@@ -1,0 +1,3262 @@
+ ********************************** 
+ DFLS/DFBOLS MINIMIZATION ATTEMPT            1
+ *********************************
+ EVALUATION NUMBER:            1
+  y1width:    1.81923067569733     
+  y2width:    2.63025021553040     
+  y1driftscale:   1.569883461343125E-004
+  y2driftscale:    1.16752934455872     
+  VarLogY, target:   0.478562563657761       model:   0.454263578363952     
+  VarD1LogY, target:   0.114076793193817       model:   0.123875554675398     
+  KurtD1LogY, target:    4.46993446350098       model:    4.46607013833928     
+  VarD5LogY, target:   0.242688760161400       model:   0.223678255814907     
+  KurtD5LogY, target:    3.66657996177673       model:    3.76689245582827     
+  objective fun:   6.379576035644551E-002
+  
+ *********************************
+ EVALUATION NUMBER:            2
+  y1width:    1.81924674931946     
+  y2width:    2.63025021553040     
+  y1driftscale:   1.569883461343125E-004
+  y2driftscale:    1.16752934455872     
+  VarLogY, target:   0.478562563657761       model:   0.454269975982374     
+  VarD1LogY, target:   0.114076793193817       model:   0.123875653771973     
+  KurtD1LogY, target:    4.46993446350098       model:    4.46606946423303     
+  VarD5LogY, target:   0.242688760161400       model:   0.223678864724188     
+  KurtD5LogY, target:    3.66657996177673       model:    3.76688908717452     
+  objective fun:   6.379259839122146E-002
+  
+ *********************************
+ EVALUATION NUMBER:            3
+  y1width:    1.81923067569733     
+  y2width:    10.7776718605320     
+  y1driftscale:   1.569883461343125E-004
+  y2driftscale:    1.16752934455872     
+  VarLogY, target:   0.478562563657761       model:   0.420319853677341     
+  VarD1LogY, target:   0.114076793193817       model:   6.800626552423203E-002
+  KurtD1LogY, target:    4.46993446350098       model:    54.8430788235280     
+  VarD5LogY, target:   0.242688760161400       model:   0.143191184637885     
+  KurtD5LogY, target:    3.66657996177673       model:    28.5044843226366     
+  objective fun:    3.30028936363210     
+  
+ *********************************
+ EVALUATION NUMBER:            4
+  y1width:    1.81923067569733     
+  y2width:    2.63025021553040     
+  y1driftscale:   1.580424158323994E-002
+  y2driftscale:    1.16752934455872     
+  VarLogY, target:   0.478562563657761       model:   0.451216739839830     
+  VarD1LogY, target:   0.114076793193817       model:   0.123933467624413     
+  KurtD1LogY, target:    4.46993446350098       model:    4.46304293445360     
+  VarD5LogY, target:   0.242688760161400       model:   0.223948003223735     
+  KurtD5LogY, target:    3.66657996177673       model:    3.77028253720018     
+  objective fun:   6.498943087258052E-002
+  
+ *********************************
+ EVALUATION NUMBER:            5
+  y1width:    1.81923067569733     
+  y2width:    2.63025021553040     
+  y1driftscale:   1.569883461343125E-004
+  y2driftscale:    1.99043720403904     
+  VarLogY, target:   0.478562563657761       model:   0.417167086069059     
+  VarD1LogY, target:   0.114076793193817       model:   8.836039334899697E-002
+  KurtD1LogY, target:    4.46993446350098       model:    6.06543585021199     
+  VarD5LogY, target:   0.242688760161400       model:   0.140067629374189     
+  KurtD5LogY, target:    3.66657996177673       model:    4.89091391928136     
+  objective fun:   0.276499210438158     
+  
+ *********************************
+ EVALUATION NUMBER:            6
+  y1width:    1.81684844901341     
+  y2width:    2.63025021553040     
+  y1driftscale:   1.569883461343125E-004
+  y2driftscale:    1.16752934455872     
+  VarLogY, target:   0.478562563657761       model:   0.453320649031743     
+  VarD1LogY, target:   0.114076793193817       model:   0.123938548948246     
+  KurtD1LogY, target:    4.46993446350098       model:    4.46411594897329     
+  VarD5LogY, target:   0.242688760161400       model:   0.223766554302263     
+  KurtD5LogY, target:    3.66657996177673       model:    3.77165892248036     
+  objective fun:   6.430456855001709E-002
+  
+ *********************************
+ EVALUATION NUMBER:            7
+  y1width:    1.81923067569733     
+  y2width:   0.570276034620853     
+  y1driftscale:   1.569883461343125E-004
+  y2driftscale:    1.16752934455872     
+  VarLogY, target:   0.478562563657761       model:   0.373981832085832     
+  VarD1LogY, target:   0.114076793193817       model:   1.975148817065517E-002
+  KurtD1LogY, target:    4.46993446350098       model:    3.94018630982487     
+  VarD5LogY, target:   0.242688760161400       model:   5.388322922933180E-002
+  KurtD5LogY, target:    3.66657996177673       model:    3.93055415275782     
+  objective fun:   0.579115812857230     
+  
+ *********************************
+ EVALUATION NUMBER:            8
+  y1width:    1.81923067569733     
+  y2width:    2.63025021553040     
+  y1driftscale:   5.072091885731200E-005
+  y2driftscale:    1.16752934455872     
+  VarLogY, target:   0.478562563657761       model:   0.454270829661928     
+  VarD1LogY, target:   0.114076793193817       model:   0.123875554675398     
+  KurtD1LogY, target:    4.46993446350098       model:    4.46607013833928     
+  VarD5LogY, target:   0.242688760161400       model:   0.223678255814907     
+  KurtD5LogY, target:    3.66657996177673       model:    3.76689245582827     
+  objective fun:   6.379274582310587E-002
+  
+ *********************************
+ EVALUATION NUMBER:            9
+  y1width:    1.81923067569733     
+  y2width:    2.63025021553040     
+  y1driftscale:   1.569883461343125E-004
+  y2driftscale:   1.877157630992446E-002
+  VarLogY, target:   0.478562563657761       model:    1.15150199432877     
+  VarD1LogY, target:   0.114076793193817       model:   0.166504293106485     
+  KurtD1LogY, target:    4.46993446350098       model:    5.28821406068094     
+  VarD5LogY, target:   0.242688760161400       model:   0.850830289954647     
+  KurtD5LogY, target:    3.66657996177673       model:    3.12766400637250     
+  objective fun:    1.45615798576221     
+  
+ *********************************
+ EVALUATION NUMBER:           10
+  y1width:    1.81924538640958     
+  y2width:    2.61781811845206     
+  y1driftscale:   5.150547061961372E-005
+  y2driftscale:    1.06023232873852     
+  VarLogY, target:   0.478562563657761       model:   0.466003203198395     
+  VarD1LogY, target:   0.114076793193817       model:   0.132438549915818     
+  KurtD1LogY, target:    4.46993446350098       model:    4.37103356127449     
+  VarD5LogY, target:   0.242688760161400       model:   0.246162819714081     
+  KurtD5LogY, target:    3.66657996177673       model:    3.67895139621013     
+  objective fun:   8.204707640274708E-002
+  
+ *********************************
+ EVALUATION NUMBER:           11
+  y1width:    1.81924680525793     
+  y2width:    2.61033526887143     
+  y1driftscale:   1.197076917744374E-003
+  y2driftscale:    1.00936220883316     
+  VarLogY, target:   0.478562563657761       model:   0.471816523713217     
+  VarD1LogY, target:   0.114076793193817       model:   0.136055898395219     
+  KurtD1LogY, target:    4.46993446350098       model:    4.35028927315628     
+  VarD5LogY, target:   0.242688760161400       model:   0.257730475109909     
+  KurtD5LogY, target:    3.66657996177673       model:    3.66717638508668     
+  objective fun:   0.101662152148522     
+  
+ *********************************
+ EVALUATION NUMBER:           12
+  y1width:    1.81924674934472     
+  y2width:    3.86517584309333     
+  y1driftscale:   1.571405133724602E-004
+  y2driftscale:    1.16726513539920     
+  VarLogY, target:   0.478562563657761       model:   0.495473172139719     
+  VarD1LogY, target:   0.114076793193817       model:   0.168814198331086     
+  KurtD1LogY, target:    4.46993446350098       model:    5.47313951839182     
+  VarD5LogY, target:   0.242688760161400       model:   0.294072825732302     
+  KurtD5LogY, target:    3.66657996177673       model:    4.65573612370954     
+  objective fun:   0.277083587888217     
+  
+ *********************************
+ EVALUATION NUMBER:           13
+  y1width:    1.81924675436220     
+  y2width:    2.44088986396309     
+  y1driftscale:   8.351622946436676E-005
+  y2driftscale:   0.946081105471039     
+  VarLogY, target:   0.478562563657761       model:   0.472143100403646     
+  VarD1LogY, target:   0.114076793193817       model:   0.133344315654400     
+  KurtD1LogY, target:    4.46993446350098       model:    4.20744032864610     
+  VarD5LogY, target:   0.242688760161400       model:   0.258340317638120     
+  KurtD5LogY, target:    3.66657996177673       model:    3.61212488024846     
+  objective fun:   9.190150169809258E-002
+  
+ *********************************
+ EVALUATION NUMBER:           14
+  y1width:    1.81924676501899     
+  y2width:    2.63032701848481     
+  y1driftscale:   1.501319557894410E-004
+  y2driftscale:    1.38371565067626     
+  VarLogY, target:   0.478562563657761       model:   0.435423689108642     
+  VarD1LogY, target:   0.114076793193817       model:   0.108866125789352     
+  KurtD1LogY, target:    4.46993446350098       model:    4.59391237448417     
+  VarD5LogY, target:   0.242688760161400       model:   0.186509277979839     
+  KurtD5LogY, target:    3.66657996177673       model:    3.90110663356541     
+  objective fun:   0.127489021238109     
+  
+ *********************************
+ EVALUATION NUMBER:           15
+  y1width:    1.81924678311535     
+  y2width:    2.36362908707237     
+  y1driftscale:   1.740524077333819E-004
+  y2driftscale:    1.04452214702913     
+  VarLogY, target:   0.478562563657761       model:   0.457415075685805     
+  VarD1LogY, target:   0.114076793193817       model:   0.122138360471021     
+  KurtD1LogY, target:    4.46993446350098       model:    4.22765892124501     
+  VarD5LogY, target:   0.242688760161400       model:   0.226967483174095     
+  KurtD5LogY, target:    3.66657996177673       model:    3.57696414938691     
+  objective fun:   5.483350199288112E-002
+  
+ *********************************
+ EVALUATION NUMBER:           16
+  y1width:    1.81924673550161     
+  y2width:    2.34849365621568     
+  y1driftscale:   1.802888158056856E-004
+  y2driftscale:    1.00241884310064     
+  VarLogY, target:   0.478562563657761       model:   0.461814749100840     
+  VarD1LogY, target:   0.114076793193817       model:   0.124628752417970     
+  KurtD1LogY, target:    4.46993446350098       model:    4.23142581974200     
+  VarD5LogY, target:   0.242688760161400       model:   0.235146018030710     
+  KurtD5LogY, target:    3.66657996177673       model:    3.56254220744165     
+  objective fun:   5.399018866475438E-002
+  
+ *********************************
+ EVALUATION NUMBER:           17
+  y1width:    1.81924666186229     
+  y2width:    2.28596766498073     
+  y1driftscale:   1.603344634773702E-004
+  y2driftscale:    1.00184772107765     
+  VarLogY, target:   0.478562563657761       model:   0.459531916743210     
+  VarD1LogY, target:   0.114076793193817       model:   0.121497927449852     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17898667971540     
+  VarD5LogY, target:   0.242688760161400       model:   0.229685536725631     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53904392961488     
+  objective fun:   5.011437833037308E-002
+  
+ *********************************
+ EVALUATION NUMBER:           18
+  y1width:    1.81924671769171     
+  y2width:    2.32818663407984     
+  y1driftscale:   1.261787683195045E-004
+  y2driftscale:    1.00907235502480     
+  VarLogY, target:   0.478562563657761       model:   0.460214017076781     
+  VarD1LogY, target:   0.114076793193817       model:   0.123160058108503     
+  KurtD1LogY, target:    4.46993446350098       model:    4.21072515962824     
+  VarD5LogY, target:   0.242688760161400       model:   0.231772966273228     
+  KurtD5LogY, target:    3.66657996177673       model:    3.55421965617691     
+  objective fun:   5.222204652621889E-002
+  
+ *********************************
+ EVALUATION NUMBER:           19
+  y1width:    1.81924660844301     
+  y2width:    2.23139633734776     
+  y1driftscale:   1.231274769566487E-004
+  y2driftscale:    1.07504888140204     
+  VarLogY, target:   0.478562563657761       model:   0.449839937878145     
+  VarD1LogY, target:   0.114076793193817       model:   0.113876663556739     
+  KurtD1LogY, target:    4.46993446350098       model:    4.14403932060930     
+  VarD5LogY, target:   0.242688760161400       model:   0.209741904087391     
+  KurtD5LogY, target:    3.66657996177673       model:    3.52093535554597     
+  objective fun:   7.706946441784666E-002
+  
+ *********************************
+ EVALUATION NUMBER:           20
+  y1width:    1.81924666537074     
+  y2width:    2.34990949808636     
+  y1driftscale:   2.309516831580575E-004
+  y2driftscale:    1.02923624430066     
+  VarLogY, target:   0.478562563657761       model:   0.459281731979405     
+  VarD1LogY, target:   0.114076793193817       model:   0.122784041683575     
+  KurtD1LogY, target:    4.46993446350098       model:    4.23177274946901     
+  VarD5LogY, target:   0.242688760161400       model:   0.229185240785163     
+  KurtD5LogY, target:    3.66657996177673       model:    3.57424573090299     
+  objective fun:   5.341669233712855E-002
+  
+ *********************************
+ EVALUATION NUMBER:           21
+  y1width:    1.81924665303906     
+  y2width:    1.83451882205252     
+  y1driftscale:   1.645851355877388E-004
+  y2driftscale:   0.828373354985015     
+  VarLogY, target:   0.478562563657761       model:   0.453888377579335     
+  VarD1LogY, target:   0.114076793193817       model:   0.106673817933837     
+  KurtD1LogY, target:    4.46993446350098       model:    3.72462345309502     
+  VarD5LogY, target:   0.242688760161400       model:   0.217022280203703     
+  KurtD5LogY, target:    3.66657996177673       model:    3.29959106926488     
+  objective fun:   8.292999465278458E-002
+  
+ *********************************
+ EVALUATION NUMBER:           22
+  y1width:    1.81924665167670     
+  y2width:    2.98091946116959     
+  y1driftscale:   1.572554576258205E-004
+  y2driftscale:   0.869855276099435     
+  VarLogY, target:   0.478562563657761       model:   0.508572091714664     
+  VarD1LogY, target:   0.114076793193817       model:   0.165254603282017     
+  KurtD1LogY, target:    4.46993446350098       model:    4.39126509622414     
+  VarD5LogY, target:   0.242688760161400       model:   0.331373220917222     
+  KurtD5LogY, target:    3.66657996177673       model:    3.80050962726675     
+  objective fun:   0.291180219208513     
+  
+ *********************************
+ EVALUATION NUMBER:           23
+  y1width:    1.81924673770338     
+  y2width:    2.24284302683173     
+  y1driftscale:   1.689836377281028E-004
+  y2driftscale:   0.964650979344090     
+  VarLogY, target:   0.478562563657761       model:   0.460039597250957     
+  VarD1LogY, target:   0.114076793193817       model:   0.121830320674209     
+  KurtD1LogY, target:    4.46993446350098       model:    4.10198751016160     
+  VarD5LogY, target:   0.242688760161400       model:   0.233734003003582     
+  KurtD5LogY, target:    3.66657996177673       model:    3.47968546167105     
+  objective fun:   4.955477691061436E-002
+  
+ *********************************
+ EVALUATION NUMBER:           24
+  y1width:    1.81924670005598     
+  y2width:    2.21163600336404     
+  y1driftscale:   1.543561998004644E-004
+  y2driftscale:   0.952012832967785     
+  VarLogY, target:   0.478562563657761       model:   0.460277279453204     
+  VarD1LogY, target:   0.114076793193817       model:   0.120784363650808     
+  KurtD1LogY, target:    4.46993446350098       model:    4.03217443014884     
+  VarD5LogY, target:   0.242688760161400       model:   0.234281529301203     
+  KurtD5LogY, target:    3.66657996177673       model:    3.45763870355764     
+  objective fun:   4.828790068423002E-002
+  
+ *********************************
+ EVALUATION NUMBER:           25
+  y1width:    1.81924666970840     
+  y2width:    2.32019124096724     
+  y1driftscale:   1.597894467292018E-004
+  y2driftscale:    1.02228046412913     
+  VarLogY, target:   0.478562563657761       model:   0.458126053114179     
+  VarD1LogY, target:   0.114076793193817       model:   0.121611999152332     
+  KurtD1LogY, target:    4.46993446350098       model:    4.21045810166494     
+  VarD5LogY, target:   0.242688760161400       model:   0.227466792473619     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53938004245415     
+  objective fun:   5.306625860146159E-002
+  
+ *********************************
+ EVALUATION NUMBER:           26
+  y1width:    1.81924664514241     
+  y2width:    2.21616759727628     
+  y1driftscale:   1.623081759795616E-004
+  y2driftscale:   0.962377963160190     
+  VarLogY, target:   0.478562563657761       model:   0.459086812715028     
+  VarD1LogY, target:   0.114076793193817       model:   0.120806008659282     
+  KurtD1LogY, target:    4.46993446350098       model:    4.07844544478944     
+  VarD5LogY, target:   0.242688760161400       model:   0.232525913953237     
+  KurtD5LogY, target:    3.66657996177673       model:    3.47629000663679     
+  objective fun:   4.868388485192605E-002
+  
+ *********************************
+ EVALUATION NUMBER:           27
+  y1width:    1.81924666164070     
+  y2width:    2.34973871596377     
+  y1driftscale:   1.598532844912926E-004
+  y2driftscale:   0.989669663421985     
+  VarLogY, target:   0.478562563657761       model:   0.463100066507224     
+  VarD1LogY, target:   0.114076793193817       model:   0.125849289473303     
+  KurtD1LogY, target:    4.46993446350098       model:    4.21572119868297     
+  VarD5LogY, target:   0.242688760161400       model:   0.238363702252635     
+  KurtD5LogY, target:    3.66657996177673       model:    3.56210270628564     
+  objective fun:   5.705911089046703E-002
+  
+ *********************************
+ EVALUATION NUMBER:           28
+  y1width:    1.81924665890525     
+  y2width:    2.26012854873480     
+  y1driftscale:   1.566876226072804E-004
+  y2driftscale:   0.987492618995668     
+  VarLogY, target:   0.478562563657761       model:   0.458665954833952     
+  VarD1LogY, target:   0.114076793193817       model:   0.121036092346447     
+  KurtD1LogY, target:    4.46993446350098       model:    4.14697768497424     
+  VarD5LogY, target:   0.242688760161400       model:   0.229974263404459     
+  KurtD5LogY, target:    3.66657996177673       model:    3.50018915618300     
+  objective fun:   5.003704002681837E-002
+  
+ *********************************
+ EVALUATION NUMBER:           29
+  y1width:    1.81924666834394     
+  y2width:    2.27241898432085     
+  y1driftscale:   1.634206756647422E-004
+  y2driftscale:   0.990385879726148     
+  VarLogY, target:   0.478562563657761       model:   0.459049348464335     
+  VarD1LogY, target:   0.114076793193817       model:   0.121654195574340     
+  KurtD1LogY, target:    4.46993446350098       model:    4.15766109015999     
+  VarD5LogY, target:   0.242688760161400       model:   0.230313690128127     
+  KurtD5LogY, target:    3.66657996177673       model:    3.51846901533820     
+  objective fun:   5.075156274062529E-002
+  
+ *********************************
+ EVALUATION NUMBER:           30
+  y1width:    1.81924665258858     
+  y2width:    2.28984706219655     
+  y1driftscale:   1.620001729209508E-004
+  y2driftscale:    1.00779796209726     
+  VarLogY, target:   0.478562563657761       model:   0.459194242967319     
+  VarD1LogY, target:   0.114076793193817       model:   0.121390894202140     
+  KurtD1LogY, target:    4.46993446350098       model:    4.18396453260909     
+  VarD5LogY, target:   0.242688760161400       model:   0.228698618167237     
+  KurtD5LogY, target:    3.66657996177673       model:    3.52671519973761     
+  objective fun:   5.113440871528625E-002
+  
+ *********************************
+ EVALUATION NUMBER:           31
+  y1width:    1.81924665915981     
+  y2width:    2.28791753572500     
+  y1driftscale:   1.657675499367465E-004
+  y2driftscale:    1.00139803981400     
+  VarLogY, target:   0.478562563657761       model:   0.459394927086795     
+  VarD1LogY, target:   0.114076793193817       model:   0.121703382453448     
+  KurtD1LogY, target:    4.46993446350098       model:    4.18095755680396     
+  VarD5LogY, target:   0.242688760161400       model:   0.230072821943523     
+  KurtD5LogY, target:    3.66657996177673       model:    3.54025224232472     
+  objective fun:   5.029353211584781E-002
+  
+ *********************************
+ EVALUATION NUMBER:           32
+  y1width:    1.81924666447349     
+  y2width:    2.25437251346305     
+  y1driftscale:   1.577655168331240E-004
+  y2driftscale:   0.983945521714044     
+  VarLogY, target:   0.478562563657761       model:   0.458524587153716     
+  VarD1LogY, target:   0.114076793193817       model:   0.121223918335073     
+  KurtD1LogY, target:    4.46993446350098       model:    4.13310839533009     
+  VarD5LogY, target:   0.242688760161400       model:   0.230272566696972     
+  KurtD5LogY, target:    3.66657996177673       model:    3.50301743558273     
+  objective fun:   5.052953096071226E-002
+  
+ *********************************
+ EVALUATION NUMBER:           33
+  y1width:    1.81924665685222     
+  y2width:    2.25728218835448     
+  y1driftscale:   1.621112661929608E-004
+  y2driftscale:   0.984437872535037     
+  VarLogY, target:   0.478562563657761       model:   0.458507011294563     
+  VarD1LogY, target:   0.114076793193817       model:   0.121328401681006     
+  KurtD1LogY, target:    4.46993446350098       model:    4.13878222581666     
+  VarD5LogY, target:   0.242688760161400       model:   0.230589605348523     
+  KurtD5LogY, target:    3.66657996177673       model:    3.50047646860418     
+  objective fun:   5.041777696935736E-002
+  
+ *********************************
+ EVALUATION NUMBER:           34
+  y1width:    1.81924666296821     
+  y2width:    2.29609396914064     
+  y1driftscale:   1.551068588910921E-004
+  y2driftscale:    1.00582064436353     
+  VarLogY, target:   0.478562563657761       model:   0.459659642073511     
+  VarD1LogY, target:   0.114076793193817       model:   0.122123364410994     
+  KurtD1LogY, target:    4.46993446350098       model:    4.18910161156093     
+  VarD5LogY, target:   0.242688760161400       model:   0.229630310958204     
+  KurtD5LogY, target:    3.66657996177673       model:    3.52546210948564     
+  objective fun:   5.193255110511192E-002
+  
+ *********************************
+ EVALUATION NUMBER:           35
+  y1width:    1.81924666131328     
+  y2width:    2.28903852146526     
+  y1driftscale:   1.624378262697153E-004
+  y2driftscale:    1.00145696220047     
+  VarLogY, target:   0.478562563657761       model:   0.459466276513116     
+  VarD1LogY, target:   0.114076793193817       model:   0.121819666509590     
+  KurtD1LogY, target:    4.46993446350098       model:    4.18082243155557     
+  VarD5LogY, target:   0.242688760161400       model:   0.230059505347889     
+  KurtD5LogY, target:    3.66657996177673       model:    3.54385937695692     
+  objective fun:   5.057952230186399E-002
+  
+ *********************************
+ EVALUATION NUMBER:           36
+  y1width:    1.81924666248988     
+  y2width:    2.28856170126389     
+  y1driftscale:   1.603852594180868E-004
+  y2driftscale:    1.00353180982307     
+  VarLogY, target:   0.478562563657761       model:   0.459288535370084     
+  VarD1LogY, target:   0.114076793193817       model:   0.121737610140156     
+  KurtD1LogY, target:    4.46993446350098       model:    4.18161318547616     
+  VarD5LogY, target:   0.242688760161400       model:   0.229634887823909     
+  KurtD5LogY, target:    3.66657996177673       model:    3.54382402416283     
+  objective fun:   5.085619758004204E-002
+  
+ *********************************
+ EVALUATION NUMBER:           37
+  y1width:    1.81924666076399     
+  y2width:    2.28225996627243     
+  y1driftscale:   1.601657028832963E-004
+  y2driftscale:   0.998228475751948     
+  VarLogY, target:   0.478562563657761       model:   0.459500512712116     
+  VarD1LogY, target:   0.114076793193817       model:   0.121404209744472     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17413985945329     
+  VarD5LogY, target:   0.242688760161400       model:   0.230100860267816     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53736679972442     
+  objective fun:   4.951753868562375E-002
+  
+ *********************************
+ EVALUATION NUMBER:           38
+  y1width:    1.81924665945657     
+  y2width:    2.27852131235415     
+  y1driftscale:   1.598911283101563E-004
+  y2driftscale:   0.995230443351231     
+  VarLogY, target:   0.478562563657761       model:   0.459358922337036     
+  VarD1LogY, target:   0.114076793193817       model:   0.121663566109580     
+  KurtD1LogY, target:    4.46993446350098       model:    4.16456644127080     
+  VarD5LogY, target:   0.242688760161400       model:   0.230156412930819     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53423087480540     
+  objective fun:   5.047873439743614E-002
+  
+ *********************************
+ EVALUATION NUMBER:           39
+  y1width:    1.81924666066560     
+  y2width:    2.28473153599739     
+  y1driftscale:   1.596705985265683E-004
+  y2driftscale:   0.998848469687443     
+  VarLogY, target:   0.478562563657761       model:   0.459478296618755     
+  VarD1LogY, target:   0.114076793193817       model:   0.121619658276913     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17354044905395     
+  VarD5LogY, target:   0.242688760161400       model:   0.230103522195960     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53564759323570     
+  objective fun:   5.017334008933579E-002
+  
+ *********************************
+ EVALUATION NUMBER:           40
+  y1width:    1.81924666141290     
+  y2width:    2.27996729132536     
+  y1driftscale:   1.604846548806093E-004
+  y2driftscale:   0.997320296112367     
+  VarLogY, target:   0.478562563657761       model:   0.459476307928490     
+  VarD1LogY, target:   0.114076793193817       model:   0.121400829021454     
+  KurtD1LogY, target:    4.46993446350098       model:    4.16911297085383     
+  VarD5LogY, target:   0.242688760161400       model:   0.230112621227712     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53469348274850     
+  objective fun:   4.963278457444535E-002
+  
+ *********************************
+ EVALUATION NUMBER:           41
+  y1width:    1.81924666085112     
+  y2width:    2.28858939031265     
+  y1driftscale:   1.602224898626329E-004
+  y2driftscale:   0.997066487809240     
+  VarLogY, target:   0.478562563657761       model:   0.459873876904540     
+  VarD1LogY, target:   0.114076793193817       model:   0.121923299289047     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17194617202404     
+  VarD5LogY, target:   0.242688760161400       model:   0.230723336236704     
+  KurtD5LogY, target:    3.66657996177673       model:    3.54401493830386     
+  objective fun:   5.019298215254155E-002
+  
+ *********************************
+ EVALUATION NUMBER:           42
+  y1width:    1.81924666025652     
+  y2width:    2.28018328634022     
+  y1driftscale:   1.604861887857900E-004
+  y2driftscale:   0.999634975401506     
+  VarLogY, target:   0.478562563657761       model:   0.459270819844410     
+  VarD1LogY, target:   0.114076793193817       model:   0.121403040584280     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17275431960463     
+  VarD5LogY, target:   0.242688760161400       model:   0.229890716237947     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53340865707713     
+  objective fun:   4.991308597369746E-002
+  
+ *********************************
+ EVALUATION NUMBER:           43
+  y1width:    1.81924666127337     
+  y2width:    2.27943819613052     
+  y1driftscale:   1.598938291425812E-004
+  y2driftscale:   0.996778418932110     
+  VarLogY, target:   0.478562563657761       model:   0.459442489633654     
+  VarD1LogY, target:   0.114076793193817       model:   0.121355699490044     
+  KurtD1LogY, target:    4.46993446350098       model:    4.16912568093086     
+  VarD5LogY, target:   0.242688760161400       model:   0.229943950552399     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53518053278049     
+  objective fun:   4.969579167570869E-002
+  
+ *********************************
+ EVALUATION NUMBER:           44
+  y1width:    1.81924666137342     
+  y2width:    2.27880789151311     
+  y1driftscale:   1.604896153592970E-004
+  y2driftscale:   0.998757270299089     
+  VarLogY, target:   0.478562563657761       model:   0.459260479558164     
+  VarD1LogY, target:   0.114076793193817       model:   0.121460251151754     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17398231049498     
+  VarD5LogY, target:   0.242688760161400       model:   0.229562618312731     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53172265521919     
+  objective fun:   5.043654054063180E-002
+  
+ *********************************
+ EVALUATION NUMBER:           45
+  y1width:    1.81924666077637     
+  y2width:    2.28435451087180     
+  y1driftscale:   1.603841386902726E-004
+  y2driftscale:   0.997992911102811     
+  VarLogY, target:   0.478562563657761       model:   0.459607700883320     
+  VarD1LogY, target:   0.114076793193817       model:   0.121569599548786     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17289318298197     
+  VarD5LogY, target:   0.242688760161400       model:   0.230247564816448     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53855918524197     
+  objective fun:   4.979885938207017E-002
+  
+ *********************************
+ EVALUATION NUMBER:           46
+  y1width:    1.81924666066190     
+  y2width:    2.28198793633855     
+  y1driftscale:   1.601629590710728E-004
+  y2driftscale:   0.998006491776239     
+  VarLogY, target:   0.478562563657761       model:   0.459477117103070     
+  VarD1LogY, target:   0.114076793193817       model:   0.121395713600567     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17302339041100     
+  VarD5LogY, target:   0.242688760161400       model:   0.230083382882293     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53683118733460     
+  objective fun:   4.954951153037804E-002
+  
+ *********************************
+ EVALUATION NUMBER:           47
+  y1width:    1.81924666094373     
+  y2width:    2.28152786389534     
+  y1driftscale:   1.601273850953334E-004
+  y2driftscale:   0.998526972681059     
+  VarLogY, target:   0.478562563657761       model:   0.459289199559145     
+  VarD1LogY, target:   0.114076793193817       model:   0.121502497281209     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17622431134695     
+  VarD5LogY, target:   0.242688760161400       model:   0.229967790781149     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53338210103768     
+  objective fun:   5.003997002867419E-002
+  
+ *********************************
+ EVALUATION NUMBER:           48
+  y1width:    1.81924666071504     
+  y2width:    2.28263231659912     
+  y1driftscale:   1.601046957602008E-004
+  y2driftscale:   0.998356298061211     
+  VarLogY, target:   0.478562563657761       model:   0.459481511569605     
+  VarD1LogY, target:   0.114076793193817       model:   0.121460321954364     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17458855275126     
+  VarD5LogY, target:   0.242688760161400       model:   0.230085033090530     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53911300114257     
+  objective fun:   4.967307674952604E-002
+  
+ *********************************
+ EVALUATION NUMBER:           49
+  y1width:    1.81924666079364     
+  y2width:    2.28298754681552     
+  y1driftscale:   1.601957391468552E-004
+  y2driftscale:   0.998035087476333     
+  VarLogY, target:   0.478562563657761       model:   0.459592009123750     
+  VarD1LogY, target:   0.114076793193817       model:   0.121497517563002     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17464194174681     
+  VarD5LogY, target:   0.242688760161400       model:   0.230154919332964     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53896278880704     
+  objective fun:   4.965909725513822E-002
+  
+ *********************************
+ EVALUATION NUMBER:           50
+  y1width:    1.81924666083833     
+  y2width:    2.28181099938249     
+  y1driftscale:   1.602162190543634E-004
+  y2driftscale:   0.998114893035763     
+  VarLogY, target:   0.478562563657761       model:   0.459433164748297     
+  VarD1LogY, target:   0.114076793193817       model:   0.121459101955562     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17557692782709     
+  VarD5LogY, target:   0.242688760161400       model:   0.230053282928868     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53680554282854     
+  objective fun:   4.973351792241485E-002
+  
+ *********************************
+ EVALUATION NUMBER:           51
+  y1width:    1.81924666067438     
+  y2width:    2.28240956257112     
+  y1driftscale:   1.602072807943296E-004
+  y2driftscale:   0.998416406672992     
+  VarLogY, target:   0.478562563657761       model:   0.459426104127468     
+  VarD1LogY, target:   0.114076793193817       model:   0.121426005057843     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17388682684619     
+  VarD5LogY, target:   0.242688760161400       model:   0.230091739513224     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53818357330587     
+  objective fun:   4.961551917125473E-002
+  
+ *********************************
+ EVALUATION NUMBER:           52
+  y1width:    1.81924666082911     
+  y2width:    2.28198518769054     
+  y1driftscale:   1.601224164389742E-004
+  y2driftscale:   0.998004481915837     
+  VarLogY, target:   0.478562563657761       model:   0.459476880791065     
+  VarD1LogY, target:   0.114076793193817       model:   0.121395429681529     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17302327318900     
+  VarD5LogY, target:   0.242688760161400       model:   0.230083009832973     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53682715166991     
+  objective fun:   4.954925941806709E-002
+  
+ *********************************
+ EVALUATION NUMBER:           53
+  y1width:    1.81924666066180     
+  y2width:    2.28172200808620     
+  y1driftscale:   1.601334558287916E-004
+  y2driftscale:   0.998183031472876     
+  VarLogY, target:   0.478562563657761       model:   0.459425513092349     
+  VarD1LogY, target:   0.114076793193817       model:   0.121449904149890     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17557321110877     
+  VarD5LogY, target:   0.242688760161400       model:   0.230034170572188     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53688077653394     
+  objective fun:   4.973030197174567E-002
+  
+ *********************************
+ EVALUATION NUMBER:           54
+  y1width:    1.81924666074744     
+  y2width:    2.28268155682446     
+  y1driftscale:   1.601659664235556E-004
+  y2driftscale:   0.998137874072859     
+  VarLogY, target:   0.478562563657761       model:   0.459565687709079     
+  VarD1LogY, target:   0.114076793193817       model:   0.121467619404455     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17450491027683     
+  VarD5LogY, target:   0.242688760161400       model:   0.230110406449672     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53870216394963     
+  objective fun:   4.963785919827483E-002
+  
+ *********************************
+ EVALUATION NUMBER:           55
+  y1width:    1.81924666077903     
+  y2width:    2.28232700137821     
+  y1driftscale:   1.601673513802807E-004
+  y2driftscale:   0.998249862977771     
+  VarLogY, target:   0.478562563657761       model:   0.459506278435351     
+  VarD1LogY, target:   0.114076793193817       model:   0.121406643437072     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17445008330678     
+  VarD5LogY, target:   0.242688760161400       model:   0.230112532890490     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53737187466019     
+  objective fun:   4.950358916186687E-002
+  
+ *********************************
+ EVALUATION NUMBER:           56
+  y1width:    1.81924666079665     
+  y2width:    2.28232636769240     
+  y1driftscale:   1.601641668414630E-004
+  y2driftscale:   0.998324798121235     
+  VarLogY, target:   0.478562563657761       model:   0.459431425382125     
+  VarD1LogY, target:   0.114076793193817       model:   0.121398491423805     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17481415468379     
+  VarD5LogY, target:   0.242688760161400       model:   0.230119808756164     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53719387698008     
+  objective fun:   4.949945347654584E-002
+  
+ *********************************
+ EVALUATION NUMBER:           57
+  y1width:    1.81924666079874     
+  y2width:    2.28257781082992     
+  y1driftscale:   1.601610292206846E-004
+  y2driftscale:   0.998321642499239     
+  VarLogY, target:   0.478562563657761       model:   0.459481901155379     
+  VarD1LogY, target:   0.114076793193817       model:   0.121447414456338     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17495379219675     
+  VarD5LogY, target:   0.242688760161400       model:   0.230092050209683     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53870577628066     
+  objective fun:   4.962658761300745E-002
+  
+ *********************************
+ EVALUATION NUMBER:           58
+  y1width:    1.81924666080769     
+  y2width:    2.28230038697898     
+  y1driftscale:   1.601569026157710E-004
+  y2driftscale:   0.998301311840976     
+  VarLogY, target:   0.478562563657761       model:   0.459429191824612     
+  VarD1LogY, target:   0.114076793193817       model:   0.121400297211877     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17450579649312     
+  VarD5LogY, target:   0.242688760161400       model:   0.230115284612569     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53719191034221     
+  objective fun:   4.951617968051763E-002
+  
+ *********************************
+ EVALUATION NUMBER:           59
+  y1width:    1.81924666078726     
+  y2width:    2.28221393078437     
+  y1driftscale:   1.601681042673048E-004
+  y2driftscale:   0.998334899768272     
+  VarLogY, target:   0.478562563657761       model:   0.459416684100675     
+  VarD1LogY, target:   0.114076793193817       model:   0.121398642727540     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17413454389436     
+  VarD5LogY, target:   0.242688760161400       model:   0.230083723822903     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53758819865840     
+  objective fun:   4.955292925635032E-002
+  
+ *********************************
+ EVALUATION NUMBER:           60
+  y1width:    1.81924666081127     
+  y2width:    2.28230197633441     
+  y1driftscale:   1.601713180026832E-004
+  y2driftscale:   0.998322420923522     
+  VarLogY, target:   0.478562563657761       model:   0.459429328462153     
+  VarD1LogY, target:   0.114076793193817       model:   0.121400461362528     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17450586466353     
+  VarD5LogY, target:   0.242688760161400       model:   0.230115561373096     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53719203064999     
+  objective fun:   4.951628742308321E-002
+  
+ *********************************
+ EVALUATION NUMBER:           61
+  y1width:    1.81924666079176     
+  y2width:    2.28242765878259     
+  y1driftscale:   1.601595534278196E-004
+  y2driftscale:   0.998350863160859     
+  VarLogY, target:   0.478562563657761       model:   0.459427659787898     
+  VarD1LogY, target:   0.114076793193817       model:   0.121427874484405     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17388760018328     
+  VarD5LogY, target:   0.242688760161400       model:   0.230094890127040     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53818494828003     
+  objective fun:   4.961675855120885E-002
+  
+ *********************************
+ EVALUATION NUMBER:           62
+  y1width:    1.81924666080495     
+  y2width:    2.28225116238648     
+  y1driftscale:   1.601628793702391E-004
+  y2driftscale:   0.998361497217645     
+  VarLogY, target:   0.478562563657761       model:   0.459419884628737     
+  VarD1LogY, target:   0.114076793193817       model:   0.121402488065085     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17413614255629     
+  VarD5LogY, target:   0.242688760161400       model:   0.230090206178771     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53759102198658     
+  objective fun:   4.955543608120886E-002
+  
+ *********************************
+ EVALUATION NUMBER:           63
+  y1width:    1.81924666080192     
+  y2width:    2.28235557658555     
+  y1driftscale:   1.601669555063464E-004
+  y2driftscale:   0.998279417373209     
+  VarLogY, target:   0.478562563657761       model:   0.459508736264380     
+  VarD1LogY, target:   0.114076793193817       model:   0.121409594898067     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17445130732460     
+  VarD5LogY, target:   0.242688760161400       model:   0.230120380535343     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53727993518299     
+  objective fun:   4.950358690039791E-002
+  
+ ********************************** 
+ ********************************** 
+ DFLS/DFBOLS MINIMIZATION ATTEMPT            2
+ *********************************
+ EVALUATION NUMBER:           64
+  y1width:    1.81924666079665     
+  y2width:    2.28232636769240     
+  y1driftscale:   1.601641668414630E-004
+  y2driftscale:   0.998324798121235     
+  VarLogY, target:   0.478562563657761       model:   0.459431425382125     
+  VarD1LogY, target:   0.114076793193817       model:   0.121398491423805     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17481415468379     
+  VarD5LogY, target:   0.242688760161400       model:   0.230119808756164     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53719387698008     
+  objective fun:   4.949945347654584E-002
+  
+ *********************************
+ EVALUATION NUMBER:           65
+  y1width:    1.81924685702722     
+  y2width:    2.28232636769240     
+  y1driftscale:   1.601641668414630E-004
+  y2driftscale:   0.998324798121235     
+  VarLogY, target:   0.478562563657761       model:   0.459431503667217     
+  VarD1LogY, target:   0.114076793193817       model:   0.121398492630405     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17481415048879     
+  VarD5LogY, target:   0.242688760161400       model:   0.230119816156997     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53719385601235     
+  objective fun:   4.949941623364135E-002
+  
+ *********************************
+ EVALUATION NUMBER:           66
+  y1width:    1.81924666079665     
+  y2width:    10.7099072028339     
+  y1driftscale:   1.601641668414630E-004
+  y2driftscale:   0.998324798121235     
+  VarLogY, target:   0.478562563657761       model:   0.435190948001359     
+  VarD1LogY, target:   0.114076793193817       model:   7.653539093574745E-002
+  KurtD1LogY, target:    4.46993446350098       model:    50.5089612590818     
+  VarD5LogY, target:   0.242688760161400       model:   0.166307517830810     
+  KurtD5LogY, target:    3.66657996177673       model:    26.1403281106410     
+  objective fun:    3.00536194267550     
+  
+ *********************************
+ EVALUATION NUMBER:           67
+  y1width:    1.81924666079665     
+  y2width:    2.28232636769240     
+  y1driftscale:   1.626812062929705E-002
+  y2driftscale:   0.998324798121235     
+  VarLogY, target:   0.478562563657761       model:   0.456246476348065     
+  VarD1LogY, target:   0.114076793193817       model:   0.121441772850515     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17265168424813     
+  VarD5LogY, target:   0.242688760161400       model:   0.230411605739748     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53834829378519     
+  objective fun:   5.077752673100858E-002
+  
+ *********************************
+ EVALUATION NUMBER:           68
+  y1width:    1.81924666079665     
+  y2width:    2.28232636769240     
+  y1driftscale:   1.601641668414630E-004
+  y2driftscale:    1.98656934467005     
+  VarLogY, target:   0.478562563657761       model:   0.411209769740748     
+  VarD1LogY, target:   0.114076793193817       model:   7.927153041248315E-002
+  KurtD1LogY, target:    4.46993446350098       model:    5.51764248206266     
+  VarD5LogY, target:   0.242688760161400       model:   0.127518716047095     
+  KurtD5LogY, target:    3.66657996177673       model:    4.51980073174540     
+  objective fun:   0.302230928697410     
+  
+ *********************************
+ EVALUATION NUMBER:           69
+  y1width:    1.81921753809129     
+  y2width:    2.28232636769240     
+  y1driftscale:   1.601641668414630E-004
+  y2driftscale:   0.998324798121235     
+  VarLogY, target:   0.478562563657761       model:   0.459419807135636     
+  VarD1LogY, target:   0.114076793193817       model:   0.121398312353311     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17481477724367     
+  VarD5LogY, target:   0.242688760161400       model:   0.230108532203634     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53747901547532     
+  objective fun:   4.951253264785915E-002
+  
+ *********************************
+ EVALUATION NUMBER:           70
+  y1width:    1.81924666079665     
+  y2width:   0.566788309384953     
+  y1driftscale:   1.601641668414630E-004
+  y2driftscale:   0.998324798121235     
+  VarLogY, target:   0.478562563657761       model:   0.375362972607371     
+  VarD1LogY, target:   0.114076793193817       model:   2.150851377441053E-002
+  KurtD1LogY, target:    4.46993446350098       model:    3.81917513978601     
+  VarD5LogY, target:   0.242688760161400       model:   5.721447363345569E-002
+  KurtD5LogY, target:    3.66657996177673       model:    3.82117419716727     
+  objective fun:   0.568942185970369     
+  
+ *********************************
+ EVALUATION NUMBER:           71
+  y1width:    1.81924666079665     
+  y2width:    2.28232636769240     
+  y1driftscale:   5.074231967687533E-005
+  y2driftscale:   0.998324798121235     
+  VarLogY, target:   0.478562563657761       model:   0.459478010270401     
+  VarD1LogY, target:   0.114076793193817       model:   0.121398491423805     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17481415468379     
+  VarD5LogY, target:   0.242688760161400       model:   0.230119808760853     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53719387685242     
+  objective fun:   4.947981964031499E-002
+  
+ *********************************
+ EVALUATION NUMBER:           72
+  y1width:    1.81924666079665     
+  y2width:    2.28232636769240     
+  y1driftscale:   1.601641668414630E-004
+  y2driftscale:   1.339023076673509E-002
+  VarLogY, target:   0.478562563657761       model:   0.986833118976196     
+  VarD1LogY, target:   0.114076793193817       model:   0.150087311088186     
+  KurtD1LogY, target:    4.46993446350098       model:    5.42228486856607     
+  VarD5LogY, target:   0.242688760161400       model:   0.735738645177199     
+  KurtD5LogY, target:    3.66657996177673       model:    3.08237969573768     
+  objective fun:    1.15896571283263     
+  
+ *********************************
+ EVALUATION NUMBER:           73
+  y1width:    1.81924666510682     
+  y2width:    2.37144459758752     
+  y1driftscale:   1.598564026091166E-004
+  y2driftscale:   0.921307557303070     
+  VarLogY, target:   0.478562563657761       model:   0.470672257046445     
+  VarD1LogY, target:   0.114076793193817       model:   0.131386781685312     
+  KurtD1LogY, target:    4.46993446350098       model:    4.11016757517411     
+  VarD5LogY, target:   0.242688760161400       model:   0.256552202514073     
+  KurtD5LogY, target:    3.66657996177673       model:    3.52660378775262     
+  objective fun:   8.447462319976595E-002
+  
+ *********************************
+ EVALUATION NUMBER:           74
+  y1width:    1.81924666296023     
+  y2width:    2.37152094228083     
+  y1driftscale:   5.899266521946401E-005
+  y2driftscale:   0.920630855161433     
+  VarLogY, target:   0.478562563657761       model:   0.471140049784982     
+  VarD1LogY, target:   0.114076793193817       model:   0.131518083438493     
+  KurtD1LogY, target:    4.46993446350098       model:    4.10582342675639     
+  VarD5LogY, target:   0.242688760161400       model:   0.256964398259600     
+  KurtD5LogY, target:    3.66657996177673       model:    3.52198419212106     
+  objective fun:   8.532866236083715E-002
+  
+ *********************************
+ EVALUATION NUMBER:           75
+  y1width:    1.81924675260955     
+  y2width:    2.28201933403263     
+  y1driftscale:   5.073907684054333E-005
+  y2driftscale:   0.998598306259250     
+  VarLogY, target:   0.478562563657761       model:   0.459406736864780     
+  VarD1LogY, target:   0.114076793193817       model:   0.121470255361537     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17378195439602     
+  VarD5LogY, target:   0.242688760161400       model:   0.230027456402562     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53408554537325     
+  objective fun:   4.987081728566931E-002
+  
+ *********************************
+ EVALUATION NUMBER:           76
+  y1width:    1.81924665356907     
+  y2width:    2.28826091949231     
+  y1driftscale:   5.022796494125595E-005
+  y2driftscale:   0.796626506463186     
+  VarLogY, target:   0.478562563657761       model:   0.483775911087606     
+  VarD1LogY, target:   0.114076793193817       model:   0.136305533824134     
+  KurtD1LogY, target:    4.46993446350098       model:    3.94364161572151     
+  VarD5LogY, target:   0.242688760161400       model:   0.281202193575815     
+  KurtD5LogY, target:    3.66657996177673       model:    3.44569965147621     
+  objective fun:   0.130043447294225     
+  
+ *********************************
+ EVALUATION NUMBER:           77
+  y1width:    1.81924666102342     
+  y2width:    3.08377759018706     
+  y1driftscale:   5.070757858474384E-005
+  y2driftscale:    1.06997825069837     
+  VarLogY, target:   0.478562563657761       model:   0.479596458015394     
+  VarD1LogY, target:   0.114076793193817       model:   0.150175378247056     
+  KurtD1LogY, target:    4.46993446350098       model:    4.78852422836691     
+  VarD5LogY, target:   0.242688760161400       model:   0.276838739974450     
+  KurtD5LogY, target:    3.66657996177673       model:    4.07196572450573     
+  objective fun:   0.176257185497828     
+  
+ *********************************
+ EVALUATION NUMBER:           78
+  y1width:    1.81924664915678     
+  y2width:    2.16559250533330     
+  y1driftscale:   5.112195096355076E-005
+  y2driftscale:   0.867570077823026     
+  VarLogY, target:   0.478562563657761       model:   0.467924305428702     
+  VarD1LogY, target:   0.114076793193817       model:   0.124210838886084     
+  KurtD1LogY, target:    4.46993446350098       model:    3.92037061782985     
+  VarD5LogY, target:   0.242688760161400       model:   0.248923915809790     
+  KurtD5LogY, target:    3.66657996177673       model:    3.43518375797407     
+  objective fun:   5.878057067568696E-002
+  
+ *********************************
+ EVALUATION NUMBER:           79
+  y1width:    1.81924666134316     
+  y2width:    2.26846165987717     
+  y1driftscale:   5.099478317841567E-005
+  y2driftscale:    1.19826775996033     
+  VarLogY, target:   0.478562563657761       model:   0.440482328981619     
+  VarD1LogY, target:   0.114076793193817       model:   0.106967039656848     
+  KurtD1LogY, target:    4.46993446350098       model:    4.28277518972131     
+  VarD5LogY, target:   0.242688760161400       model:   0.190134066613438     
+  KurtD5LogY, target:    3.66657996177673       model:    3.55186584171841     
+  objective fun:   0.120201630139483     
+  
+ *********************************
+ EVALUATION NUMBER:           80
+  y1width:    1.81924662696295     
+  y2width:    2.19737653816623     
+  y1driftscale:   5.046952700784322E-005
+  y2driftscale:   0.944534518082841     
+  VarLogY, target:   0.478562563657761       model:   0.460590669814221     
+  VarD1LogY, target:   0.114076793193817       model:   0.120448595022615     
+  KurtD1LogY, target:    4.46993446350098       model:    4.01264290873755     
+  VarD5LogY, target:   0.242688760161400       model:   0.235109010646947     
+  KurtD5LogY, target:    3.66657996177673       model:    3.47921373913978     
+  objective fun:   4.683730066257062E-002
+  
+ *********************************
+ EVALUATION NUMBER:           81
+  y1width:    1.81924654741637     
+  y2width:    2.28125901686413     
+  y1driftscale:   5.091257225921960E-005
+  y2driftscale:    1.01863266582548     
+  VarLogY, target:   0.478562563657761       model:   0.457357395179980     
+  VarD1LogY, target:   0.114076793193817       model:   0.119999300662506     
+  KurtD1LogY, target:    4.46993446350098       model:    4.18877165605671     
+  VarD5LogY, target:   0.242688760161400       model:   0.224985785605086     
+  KurtD5LogY, target:    3.66657996177673       model:    3.51192961875680     
+  objective fun:   5.341729372940780E-002
+  
+ *********************************
+ EVALUATION NUMBER:           82
+  y1width:    1.81924673809459     
+  y2width:    2.24272422319520     
+  y1driftscale:   5.074114041783311E-005
+  y2driftscale:   0.971616106594395     
+  VarLogY, target:   0.478562563657761       model:   0.458956591406661     
+  VarD1LogY, target:   0.114076793193817       model:   0.121291667731338     
+  KurtD1LogY, target:    4.46993446350098       model:    4.10738435276863     
+  VarD5LogY, target:   0.242688760161400       model:   0.232011417191518     
+  KurtD5LogY, target:    3.66657996177673       model:    3.49022143748159     
+  objective fun:   4.959113021560262E-002
+  
+ *********************************
+ EVALUATION NUMBER:           83
+  y1width:    1.81924661826650     
+  y2width:    1.79183479099707     
+  y1driftscale:   5.063230263801491E-005
+  y2driftscale:    1.09262545277435     
+  VarLogY, target:   0.478562563657761       model:   0.427869264703730     
+  VarD1LogY, target:   0.114076793193817       model:   8.967030127867522E-002
+  KurtD1LogY, target:    4.46993446350098       model:    3.88755025077303     
+  VarD5LogY, target:   0.242688760161400       model:   0.166820418084363     
+  KurtD5LogY, target:    3.66657996177673       model:    3.37691170811713     
+  objective fun:   0.200329296023195     
+  
+ *********************************
+ EVALUATION NUMBER:           84
+  y1width:    1.81924672981005     
+  y2width:    2.27909889409025     
+  y1driftscale:   5.057495179743997E-005
+  y2driftscale:   0.995311311769965     
+  VarLogY, target:   0.478562563657761       model:   0.459399232536340     
+  VarD1LogY, target:   0.114076793193817       model:   0.121516607896765     
+  KurtD1LogY, target:    4.46993446350098       model:    4.16566956451933     
+  VarD5LogY, target:   0.242688760161400       model:   0.230225879322352     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53498307400606     
+  objective fun:   4.993590718130538E-002
+  
+ *********************************
+ EVALUATION NUMBER:           85
+  y1width:    1.81924668437636     
+  y2width:    2.30482452180372     
+  y1driftscale:   5.091989212880280E-005
+  y2driftscale:    1.00346666294943     
+  VarLogY, target:   0.478562563657761       model:   0.460002585164348     
+  VarD1LogY, target:   0.114076793193817       model:   0.122558281610257     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17143422351014     
+  VarD5LogY, target:   0.242688760161400       model:   0.230736806307820     
+  KurtD5LogY, target:    3.66657996177673       model:    3.54887964204049     
+  objective fun:   5.203300243678836E-002
+  
+ *********************************
+ EVALUATION NUMBER:           86
+  y1width:    1.81924666920670     
+  y2width:    2.26942299089855     
+  y1driftscale:   5.072588943085518E-005
+  y2driftscale:    1.00089248428598     
+  VarLogY, target:   0.478562563657761       model:   0.458595982565722     
+  VarD1LogY, target:   0.114076793193817       model:   0.120816440298607     
+  KurtD1LogY, target:    4.46993446350098       model:    4.16636798297286     
+  VarD5LogY, target:   0.242688760161400       model:   0.228026364332095     
+  KurtD5LogY, target:    3.66657996177673       model:    3.52632446213346     
+  objective fun:   5.099059528507370E-002
+  
+ *********************************
+ EVALUATION NUMBER:           87
+  y1width:    1.81924663502756     
+  y2width:    2.28719279965363     
+  y1driftscale:   5.075974079641142E-005
+  y2driftscale:   0.995006376261716     
+  VarLogY, target:   0.478562563657761       model:   0.459993087196916     
+  VarD1LogY, target:   0.114076793193817       model:   0.121882616597615     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17096113791824     
+  VarD5LogY, target:   0.242688760161400       model:   0.231182950131434     
+  KurtD5LogY, target:    3.66657996177673       model:    3.54126793317274     
+  objective fun:   4.961319488063284E-002
+  
+ *********************************
+ EVALUATION NUMBER:           88
+  y1width:    1.81924666122271     
+  y2width:    2.34984921971639     
+  y1driftscale:   5.073560036746718E-005
+  y2driftscale:    1.00690358256866     
+  VarLogY, target:   0.478562563657761       model:   0.461348291662120     
+  VarD1LogY, target:   0.114076793193817       model:   0.124522120758721     
+  KurtD1LogY, target:    4.46993446350098       model:    4.23581324182148     
+  VarD5LogY, target:   0.242688760161400       model:   0.234108121612379     
+  KurtD5LogY, target:    3.66657996177673       model:    3.56825179078777     
+  objective fun:   5.429911936959280E-002
+  
+ *********************************
+ EVALUATION NUMBER:           89
+  y1width:    1.81924665568598     
+  y2width:    2.26168026721978     
+  y1driftscale:   5.075411119594913E-005
+  y2driftscale:   0.979665657097845     
+  VarLogY, target:   0.478562563657761       model:   0.459509667467194     
+  VarD1LogY, target:   0.114076793193817       model:   0.122117347577542     
+  KurtD1LogY, target:    4.46993446350098       model:    4.13886604972639     
+  VarD5LogY, target:   0.242688760161400       model:   0.231646586379158     
+  KurtD5LogY, target:    3.66657996177673       model:    3.50860733946042     
+  objective fun:   5.113387367145095E-002
+  
+ *********************************
+ EVALUATION NUMBER:           90
+  y1width:    1.81924665731377     
+  y2width:    2.28040930247436     
+  y1driftscale:   5.070911835212170E-005
+  y2driftscale:   0.993347838300573     
+  VarLogY, target:   0.478562563657761       model:   0.459537502950754     
+  VarD1LogY, target:   0.114076793193817       model:   0.121692825336778     
+  KurtD1LogY, target:    4.46993446350098       model:    4.16790992261467     
+  VarD5LogY, target:   0.242688760161400       model:   0.230817442193554     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53155363317645     
+  objective fun:   4.977648641039847E-002
+  
+ *********************************
+ EVALUATION NUMBER:           91
+  y1width:    1.81924665558091     
+  y2width:    2.29964610160303     
+  y1driftscale:   5.074541776158785E-005
+  y2driftscale:    1.01870014416609     
+  VarLogY, target:   0.478562563657761       model:   0.457896816483890     
+  VarD1LogY, target:   0.114076793193817       model:   0.120845063011660     
+  KurtD1LogY, target:    4.46993446350098       model:    4.19382399194369     
+  VarD5LogY, target:   0.242688760161400       model:   0.226426964598993     
+  KurtD5LogY, target:    3.66657996177673       model:    3.52702590278259     
+  objective fun:   5.289349599302618E-002
+  
+ *********************************
+ EVALUATION NUMBER:           92
+  y1width:    1.81924665775412     
+  y2width:    2.22104659222721     
+  y1driftscale:   5.073390586323802E-005
+  y2driftscale:    1.00675769459880     
+  VarLogY, target:   0.478562563657761       model:   0.455271391564060     
+  VarD1LogY, target:   0.114076793193817       model:   0.117675233153494     
+  KurtD1LogY, target:    4.46993446350098       model:    4.11420294780990     
+  VarD5LogY, target:   0.242688760161400       model:   0.222852653308190     
+  KurtD5LogY, target:    3.66657996177673       model:    3.49332626415110     
+  objective fun:   5.519472303870120E-002
+  
+ *********************************
+ EVALUATION NUMBER:           93
+  y1width:    1.81924665351128     
+  y2width:    2.29939593920469     
+  y1driftscale:   5.076667044353934E-005
+  y2driftscale:   0.999767981617727     
+  VarLogY, target:   0.478562563657761       model:   0.460229718908810     
+  VarD1LogY, target:   0.114076793193817       model:   0.122397087043640     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17763137805320     
+  VarD5LogY, target:   0.242688760161400       model:   0.231242354448334     
+  KurtD5LogY, target:    3.66657996177673       model:    3.54872294228511     
+  objective fun:   5.084058871370319E-002
+  
+ *********************************
+ EVALUATION NUMBER:           94
+  y1width:    1.81924665092713     
+  y2width:    2.28474836323579     
+  y1driftscale:   5.073449351681641E-005
+  y2driftscale:   0.996875230089465     
+  VarLogY, target:   0.478562563657761       model:   0.459792134237212     
+  VarD1LogY, target:   0.114076793193817       model:   0.121697075290052     
+  KurtD1LogY, target:    4.46993446350098       model:    4.16812481762747     
+  VarD5LogY, target:   0.242688760161400       model:   0.230464524836772     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53890537263691     
+  objective fun:   4.995145547288393E-002
+  
+ *********************************
+ EVALUATION NUMBER:           95
+  y1width:    1.81924666760821     
+  y2width:    2.28299417722161     
+  y1driftscale:   5.076797955386978E-005
+  y2driftscale:   0.992989520903963     
+  VarLogY, target:   0.478562563657761       model:   0.459682722453746     
+  VarD1LogY, target:   0.114076793193817       model:   0.121867108251322     
+  KurtD1LogY, target:    4.46993446350098       model:    4.16793150158658     
+  VarD5LogY, target:   0.242688760161400       model:   0.231172097818296     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53716336062977     
+  objective fun:   4.981091090467783E-002
+  
+ *********************************
+ EVALUATION NUMBER:           96
+  y1width:    1.81924666112713     
+  y2width:    2.28669504649369     
+  y1driftscale:   5.072526386943881E-005
+  y2driftscale:   0.994059727675171     
+  VarLogY, target:   0.478562563657761       model:   0.460013524925717     
+  VarD1LogY, target:   0.114076793193817       model:   0.121968253104193     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17033413506845     
+  VarD5LogY, target:   0.242688760161400       model:   0.231315136610857     
+  KurtD5LogY, target:    3.66657996177673       model:    3.54045530628818     
+  objective fun:   4.975692844598131E-002
+  
+ *********************************
+ EVALUATION NUMBER:           97
+  y1width:    1.81924666051212     
+  y2width:    2.27592279585306     
+  y1driftscale:   5.074177363927492E-005
+  y2driftscale:   0.999143716927710     
+  VarLogY, target:   0.478562563657761       model:   0.458992127677559     
+  VarD1LogY, target:   0.114076793193817       model:   0.121229731066921     
+  KurtD1LogY, target:    4.46993446350098       model:    4.16969208843065     
+  VarD5LogY, target:   0.242688760161400       model:   0.229178261104842     
+  KurtD5LogY, target:    3.66657996177673       model:    3.52997865022173     
+  objective fun:   5.044319660813802E-002
+  
+ *********************************
+ EVALUATION NUMBER:           98
+  y1width:    1.81924666139227     
+  y2width:    2.29786741927784     
+  y1driftscale:   5.074335766552803E-005
+  y2driftscale:   0.995572940959270     
+  VarLogY, target:   0.478562563657761       model:   0.460452738816641     
+  VarD1LogY, target:   0.114076793193817       model:   0.122524704722804     
+  KurtD1LogY, target:    4.46993446350098       model:    4.16978108520654     
+  VarD5LogY, target:   0.242688760161400       model:   0.232060159506611     
+  KurtD5LogY, target:    3.66657996177673       model:    3.55238879049702     
+  objective fun:   5.050711178017751E-002
+  
+ *********************************
+ EVALUATION NUMBER:           99
+  y1width:    1.81924666070933     
+  y2width:    2.28585997105153     
+  y1driftscale:   5.074139332983682E-005
+  y2driftscale:    1.00040278681103     
+  VarLogY, target:   0.478562563657761       model:   0.459595210971066     
+  VarD1LogY, target:   0.114076793193817       model:   0.121614995885212     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17680829413841     
+  VarD5LogY, target:   0.242688760161400       model:   0.230164722950821     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53241854329260     
+  objective fun:   5.002586970930264E-002
+  
+ *********************************
+ EVALUATION NUMBER:          100
+  y1width:    1.81924666126401     
+  y2width:    2.28493720429305     
+  y1driftscale:   5.074390804027294E-005
+  y2driftscale:   0.996624855578071     
+  VarLogY, target:   0.478562563657761       model:   0.459862349224501     
+  VarD1LogY, target:   0.114076793193817       model:   0.121747499202944     
+  KurtD1LogY, target:    4.46993446350098       model:    4.16687547764163     
+  VarD5LogY, target:   0.242688760161400       model:   0.230554113340526     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53801830237816     
+  objective fun:   5.001245470991621E-002
+  
+ *********************************
+ EVALUATION NUMBER:          101
+  y1width:    1.81924666014291     
+  y2width:    2.28129733312330     
+  y1driftscale:   5.074224739816985E-005
+  y2driftscale:   0.996483025861210     
+  VarLogY, target:   0.478562563657761       model:   0.459673965414416     
+  VarD1LogY, target:   0.114076793193817       model:   0.121597510794068     
+  KurtD1LogY, target:    4.46993446350098       model:    4.16700563084934     
+  VarD5LogY, target:   0.242688760161400       model:   0.230293702282518     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53480066323134     
+  objective fun:   4.995962795989387E-002
+  
+ *********************************
+ EVALUATION NUMBER:          102
+  y1width:    1.81924666090964     
+  y2width:    2.28781037762052     
+  y1driftscale:   5.074003871999450E-005
+  y2driftscale:   0.997869378022903     
+  VarLogY, target:   0.478562563657761       model:   0.459823121563547     
+  VarD1LogY, target:   0.114076793193817       model:   0.121766007374301     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17507537031998     
+  VarD5LogY, target:   0.242688760161400       model:   0.230674548383370     
+  KurtD5LogY, target:    3.66657996177673       model:    3.54097765756382     
+  objective fun:   4.977079307080720E-002
+  
+ *********************************
+ EVALUATION NUMBER:          103
+  y1width:    1.81924666167645     
+  y2width:    2.28094447531453     
+  y1driftscale:   5.074096947121767E-005
+  y2driftscale:   0.998785675103188     
+  VarLogY, target:   0.478562563657761       model:   0.459320895260808     
+  VarD1LogY, target:   0.114076793193817       model:   0.121424892679939     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17639772909842     
+  VarD5LogY, target:   0.242688760161400       model:   0.229965140363187     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53259161629686     
+  objective fun:   4.981556120807927E-002
+  
+ *********************************
+ EVALUATION NUMBER:          104
+  y1width:    1.81924666063921     
+  y2width:    2.28682915185663     
+  y1driftscale:   5.074494910766551E-005
+  y2driftscale:   0.999061165771310     
+  VarLogY, target:   0.478562563657761       model:   0.459650673124969     
+  VarD1LogY, target:   0.114076793193817       model:   0.121717568615686     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17588071265955     
+  VarD5LogY, target:   0.242688760161400       model:   0.230235526763345     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53906467919054     
+  objective fun:   5.016289967314896E-002
+  
+ *********************************
+ EVALUATION NUMBER:          105
+  y1width:    1.81924666103042     
+  y2width:    2.27847008569769     
+  y1driftscale:   5.074511849899561E-005
+  y2driftscale:   0.997566791993782     
+  VarLogY, target:   0.478562563657761       model:   0.459434282816772     
+  VarD1LogY, target:   0.114076793193817       model:   0.121459696450135     
+  KurtD1LogY, target:    4.46993446350098       model:    4.16826092669729     
+  VarD5LogY, target:   0.242688760161400       model:   0.229713884124364     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53281733149232     
+  objective fun:   5.028882698667039E-002
+  
+ *********************************
+ EVALUATION NUMBER:          106
+  y1width:    1.81924666115186     
+  y2width:    2.28853968442247     
+  y1driftscale:   5.074353086579936E-005
+  y2driftscale:   0.998731199398472     
+  VarLogY, target:   0.478562563657761       model:   0.459717559004333     
+  VarD1LogY, target:   0.114076793193817       model:   0.121868209183347     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17802815059557     
+  VarD5LogY, target:   0.242688760161400       model:   0.230477950713684     
+  KurtD5LogY, target:    3.66657996177673       model:    3.54166772107066     
+  objective fun:   5.025782716878577E-002
+  
+ *********************************
+ EVALUATION NUMBER:          107
+  y1width:    1.81924666097434     
+  y2width:    2.28543079094119     
+  y1driftscale:   5.074292502451309E-005
+  y2driftscale:   0.998527998698038     
+  VarLogY, target:   0.478562563657761       model:   0.459624881276987     
+  VarD1LogY, target:   0.114076793193817       model:   0.121584676255758     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17320670015968     
+  VarD5LogY, target:   0.242688760161400       model:   0.230262442832690     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53923276541098     
+  objective fun:   4.980570321977110E-002
+  
+ *********************************
+ EVALUATION NUMBER:          108
+  y1width:    1.81924666074932     
+  y2width:    2.28151624365100     
+  y1driftscale:   5.074228103312102E-005
+  y2driftscale:   0.998501815827872     
+  VarLogY, target:   0.478562563657761       model:   0.459371065729754     
+  VarD1LogY, target:   0.114076793193817       model:   0.121441456456306     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17494951996812     
+  VarD5LogY, target:   0.242688760161400       model:   0.230009165980719     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53620355419654     
+  objective fun:   4.977596499738565E-002
+  
+ *********************************
+ EVALUATION NUMBER:          109
+  y1width:    1.81924666090729     
+  y2width:    2.28326789906061     
+  y1driftscale:   5.074201929911525E-005
+  y2driftscale:   0.997918506513703     
+  VarLogY, target:   0.478562563657761       model:   0.459580993323856     
+  VarD1LogY, target:   0.114076793193817       model:   0.121472116422653     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17219204887713     
+  VarD5LogY, target:   0.242688760161400       model:   0.230108611506916     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53739116811349     
+  objective fun:   4.970522979277721E-002
+  
+ *********************************
+ EVALUATION NUMBER:          110
+  y1width:    1.81924666071620     
+  y2width:    2.28293602601842     
+  y1driftscale:   5.074202987746142E-005
+  y2driftscale:   0.998355373118868     
+  VarLogY, target:   0.478562563657761       model:   0.459520726887806     
+  VarD1LogY, target:   0.114076793193817       model:   0.121443928457934     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17596211109604     
+  VarD5LogY, target:   0.242688760161400       model:   0.230073327192924     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53687706288281     
+  objective fun:   4.962389949629208E-002
+  
+ *********************************
+ EVALUATION NUMBER:          111
+  y1width:    1.81924666082071     
+  y2width:    2.28285798843036     
+  y1driftscale:   5.074275227854408E-005
+  y2driftscale:   0.998375703418709     
+  VarLogY, target:   0.478562563657761       model:   0.459508942694885     
+  VarD1LogY, target:   0.114076793193817       model:   0.121443144759374     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17559105937991     
+  VarD5LogY, target:   0.242688760161400       model:   0.230043240306058     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53727429380525     
+  objective fun:   4.966115363655739E-002
+  
+ *********************************
+ EVALUATION NUMBER:          112
+  y1width:    1.81924666070306     
+  y2width:    2.28214112583027     
+  y1driftscale:   5.074242805284328E-005
+  y2driftscale:   0.998080904129744     
+  VarLogY, target:   0.478562563657761       model:   0.459536872567368     
+  VarD1LogY, target:   0.114076793193817       model:   0.121411537796467     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17302992316841     
+  VarD5LogY, target:   0.242688760161400       model:   0.230083786542817     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53727581667987     
+  objective fun:   4.956341372978079E-002
+  
+ *********************************
+ EVALUATION NUMBER:          113
+  y1width:    1.81924666091407     
+  y2width:    2.28227961659001     
+  y1driftscale:   5.074207600427706E-005
+  y2driftscale:   0.998227744694934     
+  VarLogY, target:   0.478562563657761       model:   0.459548783333215     
+  VarD1LogY, target:   0.114076793193817       model:   0.121406239400971     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17414069999954     
+  VarD5LogY, target:   0.242688760161400       model:   0.230104281891687     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53736828722766     
+  objective fun:   4.949932219404487E-002
+  
+ *********************************
+ EVALUATION NUMBER:          114
+  y1width:    1.81924666083907     
+  y2width:    2.28169001445492     
+  y1driftscale:   5.074264803659731E-005
+  y2driftscale:   0.998198082518492     
+  VarLogY, target:   0.478562563657761       model:   0.459469346520506     
+  VarD1LogY, target:   0.114076793193817       model:   0.121446597502765     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17557187487312     
+  VarD5LogY, target:   0.242688760161400       model:   0.230028600326370     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53687835570737     
+  objective fun:   4.970856133017563E-002
+  
+ *********************************
+ EVALUATION NUMBER:          115
+  y1width:    1.81924666088413     
+  y2width:    2.28282029438772     
+  y1driftscale:   5.074201104952355E-005
+  y2driftscale:   0.998265573839038     
+  VarLogY, target:   0.478562563657761       model:   0.459624161661874     
+  VarD1LogY, target:   0.114076793193817       model:   0.121478838466600     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17472376213807     
+  VarD5LogY, target:   0.242688760161400       model:   0.230127891955254     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53887805198104     
+  objective fun:   4.962060827491960E-002
+  
+ *********************************
+ EVALUATION NUMBER:          116
+  y1width:    1.81924666082602     
+  y2width:    2.28249107205364     
+  y1driftscale:   5.074217959215985E-005
+  y2driftscale:   0.998208314049048     
+  VarLogY, target:   0.478562563657761       model:   0.459559625693950     
+  VarD1LogY, target:   0.114076793193817       model:   0.121430491546537     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17406522541323     
+  VarD5LogY, target:   0.242688760161400       model:   0.230118100885108     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53788153312897     
+  objective fun:   4.954414851340978E-002
+  
+ *********************************
+ EVALUATION NUMBER:          117
+  y1width:    1.81924666080529     
+  y2width:    2.28224953091321     
+  y1driftscale:   5.074236629609476E-005
+  y2driftscale:   0.998306671800580     
+  VarLogY, target:   0.478562563657761       model:   0.459471404974983     
+  VarD1LogY, target:   0.114076793193817       model:   0.121395044797331     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17450361516082     
+  VarD5LogY, target:   0.242688760161400       model:   0.230106428967837     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53718806058502     
+  objective fun:   4.949310577559036E-002
+  
+ *********************************
+ EVALUATION NUMBER:          118
+  y1width:    1.81924666080691     
+  y2width:    2.28242836469925     
+  y1driftscale:   5.074228194792316E-005
+  y2driftscale:   0.998397228294994     
+  VarLogY, target:   0.478562563657761       model:   0.459474307837597     
+  VarD1LogY, target:   0.114076793193817       model:   0.121427947409408     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17388763035008     
+  VarD5LogY, target:   0.242688760161400       model:   0.230095013035227     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53818500178743     
+  objective fun:   4.959721472438466E-002
+  
+ *********************************
+ EVALUATION NUMBER:          119
+  y1width:    1.81924666079143     
+  y2width:    2.28220654132965     
+  y1driftscale:   5.074229429739538E-005
+  y2driftscale:   0.998342506296626     
+  VarLogY, target:   0.478562563657761       model:   0.459462632976786     
+  VarD1LogY, target:   0.114076793193817       model:   0.121397879541150     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17413422660192     
+  VarD5LogY, target:   0.242688760161400       model:   0.230082437270783     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53758763817405     
+  objective fun:   4.953280456223907E-002
+  
+ *********************************
+ EVALUATION NUMBER:          120
+  y1width:    1.81924666078520     
+  y2width:    2.28240042223876     
+  y1driftscale:   5.074234548960031E-005
+  y2driftscale:   0.998298325568941     
+  VarLogY, target:   0.478562563657761       model:   0.459511481201791     
+  VarD1LogY, target:   0.114076793193817       model:   0.121424515317963     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17397231707336     
+  VarD5LogY, target:   0.242688760161400       model:   0.230114045974259     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53756076698490     
+  objective fun:   4.955727824864416E-002
+  
+ *********************************
+ EVALUATION NUMBER:          121
+  y1width:    1.81924666078652     
+  y2width:    2.28239281666744     
+  y1driftscale:   5.074226594658766E-005
+  y2driftscale:   0.998326880524152     
+  VarLogY, target:   0.478562563657761       model:   0.459476376217406     
+  VarD1LogY, target:   0.114076793193817       model:   0.121418395079740     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17416459371382     
+  VarD5LogY, target:   0.242688760161400       model:   0.230108378592122     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53769606835874     
+  objective fun:   4.955547578318437E-002
+  
+ *********************************
+ EVALUATION NUMBER:          122
+  y1width:    1.81924666081591     
+  y2width:    2.28235551743370     
+  y1driftscale:   5.074231992507419E-005
+  y2driftscale:   0.998329351327691     
+  VarLogY, target:   0.478562563657761       model:   0.459480516206719     
+  VarD1LogY, target:   0.114076793193817       model:   0.121401501965971     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17481540672096     
+  VarD5LogY, target:   0.242688760161400       model:   0.230127758166590     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53710191152645     
+  objective fun:   4.947985087189050E-002
+  
+ *********************************
+ EVALUATION NUMBER:          123
+  y1width:    1.81924666079842     
+  y2width:    2.28238864865261     
+  y1driftscale:   5.074238141474922E-005
+  y2driftscale:   0.998341717458707     
+  VarLogY, target:   0.478562563657761       model:   0.459470941258357     
+  VarD1LogY, target:   0.114076793193817       model:   0.121425239704097     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17379696036017     
+  VarD5LogY, target:   0.242688760161400       model:   0.230091144508003     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53809874103500     
+  objective fun:   4.959782264580251E-002
+  
+ *********************************
+ EVALUATION NUMBER:          124
+  y1width:    1.81924666080827     
+  y2width:    2.28228978845726     
+  y1driftscale:   5.074228373347332E-005
+  y2driftscale:   0.998294992763085     
+  VarLogY, target:   0.478562563657761       model:   0.459509313816163     
+  VarD1LogY, target:   0.114076793193817       model:   0.121404536820399     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17431267653184     
+  VarD5LogY, target:   0.242688760161400       model:   0.230117781351579     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53705526060948     
+  objective fun:   4.949707626335897E-002
+  
+ ********************************** 
+ ********************************** 
+ DFLS/DFBOLS MINIMIZATION ATTEMPT            3
+ *********************************
+ EVALUATION NUMBER:          125
+  y1width:    1.81924666079665     
+  y2width:    2.28232636769240     
+  y1driftscale:   5.074231967687533E-005
+  y2driftscale:   0.998324798121235     
+  VarLogY, target:   0.478562563657761       model:   0.459478010270401     
+  VarD1LogY, target:   0.114076793193817       model:   0.121398491423805     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17481415468379     
+  VarD5LogY, target:   0.242688760161400       model:   0.230119808760853     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53719387685242     
+  objective fun:   4.947981964031499E-002
+  
+ *********************************
+ EVALUATION NUMBER:          126
+  y1width:    1.81924685702722     
+  y2width:    2.28232636769240     
+  y1driftscale:   5.074231967687533E-005
+  y2driftscale:   0.998324798121235     
+  VarLogY, target:   0.478562563657761       model:   0.459478088566571     
+  VarD1LogY, target:   0.114076793193817       model:   0.121398492630405     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17481415048879     
+  VarD5LogY, target:   0.242688760161400       model:   0.230119816161688     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53719385588466     
+  objective fun:   4.947978245842290E-002
+  
+ *********************************
+ EVALUATION NUMBER:          127
+  y1width:    1.81924666079665     
+  y2width:    10.7099072028339     
+  y1driftscale:   5.074231967687533E-005
+  y2driftscale:   0.998324798121235     
+  VarLogY, target:   0.478562563657761       model:   0.435245619483365     
+  VarD1LogY, target:   0.114076793193817       model:   7.653539093574745E-002
+  KurtD1LogY, target:    4.46993446350098       model:    50.5089612590818     
+  VarD5LogY, target:   0.242688760161400       model:   0.166307517835477     
+  KurtD5LogY, target:    3.66657996177673       model:    26.1403281092144     
+  objective fun:    3.00536108191216     
+  
+ *********************************
+ EVALUATION NUMBER:          128
+  y1width:    1.81924666079665     
+  y2width:    2.28232636769240     
+  y1driftscale:   1.601641668414630E-004
+  y2driftscale:   0.998324798121235     
+  VarLogY, target:   0.478562563657761       model:   0.459431425382125     
+  VarD1LogY, target:   0.114076793193817       model:   0.121398491423805     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17481415468379     
+  VarD5LogY, target:   0.242688760161400       model:   0.230119808756164     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53719387698008     
+  objective fun:   4.949945347654584E-002
+  
+ *********************************
+ EVALUATION NUMBER:          129
+  y1width:    1.81924666079665     
+  y2width:    2.28232636769240     
+  y1driftscale:   5.074231967687533E-005
+  y2driftscale:    1.98656934467005     
+  VarLogY, target:   0.478562563657761       model:   0.411256188440714     
+  VarD1LogY, target:   0.114076793193817       model:   7.927153041248315E-002
+  KurtD1LogY, target:    4.46993446350098       model:    5.51764248206266     
+  VarD5LogY, target:   0.242688760161400       model:   0.127518716043048     
+  KurtD5LogY, target:    3.66657996177673       model:    4.51980073201274     
+  objective fun:   0.302219640351990     
+  
+ *********************************
+ EVALUATION NUMBER:          130
+  y1width:    1.81921753809129     
+  y2width:    2.28232636769240     
+  y1driftscale:   5.074231967687533E-005
+  y2driftscale:   0.998324798121235     
+  VarLogY, target:   0.478562563657761       model:   0.459466390379009     
+  VarD1LogY, target:   0.114076793193817       model:   0.121398312353311     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17481477724367     
+  VarD5LogY, target:   0.242688760161400       model:   0.230118710407077     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53719698873693     
+  objective fun:   4.948533903310773E-002
+  
+ *********************************
+ EVALUATION NUMBER:          131
+  y1width:    1.81924666079665     
+  y2width:   0.566788309384953     
+  y1driftscale:   5.074231967687533E-005
+  y2driftscale:   0.998324798121235     
+  VarLogY, target:   0.478562563657761       model:   0.375414865623655     
+  VarD1LogY, target:   0.114076793193817       model:   2.150851377441053E-002
+  KurtD1LogY, target:    4.46993446350098       model:    3.81917513978601     
+  VarD5LogY, target:   0.242688760161400       model:   5.721447363604412E-002
+  KurtD5LogY, target:    3.66657996177673       model:    3.82117419685134     
+  objective fun:   0.568931913469114     
+  
+ *********************************
+ EVALUATION NUMBER:          132
+  y1width:    1.81924666079665     
+  y2width:    2.28232636769240     
+  y1driftscale:   5.000500045788764E-005
+  y2driftscale:   0.998324798121235     
+  VarLogY, target:   0.478562563657761       model:   0.459478010270401     
+  VarD1LogY, target:   0.114076793193817       model:   0.121398491423805     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17481415468379     
+  VarD5LogY, target:   0.242688760161400       model:   0.230119808760853     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53719387685242     
+  objective fun:   4.947981964031499E-002
+  
+ *********************************
+ EVALUATION NUMBER:          133
+  y1width:    1.81924666079665     
+  y2width:    2.28232636769240     
+  y1driftscale:   5.074231967687533E-005
+  y2driftscale:   1.339023076673509E-002
+  VarLogY, target:   0.478562563657761       model:   0.986868560706219     
+  VarD1LogY, target:   0.114076793193817       model:   0.150087311088186     
+  KurtD1LogY, target:    4.46993446350098       model:    5.42228486856607     
+  VarD5LogY, target:   0.242688760161400       model:   0.735738645185473     
+  KurtD5LogY, target:    3.66657996177673       model:    3.08237969567754     
+  objective fun:    1.15898268018929     
+  
+ *********************************
+ EVALUATION NUMBER:          134
+  y1width:    1.81924685472480     
+  y2width:    2.37159621171088     
+  y1driftscale:   5.000555289570125E-005
+  y2driftscale:   0.919994125808578     
+  VarLogY, target:   0.478562563657761       model:   0.471258921969086     
+  VarD1LogY, target:   0.114076793193817       model:   0.131647113957020     
+  KurtD1LogY, target:    4.46993446350098       model:    4.10387568157936     
+  VarD5LogY, target:   0.242688760161400       model:   0.257069374863343     
+  KurtD5LogY, target:    3.66657996177673       model:    3.52099483057721     
+  objective fun:   8.593257864358897E-002
+  
+ *********************************
+ EVALUATION NUMBER:          135
+  y1width:    1.81924685732451     
+  y2width:    2.31358683028197     
+  y1driftscale:   5.872801674687987E-005
+  y2driftscale:   0.832716368266385     
+  VarLogY, target:   0.478562563657761       model:   0.479966384043127     
+  VarD1LogY, target:   0.114076793193817       model:   0.135130740725946     
+  KurtD1LogY, target:    4.46993446350098       model:    4.01422001360669     
+  VarD5LogY, target:   0.242688760161400       model:   0.273580177934089     
+  KurtD5LogY, target:    3.66657996177673       model:    3.45177031611676     
+  objective fun:   0.115898288980853     
+  
+ *********************************
+ EVALUATION NUMBER:          136
+  y1width:    1.81924685702724     
+  y2width:    3.37980424758771     
+  y1driftscale:   5.074171312481335E-005
+  y2driftscale:   0.999404602662892     
+  VarLogY, target:   0.478562563657761       model:   0.501590540191449     
+  VarD1LogY, target:   0.114076793193817       model:   0.168454563633380     
+  KurtD1LogY, target:    4.46993446350098       model:    5.03593512293294     
+  VarD5LogY, target:   0.242688760161400       model:   0.320002704017627     
+  KurtD5LogY, target:    3.66657996177673       model:    4.13583388001709     
+  objective fun:   0.291173440748511     
+  
+ *********************************
+ EVALUATION NUMBER:          137
+  y1width:    1.81924685714540     
+  y2width:    2.21217451360054     
+  y1driftscale:   5.022392221440830E-005
+  y2driftscale:   0.830375149431342     
+  VarLogY, target:   0.478562563657761       model:   0.475000826708185     
+  VarD1LogY, target:   0.114076793193817       model:   0.129625085712284     
+  KurtD1LogY, target:    4.46993446350098       model:    3.94204111665816     
+  VarD5LogY, target:   0.242688760161400       model:   0.264084271186802     
+  KurtD5LogY, target:    3.66657996177673       model:    3.43574432145112     
+  objective fun:   8.786656560291967E-002
+  
+ *********************************
+ EVALUATION NUMBER:          138
+  y1width:    1.81924685723780     
+  y2width:    2.28039970984834     
+  y1driftscale:   5.072488730252664E-005
+  y2driftscale:    1.22861182390522     
+  VarLogY, target:   0.478562563657761       model:   0.437439255866297     
+  VarD1LogY, target:   0.114076793193817       model:   0.105688321650929     
+  KurtD1LogY, target:    4.46993446350098       model:    4.29562389309627     
+  VarD5LogY, target:   0.242688760161400       model:   0.187061360314784     
+  KurtD5LogY, target:    3.66657996177673       model:    3.56969825024032     
+  objective fun:   0.128339962209487     
+  
+ *********************************
+ EVALUATION NUMBER:          139
+  y1width:    1.81924685627613     
+  y2width:    2.17648803734252     
+  y1driftscale:   5.077564044165877E-005
+  y2driftscale:   0.895921081563064     
+  VarLogY, target:   0.478562563657761       model:   0.465598217499588     
+  VarD1LogY, target:   0.114076793193817       model:   0.122383609256584     
+  KurtD1LogY, target:    4.46993446350098       model:    3.96682022059695     
+  VarD5LogY, target:   0.242688760161400       model:   0.242618123096542     
+  KurtD5LogY, target:    3.66657996177673       model:    3.43839904960654     
+  objective fun:   5.042762108778071E-002
+  
+ *********************************
+ EVALUATION NUMBER:          140
+  y1width:    1.81924685682788     
+  y2width:    1.69565409895691     
+  y1driftscale:   5.074967599511844E-005
+  y2driftscale:   0.983025478688167     
+  VarLogY, target:   0.478562563657761       model:   0.432253184538750     
+  VarD1LogY, target:   0.114076793193817       model:   9.007471368957054E-002
+  KurtD1LogY, target:    4.46993446350098       model:    3.81390166688896     
+  VarD5LogY, target:   0.242688760161400       model:   0.172932025634020     
+  KurtD5LogY, target:    3.66657996177673       model:    3.28669591398029     
+  objective fun:   0.189947132265546     
+  
+ *********************************
+ EVALUATION NUMBER:          141
+  y1width:    1.81924685749719     
+  y2width:    2.14547011982590     
+  y1driftscale:   5.080365405031709E-005
+  y2driftscale:   0.893302544307499     
+  VarLogY, target:   0.478562563657761       model:   0.463804441570146     
+  VarD1LogY, target:   0.114076793193817       model:   0.120977671423854     
+  KurtD1LogY, target:    4.46993446350098       model:    3.93295665470008     
+  VarD5LogY, target:   0.242688760161400       model:   0.239845383771439     
+  KurtD5LogY, target:    3.66657996177673       model:    3.42515170103233     
+  objective fun:   4.857852012700472E-002
+  
+ *********************************
+ EVALUATION NUMBER:          142
+  y1width:    1.81924685695125     
+  y2width:    2.22891920453564     
+  y1driftscale:   5.078055789705918E-005
+  y2driftscale:   0.756830550550623     
+  VarLogY, target:   0.478562563657761       model:   0.487075329083101     
+  VarD1LogY, target:   0.114076793193817       model:   0.136628606636450     
+  KurtD1LogY, target:    4.46993446350098       model:    3.93505958859734     
+  VarD5LogY, target:   0.242688760161400       model:   0.286983338653220     
+  KurtD5LogY, target:    3.66657996177673       model:    3.35407030727579     
+  objective fun:   0.139736831000269     
+  
+ *********************************
+ EVALUATION NUMBER:          143
+  y1width:    1.81924685619548     
+  y2width:    2.23348069423893     
+  y1driftscale:   5.068035803267784E-005
+  y2driftscale:   0.960863113127257     
+  VarLogY, target:   0.478562563657761       model:   0.460258109750647     
+  VarD1LogY, target:   0.114076793193817       model:   0.121694317488980     
+  KurtD1LogY, target:    4.46993446350098       model:    4.08268875331449     
+  VarD5LogY, target:   0.242688760161400       model:   0.234135840509641     
+  KurtD5LogY, target:    3.66657996177673       model:    3.47349485031276     
+  objective fun:   4.932944778519969E-002
+  
+ *********************************
+ EVALUATION NUMBER:          144
+  y1width:    1.81924685723827     
+  y2width:    2.28304114504781     
+  y1driftscale:   5.046584644058484E-005
+  y2driftscale:   0.970423275309638     
+  VarLogY, target:   0.478562563657761       model:   0.461352996039193     
+  VarD1LogY, target:   0.114076793193817       model:   0.123438690018025     
+  KurtD1LogY, target:    4.46993446350098       model:    4.15763309663698     
+  VarD5LogY, target:   0.242688760161400       model:   0.235791609127589     
+  KurtD5LogY, target:    3.66657996177673       model:    3.51565225915204     
+  objective fun:   5.118533646273762E-002
+  
+ *********************************
+ EVALUATION NUMBER:          145
+  y1width:    1.81924685686180     
+  y2width:    2.27480146729534     
+  y1driftscale:   5.120269316456592E-005
+  y2driftscale:   0.969138053882714     
+  VarLogY, target:   0.478562563657761       model:   0.460585924668772     
+  VarD1LogY, target:   0.114076793193817       model:   0.123135864322669     
+  KurtD1LogY, target:    4.46993446350098       model:    4.14333282723556     
+  VarD5LogY, target:   0.242688760161400       model:   0.234825943283273     
+  KurtD5LogY, target:    3.66657996177673       model:    3.50519484109481     
+  objective fun:   5.144414112028498E-002
+  
+ *********************************
+ EVALUATION NUMBER:          146
+  y1width:    1.81924685698295     
+  y2width:    2.25184488897126     
+  y1driftscale:   5.058195597774844E-005
+  y2driftscale:   0.977460890434041     
+  VarLogY, target:   0.478562563657761       model:   0.458752938733562     
+  VarD1LogY, target:   0.114076793193817       model:   0.121786817614977     
+  KurtD1LogY, target:    4.46993446350098       model:    4.12228824676371     
+  VarD5LogY, target:   0.242688760161400       model:   0.231729955887921     
+  KurtD5LogY, target:    3.66657996177673       model:    3.49752973970989     
+  objective fun:   5.090201236960017E-002
+  
+ *********************************
+ EVALUATION NUMBER:          147
+  y1width:    1.81924685703364     
+  y2width:    2.37410481549993     
+  y1driftscale:   5.074035207448406E-005
+  y2driftscale:   0.997282893862043     
+  VarLogY, target:   0.478562563657761       model:   0.463367596132513     
+  VarD1LogY, target:   0.114076793193817       model:   0.126032760378279     
+  KurtD1LogY, target:    4.46993446350098       model:    4.22306996801567     
+  VarD5LogY, target:   0.242688760161400       model:   0.238603561624116     
+  KurtD5LogY, target:    3.66657996177673       model:    3.57714254931512     
+  objective fun:   5.741762192681914E-002
+  
+ *********************************
+ EVALUATION NUMBER:          148
+  y1width:    1.81924685698295     
+  y2width:    2.21950691431950     
+  y1driftscale:   5.080318841621933E-005
+  y2driftscale:   0.958363225058145     
+  VarLogY, target:   0.478562563657761       model:   0.459674220930470     
+  VarD1LogY, target:   0.114076793193817       model:   0.121281326254973     
+  KurtD1LogY, target:    4.46993446350098       model:    4.07020780901852     
+  VarD5LogY, target:   0.242688760161400       model:   0.233723192444539     
+  KurtD5LogY, target:    3.66657996177673       model:    3.45400804739256     
+  objective fun:   4.937268787082084E-002
+  
+ *********************************
+ EVALUATION NUMBER:          149
+  y1width:    1.81924685702162     
+  y2width:    2.21492833533882     
+  y1driftscale:   5.074233487222407E-005
+  y2driftscale:    1.00599659588967     
+  VarLogY, target:   0.478562563657761       model:   0.455242039452199     
+  VarD1LogY, target:   0.114076793193817       model:   0.117517211025547     
+  KurtD1LogY, target:    4.46993446350098       model:    4.10882726407379     
+  VarD5LogY, target:   0.242688760161400       model:   0.222975633173037     
+  KurtD5LogY, target:    3.66657996177673       model:    3.49720209367144     
+  objective fun:   5.488003489557279E-002
+  
+ *********************************
+ EVALUATION NUMBER:          150
+  y1width:    1.81924685707927     
+  y2width:    2.29970713448350     
+  y1driftscale:   5.076161004211358E-005
+  y2driftscale:    1.00350734851247     
+  VarLogY, target:   0.478562563657761       model:   0.459857783275155     
+  VarD1LogY, target:   0.114076793193817       model:   0.122373526181210     
+  KurtD1LogY, target:    4.46993446350098       model:    4.18382527795313     
+  VarD5LogY, target:   0.242688760161400       model:   0.230483992394661     
+  KurtD5LogY, target:    3.66657996177673       model:    3.54703497140238     
+  objective fun:   5.156617447243794E-002
+  
+ *********************************
+ EVALUATION NUMBER:          151
+  y1width:    1.81924685695966     
+  y2width:    2.28509776211920     
+  y1driftscale:   5.074433651740549E-005
+  y2driftscale:    1.00139490949679     
+  VarLogY, target:   0.478562563657761       model:   0.459399026337823     
+  VarD1LogY, target:   0.114076793193817       model:   0.121508044691844     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17697275395661     
+  VarD5LogY, target:   0.242688760161400       model:   0.229682406161451     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53766286376538     
+  objective fun:   5.025483896929389E-002
+  
+ *********************************
+ EVALUATION NUMBER:          152
+  y1width:    1.81924685702866     
+  y2width:    2.29098611300051     
+  y1driftscale:   5.070644567322270E-005
+  y2driftscale:   0.996786637099708     
+  VarLogY, target:   0.478562563657761       model:   0.460084669639725     
+  VarD1LogY, target:   0.114076793193817       model:   0.122111457688066     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17203618749121     
+  VarD5LogY, target:   0.242688760161400       model:   0.230927115473226     
+  KurtD5LogY, target:    3.66657996177673       model:    3.54157050820445     
+  objective fun:   5.050060521785040E-002
+  
+ *********************************
+ EVALUATION NUMBER:          153
+  y1width:    1.81924685703411     
+  y2width:    2.28804733901395     
+  y1driftscale:   5.074217060020707E-005
+  y2driftscale:    1.02310604872986     
+  VarLogY, target:   0.478562563657761       model:   0.457140638628434     
+  VarD1LogY, target:   0.114076793193817       model:   0.119815678743868     
+  KurtD1LogY, target:    4.46993446350098       model:    4.18532543454585     
+  VarD5LogY, target:   0.242688760161400       model:   0.224720992531216     
+  KurtD5LogY, target:    3.66657996177673       model:    3.52444696835112     
+  objective fun:   5.339735939945920E-002
+  
+ *********************************
+ EVALUATION NUMBER:          154
+  y1width:    1.81924685699126     
+  y2width:    2.26803664564810     
+  y1driftscale:   5.076462985211990E-005
+  y2driftscale:   0.984060013716419     
+  VarLogY, target:   0.478562563657761       model:   0.459460938498654     
+  VarD1LogY, target:   0.114076793193817       model:   0.121961340423961     
+  KurtD1LogY, target:    4.46993446350098       model:    4.14043471729023     
+  VarD5LogY, target:   0.242688760161400       model:   0.231493594969612     
+  KurtD5LogY, target:    3.66657996177673       model:    3.51486534781254     
+  objective fun:   5.070664919797056E-002
+  
+ *********************************
+ EVALUATION NUMBER:          155
+  y1width:    1.81924685705463     
+  y2width:    2.24022519940503     
+  y1driftscale:   5.075873399927654E-005
+  y2driftscale:   0.984886305692667     
+  VarLogY, target:   0.478562563657761       model:   0.458082609540869     
+  VarD1LogY, target:   0.114076793193817       model:   0.120208997628141     
+  KurtD1LogY, target:    4.46993446350098       model:    4.12008320389870     
+  VarD5LogY, target:   0.242688760161400       model:   0.229239905002466     
+  KurtD5LogY, target:    3.66657996177673       model:    3.49433773297565     
+  objective fun:   4.968672630007719E-002
+  
+ *********************************
+ EVALUATION NUMBER:          156
+  y1width:    1.81924685700617     
+  y2width:    2.31333407900744     
+  y1driftscale:   5.071803315293223E-005
+  y2driftscale:    1.01148830838550     
+  VarLogY, target:   0.478562563657761       model:   0.459428301974905     
+  VarD1LogY, target:   0.114076793193817       model:   0.122230980044240     
+  KurtD1LogY, target:    4.46993446350098       model:    4.18855372964192     
+  VarD5LogY, target:   0.242688760161400       model:   0.229528419343185     
+  KurtD5LogY, target:    3.66657996177673       model:    3.54046916001097     
+  objective fun:   5.228525288928122E-002
+  
+ *********************************
+ EVALUATION NUMBER:          157
+  y1width:    1.81924685701890     
+  y2width:    2.30052327372393     
+  y1driftscale:   5.073047578604310E-005
+  y2driftscale:    1.00484589031138     
+  VarLogY, target:   0.478562563657761       model:   0.459980511369836     
+  VarD1LogY, target:   0.114076793193817       model:   0.122436248347933     
+  KurtD1LogY, target:    4.46993446350098       model:    4.18425654090516     
+  VarD5LogY, target:   0.242688760161400       model:   0.230587815924600     
+  KurtD5LogY, target:    3.66657996177673       model:    3.54897068718481     
+  objective fun:   5.158030538257395E-002
+  
+ *********************************
+ EVALUATION NUMBER:          158
+  y1width:    1.81924685702718     
+  y2width:    2.28958571659623     
+  y1driftscale:   5.074224621993585E-005
+  y2driftscale:   0.996461482478994     
+  VarLogY, target:   0.478562563657761       model:   0.460067407146566     
+  VarD1LogY, target:   0.114076793193817       model:   0.122051846703959     
+  KurtD1LogY, target:    4.46993446350098       model:    4.16976838430569     
+  VarD5LogY, target:   0.242688760161400       model:   0.231053333162705     
+  KurtD5LogY, target:    3.66657996177673       model:    3.54785584150130     
+  objective fun:   5.017229882308753E-002
+  
+ *********************************
+ EVALUATION NUMBER:          159
+  y1width:    1.81924685703090     
+  y2width:    2.26683797884998     
+  y1driftscale:   5.073969292720460E-005
+  y2driftscale:   0.996074613932026     
+  VarLogY, target:   0.478562563657761       model:   0.458728336319031     
+  VarD1LogY, target:   0.114076793193817       model:   0.120945909727100     
+  KurtD1LogY, target:    4.46993446350098       model:    4.15357153427746     
+  VarD5LogY, target:   0.242688760161400       model:   0.228510004344545     
+  KurtD5LogY, target:    3.66657996177673       model:    3.52285462878913     
+  objective fun:   5.097378450619258E-002
+  
+ *********************************
+ EVALUATION NUMBER:          160
+  y1width:    1.81924685702909     
+  y2width:    2.28071028367707     
+  y1driftscale:   5.074567775822170E-005
+  y2driftscale:   0.997730432400513     
+  VarLogY, target:   0.478562563657761       model:   0.459464544136633     
+  VarD1LogY, target:   0.114076793193817       model:   0.121356959596408     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17429609289459     
+  VarD5LogY, target:   0.242688760161400       model:   0.230104991531952     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53454775074682     
+  objective fun:   4.942589192072763E-002
+  
+ *********************************
+ EVALUATION NUMBER:          161
+  y1width:    1.81924685702633     
+  y2width:    2.28219848394412     
+  y1driftscale:   5.074685495886348E-005
+  y2driftscale:   0.999801973247906     
+  VarLogY, target:   0.478562563657761       model:   0.459351264595783     
+  VarD1LogY, target:   0.114076793193817       model:   0.121384486130342     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17635753585786     
+  VarD5LogY, target:   0.242688760161400       model:   0.229895027980335     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53617684223828     
+  objective fun:   4.972122262230354E-002
+  
+ *********************************
+ EVALUATION NUMBER:          162
+  y1width:    1.81924685702265     
+  y2width:    2.27945695268837     
+  y1driftscale:   5.074562596953765E-005
+  y2driftscale:   0.997258693345799     
+  VarLogY, target:   0.478562563657761       model:   0.459479077188444     
+  VarD1LogY, target:   0.114076793193817       model:   0.121318103555411     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17044211039032     
+  VarD5LogY, target:   0.242688760161400       model:   0.229944481711620     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53525213198450     
+  objective fun:   4.954837848046212E-002
+  
+ *********************************
+ EVALUATION NUMBER:          163
+  y1width:    1.81924685703473     
+  y2width:    2.28036203426691     
+  y1driftscale:   5.074440317312006E-005
+  y2driftscale:   0.998717923171492     
+  VarLogY, target:   0.478562563657761       model:   0.459299165711363     
+  VarD1LogY, target:   0.114076793193817       model:   0.121382107277229     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17587456063866     
+  VarD5LogY, target:   0.242688760161400       model:   0.229822680798721     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53315546918745     
+  objective fun:   4.986174556030774E-002
+  
+ *********************************
+ EVALUATION NUMBER:          164
+  y1width:    1.81924685703311     
+  y2width:    2.28423579718040     
+  y1driftscale:   5.074798939142744E-005
+  y2driftscale:   0.997990897814466     
+  VarLogY, target:   0.478562563657761       model:   0.459644164332853     
+  VarD1LogY, target:   0.114076793193817       model:   0.121557330582426     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17288823265145     
+  VarD5LogY, target:   0.242688760161400       model:   0.230249173866512     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53825018076399     
+  objective fun:   4.975034948257274E-002
+  
+ *********************************
+ EVALUATION NUMBER:          165
+  y1width:    1.81924685702516     
+  y2width:    2.27688410015415     
+  y1driftscale:   5.074466035592353E-005
+  y2driftscale:   0.996368597271031     
+  VarLogY, target:   0.478562563657761       model:   0.459334600583487     
+  VarD1LogY, target:   0.114076793193817       model:   0.121467566251309     
+  KurtD1LogY, target:    4.46993446350098       model:    4.16111701255113     
+  VarD5LogY, target:   0.242688760161400       model:   0.229730597376944     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53010029342405     
+  objective fun:   5.050336255308118E-002
+  
+ *********************************
+ EVALUATION NUMBER:          166
+  y1width:    1.81924685703134     
+  y2width:    2.27538015896276     
+  y1driftscale:   5.074351706376282E-005
+  y2driftscale:   0.997629577796193     
+  VarLogY, target:   0.478562563657761       model:   0.459079428656564     
+  VarD1LogY, target:   0.114076793193817       model:   0.121165648017499     
+  KurtD1LogY, target:    4.46993446350098       model:    4.16687641872250     
+  VarD5LogY, target:   0.242688760161400       model:   0.229151975459008     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53134234828737     
+  objective fun:   5.029780800016564E-002
+  
+ *********************************
+ EVALUATION NUMBER:          167
+  y1width:    1.81924685702697     
+  y2width:    2.28753056015190     
+  y1driftscale:   5.074579181066324E-005
+  y2driftscale:   0.997955293345046     
+  VarLogY, target:   0.478562563657761       model:   0.459898874659363     
+  VarD1LogY, target:   0.114076793193817       model:   0.121734108731870     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17526192237421     
+  VarD5LogY, target:   0.242688760161400       model:   0.230550161603977     
+  KurtD5LogY, target:    3.66657996177673       model:    3.54078341114339     
+  objective fun:   4.977217805567727E-002
+  
+ *********************************
+ EVALUATION NUMBER:          168
+  y1width:    1.81924685702766     
+  y2width:    2.28299719607018     
+  y1driftscale:   5.074626682824127E-005
+  y2driftscale:   0.998432259811790     
+  VarLogY, target:   0.478562563657761       model:   0.459523507247679     
+  VarD1LogY, target:   0.114076793193817       model:   0.121459009200440     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17548466140093     
+  VarD5LogY, target:   0.242688760161400       model:   0.230050469715672     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53777098596745     
+  objective fun:   4.968846487305385E-002
+  
+ *********************************
+ EVALUATION NUMBER:          169
+  y1width:    1.81924685702970     
+  y2width:    2.28103285413651     
+  y1driftscale:   5.074542814940299E-005
+  y2driftscale:   0.997904758121869     
+  VarLogY, target:   0.478562563657761       model:   0.459448144952295     
+  VarD1LogY, target:   0.114076793193817       model:   0.121372428489570     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17517388826706     
+  VarD5LogY, target:   0.242688760161400       model:   0.230026029678316     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53481988242494     
+  objective fun:   4.954231731486790E-002
+  
+ *********************************
+ EVALUATION NUMBER:          170
+  y1width:    1.81924685702874     
+  y2width:    2.28160559162490     
+  y1driftscale:   5.074598535860004E-005
+  y2driftscale:   0.997245466843566     
+  VarLogY, target:   0.478562563657761       model:   0.459518888287221     
+  VarD1LogY, target:   0.114076793193817       model:   0.121455635054893     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17475320227769     
+  VarD5LogY, target:   0.242688760161400       model:   0.230166018635428     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53882740746308     
+  objective fun:   4.955731273940352E-002
+  
+ *********************************
+ EVALUATION NUMBER:          171
+  y1width:    1.81924685702817     
+  y2width:    2.28065875801946     
+  y1driftscale:   5.074570707666634E-005
+  y2driftscale:   0.997797089579289     
+  VarLogY, target:   0.478562563657761       model:   0.459415989428891     
+  VarD1LogY, target:   0.114076793193817       model:   0.121333784282452     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17515818337967     
+  VarD5LogY, target:   0.242688760161400       model:   0.230048517082796     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53434512031370     
+  objective fun:   4.942850374206536E-002
+  
+ *********************************
+ EVALUATION NUMBER:          172
+  y1width:    1.81924685702826     
+  y2width:    2.28017409878927     
+  y1driftscale:   5.074615784993551E-005
+  y2driftscale:   0.997861627152332     
+  VarLogY, target:   0.478562563657761       model:   0.459445486227350     
+  VarD1LogY, target:   0.114076793193817       model:   0.121372931596466     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17165518307432     
+  VarD5LogY, target:   0.242688760161400       model:   0.229976527784606     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53371536675190     
+  objective fun:   4.967807562551774E-002
+  
+ *********************************
+ EVALUATION NUMBER:          173
+  y1width:    1.81924685702841     
+  y2width:    2.27982104904101     
+  y1driftscale:   5.074544135120342E-005
+  y2driftscale:   0.997815310091164     
+  VarLogY, target:   0.478562563657761       model:   0.459460977531695     
+  VarD1LogY, target:   0.114076793193817       model:   0.121338480797350     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17149593463810     
+  VarD5LogY, target:   0.242688760161400       model:   0.229854652065860     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53401191773476     
+  objective fun:   4.970691140924669E-002
+  
+ *********************************
+ EVALUATION NUMBER:          174
+  y1width:    1.81924685702809     
+  y2width:    2.28150418268724     
+  y1driftscale:   5.074553439439645E-005
+  y2driftscale:   0.997638699383388     
+  VarLogY, target:   0.478562563657761       model:   0.459500683566487     
+  VarD1LogY, target:   0.114076793193817       model:   0.121472700742079     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17346599266185     
+  VarD5LogY, target:   0.242688760161400       model:   0.230104824104798     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53612257384067     
+  objective fun:   4.973609292290088E-002
+  
+ *********************************
+ EVALUATION NUMBER:          175
+  y1width:    1.81924685702769     
+  y2width:    2.28021228303259     
+  y1driftscale:   5.074564381215078E-005
+  y2driftscale:   0.997536340326825     
+  VarLogY, target:   0.478562563657761       model:   0.459533261144191     
+  VarD1LogY, target:   0.114076793193817       model:   0.121417246906040     
+  KurtD1LogY, target:    4.46993446350098       model:    4.16956358640246     
+  VarD5LogY, target:   0.242688760161400       model:   0.230079780426974     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53284738589453     
+  objective fun:   4.970524960187672E-002
+  
+ *********************************
+ EVALUATION NUMBER:          176
+  y1width:    1.81924685702835     
+  y2width:    2.28125633635192     
+  y1driftscale:   5.074577426188269E-005
+  y2driftscale:   0.998071674487432     
+  VarLogY, target:   0.478562563657761       model:   0.459482614925020     
+  VarD1LogY, target:   0.114076793193817       model:   0.121426420236607     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17450117118727     
+  VarD5LogY, target:   0.242688760161400       model:   0.229991217069651     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53586781059670     
+  objective fun:   4.971825749462131E-002
+  
+ *********************************
+ EVALUATION NUMBER:          177
+  y1width:    1.81924685702813     
+  y2width:    2.28102361043296     
+  y1driftscale:   5.074569846422519E-005
+  y2driftscale:   0.997919704483654     
+  VarLogY, target:   0.478562563657761       model:   0.459447350339634     
+  VarD1LogY, target:   0.114076793193817       model:   0.121371473532232     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17517350022397     
+  VarD5LogY, target:   0.242688760161400       model:   0.230112070133164     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53437246189730     
+  objective fun:   4.945238897935676E-002
+  
+ *********************************
+ EVALUATION NUMBER:          178
+  y1width:    1.81924685702815     
+  y2width:    2.28070277234656     
+  y1driftscale:   5.074576864309576E-005
+  y2driftscale:   0.997774033687896     
+  VarLogY, target:   0.478562563657761       model:   0.459419772401399     
+  VarD1LogY, target:   0.114076793193817       model:   0.121338330623491     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17516003120831     
+  VarD5LogY, target:   0.242688760161400       model:   0.230056183299402     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53434841878683     
+  objective fun:   4.943133671640187E-002
+  
+ *********************************
+ EVALUATION NUMBER:          179
+  y1width:    1.81924685702803     
+  y2width:    2.28078916998854     
+  y1driftscale:   5.074569979900305E-005
+  y2driftscale:   0.997853945431327     
+  VarLogY, target:   0.478562563657761       model:   0.459427198387732     
+  VarD1LogY, target:   0.114076793193817       model:   0.121347255104568     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17516365833911     
+  VarD5LogY, target:   0.242688760161400       model:   0.230071232103203     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53435489342838     
+  objective fun:   4.943693634609990E-002
+  
+ *********************************
+ EVALUATION NUMBER:          180
+  y1width:    1.81924685702815     
+  y2width:    2.28074950196382     
+  y1driftscale:   5.074566415082616E-005
+  y2driftscale:   0.997771263528481     
+  VarLogY, target:   0.478562563657761       model:   0.459423788834026     
+  VarD1LogY, target:   0.114076793193817       model:   0.121343157534708     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17516199301161     
+  VarD5LogY, target:   0.242688760161400       model:   0.230064322623439     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53435192071798     
+  objective fun:   4.943435901034136E-002
+  
+ *********************************
+ EVALUATION NUMBER:          181
+  y1width:    1.81924685702826     
+  y2width:    2.28074037702707     
+  y1driftscale:   5.074570765969828E-005
+  y2driftscale:   0.997817943685399     
+  VarLogY, target:   0.478562563657761       model:   0.459423004534624     
+  VarD1LogY, target:   0.114076793193817       model:   0.121342214970946     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17516160993016     
+  VarD5LogY, target:   0.242688760161400       model:   0.230062733236115     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53435123689479     
+  objective fun:   4.943376766674188E-002
+  
+ *********************************
+ EVALUATION NUMBER:          182
+  y1width:    1.81924685702818     
+  y2width:    2.28057753715554     
+  y1driftscale:   5.074576152930994E-005
+  y2driftscale:   0.997815272840662     
+  VarLogY, target:   0.478562563657761       model:   0.459407699777580     
+  VarD1LogY, target:   0.114076793193817       model:   0.121331809418377     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17509566372875     
+  VarD5LogY, target:   0.242688760161400       model:   0.230044267181714     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53442975657038     
+  objective fun:   4.943116833592724E-002
+  
+ *********************************
+ EVALUATION NUMBER:          183
+  y1width:    1.81924685702817     
+  y2width:    2.28054674563412     
+  y1driftscale:   5.074570683201570E-005
+  y2driftscale:   0.997765567993765     
+  VarLogY, target:   0.478562563657761       model:   0.459405053390553     
+  VarD1LogY, target:   0.114076793193817       model:   0.121328628944755     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17509437156631     
+  VarD5LogY, target:   0.242688760161400       model:   0.230038904159513     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53442744925885     
+  objective fun:   4.942919926873836E-002
+  
+ *********************************
+ EVALUATION NUMBER:          184
+  y1width:    1.81924685702829     
+  y2width:    2.28064949073598     
+  y1driftscale:   5.074570083342590E-005
+  y2driftscale:   0.997782276119795     
+  VarLogY, target:   0.478562563657761       model:   0.459415192928164     
+  VarD1LogY, target:   0.114076793193817       model:   0.121332827055268     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17515779431421     
+  VarD5LogY, target:   0.242688760161400       model:   0.230046902969090     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53434442581179     
+  objective fun:   4.942790894945880E-002
+  
+ *********************************
+ EVALUATION NUMBER:          185
+  y1width:    1.81924685702829     
+  y2width:    2.28067647654714     
+  y1driftscale:   5.074572783483984E-005
+  y2driftscale:   0.997736677780099     
+  VarLogY, target:   0.478562563657761       model:   0.459461637599592     
+  VarD1LogY, target:   0.114076793193817       model:   0.121353467022609     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17429467419857     
+  VarD5LogY, target:   0.242688760161400       model:   0.230099101962200     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53454522756321     
+  objective fun:   4.942366163979348E-002
+  
+ *********************************
+ EVALUATION NUMBER:          186
+  y1width:    1.81924685702839     
+  y2width:    2.28056522380018     
+  y1driftscale:   5.074569015768318E-005
+  y2driftscale:   0.997764430369559     
+  VarLogY, target:   0.478562563657761       model:   0.459406641497904     
+  VarD1LogY, target:   0.114076793193817       model:   0.121330537559499     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17509514700149     
+  VarD5LogY, target:   0.242688760161400       model:   0.230042122530314     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53442883389101     
+  objective fun:   4.943038013619810E-002
+  
+ *********************************
+ EVALUATION NUMBER:          187
+  y1width:    1.81924685702829     
+  y2width:    2.28057984203898     
+  y1driftscale:   5.074565194082640E-005
+  y2driftscale:   0.997811295973022     
+  VarLogY, target:   0.478562563657761       model:   0.459407897873085     
+  VarD1LogY, target:   0.114076793193817       model:   0.121332047492916     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17509576045261     
+  VarD5LogY, target:   0.242688760161400       model:   0.230044668631042     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53442992928252     
+  objective fun:   4.943131599119888E-002
+  
+ ********************************** 
+ ********************************** 
+ DFLS/DFBOLS MINIMIZATION ATTEMPT            4
+ *********************************
+ EVALUATION NUMBER:          188
+  y1width:    1.81924685702829     
+  y2width:    2.28064949073598     
+  y1driftscale:   5.074570083342590E-005
+  y2driftscale:   0.997782276119795     
+  VarLogY, target:   0.478562563657761       model:   0.459415192928164     
+  VarD1LogY, target:   0.114076793193817       model:   0.121332827055268     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17515779431421     
+  VarD5LogY, target:   0.242688760161400       model:   0.230046902969090     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53434442581179     
+  objective fun:   4.942790894945880E-002
+  
+ *********************************
+ EVALUATION NUMBER:          189
+  y1width:    1.81924685834942     
+  y2width:    2.28064949073598     
+  y1driftscale:   5.074570083342590E-005
+  y2driftscale:   0.997782276119795     
+  VarLogY, target:   0.478562563657761       model:   0.459415193455328     
+  VarD1LogY, target:   0.114076793193817       model:   0.121332827063406     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17515779428977     
+  VarD5LogY, target:   0.242688760161400       model:   0.230046903018944     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53434442567206     
+  objective fun:   4.942790869756131E-002
+  
+ *********************************
+ EVALUATION NUMBER:          190
+  y1width:    1.81924685702829     
+  y2width:    10.7095171325730     
+  y1driftscale:   5.074570083342590E-005
+  y2driftscale:   0.997782276119795     
+  VarLogY, target:   0.478562563657761       model:   0.435240049925096     
+  VarD1LogY, target:   0.114076793193817       model:   7.583054823846415E-002
+  KurtD1LogY, target:    4.46993446350098       model:    50.5477637704730     
+  VarD5LogY, target:   0.242688760161400       model:   0.166297034577848     
+  KurtD5LogY, target:    3.66657996177673       model:    26.1396959400154     
+  objective fun:    3.00737054048200     
+  
+ *********************************
+ EVALUATION NUMBER:          191
+  y1width:    1.81924685702829     
+  y2width:    2.28064949073598     
+  y1driftscale:   1.606659199328496E-004
+  y2driftscale:   0.997782276119795     
+  VarLogY, target:   0.478562563657761       model:   0.459368602572120     
+  VarD1LogY, target:   0.114076793193817       model:   0.121332827055268     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17515779431421     
+  VarD5LogY, target:   0.242688760161400       model:   0.230046902964405     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53434442593925     
+  objective fun:   4.944763031576913E-002
+  
+ *********************************
+ EVALUATION NUMBER:          192
+  y1width:    1.81924685702829     
+  y2width:    2.28064949073598     
+  y1driftscale:   5.074570083342590E-005
+  y2driftscale:    1.98655486151275     
+  VarLogY, target:   0.478562563657761       model:   0.411208183095962     
+  VarD1LogY, target:   0.114076793193817       model:   7.919219232500305E-002
+  KurtD1LogY, target:    4.46993446350098       model:    5.51216125931481     
+  VarD5LogY, target:   0.242688760161400       model:   0.127415057182059     
+  KurtD5LogY, target:    3.66657996177673       model:    4.51678206562007     
+  objective fun:   0.302475851003583     
+  
+ *********************************
+ EVALUATION NUMBER:          193
+  y1width:    1.81924666095530     
+  y2width:    2.28064949073598     
+  y1driftscale:   5.074570083342590E-005
+  y2driftscale:   0.997782276119795     
+  VarLogY, target:   0.478562563657761       model:   0.459415114690095     
+  VarD1LogY, target:   0.114076793193817       model:   0.121332825847541     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17515779794102     
+  VarD5LogY, target:   0.242688760161400       model:   0.230046895570040     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53434444654705     
+  objective fun:   4.942794633454048E-002
+  
+ *********************************
+ EVALUATION NUMBER:          194
+  y1width:    1.81924685702829     
+  y2width:   0.566772163912040     
+  y1driftscale:   5.074570083342590E-005
+  y2driftscale:   0.997782276119795     
+  VarLogY, target:   0.478562563657761       model:   0.375418537555607     
+  VarD1LogY, target:   0.114076793193817       model:   2.152169931609700E-002
+  KurtD1LogY, target:    4.46993446350098       model:    3.81883055957804     
+  VarD5LogY, target:   0.242688760161400       model:   5.722130316857857E-002
+  KurtD5LogY, target:    3.66657996177673       model:    3.82171230072586     
+  objective fun:   0.568882437355829     
+  
+ *********************************
+ EVALUATION NUMBER:          195
+  y1width:    1.81924685702829     
+  y2width:    2.28064949073598     
+  y1driftscale:   5.000502323995811E-005
+  y2driftscale:   0.997782276119795     
+  VarLogY, target:   0.478562563657761       model:   0.459415192928164     
+  VarD1LogY, target:   0.114076793193817       model:   0.121332827055268     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17515779431421     
+  VarD5LogY, target:   0.242688760161400       model:   0.230046902969090     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53434442581179     
+  objective fun:   4.942790894945880E-002
+  
+ *********************************
+ EVALUATION NUMBER:          196
+  y1width:    1.81924685702829     
+  y2width:    2.28064949073598     
+  y1driftscale:   5.074570083342590E-005
+  y2driftscale:   1.337585985837782E-002
+  VarLogY, target:   0.478562563657761       model:   0.986153365359802     
+  VarD1LogY, target:   0.114076793193817       model:   0.149976915686817     
+  KurtD1LogY, target:    4.46993446350098       model:    5.41966570397236     
+  VarD5LogY, target:   0.242688760161400       model:   0.735404791915815     
+  KurtD5LogY, target:    3.66657996177673       model:    3.08409718883343     
+  objective fun:    1.15796088675273     
+  
+ *********************************
+ EVALUATION NUMBER:          197
+  y1width:    1.81924685834936     
+  y2width:    2.37035878557946     
+  y1driftscale:   5.000503776948427E-005
+  y2driftscale:   0.918730641569419     
+  VarLogY, target:   0.478562563657761       model:   0.471646427409199     
+  VarD1LogY, target:   0.114076793193817       model:   0.131808146913164     
+  KurtD1LogY, target:    4.46993446350098       model:    4.09431486675833     
+  VarD5LogY, target:   0.242688760161400       model:   0.257576014146089     
+  KurtD5LogY, target:    3.66657996177673       model:    3.51780461358948     
+  objective fun:   8.704647624339212E-002
+  
+ *********************************
+ EVALUATION NUMBER:          198
+  y1width:    1.81924685834944     
+  y2width:    2.32270614664985     
+  y1driftscale:   5.891510094593083E-005
+  y2driftscale:   0.846600814727684     
+  VarLogY, target:   0.478562563657761       model:   0.478374907682941     
+  VarD1LogY, target:   0.114076793193817       model:   0.134673877583318     
+  KurtD1LogY, target:    4.46993446350098       model:    4.03872394289826     
+  VarD5LogY, target:   0.242688760161400       model:   0.271742497213095     
+  KurtD5LogY, target:    3.66657996177673       model:    3.46314945761572     
+  objective fun:   0.111834894790501     
+  
+ *********************************
+ EVALUATION NUMBER:          199
+  y1width:    1.81924685834942     
+  y2width:    3.37739346092468     
+  y1driftscale:   5.074452484105497E-005
+  y2driftscale:   0.999387293625363     
+  VarLogY, target:   0.478562563657761       model:   0.501385885368392     
+  VarD1LogY, target:   0.114076793193817       model:   0.168425478588735     
+  KurtD1LogY, target:    4.46993446350098       model:    5.02407737895116     
+  VarD5LogY, target:   0.242688760161400       model:   0.319930536630247     
+  KurtD5LogY, target:    3.66657996177673       model:    4.14344692336004     
+  objective fun:   0.290956306422751     
+  
+ *********************************
+ EVALUATION NUMBER:          200
+  y1width:    1.81924685834945     
+  y2width:    2.20531948702250     
+  y1driftscale:   5.022421832215858E-005
+  y2driftscale:   0.829481220446501     
+  VarLogY, target:   0.478562563657761       model:   0.474534258427112     
+  VarD1LogY, target:   0.114076793193817       model:   0.129172917489047     
+  KurtD1LogY, target:    4.46993446350098       model:    3.95281471637663     
+  VarD5LogY, target:   0.242688760161400       model:   0.263522016673756     
+  KurtD5LogY, target:    3.66657996177673       model:    3.43228089559131     
+  objective fun:   8.561364252386397E-002
+  
+ *********************************
+ EVALUATION NUMBER:          201
+  y1width:    1.81924685834810     
+  y2width:    2.28082645260605     
+  y1driftscale:   5.075700829532359E-005
+  y2driftscale:    1.23365107736243     
+  VarLogY, target:   0.478562563657761       model:   0.436899385500010     
+  VarD1LogY, target:   0.114076793193817       model:   0.105406691731183     
+  KurtD1LogY, target:    4.46993446350098       model:    4.28036524331754     
+  VarD5LogY, target:   0.242688760161400       model:   0.186295673179594     
+  KurtD5LogY, target:    3.66657996177673       model:    3.57631111805292     
+  objective fun:   0.130337694757639     
+  
+ *********************************
+ EVALUATION NUMBER:          202
+  y1width:    1.81924685834766     
+  y2width:    2.33994155520201     
+  y1driftscale:   5.047322896524039E-005
+  y2driftscale:    1.04621254587113     
+  VarLogY, target:   0.478562563657761       model:   0.456506891437492     
+  VarD1LogY, target:   0.114076793193817       model:   0.121233132650530     
+  KurtD1LogY, target:    4.46993446350098       model:    4.21950542726715     
+  VarD5LogY, target:   0.242688760161400       model:   0.224664250407006     
+  KurtD5LogY, target:    3.66657996177673       model:    3.57433656634358     
+  objective fun:   5.594284114736243E-002
+  
+ *********************************
+ EVALUATION NUMBER:          203
+  y1width:    1.81924685834701     
+  y2width:    1.73541531881521     
+  y1driftscale:   5.074909044112474E-005
+  y2driftscale:   0.988903081294892     
+  VarLogY, target:   0.478562563657761       model:   0.433336648103933     
+  VarD1LogY, target:   0.114076793193817       model:   9.145007493399906E-002
+  KurtD1LogY, target:    4.46993446350098       model:    3.80142892399196     
+  VarD5LogY, target:   0.242688760161400       model:   0.176003484809888     
+  KurtD5LogY, target:    3.66657996177673       model:    3.30084416899942     
+  objective fun:   0.181558381711514     
+  
+ *********************************
+ EVALUATION NUMBER:          204
+  y1width:    1.81924685835257     
+  y2width:    2.24091150874473     
+  y1driftscale:   5.094346705397289E-005
+  y2driftscale:   0.955737398818208     
+  VarLogY, target:   0.478562563657761       model:   0.460993783994792     
+  VarD1LogY, target:   0.114076793193817       model:   0.122307794316729     
+  KurtD1LogY, target:    4.46993446350098       model:    4.09347299180154     
+  VarD5LogY, target:   0.242688760161400       model:   0.235900539296109     
+  KurtD5LogY, target:    3.66657996177673       model:    3.46224638815153     
+  objective fun:   4.971391861762080E-002
+  
+ *********************************
+ EVALUATION NUMBER:          205
+  y1width:    1.81924685834385     
+  y2width:    2.39509834557939     
+  y1driftscale:   5.080218555039297E-005
+  y2driftscale:   0.961593801278299     
+  VarLogY, target:   0.478562563657761       model:   0.467945435959735     
+  VarD1LogY, target:   0.114076793193817       model:   0.129940093834615     
+  KurtD1LogY, target:    4.46993446350098       model:    4.21096059029191     
+  VarD5LogY, target:   0.242688760161400       model:   0.249230296126852     
+  KurtD5LogY, target:    3.66657996177673       model:    3.56803593330067     
+  objective fun:   7.344324321822000E-002
+  
+ *********************************
+ EVALUATION NUMBER:          206
+  y1width:    1.81924685835205     
+  y2width:    2.26232522211952     
+  y1driftscale:   5.106620331490419E-005
+  y2driftscale:   0.980269468717272     
+  VarLogY, target:   0.478562563657761       model:   0.459379735267044     
+  VarD1LogY, target:   0.114076793193817       model:   0.122110710046507     
+  KurtD1LogY, target:    4.46993446350098       model:    4.14108559118546     
+  VarD5LogY, target:   0.242688760161400       model:   0.231588380265563     
+  KurtD5LogY, target:    3.66657996177673       model:    3.51131103663184     
+  objective fun:   5.113705186877970E-002
+  
+ *********************************
+ EVALUATION NUMBER:          207
+  y1width:    1.81924685835069     
+  y2width:    2.21693524535892     
+  y1driftscale:   5.052808437335622E-005
+  y2driftscale:   0.836776729853375     
+  VarLogY, target:   0.478562563657761       model:   0.474291692137688     
+  VarD1LogY, target:   0.114076793193817       model:   0.129216459219513     
+  KurtD1LogY, target:    4.46993446350098       model:    3.94833495048574     
+  VarD5LogY, target:   0.242688760161400       model:   0.262254845903967     
+  KurtD5LogY, target:    3.66657996177673       model:    3.44787220955787     
+  objective fun:   8.438962899420607E-002
+  
+ *********************************
+ EVALUATION NUMBER:          208
+  y1width:    1.81924685835282     
+  y2width:    2.29394945682004     
+  y1driftscale:   5.064206854343020E-005
+  y2driftscale:   0.993016354673342     
+  VarLogY, target:   0.478562563657761       model:   0.460246877380927     
+  VarD1LogY, target:   0.114076793193817       model:   0.122421050146097     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17458548430579     
+  VarD5LogY, target:   0.242688760161400       model:   0.232181734696090     
+  KurtD5LogY, target:    3.66657996177673       model:    3.54372500043833     
+  objective fun:   5.015383386831400E-002
+  
+ *********************************
+ EVALUATION NUMBER:          209
+  y1width:    1.81924685835137     
+  y2width:    2.25709179180438     
+  y1driftscale:   5.074561722166308E-005
+  y2driftscale:   0.975602676705524     
+  VarLogY, target:   0.478562563657761       model:   0.459159932960413     
+  VarD1LogY, target:   0.114076793193817       model:   0.122075061874584     
+  KurtD1LogY, target:    4.46993446350098       model:    4.12887427973769     
+  VarD5LogY, target:   0.242688760161400       model:   0.232431312048257     
+  KurtD5LogY, target:    3.66657996177673       model:    3.49847169051117     
+  objective fun:   5.081093619564606E-002
+  
+ *********************************
+ EVALUATION NUMBER:          210
+  y1width:    1.81924685834948     
+  y2width:    2.37218008540458     
+  y1driftscale:   5.074591444179333E-005
+  y2driftscale:   0.996916713975716     
+  VarLogY, target:   0.478562563657761       model:   0.463376236071896     
+  VarD1LogY, target:   0.114076793193817       model:   0.125970140019552     
+  KurtD1LogY, target:    4.46993446350098       model:    4.22053083560121     
+  VarD5LogY, target:   0.242688760161400       model:   0.238559664103129     
+  KurtD5LogY, target:    3.66657996177673       model:    3.57420494920769     
+  objective fun:   5.723426914272397E-002
+  
+ *********************************
+ EVALUATION NUMBER:          211
+  y1width:    1.81924685834899     
+  y2width:    2.20672082025743     
+  y1driftscale:   5.077865227364397E-005
+  y2driftscale:   0.950707252742744     
+  VarLogY, target:   0.478562563657761       model:   0.460448331005978     
+  VarD1LogY, target:   0.114076793193817       model:   0.120743405498603     
+  KurtD1LogY, target:    4.46993446350098       model:    4.02551024886749     
+  VarD5LogY, target:   0.242688760161400       model:   0.234364777922809     
+  KurtD5LogY, target:    3.66657996177673       model:    3.46296238828363     
+  objective fun:   4.813178535187854E-002
+  
+ *********************************
+ EVALUATION NUMBER:          212
+  y1width:    1.81924685834935     
+  y2width:    2.28460668313171     
+  y1driftscale:   5.075466518451830E-005
+  y2driftscale:    1.02166115944044     
+  VarLogY, target:   0.478562563657761       model:   0.457077549597610     
+  VarD1LogY, target:   0.114076793193817       model:   0.119776790842960     
+  KurtD1LogY, target:    4.46993446350098       model:    4.18940939533701     
+  VarD5LogY, target:   0.242688760161400       model:   0.224596776469570     
+  KurtD5LogY, target:    3.66657996177673       model:    3.52123678172089     
+  objective fun:   5.349551967433502E-002
+  
+ *********************************
+ EVALUATION NUMBER:          213
+  y1width:    1.81924685834929     
+  y2width:    2.25636811281851     
+  y1driftscale:   5.072239234919453E-005
+  y2driftscale:   0.981931497327893     
+  VarLogY, target:   0.478562563657761       model:   0.458915777213525     
+  VarD1LogY, target:   0.114076793193817       model:   0.121572115792691     
+  KurtD1LogY, target:    4.46993446350098       model:    4.12800736132396     
+  VarD5LogY, target:   0.242688760161400       model:   0.230951436559277     
+  KurtD5LogY, target:    3.66657996177673       model:    3.50532377818243     
+  objective fun:   5.071469969366952E-002
+  
+ *********************************
+ EVALUATION NUMBER:          214
+  y1width:    1.81924685834897     
+  y2width:    2.29382333167474     
+  y1driftscale:   5.075069591641623E-005
+  y2driftscale:   0.996815838789656     
+  VarLogY, target:   0.478562563657761       model:   0.460202969233454     
+  VarD1LogY, target:   0.114076793193817       model:   0.122268842786133     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17365466346387     
+  VarD5LogY, target:   0.242688760161400       model:   0.231363650944292     
+  KurtD5LogY, target:    3.66657996177673       model:    3.54485062781076     
+  objective fun:   5.044865183338564E-002
+  
+ *********************************
+ EVALUATION NUMBER:          215
+  y1width:    1.81924685834953     
+  y2width:    2.27052283559501     
+  y1driftscale:   5.078079095137618E-005
+  y2driftscale:   0.990849425496309     
+  VarLogY, target:   0.478562563657761       model:   0.458995877296296     
+  VarD1LogY, target:   0.114076793193817       model:   0.121459758200455     
+  KurtD1LogY, target:    4.46993446350098       model:    4.15488621722247     
+  VarD5LogY, target:   0.242688760161400       model:   0.230142590584293     
+  KurtD5LogY, target:    3.66657996177673       model:    3.51979773011076     
+  objective fun:   5.043652952664943E-002
+  
+ *********************************
+ EVALUATION NUMBER:          216
+  y1width:    1.81924685834927     
+  y2width:    2.21505433849801     
+  y1driftscale:   5.074667020269268E-005
+  y2driftscale:    1.00205734538076     
+  VarLogY, target:   0.478562563657761       model:   0.455625130186537     
+  VarD1LogY, target:   0.114076793193817       model:   0.118001040581876     
+  KurtD1LogY, target:    4.46993446350098       model:    4.11130527395493     
+  VarD5LogY, target:   0.242688760161400       model:   0.223810314710259     
+  KurtD5LogY, target:    3.66657996177673       model:    3.50503209959159     
+  objective fun:   5.391265798964008E-002
+  
+ *********************************
+ EVALUATION NUMBER:          217
+  y1width:    1.81924685834971     
+  y2width:    2.30221638245865     
+  y1driftscale:   5.072267903891586E-005
+  y2driftscale:    1.00572133869464     
+  VarLogY, target:   0.478562563657761       model:   0.459774110470527     
+  VarD1LogY, target:   0.114076793193817       model:   0.122345165156617     
+  KurtD1LogY, target:    4.46993446350098       model:    4.16950482510225     
+  VarD5LogY, target:   0.242688760161400       model:   0.230133951851244     
+  KurtD5LogY, target:    3.66657996177673       model:    3.54869522485444     
+  objective fun:   5.210277291644244E-002
+  
+ *********************************
+ EVALUATION NUMBER:          218
+  y1width:    1.81924685834927     
+  y2width:    2.25632428380566     
+  y1driftscale:   5.075739739592204E-005
+  y2driftscale:   0.977164036415989     
+  VarLogY, target:   0.478562563657761       model:   0.459170793029851     
+  VarD1LogY, target:   0.114076793193817       model:   0.121987066356010     
+  KurtD1LogY, target:    4.46993446350098       model:    4.13012699442915     
+  VarD5LogY, target:   0.242688760161400       model:   0.232048242701021     
+  KurtD5LogY, target:    3.66657996177673       model:    3.50353495567054     
+  objective fun:   5.077317551652517E-002
+  
+ *********************************
+ EVALUATION NUMBER:          219
+  y1width:    1.81924685834908     
+  y2width:    2.31074411303246     
+  y1driftscale:   5.075867253646508E-005
+  y2driftscale:    1.00760799164894     
+  VarLogY, target:   0.478562563657761       model:   0.459925563854519     
+  VarD1LogY, target:   0.114076793193817       model:   0.122388218681126     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17936509596028     
+  VarD5LogY, target:   0.242688760161400       model:   0.229999889925162     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53448015971493     
+  objective fun:   5.229609075148566E-002
+  
+ *********************************
+ EVALUATION NUMBER:          220
+  y1width:    1.81924685834927     
+  y2width:    2.29898685083221     
+  y1driftscale:   5.075168613569076E-005
+  y2driftscale:    1.00323480719627     
+  VarLogY, target:   0.478562563657761       model:   0.460004333729121     
+  VarD1LogY, target:   0.114076793193817       model:   0.122343359630961     
+  KurtD1LogY, target:    4.46993446350098       model:    4.18213524233411     
+  VarD5LogY, target:   0.242688760161400       model:   0.230426055736232     
+  KurtD5LogY, target:    3.66657996177673       model:    3.54712092219073     
+  objective fun:   5.150209663434888E-002
+  
+ *********************************
+ EVALUATION NUMBER:          221
+  y1width:    1.81924685834944     
+  y2width:    2.28832375729664     
+  y1driftscale:   5.074640580250489E-005
+  y2driftscale:   0.996752794799894     
+  VarLogY, target:   0.478562563657761       model:   0.459977059856161     
+  VarD1LogY, target:   0.114076793193817       model:   0.121937463866647     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17017397768786     
+  VarD5LogY, target:   0.242688760161400       model:   0.230930325673442     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53997146374852     
+  objective fun:   5.006560886958351E-002
+  
+ *********************************
+ EVALUATION NUMBER:          222
+  y1width:    1.81924685834945     
+  y2width:    2.26619236823420     
+  y1driftscale:   5.074064400245903E-005
+  y2driftscale:   0.997762021942469     
+  VarLogY, target:   0.478562563657761       model:   0.458518464262797     
+  VarD1LogY, target:   0.114076793193817       model:   0.120835200866144     
+  KurtD1LogY, target:    4.46993446350098       model:    4.15558974619245     
+  VarD5LogY, target:   0.242688760161400       model:   0.228193782864222     
+  KurtD5LogY, target:    3.66657996177673       model:    3.52180612256985     
+  objective fun:   5.113111886682261E-002
+  
+ *********************************
+ EVALUATION NUMBER:          223
+  y1width:    1.81924685834941     
+  y2width:    2.27844626690457     
+  y1driftscale:   5.074715101904783E-005
+  y2driftscale:   0.995708699818528     
+  VarLogY, target:   0.478562563657761       model:   0.459459831315345     
+  VarD1LogY, target:   0.114076793193817       model:   0.121595372063553     
+  KurtD1LogY, target:    4.46993446350098       model:    4.16283312812050     
+  VarD5LogY, target:   0.242688760161400       model:   0.230064324908427     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53491363092956     
+  objective fun:   5.036278588982309E-002
+  
+ *********************************
+ EVALUATION NUMBER:          224
+  y1width:    1.81924685834940     
+  y2width:    2.28306136150896     
+  y1driftscale:   5.074448804201409E-005
+  y2driftscale:   0.999750404385056     
+  VarLogY, target:   0.478562563657761       model:   0.459423289140356     
+  VarD1LogY, target:   0.114076793193817       model:   0.121488026203937     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17711271034078     
+  VarD5LogY, target:   0.242688760161400       model:   0.229976362412709     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53773214389096     
+  objective fun:   4.986378098256295E-002
+  
+ *********************************
+ EVALUATION NUMBER:          225
+  y1width:    1.81924685834945     
+  y2width:    2.28222874562124     
+  y1driftscale:   5.074355616659630E-005
+  y2driftscale:   0.998382730881515     
+  VarLogY, target:   0.478562563657761       model:   0.459464620444250     
+  VarD1LogY, target:   0.114076793193817       model:   0.121400174034230     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17413517579251     
+  VarD5LogY, target:   0.242688760161400       model:   0.230086310662367     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53758930081809     
+  objective fun:   4.953426247848572E-002
+  
+ *********************************
+ EVALUATION NUMBER:          226
+  y1width:    1.81924685834944     
+  y2width:    2.27939978982625     
+  y1driftscale:   5.074830853485586E-005
+  y2driftscale:   0.999198854389180     
+  VarLogY, target:   0.478562563657761       model:   0.459248926244077     
+  VarD1LogY, target:   0.114076793193817       model:   0.121326841001415     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17409703615701     
+  VarD5LogY, target:   0.242688760161400       model:   0.229631735091061     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53351420150940     
+  objective fun:   4.996700724384696E-002
+  
+ *********************************
+ EVALUATION NUMBER:          227
+  y1width:    1.81924685834941     
+  y2width:    2.28201294455168     
+  y1driftscale:   5.074218515217115E-005
+  y2driftscale:   0.997854570368662     
+  VarLogY, target:   0.478562563657761       model:   0.459525928085691     
+  VarD1LogY, target:   0.114076793193817       model:   0.121398298041569     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17302445273302     
+  VarD5LogY, target:   0.242688760161400       model:   0.230111104827213     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53682566611048     
+  objective fun:   4.950647602693795E-002
+  
+ *********************************
+ EVALUATION NUMBER:          228
+  y1width:    1.81924685834942     
+  y2width:    2.28628611829688     
+  y1driftscale:   5.074443228878063E-005
+  y2driftscale:   0.999083631849218     
+  VarLogY, target:   0.478562563657761       model:   0.459634958731653     
+  VarD1LogY, target:   0.114076793193817       model:   0.121674146193671     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17561337126688     
+  VarD5LogY, target:   0.242688760161400       model:   0.230170453336972     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53873124603716     
+  objective fun:   5.012025152818669E-002
+  
+ *********************************
+ EVALUATION NUMBER:          229
+  y1width:    1.81924685834943     
+  y2width:    2.27393242008536     
+  y1driftscale:   5.074442921379533E-005
+  y2driftscale:   0.997774517845946     
+  VarLogY, target:   0.478562563657761       model:   0.458972887936262     
+  VarD1LogY, target:   0.114076793193817       model:   0.121128520448947     
+  KurtD1LogY, target:    4.46993446350098       model:    4.16824406977176     
+  VarD5LogY, target:   0.242688760161400       model:   0.228967041664020     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53006227389645     
+  objective fun:   5.044556678478523E-002
+  
+ *********************************
+ EVALUATION NUMBER:          230
+  y1width:    1.81924685834942     
+  y2width:    2.28755457196983     
+  y1driftscale:   5.074541415745110E-005
+  y2driftscale:   0.998470754172934     
+  VarLogY, target:   0.478562563657761       model:   0.459853533221615     
+  VarD1LogY, target:   0.114076793193817       model:   0.121719152246001     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17609382950154     
+  VarD5LogY, target:   0.242688760161400       model:   0.230472439598555     
+  KurtD5LogY, target:    3.66657996177673       model:    3.54088497260252     
+  objective fun:   4.981072152473491E-002
+  
+ *********************************
+ EVALUATION NUMBER:          231
+  y1width:    1.81924685834942     
+  y2width:    2.28418864972847     
+  y1driftscale:   5.074570702677978E-005
+  y2driftscale:   0.997955560159415     
+  VarLogY, target:   0.478562563657761       model:   0.459684330431424     
+  VarD1LogY, target:   0.114076793193817       model:   0.121570371618617     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17202279988442     
+  VarD5LogY, target:   0.242688760161400       model:   0.230288581527595     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53844602181536     
+  objective fun:   4.974347871198725E-002
+  
+ *********************************
+ EVALUATION NUMBER:          232
+  y1width:    1.81924685834943     
+  y2width:    2.28098790106142     
+  y1driftscale:   5.074576810741374E-005
+  y2driftscale:   0.997581041207580     
+  VarLogY, target:   0.478562563657761       model:   0.459491503229254     
+  VarD1LogY, target:   0.114076793193817       model:   0.121385115181364     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17434170536836     
+  VarD5LogY, target:   0.242688760161400       model:   0.230165233450683     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53428901864030     
+  objective fun:   4.943176951246332E-002
+  
+ *********************************
+ EVALUATION NUMBER:          233
+  y1width:    1.81924685834942     
+  y2width:    2.28073246534494     
+  y1driftscale:   5.074532722882839E-005
+  y2driftscale:   0.998316865842615     
+  VarLogY, target:   0.478562563657761       model:   0.459342524811172     
+  VarD1LogY, target:   0.114076793193817       model:   0.121340596266867     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17515766631026     
+  VarD5LogY, target:   0.242688760161400       model:   0.230025304481600     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53466382066049     
+  objective fun:   4.950006788363762E-002
+  
+ *********************************
+ EVALUATION NUMBER:          234
+  y1width:    1.81924685834942     
+  y2width:    2.28077426702539     
+  y1driftscale:   5.074526062073117E-005
+  y2driftscale:   0.997624716701233     
+  VarLogY, target:   0.478562563657761       model:   0.459473134278264     
+  VarD1LogY, target:   0.114076793193817       model:   0.121363043036109     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17433274370263     
+  VarD5LogY, target:   0.242688760161400       model:   0.230123176430001     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53434207175449     
+  objective fun:   4.942172323931943E-002
+  
+ *********************************
+ EVALUATION NUMBER:          235
+  y1width:    1.81924685834942     
+  y2width:    2.28062692240155     
+  y1driftscale:   5.074594620713951E-005
+  y2driftscale:   0.997716585307782     
+  VarLogY, target:   0.478562563657761       model:   0.459457377837325     
+  VarD1LogY, target:   0.114076793193817       model:   0.121348347750775     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17429259464463     
+  VarD5LogY, target:   0.242688760161400       model:   0.230090469307034     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53454152893968     
+  objective fun:   4.942040644094067E-002
+  
+ *********************************
+ EVALUATION NUMBER:          236
+  y1width:    1.81924685834942     
+  y2width:    2.27965716882430     
+  y1driftscale:   5.074562215541116E-005
+  y2driftscale:   0.997730173990208     
+  VarLogY, target:   0.478562563657761       model:   0.459438324058065     
+  VarD1LogY, target:   0.114076793193817       model:   0.121312568916937     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17172046954025     
+  VarD5LogY, target:   0.242688760161400       model:   0.229844524908223     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53348176466456     
+  objective fun:   4.965727713272607E-002
+  
+ *********************************
+ EVALUATION NUMBER:          237
+  y1width:    1.81924685834942     
+  y2width:    2.28162096462852     
+  y1driftscale:   5.074571309194082E-005
+  y2driftscale:   0.997886910302713     
+  VarLogY, target:   0.478562563657761       model:   0.459463488897830     
+  VarD1LogY, target:   0.114076793193817       model:   0.121439462357415     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17556898726858     
+  VarD5LogY, target:   0.242688760161400       model:   0.230043557740834     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53678382767175     
+  objective fun:   4.967573471220041E-002
+  
+ *********************************
+ EVALUATION NUMBER:          238
+  y1width:    1.81924685834943     
+  y2width:    2.28077325044447     
+  y1driftscale:   5.074540203360400E-005
+  y2driftscale:   0.997901068660566     
+  VarLogY, target:   0.478562563657761       model:   0.459425830587726     
+  VarD1LogY, target:   0.114076793193817       model:   0.121345610669766     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17516298998813     
+  VarD5LogY, target:   0.242688760161400       model:   0.230068459230261     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53435370028502     
+  objective fun:   4.943590046281635E-002
+  
+ *********************************
+ EVALUATION NUMBER:          239
+  y1width:    1.81924685834942     
+  y2width:    2.28157564705719     
+  y1driftscale:   5.074572778426119E-005
+  y2driftscale:   0.997915648331740     
+  VarLogY, target:   0.478562563657761       model:   0.459459592904950     
+  VarD1LogY, target:   0.114076793193817       model:   0.121434778869674     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17556709450871     
+  VarD5LogY, target:   0.242688760161400       model:   0.230035667233417     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53678040465747     
+  objective fun:   4.967264371653818E-002
+  
+ *********************************
+ EVALUATION NUMBER:          240
+  y1width:    1.81924685834942     
+  y2width:    2.28111673255351     
+  y1driftscale:   5.074569974359951E-005
+  y2driftscale:   0.997838376692155     
+  VarLogY, target:   0.478562563657761       model:   0.459455356034596     
+  VarD1LogY, target:   0.114076793193817       model:   0.121402418408322     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17510121013960     
+  VarD5LogY, target:   0.242688760161400       model:   0.230040636915021     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53482621001458     
+  objective fun:   4.960968699675248E-002
+  
+ *********************************
+ EVALUATION NUMBER:          241
+  y1width:    1.81924685834942     
+  y2width:    2.28061044954655     
+  y1driftscale:   5.074568409476826E-005
+  y2driftscale:   0.997824446968546     
+  VarLogY, target:   0.478562563657761       model:   0.459410529012410     
+  VarD1LogY, target:   0.114076793193817       model:   0.121335209016195     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17509704485885     
+  VarD5LogY, target:   0.242688760161400       model:   0.230049999734240     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53443222265196     
+  objective fun:   4.943327997243215E-002
+  
+ *********************************
+ EVALUATION NUMBER:          242
+  y1width:    1.81924685834942     
+  y2width:    2.28057635651961     
+  y1driftscale:   5.074581102816879E-005
+  y2driftscale:   0.997805694540927     
+  VarLogY, target:   0.478562563657761       model:   0.459407598833957     
+  VarD1LogY, target:   0.114076793193817       model:   0.121331687477127     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17509561415913     
+  VarD5LogY, target:   0.242688760161400       model:   0.230044061596392     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53442966796186     
+  objective fun:   4.943109246422638E-002
+  
+ *********************************
+ EVALUATION NUMBER:          243
+  y1width:    1.81924685834942     
+  y2width:    2.28070005454788     
+  y1driftscale:   5.074570828096919E-005
+  y2driftscale:   0.997752296471832     
+  VarLogY, target:   0.478562563657761       model:   0.459463665218770     
+  VarD1LogY, target:   0.114076793193817       model:   0.121355902839773     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17429566361169     
+  VarD5LogY, target:   0.242688760161400       model:   0.230103209546534     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53454698716161     
+  objective fun:   4.942521601911242E-002
+  
+ *********************************
+ EVALUATION NUMBER:          244
+  y1width:    1.81924685834942     
+  y2width:    2.28052037591904     
+  y1driftscale:   5.074570717370934E-005
+  y2driftscale:   0.997760947096021     
+  VarLogY, target:   0.478562563657761       model:   0.459402787594328     
+  VarD1LogY, target:   0.114076793193817       model:   0.121325905246262     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17509326493297     
+  VarD5LogY, target:   0.242688760161400       model:   0.230029803588747     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53455242078736     
+  objective fun:   4.943084015334117E-002
+  
+ *********************************
+ EVALUATION NUMBER:          245
+  y1width:    1.81924685834942     
+  y2width:    2.28067011644778     
+  y1driftscale:   5.074573849896106E-005
+  y2driftscale:   0.997768425396106     
+  VarLogY, target:   0.478562563657761       model:   0.459416966190418     
+  VarD1LogY, target:   0.114076793193817       model:   0.121334957519880     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17515866021124     
+  VarD5LogY, target:   0.242688760161400       model:   0.230050495477467     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53434597138716     
+  objective fun:   4.942923330057992E-002
+  
+ *********************************
+ EVALUATION NUMBER:          246
+  y1width:    1.81924685834942     
+  y2width:    2.28056479107220     
+  y1driftscale:   5.074576069959473E-005
+  y2driftscale:   0.997780269964512     
+  VarLogY, target:   0.478562563657761       model:   0.459406604834044     
+  VarD1LogY, target:   0.114076793193817       model:   0.121330492870864     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17509512881738     
+  VarD5LogY, target:   0.242688760161400       model:   0.230042047210944     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53442880132564     
+  objective fun:   4.943035220346594E-002
+  
+ *********************************
+ EVALUATION NUMBER:          247
+  y1width:    1.81924685834942     
+  y2width:    2.28065518584692     
+  y1driftscale:   5.074565801244607E-005
+  y2driftscale:   0.997800926140925     
+  VarLogY, target:   0.478562563657761       model:   0.459415682936032     
+  VarD1LogY, target:   0.114076793193817       model:   0.121333415316751     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17515803338574     
+  VarD5LogY, target:   0.242688760161400       model:   0.230047894954618     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53434485247095     
+  objective fun:   4.942827415125620E-002
+  
+ *********************************
+ EVALUATION NUMBER:          248
+  y1width:    1.81924685834942     
+  y2width:    2.28051756460328     
+  y1driftscale:   5.074571537444931E-005
+  y2driftscale:   0.997766873662558     
+  VarLogY, target:   0.478562563657761       model:   0.459402545979757     
+  VarD1LogY, target:   0.114076793193817       model:   0.121325614869688     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17509314695531     
+  VarD5LogY, target:   0.242688760161400       model:   0.230029313949839     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53455221028177     
+  objective fun:   4.943066140019082E-002
+  
+ *********************************
+ EVALUATION NUMBER:          249
+  y1width:    1.81924685834942     
+  y2width:    2.28078266140736     
+  y1driftscale:   5.074570230366981E-005
+  y2driftscale:   0.997801049427193     
+  VarLogY, target:   0.478562563657761       model:   0.459426639483864     
+  VarD1LogY, target:   0.114076793193817       model:   0.121346582793595     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17516338507481     
+  VarD5LogY, target:   0.242688760161400       model:   0.230070098462789     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53435440553875     
+  objective fun:   4.943651247443570E-002
+  
+ *********************************
+ EVALUATION NUMBER:          250
+  y1width:    1.81924685834942     
+  y2width:    2.28056509629377     
+  y1driftscale:   5.074572345364487E-005
+  y2driftscale:   0.997747008742570     
+  VarLogY, target:   0.478562563657761       model:   0.459450753828159     
+  VarD1LogY, target:   0.114076793193817       model:   0.121348375431471     
+  KurtD1LogY, target:    4.46993446350098       model:    4.17423096229952     
+  VarD5LogY, target:   0.242688760161400       model:   0.230089595547829     
+  KurtD5LogY, target:    3.66657996177673       model:    3.53462756030097     
+  objective fun:   4.942431098977094E-002
+  
+ ********************************** 
