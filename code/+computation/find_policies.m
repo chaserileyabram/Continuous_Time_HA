@@ -129,7 +129,17 @@ function [policies, V_deriv_risky_asset_nodrift] = find_policies(...
     Vb.B_adj(1,2:na,:,:) = prefs.u1(upwindB.c(1,2:na,:,:));
     [d, I_specialcase] = upwind_deposits(Vb, Va, adjcost, opt_d);
     s_d = - d - adjcost(d);
-
+    
+    
+    
+    %% --------------------------------------------------------------------
+	% OPTIMAL REBALANCING
+	% ---------------------------------------------------------------------
+    
+    
+    
+    
+    
     %% --------------------------------------------------------------------
 	% STORE POLICY FUNCTIONS/OTHER VARIABLES
 	% ---------------------------------------------------------------------
