@@ -136,6 +136,18 @@ classdef ParamsDefaults < handle
         % returns risk in the KFE
         retrisk_KFE = false;
 
+        
+        %% -------------------------------------------
+    	% Rebalancing
+    	% --------------------------------------------
+        
+        % Rate or rebalance opportunity arrival
+        rebalance_rate = 0.0
+        
+        % Rebalancing cost
+        rebalance_cost = 1000.0 % need to do nominal cost/numeraire
+        
+        
     	%% -------------------------------------------
     	% Preferences
     	% --------------------------------------------

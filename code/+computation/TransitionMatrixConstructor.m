@@ -109,6 +109,8 @@ classdef TransitionMatrixConstructor < handle
 
             A = obj.compute_liquid_transitions(drifts.b_B, drifts.b_F);
             A = A + obj.compute_illiquid_transitions(drifts.a_B, drifts.a_F);
+            
+            % Add rebalancing transitions here
 
             stationary = [];
             if obj.returns_risk

@@ -168,7 +168,7 @@ classdef Model < handle
 		        [A, stationary] = obj.A_constructor_HJB.construct(HJB, Vn);
 
 		        % Update value function
-			    Vn1 = obj.hjb_solver.solve(obj.grids_HJB, A, HJB.u, Vn,...
+			    Vn1 = obj.hjb_solver.solve(obj.grids_HJB, A, HJB.u, HJB.Vstar, Vn,...
 			    	V_deriv_risky_asset_nodrift, stationary); % ignored unless SDU
 
 				% check for convergence

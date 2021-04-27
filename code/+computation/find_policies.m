@@ -135,10 +135,9 @@ function [policies, V_deriv_risky_asset_nodrift] = find_policies(...
     %% --------------------------------------------------------------------
 	% OPTIMAL REBALANCING
 	% ---------------------------------------------------------------------
+    import computation.optimal_rebalance
     
-    
-    
-    
+    [Vstar, rebalance_ba] = optimal_rebalance(Vn, grd, p);
     
     %% --------------------------------------------------------------------
 	% STORE POLICY FUNCTIONS/OTHER VARIABLES
@@ -154,6 +153,9 @@ function [policies, V_deriv_risky_asset_nodrift] = find_policies(...
     policies.bdot = s_c + s_d;
 
    	policies.adot = net_income_illiq_hourly(h) + d;
+    
+    policies.Vstar = Vstar;
+    policies.rebalance_ba = rebalance_ba;
 
     %% --------------------------------------------------------------------
     % DERIVATIVE OF VALUE FUNCTION FOR SDU WITH RETURNS RISK

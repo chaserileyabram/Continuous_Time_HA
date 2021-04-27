@@ -61,12 +61,12 @@ classdef HJBSolver < handle
 			obj.create_rho_matrix();
 		end
 
-		function V_update = solve(obj, grd, A, u, V, varargin)
+		function V_update = solve(obj, grd, A, u, Vstar, V, varargin)
 			% Updates the value function (grd only used for SDU derived class)
 			if obj.options.implicit
-				V_update = obj.solve_implicit(A, u, V);
+				V_update = obj.solve_implicit(A, u, Vstar, V);
 			else
-				V_update = obj.solve_implicit_explicit(A, u, V);
+				V_update = obj.solve_implicit_explicit(A, u, Vstar, V);
 			end
 		end
 	end
@@ -75,16 +75,16 @@ classdef HJBSolver < handle
 		%%--------------------------------------------------------------
 	    % Implicit Updating
 	    % --------------------------------------------------------------
-		function Vn1 = solve_implicit(obj, A, u, V)
+		function Vn1 = solve_implicit(obj, A, u, Vstar, V)
 			assert(obj.p.deathrate == 0,...
 				"Fully implicit updating does not support death.")
 
 			A_income = obj.income.full_income_transition_matrix(obj.p, V);
 
 			% Note: risk_adj = 0 unless using SDU w/risky asset
-		    RHS = obj.options.delta * (u(:) + obj.risk_adj(:)) + Vn(:);
+		    RHS = obj.options.delta * (u(:) + obj.risk_adj(:) + Vstar(:)) + Vn(:);
 	        
-	        B = (obj.rho_mat - A - A_income) * obj.options.delta + speye(obj.n_states);
+	        B = (obj.rho_mat + obj.p.rebalance_rate - A - A_income) * obj.options.delta + speye(obj.n_states);
 	        Vn1 = B \ RHS;
 	        Vn1 = reshape(Vn1, obj.p.nb, obj.p.na, obj.p.nz, obj.income.ny);
 		end
@@ -92,35 +92,37 @@ classdef HJBSolver < handle
 		%%--------------------------------------------------------------
 	    % Implicit-Explicit Updating
 	    % --------------------------------------------------------------
-		function [Vn1, Bk_inv] = solve_implicit_explicit(obj, A, u, V)
+		function [Vn1, Bk_inv] = solve_implicit_explicit(obj, A, u, Vstar, V)
 			import computation.hjb_divisor
 			obj.current_iteration = obj.current_iteration + 1;
 
 			% Update value function
 			u_k = reshape(u, [], obj.income.ny);
 			Vn_k = reshape(V, [], obj.income.ny);
+            Vstar_k = reshape(Vstar, [], obj.income.ny);
+            
 			Vn1 = zeros(obj.states_per_income, obj.income.ny);
 			for k = 1:obj.income.ny
 				[inctrans, inctrans_k] = obj.get_implicit_explicit_inctrans(k);
 				
 				% Solve HJB
 				Bk = hjb_divisor(obj.options.delta, obj.p.deathrate, k,...
-					A, inctrans, obj.rho_mat);
+					A, inctrans, obj.rho_mat, obj.p.rebalance_rate);
 	        	Vn1(:,k) = obj.update_Vk_implicit_explicit(...
-	        		Vn_k, u_k, k, Bk, inctrans_k);
+	        		Vn_k, u_k, Vstar_k, k, Bk, inctrans_k);
 	        end
 
 	        Vn1 = reshape(Vn1, obj.p.nb, obj.p.na, obj.p.nz, obj.income.ny);
 		end
 
 		function Vn1_k = update_Vk_implicit_explicit(...
-			obj, V_k, u_k, k, Bk, inctrans_k)
+			obj, V_k, u_k, Vstar_k, k, Bk, inctrans_k)
         	indx_k = ~ismember(1:obj.income.ny, k);
 
             offdiag_inc_term = sum(...
             	squeeze(inctrans_k(:,indx_k)) .* V_k(:,indx_k), 2);
 
-            RHSk = obj.options.delta * (u_k(:,k) + offdiag_inc_term) + V_k(:,k);
+            RHSk = obj.options.delta * (u_k(:,k) + Vstar_k(:,k) + offdiag_inc_term) + V_k(:,k);
             
             % Note: sdu_k_adj = 0 unless using SDU w/risky asset
             Vn1_k = Bk \ (RHSk + obj.sdu_k_adj);
