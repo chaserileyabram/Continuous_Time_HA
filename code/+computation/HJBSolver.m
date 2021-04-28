@@ -84,7 +84,7 @@ classdef HJBSolver < handle
 			% Note: risk_adj = 0 unless using SDU w/risky asset
 		    RHS = obj.options.delta * (u(:) + obj.risk_adj(:) + obj.p.rebalance_rate*Vstar(:)) + Vn(:);
 	        
-	        B = (obj.rho_mat + obj.p.rebalance_rate - A - A_income) * obj.options.delta + speye(obj.n_states);
+	        B = (obj.rho_mat + obj.p.rebalance_rate*speye(obj.n_states) - A - A_income) * obj.options.delta + speye(obj.n_states);
 	        Vn1 = B \ RHS;
 	        Vn1 = reshape(Vn1, obj.p.nb, obj.p.na, obj.p.nz, obj.income.ny);
 		end

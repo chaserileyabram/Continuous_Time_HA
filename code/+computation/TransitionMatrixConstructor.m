@@ -110,8 +110,10 @@ classdef TransitionMatrixConstructor < handle
             A = obj.compute_liquid_transitions(drifts.b_B, drifts.b_F);
             A = A + obj.compute_illiquid_transitions(drifts.a_B, drifts.a_F);
             
-            % Add rebalancing transitions here
-            A = A + obj.compute_rebalance(model);
+            % Add rebalancing transitions for KFE
+            if obj.gridtype == "KFE"
+                A = A + obj.compute_rebalance(model);
+            end
 
             stationary = [];
             if obj.returns_risk
@@ -338,6 +340,10 @@ classdef TransitionMatrixConstructor < handle
         function A_rebalance = compute_rebalance(obj, model)
             % Transition matrix reflecting rate of rebalancing
             
+            % Check death - in KFE solver
+            
+            % Conditional for no rebalance case?
+            
             % Create sparse matrix with diag -rebalance_rate
             rebalance_exit = -obj.p.rebalance_rate*ones(obj.shape);
             A_rebalance = aux.sparse_diags([rebalance_exit(:)], [0]);
@@ -356,14 +362,16 @@ classdef TransitionMatrixConstructor < handle
                             [b1, b2, bmix] = aux.split_x(model.rebalance_ba(bi,ai,zi,yi,1), obj.grids.b.vec);
                             [a1, a2, amix] = aux.split_x(model.rebalance_ba(bi,ai,zi,yi,2), obj.grids.a.vec);
                             
-                            % Initialize row
+                            % Initialize entry row
                             reb_row = zeros(obj.shape);
                             
-                            % Set weights entering
-                            reb_row(b1,a1,zi,yi) = bmix*amix*obj.p.rebalance_rate;
-                            reb_row(b2,a1,zi,yi) = (1-bmix)*amix*obj.p.rebalance_rate;
-                            reb_row(b1,a2,zi,yi) = bmix*(1-amix)*obj.p.rebalance_rate;
-                            reb_row(b2,a2,zi,yi) = (1-bmix)*(1-amix)*obj.p.rebalance_rate;
+                            % Set weights entering (must do term +
+                            % reb_row(...) to account for some being the
+                            % same
+                            reb_row(b1,a1,zi,yi) = bmix*amix*obj.p.rebalance_rate + reb_row(b1,a1,zi,yi);
+                            reb_row(b2,a1,zi,yi) = (1-bmix)*amix*obj.p.rebalance_rate + reb_row(b2,a1,zi,yi);
+                            reb_row(b1,a2,zi,yi) = bmix*(1-amix)*obj.p.rebalance_rate + reb_row(b1,a2,zi,yi);
+                            reb_row(b2,a2,zi,yi) = (1-bmix)*(1-amix)*obj.p.rebalance_rate + reb_row(b2,a2,zi,yi);
                             
                             % Add entering weights to row
                             A_rebalance(row_count,:) = A_rebalance(row_count,:) + reb_row(:)';

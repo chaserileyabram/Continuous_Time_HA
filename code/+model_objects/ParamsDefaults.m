@@ -141,11 +141,11 @@ classdef ParamsDefaults < handle
     	% Rebalancing
     	% --------------------------------------------
         
-        % Rate or rebalance opportunity arrival
-        rebalance_rate = 0.0
+        % Rate of rebalance opportunity arrival
+        rebalance_rate = 1.0 / 4
         
         % Rebalancing cost
-        rebalance_cost = 1000.0 % need to do nominal cost/numeraire
+        rebalance_cost = 500/67131.733 % 500/numeraire for now
         
         
     	%% -------------------------------------------

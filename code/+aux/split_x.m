@@ -18,8 +18,6 @@ function [x1, x2, xmix] = split_x(x, xgrid)
     else
         x1 = sum(xgrid < x);
         x2 = x1 + 1;
-        disp(x1)
-        disp(x2)
         xmix = (xgrid(x2) - x)/(xgrid(x2) - xgrid(x1));
     end
 end
