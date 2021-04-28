@@ -82,7 +82,7 @@ classdef HJBSolver < handle
 			A_income = obj.income.full_income_transition_matrix(obj.p, V);
 
 			% Note: risk_adj = 0 unless using SDU w/risky asset
-		    RHS = obj.options.delta * (u(:) + obj.risk_adj(:) + Vstar(:)) + Vn(:);
+		    RHS = obj.options.delta * (u(:) + obj.risk_adj(:) + obj.p.rebalance_rate*Vstar(:)) + Vn(:);
 	        
 	        B = (obj.rho_mat + obj.p.rebalance_rate - A - A_income) * obj.options.delta + speye(obj.n_states);
 	        Vn1 = B \ RHS;
@@ -122,7 +122,7 @@ classdef HJBSolver < handle
             offdiag_inc_term = sum(...
             	squeeze(inctrans_k(:,indx_k)) .* V_k(:,indx_k), 2);
 
-            RHSk = obj.options.delta * (u_k(:,k) + Vstar_k(:,k) + offdiag_inc_term) + V_k(:,k);
+            RHSk = obj.options.delta * (u_k(:,k) + obj.p.rebalance_rate*Vstar_k(:,k) + offdiag_inc_term) + V_k(:,k);
             
             % Note: sdu_k_adj = 0 unless using SDU w/risky asset
             Vn1_k = Bk \ (RHSk + obj.sdu_k_adj);

@@ -139,6 +139,14 @@ function [policies, V_deriv_risky_asset_nodrift] = find_policies(...
     
     [Vstar, rebalance_ba] = optimal_rebalance(Vn, grd, p);
     
+    if min(Vn - Vstar, [], "all") ~= 0
+        disp('Vstar ~= Vn (min)')
+    end
+    
+    if max(Vn - Vstar, [], "all") ~= 0
+        disp('Vstar ~= Vn (max)')
+    end
+    
     %% --------------------------------------------------------------------
 	% STORE POLICY FUNCTIONS/OTHER VARIABLES
 	% ---------------------------------------------------------------------

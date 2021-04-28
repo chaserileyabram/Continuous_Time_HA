@@ -111,6 +111,7 @@ classdef TransitionMatrixConstructor < handle
             A = A + obj.compute_illiquid_transitions(drifts.a_B, drifts.a_F);
             
             % Add rebalancing transitions here
+            A = A + obj.compute_rebalance(model);
 
             stationary = [];
             if obj.returns_risk
@@ -331,6 +332,46 @@ classdef TransitionMatrixConstructor < handle
             % Some states may have no drift, we will need to deal with them
             % separately by adding directly to the right_hand_side of the HJB.
             stationary = (driftB >= 0) & (driftF <= 0);
+        end
+        
+        
+        function A_rebalance = compute_rebalance(obj, model)
+            % Transition matrix reflecting rate of rebalancing
+            
+            % Create sparse matrix with diag -rebalance_rate
+            rebalance_exit = -obj.p.rebalance_rate*ones(obj.shape);
+            A_rebalance = aux.sparse_diags([rebalance_exit(:)], [0]);
+            
+            % Keep track of which row to update
+            row_count = 0;
+            
+            for yi = 1:obj.ny
+                for zi = 1:obj.nz
+                    for ai = 1:obj.na
+                        for bi = 1:obj.nb
+                            % Update row count
+                            row_count = row_count + 1;
+                            
+                            % Get four nearest points
+                            [b1, b2, bmix] = aux.split_x(model.rebalance_ba(bi,ai,zi,yi,1), obj.grids.b.vec);
+                            [a1, a2, amix] = aux.split_x(model.rebalance_ba(bi,ai,zi,yi,2), obj.grids.a.vec);
+                            
+                            % Initialize row
+                            reb_row = zeros(obj.shape);
+                            
+                            % Set weights entering
+                            reb_row(b1,a1,zi,yi) = bmix*amix*obj.p.rebalance_rate;
+                            reb_row(b2,a1,zi,yi) = (1-bmix)*amix*obj.p.rebalance_rate;
+                            reb_row(b1,a2,zi,yi) = bmix*(1-amix)*obj.p.rebalance_rate;
+                            reb_row(b2,a2,zi,yi) = (1-bmix)*(1-amix)*obj.p.rebalance_rate;
+                            
+                            % Add entering weights to row
+                            A_rebalance(row_count,:) = A_rebalance(row_count,:) + reb_row(:)';
+                            
+                        end
+                    end
+                end
+            end
         end
     end
 end
