@@ -3,10 +3,11 @@ function scf = scf2019struct()
     
     scf.quarterly_earnings = 67131.733 / 4;
     scf.median_totw = 1.54;
-    scf.median_liqw = 0.046;
+    scf.median_liqw = 0.05;
     scf.htm = 0.39;
     scf.phtm = 0.135;
     scf.mean_totw = 4.1;
+    scf.mean_liqw = 0.56;
 
     %% Notes
     % HtM defined as household with b < y / 6

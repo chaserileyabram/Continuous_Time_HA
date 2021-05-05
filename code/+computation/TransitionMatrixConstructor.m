@@ -340,42 +340,45 @@ classdef TransitionMatrixConstructor < handle
         function A_rebalance = compute_rebalance(obj, model)
             % Transition matrix reflecting rate of rebalancing
             
-            % Check death - in KFE solver
             
-            % Conditional for no rebalance case?
+            A_rebalance = 0;
             
-            % Create sparse matrix with diag -rebalance_rate
-            rebalance_exit = -obj.p.rebalance_rate*ones(obj.shape);
-            A_rebalance = aux.sparse_diags([rebalance_exit(:)], [0]);
+            % Conditional for no rebalance case
+            if obj.p.rebalance_rate ~= 0
             
-            % Keep track of which row to update
-            row_count = 0;
-            
-            for yi = 1:obj.ny
-                for zi = 1:obj.nz
-                    for ai = 1:obj.na
-                        for bi = 1:obj.nb
-                            % Update row count
-                            row_count = row_count + 1;
-                            
-                            % Get four nearest points
-                            [b1, b2, bmix] = aux.split_x(model.rebalance_ba(bi,ai,zi,yi,1), obj.grids.b.vec);
-                            [a1, a2, amix] = aux.split_x(model.rebalance_ba(bi,ai,zi,yi,2), obj.grids.a.vec);
-                            
-                            % Initialize entry row
-                            reb_row = zeros(obj.shape);
-                            
-                            % Set weights entering (must do term +
-                            % reb_row(...) to account for some being the
-                            % same
-                            reb_row(b1,a1,zi,yi) = bmix*amix*obj.p.rebalance_rate + reb_row(b1,a1,zi,yi);
-                            reb_row(b2,a1,zi,yi) = (1-bmix)*amix*obj.p.rebalance_rate + reb_row(b2,a1,zi,yi);
-                            reb_row(b1,a2,zi,yi) = bmix*(1-amix)*obj.p.rebalance_rate + reb_row(b1,a2,zi,yi);
-                            reb_row(b2,a2,zi,yi) = (1-bmix)*(1-amix)*obj.p.rebalance_rate + reb_row(b2,a2,zi,yi);
-                            
-                            % Add entering weights to row
-                            A_rebalance(row_count,:) = A_rebalance(row_count,:) + reb_row(:)';
-                            
+                % Create sparse matrix with diag -rebalance_rate
+                rebalance_exit = -obj.p.rebalance_rate*ones(obj.shape);
+                A_rebalance = aux.sparse_diags([rebalance_exit(:)], [0]);
+
+                % Keep track of which row to update
+                row_count = 0;
+
+                for yi = 1:obj.ny
+                    for zi = 1:obj.nz
+                        for ai = 1:obj.na
+                            for bi = 1:obj.nb
+                                % Update row count
+                                row_count = row_count + 1;
+
+                                % Get four nearest points
+                                [b1, b2, bmix] = aux.split_x(model.rebalance_ba(bi,ai,zi,yi,1), obj.grids.b.vec);
+                                [a1, a2, amix] = aux.split_x(model.rebalance_ba(bi,ai,zi,yi,2), obj.grids.a.vec);
+
+                                % Initialize entry row
+                                reb_row = zeros(obj.shape);
+
+                                % Set weights entering (must do term +
+                                % reb_row(...) to account for some being the
+                                % same
+                                reb_row(b1,a1,zi,yi) = bmix*amix*obj.p.rebalance_rate + reb_row(b1,a1,zi,yi);
+                                reb_row(b2,a1,zi,yi) = (1-bmix)*amix*obj.p.rebalance_rate + reb_row(b2,a1,zi,yi);
+                                reb_row(b1,a2,zi,yi) = bmix*(1-amix)*obj.p.rebalance_rate + reb_row(b1,a2,zi,yi);
+                                reb_row(b2,a2,zi,yi) = (1-bmix)*(1-amix)*obj.p.rebalance_rate + reb_row(b2,a2,zi,yi);
+
+                                % Add entering weights to row
+                                A_rebalance(row_count,:) = A_rebalance(row_count,:) + reb_row(:)';
+
+                            end
                         end
                     end
                 end

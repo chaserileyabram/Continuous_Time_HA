@@ -65,7 +65,7 @@ classdef ParamsDefaults < handle
     	% asset grid, defaults to 0
         nb_neg;
 
-            % Number of points on liquid asset grid for the KFE
+        % Number of points on liquid asset grid for the KFE
     	nb_KFE = 45;
 
     	% Number of points on positive section of liquid
@@ -76,7 +76,7 @@ classdef ParamsDefaults < handle
     	% asset grid for the KFE, defaults to 0
         nb_neg_KFE;
 
-            %% -------------------------------------------
+        %% -------------------------------------------
     	% Illiquid Asset Grid Parameters
     	% --------------------------------------------
     	% Min value of illiquid assets
@@ -113,7 +113,7 @@ classdef ParamsDefaults < handle
     	% Returns
     	% --------------------------------------------
     	% Liquid returns, at a quarterly rate
-    	r_b = 0.02 / 4;
+    	r_b = 0.01 / 4;
 
     	% Illiquid returns, at a quarterly rate
         r_a = 0.06 / 4;
@@ -142,10 +142,10 @@ classdef ParamsDefaults < handle
     	% --------------------------------------------
         
         % Rate of rebalance opportunity arrival
-        rebalance_rate = 1.0 / 4
+        rebalance_rate = 0.0 / 4
         
         % Rebalancing cost
-        rebalance_cost = 500/67131.733 % 500/numeraire for now
+        rebalance_cost = 0.007 % 500/numeraire for now
         
         
     	%% -------------------------------------------

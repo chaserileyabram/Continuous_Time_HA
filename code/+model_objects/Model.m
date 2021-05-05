@@ -184,7 +184,10 @@ classdef Model < handle
 			        	fprintf('\tHJB converged after %i iterations\n', nn);
 			        end
 				 	break
-				end
+                end
+                % disp('in Model')
+                % disp(obj.p.rho)
+                
 				check_if_not_converging(dst, nn);
 		    end
 
@@ -200,6 +203,7 @@ end
 
 function check_if_not_converging(dst, nn)
 	if dst>10 && nn>500
+        
 	 	% Not going to converge, throw exception
 	 	msgID = 'HACT_Model:NotConverging';
 	    msg = 'The HJB does not appear to be converging';

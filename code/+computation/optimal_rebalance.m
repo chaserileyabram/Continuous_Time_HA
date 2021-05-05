@@ -1,8 +1,6 @@
 function [Vstar, rebalance_ba] = optimal_rebalance(Vn, grd, p)
     % Computes optimal rebalancing choice
     % Chase Abram
-    
-    % Script needs to be vectorized?
 
     % Initialize Vstar (optimal value given rebalance choice)
     Vstar = Vn;
@@ -18,7 +16,8 @@ function [Vstar, rebalance_ba] = optimal_rebalance(Vn, grd, p)
         
         for yi = 1:grd.ny
             for zi = 1:grd.nz
-                % Construct grid of bmin
+                
+                % Construct grid of wealth levels
                 bpfracs = linspace(0, 1, grd.nb);
                 bpfracs = shiftdim(bpfracs, -1);
                 wp = grd.b.vec + shiftdim(grd.a.vec, -1) - p.rebalance_cost;
@@ -31,8 +30,11 @@ function [Vstar, rebalance_ba] = optimal_rebalance(Vn, grd, p)
                 asset_grids = {grd.b.vec, grd.a.vec};
                 vinterp = griddedInterpolant(asset_grids, Vn(:,:,zi,yi), 'linear');
 
+                % Get rebalance values on grid
                 value_bp_ap = vinterp(bprime(:), aprime(:));
                 value_bp_ap = reshape(value_bp_ap, grd.nb, grd.na, grd.nb);
+                
+                % Get values and indices along grid
                 [W, max_ind] = max(value_bp_ap, [], 3);
                 Vstar(:,:,zi,yi) = W .* (W > Vn(:,:,zi,yi)) + Vn(:,:,zi,yi) .* (W <= Vn(:,:,zi,yi));
                 rebalance_ba(:,:,zi,yi,1) = bprime(max_ind) .* (W > Vn(:,:,zi,yi)) + rebalance_ba(:,:,zi,yi,1) .* (W <= Vn(:,:,zi,yi));
@@ -49,19 +51,19 @@ function [Vstar, rebalance_ba] = optimal_rebalance(Vn, grd, p)
         
         % Check if dims singular
         % Build grid and interpolant
-        if grd.nz == 1 && grd.ny == 1
-            grids = {grd.b.vec, grd.a.vec};
-            Vn_int = griddedInterpolant(grids, squeeze(Vn(:,:,1,1)));
-        elseif grd.nz == 1
-            grids = {grd.b.vec, grd.a.vec, linspace(1,size(Vn,4), size(Vn,4))'};
-            Vn_int = griddedInterpolant(grids, squeeze(Vn(:,:,1,:)));
-        elseif grd.ny == 1
-            grids = {grd.b.vec, grd.a.vec, linspace(1,size(Vn,3), size(Vn,3))'};
-            Vn_int = griddedInterpolant(grids, squeeze(Vn(:,:,:,1)));
-        else
-            grids = {grd.b.vec, grd.a.vec, linspace(1,size(Vn,3), size(Vn,3))', linspace(1,size(Vn,4), size(Vn,4))'};
-            Vn_int = griddedInterpolant(grids, Vn);
-        end
+%         if grd.nz == 1 && grd.ny == 1
+%             grids = {grd.b.vec, grd.a.vec};
+%             Vn_int = griddedInterpolant(grids, squeeze(Vn(:,:,1,1)));
+%         elseif grd.nz == 1
+%             grids = {grd.b.vec, grd.a.vec, linspace(1,size(Vn,4), size(Vn,4))'};
+%             Vn_int = griddedInterpolant(grids, squeeze(Vn(:,:,1,:)));
+%         elseif grd.ny == 1
+%             grids = {grd.b.vec, grd.a.vec, linspace(1,size(Vn,3), size(Vn,3))'};
+%             Vn_int = griddedInterpolant(grids, squeeze(Vn(:,:,:,1)));
+%         else
+%             grids = {grd.b.vec, grd.a.vec, linspace(1,size(Vn,3), size(Vn,3))', linspace(1,size(Vn,4), size(Vn,4))'};
+%             Vn_int = griddedInterpolant(grids, Vn);
+%         end
 
 
 %         for yi = 1:grd.ny

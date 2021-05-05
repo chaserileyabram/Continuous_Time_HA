@@ -44,7 +44,7 @@ function [outparams, n] = overall_htm_target(param_opts)
         params.r_a = 0.013;
 
         params.sd_r = 0.01;
-        params.SDU = true;
+        params.SDU = false;
         params.invies = 1 / 1.5;
         params.riskaver = 2;
         params.kappa1 = 0.1;
@@ -93,13 +93,20 @@ function [outparams, n] = overall_htm_target(param_opts)
                             % [shared_params.r_b + 0.0003, 0.009]};
                             % params{ii}.calibration_backup_x0 = {};
                         else
+                            % disp('indicator 1 in overal_htm_target')
                             params{ii}.kappa1 = kappa1;
-                            params{ii}.rho = 0.005;
-                            params{ii}.r_a = 0.007;
+                            
+                            % params{ii}.rho = 0.005;
+                            params{ii}.rho = 0.0004;
+                            
+                            % params{ii}.r_a = 0.007;
+                            params{ii}.r_a = 0.009;
 
-                            rho_bds = [0.0005, 0.03];
+                            % rho_bds = [0.0005, 0.03];
+                            rho_bds = [0.0002, 0.03];
+                            
                             % r_a_bds = [0.008, 0.02];
-                            r_a_bds = [0.003, 0.04];
+                            r_a_bds = [0.005, 0.02];
                             params{ii}.KFE_maxiters = 1e6;
                             % params{ii}.a_lb = 0.3;
 
