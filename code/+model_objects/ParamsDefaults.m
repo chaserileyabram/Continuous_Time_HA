@@ -145,7 +145,10 @@ classdef ParamsDefaults < handle
         rebalance_rate = 0.0 / 4
         
         % Rebalancing cost
-        rebalance_cost = 0.007 % 500/numeraire for now
+        rebalance_cost = 0.007; % 500/numeraire (for now)
+        % rebalance_cost = 0.014; % 1000/numeraire
+        % rebalance_cost = 0.14; % 1000/numeraire
+        % rebalance_cost = 100.0
         
         
     	%% -------------------------------------------

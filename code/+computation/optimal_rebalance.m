@@ -23,7 +23,7 @@ function [Vstar, rebalance_ba] = optimal_rebalance(Vn, grd, p)
                 wp = grd.b.vec + shiftdim(grd.a.vec, -1) - p.rebalance_cost;
 
                 % Construct grids of bprime and aprime
-                bprime = min(bpfracs .* (wp - grd.b.vec(1)), grd.b.vec(grd.nb));
+                bprime = max(min(bpfracs .* (wp - grd.b.vec(1)), grd.b.vec(grd.nb)),grd.b.vec(1));
                 aprime = grd.b.vec + shiftdim(grd.a.vec, -1) - p.rebalance_cost - bprime;
 
                 % Interpolate value function

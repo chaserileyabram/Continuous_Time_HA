@@ -112,7 +112,8 @@ if ~isempty(p.calibrator)
     if ~p.OneAsset
         zval = p.calibrator.target_result;
         z1bad = (zval(1) < 4) || (zval(1) > 4.2);
-        z2bad = (zval(2) < 0.035) || (zval(2) > 0.055);
+        % z2bad = (zval(2) < 0.035) || (zval(2) > 0.055);
+        z2bad = false; % temp fix so I can see single calibrations in 2 asset mode
 
         if z1bad || z2bad
             runFinal = false;
