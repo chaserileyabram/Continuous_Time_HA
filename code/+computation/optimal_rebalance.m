@@ -24,7 +24,10 @@ function [Vstar, rebalance_ba] = optimal_rebalance(Vn, grd, p)
 
                 % Construct grids of bprime and aprime
                 bprime = max(min(bpfracs .* (wp - grd.b.vec(1)), grd.b.vec(grd.nb)),grd.b.vec(1));
-                aprime = grd.b.vec + shiftdim(grd.a.vec, -1) - p.rebalance_cost - bprime;
+                % aprime = grd.b.vec + shiftdim(grd.a.vec, -1) - p.rebalance_cost - bprime;
+                % aprime = max(min(wp - bprime, grd.a.vec(grd.na)), grd.a.vec(1));
+                aprime = wp - bprime;
+                
 
                 % Interpolate value function
                 asset_grids = {grd.b.vec, grd.a.vec};
@@ -36,9 +39,17 @@ function [Vstar, rebalance_ba] = optimal_rebalance(Vn, grd, p)
                 
                 % Get values and indices along grid
                 [W, max_ind] = max(value_bp_ap, [], 3);
+                
+                % Linear indexing
+                idx = [1:grd.nb*grd.na]+(max_ind(1:grd.nb*grd.na)-1)*grd.nb*grd.na;
+                
+                % Optimal choices in shape of (nb,na)
+                b_reb = reshape(bprime(idx),grd.nb,grd.na);
+                a_reb = reshape(aprime(idx),grd.nb,grd.na);
+                
                 Vstar(:,:,zi,yi) = W .* (W > Vn(:,:,zi,yi)) + Vn(:,:,zi,yi) .* (W <= Vn(:,:,zi,yi));
-                rebalance_ba(:,:,zi,yi,1) = bprime(max_ind) .* (W > Vn(:,:,zi,yi)) + rebalance_ba(:,:,zi,yi,1) .* (W <= Vn(:,:,zi,yi));
-                rebalance_ba(:,:,zi,yi,2) = aprime(max_ind) .* (W > Vn(:,:,zi,yi)) + rebalance_ba(:,:,zi,yi,2) .* (W <= Vn(:,:,zi,yi));
+                rebalance_ba(:,:,zi,yi,1) = b_reb .* (W > Vn(:,:,zi,yi)) + rebalance_ba(:,:,zi,yi,1) .* (W <= Vn(:,:,zi,yi));
+                rebalance_ba(:,:,zi,yi,2) = a_reb .* (W > Vn(:,:,zi,yi)) + rebalance_ba(:,:,zi,yi,2) .* (W <= Vn(:,:,zi,yi));
                 
             end
         end

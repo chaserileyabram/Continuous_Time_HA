@@ -32,7 +32,7 @@ function [outparams, n] = overall_htm_target(param_opts)
         
 %         params.calibration_vars = {'rho', 'r_a'};
 %         params.calibration_vars = {'rho'};
-        params.calibration_vars = {'rho', 'r_b'};
+        params.calibration_vars = {'rho', 'r_a'};
         
         params.calibration_stats = {'totw', 'median_liqw'};
 %         params.calibration_stats = {'totw'};
@@ -47,10 +47,10 @@ function [outparams, n] = overall_htm_target(param_opts)
         params.IncomeDescr = IncomeDescriptions{iy};
         param_opts.param_index = 1;
 
-        % Test with this at "infinity"
+        % Test with this at "infinity" (not not actually else issues?)
         % params.kappa1 = 2;
-        params.kappa0 = 1e6;
-        params.kappa1 = 1e6;
+        params.kappa0 = 1e10;
+        params.kappa1 = 1e10;
         params.kappa2 = 0.5;
         
         params.r_b = 0.01/4;
@@ -64,7 +64,7 @@ function [outparams, n] = overall_htm_target(param_opts)
         % params.kappa1 = 0.1;
         
         params.rebalance_rate = 0.25;
-        params.rebalance_cost = 0.007;
+        params.rebalance_cost = 0.07;
 %         params.rebalance_cost = 0.0014;
         
 %         Computing statistics
@@ -73,10 +73,10 @@ function [outparams, n] = overall_htm_target(param_opts)
 %             target variables: totw = 4.27785, median_liqw = 0.170954
 %             norm: 12.096750
 
-        params.rho = -0.001;
+        params.rho = 0.0125;
         rho_bds = [-0.0045, 0.03];
         
-        params.r_a = 0.012/4;
+        params.r_a = 0.0199;
         r_a_bds = [0.01/4, 0.05];
         params.KFE_maxiters = 1e6;
 
@@ -84,6 +84,7 @@ function [outparams, n] = overall_htm_target(param_opts)
         params.calibration_bounds = {rho_bds, r_b_bds};
 %         params.calibration_bounds = {rho_bds};
         params.calibration_backup_x0 = {};
+        params.calibration_crit = 1e-8;
 
         params = {params};
     else
@@ -92,7 +93,7 @@ function [outparams, n] = overall_htm_target(param_opts)
         %% TARGET MEDIAN TOTAL WEALTH AND MEDIAN LIQUID WEALTH
         % Iterate over r_a, rho
         median_calibration = shared_params;
-        median_calibration.calibration_vars = {'rho', 'r_b'};
+        median_calibration.calibration_vars = {'rho', 'r_a'};
         % median_calibration.calibration_vars = {'rho'};
 
         % kappa_1s = [0.2:0.2:1, 1.5:0.5:5];
@@ -105,10 +106,10 @@ function [outparams, n] = overall_htm_target(param_opts)
         reb_costs = [100, 200, 500, 1000, 5000, 10000]/anninc;
         
         % Various liquid rates
-        % r_bs = [-0.01, 0.0, 0.01, 0.02]/4;
+        r_bs = [-0.01, 0.0, 0.01, 0.02]/4;
         
         % Various illiquid rates
-        r_as = [0.0, 0.01, 0.02, 0.03]/4;
+        % r_as = [0.0, 0.01, 0.02, 0.03]/4;
         
         % Calibration stats to use
         cal_stats = {{'totw', 'liqw'}, {'totw', 'median_liqw'}};
@@ -123,7 +124,7 @@ function [outparams, n] = overall_htm_target(param_opts)
             % for kappa2 = kappa_2s
             for cal_i = 1:2
                 for iy = 1:1
-                    for r_a = r_as
+                    for r_b = r_bs
                         group_num = group_num + 1;
                         % for kappa1 = kappa_1s
                         for reb_cost = reb_costs
@@ -146,24 +147,28 @@ function [outparams, n] = overall_htm_target(param_opts)
                             else
                                 % disp('indicator 1 in overal_htm_target')
                                 % params{ii}.kappa1 = kappa1;
-                                params{ii}.kappa0 = 1e6;
-                                params{ii}.kappa1 = 1e6;
+                                params{ii}.kappa0 = 1e10;
+                                params{ii}.kappa1 = 1e10;
+                                
+                                % params{ii}.OneAsset = true;
                                 
                                 params{ii}.rebalance_rate = 1.0/4;
                                 params{ii}.rebalance_cost = reb_cost;
+%                                 params{ii}.rebalance_cost = Inf;
 
                                 % params{ii}.rho = 0.005;
-                                params{ii}.rho = -0.001;
+                                params{ii}.rho = 0.0125;
                                 % rho_bds = [0.0005, 0.03];
-                                rho_bds = [-0.004, 0.03];
-
-                                % params{ii}.r_a = 0.007;
-                                params{ii}.r_a = r_a;
-                                % r_a_bds = [0.008, 0.02];
-                                % r_a_bds = [0.005, 0.02];
+                                rho_bds = [-0.0045, 0.03];
                                 
-                                params{ii}.r_b = -0.01/4;
-                                r_b_bds = [-0.01, 0.02];
+
+                                params{ii}.r_a = 0.08/4;
+%                                 params{ii}.r_a = r_a;
+                                % r_a_bds = [0.008, 0.02];
+                                r_a_bds = [0.005, 0.05];
+                                
+                                params{ii}.r_b = 0.01/4;
+                                % r_b_bds = [-0.01, 0.02];
                                 
                                 params{ii}.KFE_maxiters = 1e6;
                                 % params{ii}.a_lb = 0.3;
@@ -173,7 +178,7 @@ function [outparams, n] = overall_htm_target(param_opts)
 
                                 % Set calibrator
                                 % params{ii}.calibration_bounds = {rho_bds, r_a_bds};
-                                params{ii}.calibration_bounds = {rho_bds, r_b_bds};
+                                params{ii}.calibration_bounds = {rho_bds, r_a_bds};
                                 params{ii}.calibration_backup_x0 = {};
                             end
                             % params{ii}.calibration_stats = {'diff_median', 'median_liqw'};
@@ -183,12 +188,14 @@ function [outparams, n] = overall_htm_target(param_opts)
                             % params{ii}.calibration_stats = {'diff_mean', 'liqw'};
                             % params{ii}.calibration_targets = [4.1-0.56, 0.56];
                             % params{ii}.calibration_stats = {'totw', 'median_liqw'};
-                            params{ii}.calibration_stats = cal_stats{1,cal_i};
+                            params{ii}.calibration_stats = cal_stats{1, cal_i};
                             
                             % params{ii}.calibration_targets = [scf.mean_totw, scf.median_liqw];
-                            params{ii}.calibration_targets = cal_targets{1,cal_i};
+                            params{ii}.calibration_targets = cal_targets{1, cal_i};
                             
                             params{ii}.calibration_scales = [1, 10]; % Not sure what this does
+                            
+                            params{ii}.calibration_crit = 1e-8;
                             
                             params{ii}.name = sprintf('cal=%d, r_a=%d, reb_cost=%d', cal_i, params{ii}.r_a, reb_cost);
 
