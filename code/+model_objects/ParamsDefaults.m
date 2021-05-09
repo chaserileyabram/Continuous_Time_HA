@@ -200,6 +200,8 @@ classdef ParamsDefaults < handle
         calibration_maxiters = 200;
         calibration_crit = 1e-5;
         calibration_scales = [];
+        
+        calibration_steptol = 1e-10;
 
         % ------------ taxes ------------------------------
         transfer = 0; % transfer to households 
