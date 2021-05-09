@@ -193,7 +193,7 @@ function [outparams, n] = overall_htm_target(param_opts)
                             % params{ii}.calibration_targets = [scf.mean_totw, scf.median_liqw];
                             params{ii}.calibration_targets = cal_targets{1, cal_i};
                             
-                            params{ii}.calibration_scales = [1, 10]; % Not sure what this does
+                            params{ii}.calibration_scales = [1, 10]; % Scales deviation for calibration
                             
                             params{ii}.calibration_crit = 1e-8;
                             
