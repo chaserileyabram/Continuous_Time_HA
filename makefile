@@ -23,13 +23,13 @@ copy_for_download :
 	-cp output/*.err "$(dldir)"
 	-cp output/output_table.mat "$(dldir)"
 
-spath1 := "$$MW:/home/livingstonb/GitHub/Continuous_Time_HA/output/download/*"
+spath1 := "abram@midway2.rcc.uchicago.edu:/home/abram/Continuous_Time_HA/output/download/*"
 cdate := $(shell date +"%m-%d-%Y-%T")
 download_final :
 	-mkdir -p output/server-$(cdate)
 	-scp $(spath1) output/server-$(cdate)
 
-spath2 := "$$MW:/home/livingstonb/GitHub/Continuous_Time_HA/output/*.out"
+spath2 := "abram@midway2.rcc.uchicago.edu:/home/abram/Continuous_Time_HA/output/*.out"
 cdate := $(shell date +"%m-%d-%Y-%T")
 download_txt :
 	-mkdir -p output/server-txt-$(cdate)

@@ -193,11 +193,11 @@ function [outparams, n] = overall_htm_target(param_opts)
                             % params{ii}.calibration_targets = [scf.mean_totw, scf.median_liqw];
                             params{ii}.calibration_targets = cal_targets{1, cal_i};
                             
-                            params{ii}.calibration_scales = [1, 10]; % Scales deviation for calibration
+                            params{ii}.calibration_scales = [10, 10]; % Scales deviation for calibration
                             
                             params{ii}.calibration_crit = 1e-8;
                             
-                            params{ii}.name = sprintf('cal=%d, r_a=%d, reb_cost=%d', cal_i, params{ii}.r_a, reb_cost);
+                            params{ii}.name = sprintf('cal=%d, r_b=%d, reb_cost=%d', cal_i, params{ii}.r_b, reb_cost);
 
                             ii = ii + 1;
                         end
