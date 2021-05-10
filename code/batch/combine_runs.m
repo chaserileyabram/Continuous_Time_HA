@@ -17,7 +17,7 @@ try
         fname = sprintf('output_%d.mat', irun);
         fpath = fullfile('output', fname);
         if exist(fpath,'file')
-            fprintf('exist(fpath...) conditional: %s\n', fpath);
+            fprintf('start exist(fpath...) conditional: %s\n', fpath);
             ind = ind + 1;
             
             s(ind) = load(fpath);
@@ -37,6 +37,7 @@ try
             
             stats{ind} = aux.add_comparison_decomps(params(ind),...
                 stats{ind}, decomp_base(ind));
+            fprintf('end exist(fpath...) conditional: %s\n', fpath);
         end
     end
 
