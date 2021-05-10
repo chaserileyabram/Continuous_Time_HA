@@ -12,7 +12,6 @@ addpath('code');
 %% Read .mat files into a cell array
 try
     fprintf('try...\n');
-    asdf
     ind = 0;
     for irun = 1:999
         fname = sprintf('output_%d.mat', irun);
@@ -65,15 +64,15 @@ if ~isempty(getenv('SLURM_ARRAY_TASK_ID'))
     exit
 end
 
-function display_exception_stack(me)
-    disp(me.message)
-
-    filestack = {me.stack.file};
-    namestack = {me.stack.name};
-    linestack = [me.stack.line];
-    
-    for istack = 1:numel(me.stack)
-        fprintf("File: %s, Name: %s, Line: %d\n",...
-            me.stack(istack).file, me.stack(istack).name, me.stack(istack).line)
-    end
-end
+% function display_exception_stack(me)
+%     disp(me.message)
+% 
+%     filestack = {me.stack.file};
+%     namestack = {me.stack.name};
+%     linestack = [me.stack.line];
+%     
+%     for istack = 1:numel(me.stack)
+%         fprintf("File: %s, Name: %s, Line: %d\n",...
+%             me.stack(istack).file, me.stack(istack).name, me.stack(istack).line)
+%     end
+% end
