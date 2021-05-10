@@ -12,6 +12,7 @@ addpath('code');
 %% Read .mat files into a cell array
 try
     fprintf('try...\n');
+    asdf
     ind = 0;
     for irun = 1:999
         fname = sprintf('output_%d.mat', irun);
@@ -54,13 +55,13 @@ try
     matpath = fullfile('output', 'output_table.mat');
     save(matpath, 'output_table');
 catch ME
-    fprintf('Catching display_exception_stack...?')
+    fprintf('Catching display_exception_stack...?\n')
     display_exception_stack(ME);
     rethrow(ME);
 end
 
 if ~isempty(getenv('SLURM_ARRAY_TASK_ID'))
-    fprintf('Empty task ID\n')
+    fprintf('Nonempty task ID\n')
     exit
 end
 
