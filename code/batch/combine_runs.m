@@ -52,11 +52,13 @@ try
     matpath = fullfile('output', 'output_table.mat');
     save(matpath, 'output_table');
 catch ME
+    fprintf('Catching display_exception_stack...?')
     display_exception_stack(ME);
     rethrow(ME);
 end
 
 if ~isempty(getenv('SLURM_ARRAY_TASK_ID'))
+    fprintf('Empty task ID')
     exit
 end
 
