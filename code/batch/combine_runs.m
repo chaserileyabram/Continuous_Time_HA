@@ -11,11 +11,13 @@ addpath('code');
 
 %% Read .mat files into a cell array
 try
+    fprintf('try...\n');
     ind = 0;
     for irun = 1:999
         fname = sprintf('output_%d.mat', irun);
         fpath = fullfile('output', fname);
         if exist(fpath,'file')
+            fprintf('exist(fpath...) conditional: %s\n', fpath);
             ind = ind + 1;
             
             s(ind) = load(fpath);
@@ -58,7 +60,7 @@ catch ME
 end
 
 if ~isempty(getenv('SLURM_ARRAY_TASK_ID'))
-    fprintf('Empty task ID')
+    fprintf('Empty task ID\n')
     exit
 end
 
