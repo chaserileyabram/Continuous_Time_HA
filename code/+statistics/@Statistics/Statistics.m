@@ -54,6 +54,8 @@ classdef Statistics < handle
 		WHtM_over_HtM_weekly;
 
 		adjcosts;
+        
+        rebalance_frac;
 
 		mpcs;
 		illiquid_mpcs;
@@ -122,6 +124,8 @@ classdef Statistics < handle
 			obj.compute_inequality();
 			obj.compute_constrained();
 			obj.compute_deposit_stats();
+            
+            obj.compute_adjust();
 		end
 
 		function add_params(obj)

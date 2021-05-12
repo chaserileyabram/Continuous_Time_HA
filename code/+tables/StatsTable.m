@@ -303,6 +303,9 @@ classdef StatsTable < tables.BaseTable
 				stats.adjcosts.chi_div_d_pctiles{4}
 				stats.adjcosts.chi_div_d_pctiles{5}
 				stats.adjcosts.chi_div_d_pctiles{7}
+                
+                stats.adjcosts.rebalance_rate
+                stats.adjcosts.rebalance_cost
 			};
 
 			obj.update_current_column(out, new_entries);
@@ -362,6 +365,8 @@ classdef StatsTable < tables.BaseTable
 				stats.constrained_dollars{5}
 				stats.w_lt_ysixth
 				stats.w_lt_ytwelfth
+                
+                stats.rebalance_frac
 			};
 
 			obj.update_current_column(out, new_entries);

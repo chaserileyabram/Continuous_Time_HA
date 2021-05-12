@@ -6,11 +6,11 @@ function scf = scf2019struct()
     
     % Medians
     scf.median_totw = 1.54;
-    scf.median_liqw = 0.05;
+    scf.median_liqw = 0.046;
     
     % Means
     scf.mean_totw = 4.1;
-    scf.mean_liqw = 0.56;
+    scf.mean_liqw = 0.562;
     
     % Hand-to-mouth
     scf.htm = 0.39;

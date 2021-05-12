@@ -19,6 +19,11 @@ function compute_deposit_stats(obj)
         'Mean ratio of deposits to assets, E[|d| / max(a, a_lb)]', 2);
 	obj.adjcosts.mean_chi_div_d = obj.empty_stat(...
 		'E[chi(d,a)/abs(d) | d != 0]', 2);
+    
+    obj.adjcosts.rebalance_cost = obj.empty_stat(...
+		'Rebalance cost ($)', 2);
+    obj.adjcosts.rebalance_rate = obj.empty_stat(...
+		'Rebalance arrival rate', 2);
 
 	npct = numel(obj.p.wpercentiles);
 	obj.adjcosts.chi_div_d_pctiles = cell(1, npct);
@@ -38,6 +43,9 @@ function compute_deposit_stats(obj)
 	obj.adjcosts.kappa2.value = obj.p.kappa2;
 	obj.adjcosts.kappa_var.value = obj.p.kappa1 ^ (-1/obj.p.kappa2);
 	obj.adjcosts.a_lb.value = obj.p.a_lb;
+    
+    obj.adjcosts.rebalance_rate.value = obj.p.rebalance_rate;
+    obj.adjcosts.rebalance_cost.value = obj.p.rebalance_cost*obj.p.numeraire_in_dollars;
 
 	term1 = sprintf("%g |d|", obj.p.kappa0);
 	term2 = sprintf("(%g / (1 + %g)) |d / max(a,%g)| ^ (1 + %g) * max(a,%g)",...

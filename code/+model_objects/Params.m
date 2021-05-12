@@ -233,6 +233,10 @@ classdef Params < model_objects.ParamsDefaults
             fprintf('\tperfectannuities = %f\n',obj.perfectannuities)
             fprintf('\triskaver = %f\n',obj.riskaver)
             fprintf('\tdeathrate = %f\n',obj.deathrate)
+            fprintf('\n')
+            
+            fprintf('\trebalance_rate = %f\n',obj.rebalance_rate)
+            fprintf('\trebalance_cost = %f\n',obj.rebalance_cost)
             fprintf('\n\n')
         end
 
