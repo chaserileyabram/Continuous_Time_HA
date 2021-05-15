@@ -167,7 +167,7 @@ function [outparams, n] = overall_htm_target(param_opts)
                                 % r_a_bds = [0.008, 0.02];
                                 r_a_bds = [0.005, 0.05];
                                 
-                                params{ii}.r_b = 0.01/4;
+                                params{ii}.r_b = r_b;
                                 % r_b_bds = [-0.01, 0.02];
                                 
                                 params{ii}.KFE_maxiters = 1e6;
@@ -193,14 +193,14 @@ function [outparams, n] = overall_htm_target(param_opts)
                             % params{ii}.calibration_targets = [scf.mean_totw, scf.median_liqw];
                             params{ii}.calibration_targets = cal_targets{1, cal_i};
                             
-                            params{ii}.calibration_scales = [100, 10]; % Scales deviation for calibration
+                            params{ii}.calibration_scales = [100, 100]; % Scales deviation for calibration
                             
                             params{ii}.calibration_crit = 1e-8;
                             
                             if cal_i == 1
-                                params{ii}.name = sprintf('cal= (mean total, mean liquid), r_b=%d, reb_cost=%d', params{ii}.r_b, reb_cost);
+                                params{ii}.name = sprintf('cal= (mean total=%d, mean liquid=%d), r_b=%d, reb_cost=%d',params{ii}.calibration_targets(1), params{ii}.calibration_targets(2), params{ii}.r_b, reb_cost);
                             else
-                                params{ii}.name = sprintf('cal= (mean total, median liquid), r_b=%d, reb_cost=%d', params{ii}.r_b, reb_cost);
+                                params{ii}.name = sprintf('cal= (mean total=%d, median liquid=%d), r_b=%d, reb_cost=%d',params{ii}.calibration_targets(1), params{ii}.calibration_targets(2), params{ii}.r_b, reb_cost);
                             end
 
                             ii = ii + 1;
