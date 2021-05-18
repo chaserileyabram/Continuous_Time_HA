@@ -18,15 +18,22 @@ function [Vstar, rebalance_ba] = optimal_rebalance(Vn, grd, p)
             for zi = 1:grd.nz
                 
                 % Construct grid of wealth levels
-                bpfracs = linspace(0, 1, grd.nb);
+                % bpfracs = linspace(0, 1, grd.nb);
+                bpfracs = linspace(0, 1, p.rebalance_n);
                 bpfracs = shiftdim(bpfracs, -1);
                 wp = grd.b.vec + shiftdim(grd.a.vec, -1) - p.rebalance_cost;
+                
+                % Must be possible to rebalance, otherwise just set to
+                reb_allow = (wp > (grd.b.vec(1) + grd.a.vec(1)));
 
                 % Construct grids of bprime and aprime
+                % Must be in b range, and must have enough wealth
                 bprime = max(min(bpfracs .* (wp - grd.b.vec(1)), grd.b.vec(grd.nb)),grd.b.vec(1));
                 % aprime = grd.b.vec + shiftdim(grd.a.vec, -1) - p.rebalance_cost - bprime;
-                % aprime = max(min(wp - bprime, grd.a.vec(grd.na)), grd.a.vec(1));
+                
+                % Remaining wealth is illiquid
                 aprime = wp - bprime;
+                % aprime = max(min(wp - bprime, grd.a.vec(grd.na)), grd.a.vec(1));
                 
 
                 % Interpolate value function
@@ -35,7 +42,8 @@ function [Vstar, rebalance_ba] = optimal_rebalance(Vn, grd, p)
 
                 % Get rebalance values on grid
                 value_bp_ap = vinterp(bprime(:), aprime(:));
-                value_bp_ap = reshape(value_bp_ap, grd.nb, grd.na, grd.nb);
+                % value_bp_ap = reshape(value_bp_ap, grd.nb, grd.na, grd.nb);
+                value_bp_ap = reshape(value_bp_ap, grd.nb, grd.na, p.rebalance_n);
                 
                 % Get values and indices along grid
                 [W, max_ind] = max(value_bp_ap, [], 3);
@@ -47,9 +55,12 @@ function [Vstar, rebalance_ba] = optimal_rebalance(Vn, grd, p)
                 b_reb = reshape(bprime(idx),grd.nb,grd.na);
                 a_reb = reshape(aprime(idx),grd.nb,grd.na);
                 
-                Vstar(:,:,zi,yi) = W .* (W > Vn(:,:,zi,yi)) + Vn(:,:,zi,yi) .* (W <= Vn(:,:,zi,yi));
-                rebalance_ba(:,:,zi,yi,1) = b_reb .* (W > Vn(:,:,zi,yi)) + rebalance_ba(:,:,zi,yi,1) .* (W <= Vn(:,:,zi,yi));
-                rebalance_ba(:,:,zi,yi,2) = a_reb .* (W > Vn(:,:,zi,yi)) + rebalance_ba(:,:,zi,yi,2) .* (W <= Vn(:,:,zi,yi));
+                % Check if allowed and optimal
+                reb_happen = reb_allow .* (W > Vn(:,:,zi,yi));
+                
+                Vstar(:,:,zi,yi) = W .* reb_happen + Vn(:,:,zi,yi) .* (1-reb_happen);
+                rebalance_ba(:,:,zi,yi,1) = b_reb .* reb_happen + rebalance_ba(:,:,zi,yi,1) .* (1-reb_happen);
+                rebalance_ba(:,:,zi,yi,2) = a_reb .* reb_happen + rebalance_ba(:,:,zi,yi,2) .* (1-reb_happen);
                 
             end
         end
