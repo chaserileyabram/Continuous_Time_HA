@@ -16,18 +16,20 @@ function [outparams, n] = overall_htm_target(param_opts)
     shared_params.a_lb = 500 / anninc;
     
     incomedirs = {'continuous_a/no_measurement_error',...
+        'continuous_b/no_measurement_error',...
         'continuous_a/measurement_error_20pc',...
         'continuous_a/measurement_error_33pc',...
         'continuous_a/measurement_error_50pc'};
 
     IncomeDescriptions = {'cont_a, no meas err',...
+        'cont_b, no meas err',...
         'cont_a, meas err 20pc',...
         'cont_a, meas err 33pc',...
         'cont_a, meas err 50pc'};
 
     experiment = false;
     if experiment
-        iy = 1;
+        iy = 2;
         params = shared_params;
         
 %         params.calibration_vars = {'rho', 'r_a'};
@@ -103,10 +105,13 @@ function [outparams, n] = overall_htm_target(param_opts)
         calibrations = {median_calibration};
         
         % Various adjustment costs
-        reb_costs = [100, 200, 500, 1000, 5000, 10000]/anninc;
+        % reb_costs = [100, 200, 500, 1000, 5000, 10000]/anninc;
+        reb_costs = [100, 200, 500, 1000, 5000]/anninc;
         
         % Various rebalance arrival rates
-        reb_rates = [0.05, 0.125, 0.25, 1, 3];
+        % reb_rates = [0.05, 0.125, 0.25, 1, 3];
+        reb_rates = [0.05, 0.125, 0.25, 1];
+        % reb_rates = [0];
         
         % Various liquid rates
         r_bs = [-0.01, 0.0, 0.01, 0.02]/4;
@@ -126,7 +131,7 @@ function [outparams, n] = overall_htm_target(param_opts)
         for icalibration = [1]
             % for kappa2 = kappa_2s
             for cal_i = 1:1
-                for iy = 1:1
+                for iy = 2:2
                     for r_b = r_bs
                         group_num = group_num + 1;
 %                         for kappa1 = kappa_1s
@@ -151,6 +156,7 @@ function [outparams, n] = overall_htm_target(param_opts)
                                 else
                                     % disp('indicator 1 in overal_htm_target')
                                     % params{ii}.kappa1 = kappa1;
+                                    
                                     params{ii}.kappa0 = 1e10;
                                     params{ii}.kappa1 = 1e10;
 

@@ -150,7 +150,7 @@ classdef ParamsDefaults < handle
         % rebalance_cost = 0.14; % 1000/numeraire
         % rebalance_cost = 100.0
         
-        rebalance_n = 50;
+        rebalance_n = 30;
         
         
     	%% -------------------------------------------
