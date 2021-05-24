@@ -9,12 +9,12 @@ function scf = scf2019struct()
     scf.median_liqw = 0.046;
     
     % Means
-    scf.mean_totw = 4.1;
+    scf.mean_totw = 4.11;
     scf.mean_liqw = 0.562;
     
     % Hand-to-mouth
-    scf.htm = 0.39;
-    scf.phtm = 0.135;
+    scf.htm = 0.409; % 0.399;
+    scf.phtm = 0.142; % 0.135;
 
     %% Notes
     % HtM defined as household with b < y / 6

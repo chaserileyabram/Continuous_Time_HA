@@ -186,6 +186,9 @@ classdef ParamsDefaults < handle
 
     	% Grid to accomodate rho heterogeneity
     	rho_grid = [0];
+        
+        % Instantaneous Gratification as in Laibson, Maxted, and Moll
+        beta = 1.0
 
         %% -------------------------------------------
         % CALIBRATION

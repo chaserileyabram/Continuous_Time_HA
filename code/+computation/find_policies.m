@@ -82,13 +82,18 @@ function [policies, V_deriv_risky_asset_nodrift] = find_policies(...
 
     import computation.upwind_consumption
 
-    upwindB = upwind_consumption(net_income_liq_hourly, Vb.B,...
+    % Adding IG here
+    % Also moving this above the upwinds (not sure why it was between...?)
+    if p.endogenous_labor
+    	hours_fn = {@(Vb) prefs.hrs_u1inv(nety_mat_liq .* p.beta .* Vb)};
+    end
+    
+    % Adding IG here
+    upwindB = upwind_consumption(net_income_liq_hourly, p.beta .* Vb.B,...
         'B', prefs, hours_fn);
 
-    if p.endogenous_labor
-    	hours_fn = {@(Vb) prefs.hrs_u1inv(nety_mat_liq .* Vb)};
-    end
-    upwindF = upwind_consumption(net_income_liq_hourly, Vb.F,...
+    % Adding IG here
+    upwindF = upwind_consumption(net_income_liq_hourly, p.beta .* Vb.F,...
         'F', prefs, hours_fn);
     HcB = upwindB.H;
     HcF = upwindF.H;
