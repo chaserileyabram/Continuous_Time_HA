@@ -116,7 +116,8 @@ function [outparams, n] = overall_htm_target(param_opts)
         
         % Various liquid rates
         % r_bs = [-0.05, -0.04, -0.03, -0.02, -0.01, 0.0, 0.01, 0.02]/4;
-        r_bs = [-0.06, -0.05, -0.04, -0.03, -0.02, -0.01, 0.0];
+        % r_bs = [-0.06, -0.05, -0.04, -0.03, -0.02, -0.01, 0.0];
+        r_bs = [-0.03, -0.02, -0.01, 0.0, 0.01];
         
         % Various illiquid rates
         % r_as = [0.0, 0.01, 0.02, 0.03]/4;
@@ -141,7 +142,7 @@ function [outparams, n] = overall_htm_target(param_opts)
         for icalibration = [1]
             % for kappa2 = kappa_2s
             for cal_i = 1:1
-                for iy = 1:1
+                for iy = 2:2
                     for r_b = r_bs
                         group_num = group_num + 1;
 %                         for kappa1 = kappa_1s

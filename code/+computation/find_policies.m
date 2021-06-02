@@ -82,18 +82,16 @@ function [policies, V_deriv_risky_asset_nodrift] = find_policies(...
 
     import computation.upwind_consumption
 
-    % Adding IG here
-    % Also moving this above the upwinds (not sure why it was between...?)
+    % Moving this above the upwinds (not sure why it was between...?)
     if p.endogenous_labor
-    	hours_fn = {@(Vb) prefs.hrs_u1inv(nety_mat_liq .* p.beta .* Vb)};
+    	hours_fn = {@(Vb) prefs.hrs_u1inv(nety_mat_liq .* Vb)};
+        
     end
     
-    % Adding IG here
-    upwindB = upwind_consumption(net_income_liq_hourly, p.beta .* Vb.B,...
+    upwindB = upwind_consumption(net_income_liq_hourly, Vb.B,...
         'B', prefs, hours_fn);
 
-    % Adding IG here
-    upwindF = upwind_consumption(net_income_liq_hourly, p.beta .* Vb.F,...
+    upwindF = upwind_consumption(net_income_liq_hourly, Vb.F,...
         'F', prefs, hours_fn);
     HcB = upwindB.H;
     HcF = upwindF.H;
@@ -118,6 +116,43 @@ function [policies, V_deriv_risky_asset_nodrift] = find_policies(...
 
     h = IcF .* upwindF.hours + IcB .* upwindB.hours + Ic0 .* hours_bc;
     u = prefs.u(c) - prefs.hrs_u(h);
+    
+    
+    
+    % Now for IG implied actual choices, used in KFE
+    if p.endogenous_labor
+    	hours_fn_KFE = {@(Vb) prefs.hrs_u1inv(nety_mat_liq .* p.beta .* Vb)};
+    end
+    
+    upwindB_KFE = upwind_consumption(net_income_liq_hourly, p.beta .* Vb.B,...
+        'B', prefs, hours_fn);
+
+    upwindF_KFE = upwind_consumption(net_income_liq_hourly, p.beta .* Vb.F,...
+        'F', prefs, hours_fn);
+    HcB_KFE = upwindB_KFE.H;
+    HcF_KFE = upwindF_KFE.H;
+
+    validcF_KFE = upwindF_KFE.c > 0;
+    validcB_KFE = upwindB_KFE.c > 0;
+
+    % no drift
+    c0_KFE = net_income_liq_hourly(hours_bc);
+    Hc0_KFE = prefs.u(c0_KFE) - prefs.hrs_u(hours_bc);
+    s0_KFE = zeros(nb,na,nz,ny);
+    
+    validc0_KFE = c0_KFE > 0;
+
+     % Upwinding direction: consumption
+    IcF_KFE = validcF_KFE & (upwindF_KFE.s > 0) & ((upwindB_KFE.s>=0) | ((HcF_KFE>=HcB_KFE) | ~validcB_KFE)) & ((HcF_KFE>=Hc0_KFE) | ~validc0_KFE);
+    IcB_KFE = validcB_KFE & (upwindB_KFE.s < 0) & ((upwindF_KFE.s<=0) | ((HcB_KFE>=HcF_KFE) | ~validcF_KFE)) & ((HcB_KFE>=Hc0_KFE) | ~validc0_KFE);
+    Ic0_KFE = validc0_KFE & ~(IcF_KFE | IcB_KFE);
+    assert(isequal(IcF_KFE+IcB_KFE+Ic0_KFE,ones(nb,na,nz,ny,'logical')),'logicals do not sum to unity')
+    c_KFE = IcF_KFE .* upwindF_KFE.c + IcB_KFE .* upwindB_KFE.c + Ic0_KFE .* c0_KFE;
+    s_c_KFE = IcF_KFE .* upwindF_KFE.s + IcB_KFE .* upwindB_KFE.s + Ic0_KFE .* s0_KFE;
+
+    h_KFE = IcF_KFE .* upwindF_KFE.hours + IcB_KFE .* upwindB_KFE.hours + Ic0_KFE .* hours_bc;
+    u_KFE = prefs.u(c) - prefs.hrs_u(h);
+    
 
     %% --------------------------------------------------------------------
 	% UPWINDING FOR DEPOSITS
@@ -171,6 +206,12 @@ function [policies, V_deriv_risky_asset_nodrift] = find_policies(...
     
     policies.Vstar = Vstar;
     policies.rebalance_ba = rebalance_ba;
+    
+    % For KFE (using IG)
+    policies.c_KFE = c_KFE;
+    policies.s_c_KFE = s_c_KFE;
+    policies.h_KFE = h_KFE;
+    
 
     %% --------------------------------------------------------------------
     % DERIVATIVE OF VALUE FUNCTION FOR SDU WITH RETURNS RISK

@@ -110,8 +110,9 @@ classdef TransitionMatrixConstructor < handle
             A = obj.compute_liquid_transitions(drifts.b_B, drifts.b_F);
             A = A + obj.compute_illiquid_transitions(drifts.a_B, drifts.a_F);
             
-            % Add rebalancing transitions for KFE
+            
             if obj.gridtype == "KFE"
+                % Add rebalancing transitions for KFE
                 A = A + obj.compute_rebalance(model);
             end
 
@@ -137,12 +138,12 @@ classdef TransitionMatrixConstructor < handle
         	% functions 's' and 'd'.
 
             if strcmp(obj.gridtype,'KFE')
-            	adrift = model.d + obj.income.nety_KFE_illiq_hourly(model.h);
+            	adrift = model.d + obj.income.nety_KFE_illiq_hourly(model.h_KFE);
                 drifts.a_B = min(adrift, 0);
                 drifts.a_F = max(adrift, 0);
 
-                drifts.b_B = min(model.s_c + model.s_d, 0);
-                drifts.b_F = max(model.s_c + model.s_d, 0);
+                drifts.b_B = min(model.s_c_KFE + model.s_d, 0);
+                drifts.b_F = max(model.s_c_KFE + model.s_d, 0);
             elseif strcmp(obj.gridtype, 'HJB')
             	adrift = obj.income.nety_HJB_illiq_hourly(model.h);
                 drifts.a_B = min(model.d, 0) + min(adrift, 0);
