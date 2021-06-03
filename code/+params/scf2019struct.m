@@ -2,6 +2,7 @@ function scf = scf2019struct()
     scf = struct();
     
     % Check do file...these seem to have changed?
+    % -> truncation was turned off when I looked
     
     % Earnings
     scf.quarterly_earnings = 67131.733 / 4;
