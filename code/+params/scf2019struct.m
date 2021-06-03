@@ -1,6 +1,8 @@
 function scf = scf2019struct()
     scf = struct();
     
+    % Check do file...these seem to have changed?
+    
     % Earnings
     scf.quarterly_earnings = 67131.733 / 4;
     
