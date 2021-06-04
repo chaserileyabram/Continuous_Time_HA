@@ -114,25 +114,30 @@ function [outparams, n] = overall_htm_target(param_opts)
         
         
         % Various discount rates
-        rhos = [0.011, 0.0115, 0.012, 0.0125, 0.013];
+        % rhos = [0.011, 0.0115, 0.012, 0.0125, 0.013];
+        % rhos = [0.012006];
+        rhos = linspace(0.012006 - 0.01, 0.012006 + 0.01, 50);
         
         
         % Various liquid rates
         % r_bs = [-0.05, -0.04, -0.03, -0.02, -0.01, 0.0, 0.01, 0.02]/4;
         % r_bs = [-0.06, -0.05, -0.04, -0.03, -0.02, -0.01, 0.0]/4;
         % r_bs = [-0.03, -0.02, -0.01, 0.0, 0.01]/4;
-        r_bs = [-0.010, -0.007, -0.003, 0, 0.003]/4;
+        % r_bs = [-0.010, -0.007, -0.003, 0, 0.003]/4;
+        r_bs = [-0.00109423];
         
         % Various illiquid rates
         % r_as = [0.0, 0.01, 0.02, 0.03]/4;
-        r_as = [0.07, 0.075, 0.08, 0.085]/4;
+        % r_as = [0.07, 0.075, 0.08, 0.085]/4;
+        r_as = [0.0187754];
         
         
         % Various adjustment costs
         % reb_costs = [100, 200, 500, 1000, 5000, 10000]/anninc;
         % reb_costs = [100, 200, 500, 1000, 5000]/anninc;
         % reb_costs = [100, 300, 700, 1000, 2000]/anninc;
-        reb_costs = [150, 200, 250, 300, 350]/anninc;
+        % reb_costs = [900, 950, 1000, 1050, 1100]/anninc;
+        reb_costs = [0.0148001];
         
         % Various rebalance arrival rates
         % reb_rates = [0.05, 0.125, 0.25, 1, 3];
