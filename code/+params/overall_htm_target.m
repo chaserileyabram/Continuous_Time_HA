@@ -115,7 +115,8 @@ function [outparams, n] = overall_htm_target(param_opts)
         
         % Various discount rates
         % rhos = [0.011, 0.0115, 0.012, 0.0125, 0.013];
-        rhos = [0.012006];
+        % rhos = [0.012006];
+        rhos = [0.013842];
         % rhos = linspace(0.012006 - 0.01, 0.012006 + 0.01, 50);
         
         
