@@ -132,7 +132,7 @@ function [outparams, n] = overall_htm_target(param_opts)
         % r_as = [0.0, 0.01, 0.02, 0.03]/4;
         % r_as = [0.07, 0.075, 0.08, 0.085]/4;
         r_as = [0.0187754];
-        r_as = linspace(0.0187754 - 0.01, 0.0187754 + 0.01, 50);
+        % r_as = linspace(0.0187754 - 0.01, 0.0187754 + 0.01, 50);
         
         
         % Various adjustment costs
@@ -140,7 +140,8 @@ function [outparams, n] = overall_htm_target(param_opts)
         % reb_costs = [100, 200, 500, 1000, 5000]/anninc;
         % reb_costs = [100, 300, 700, 1000, 2000]/anninc;
         % reb_costs = [900, 950, 1000, 1050, 1100]/anninc;
-        reb_costs = [0.0148001];
+        % reb_costs = [0.0148001];
+        reb_costs = linspace(0.0148001 - 0.01, 0.0148001 + 0.01, 50);
         
         % Various rebalance arrival rates
         % reb_rates = [0.05, 0.125, 0.25, 1, 3];
