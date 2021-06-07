@@ -116,8 +116,8 @@ function [outparams, n] = overall_htm_target(param_opts)
         % Various discount rates
         % rhos = [0.011, 0.0115, 0.012, 0.0125, 0.013];
         % rhos = [0.012006];
-        rhos = [0.013842];
-        % rhos = linspace(0.012006 - 0.01, 0.012006 + 0.01, 50);
+        % rhos = [0.013842];
+        rhos = linspace(0.012006 * 0.7, 0.012006 * 1.3, 3);
         
         
         % Various liquid rates
@@ -125,14 +125,14 @@ function [outparams, n] = overall_htm_target(param_opts)
         % r_bs = [-0.06, -0.05, -0.04, -0.03, -0.02, -0.01, 0.0]/4;
         % r_bs = [-0.03, -0.02, -0.01, 0.0, 0.01]/4;
         % r_bs = [-0.010, -0.007, -0.003, 0, 0.003]/4;
-        r_bs = [-0.00109423];
-        % r_bs = linspace(-0.00109423 - 0.01, -0.00109423 + 0.01, 50);
+        % r_bs = [-0.00109423];
+        r_bs = linspace(-0.00109423 * 0.7, -0.00109423 * 1.3, 3);
         
         % Various illiquid rates
         % r_as = [0.0, 0.01, 0.02, 0.03]/4;
         % r_as = [0.07, 0.075, 0.08, 0.085]/4;
-        r_as = [0.0187754];
-        % r_as = linspace(0.0187754 - 0.01, 0.0187754 + 0.01, 50);
+        % r_as = [0.0187754];
+        r_as = linspace(0.0187754 * 0.7, 0.0187754 * 1.3, 3);
         
         
         % Various adjustment costs
@@ -141,7 +141,7 @@ function [outparams, n] = overall_htm_target(param_opts)
         % reb_costs = [100, 300, 700, 1000, 2000]/anninc;
         % reb_costs = [900, 950, 1000, 1050, 1100]/anninc;
         % reb_costs = [0.0148001];
-        reb_costs = linspace(0.0148001 - 0.01, 0.0148001 + 0.01, 50);
+        reb_costs = linspace(0.0148001 * 0.2, 0.0148001 * 1.8, 7);
         
         % Various rebalance arrival rates
         % reb_rates = [0.05, 0.125, 0.25, 1, 3];
