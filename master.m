@@ -30,7 +30,7 @@ warning('off', 'MATLAB:nearlySingularMatrix')
 % SET OPTIONS
 % -------------------------------------------------------------------------
 
-param_opts.calibrate = false;
+param_opts.calibrate = true;
 param_opts.fast = true; % use small grid for debugging
 param_opts.ComputeMPCS = true;
 param_opts.ComputeMPCS_illiquid = false;
@@ -98,8 +98,8 @@ if ~isempty(p.calibrator)
         'MaxFunctionEvaluations', p.calibration_maxiters,...
         'FunctionTolerance', p.calibration_crit,...
         'OptimalityTolerance', p.calibration_crit,...
-        'StepTolerance', p.calibration_steptol) %,...
-%         'FiniteDifferenceStepSize', 1e-6);
+        'StepTolerance', p.calibration_steptol,...
+        'FiniteDifferenceStepSize', 1e-10);
 	resnorm = 100;
 	while (resnorm >= 1e-4)
 	    x0 = p.calibrator.get_next_x0();
