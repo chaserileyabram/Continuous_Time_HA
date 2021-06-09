@@ -5,6 +5,8 @@ classdef Statistics < handle
 		rho;
 		beta_Q;
 		beta_A;
+        beta_IG_Q;
+        beta_IG_A;
 		illiqw;
 		liqw;
 		totw;
@@ -168,6 +170,9 @@ classdef Statistics < handle
 			obj.rho = obj.sfill(obj.p.rho, 'rho');
 		    obj.beta_Q = obj.sfill(exp(-obj.p.rho), 'beta (quarterly)');
 		    obj.beta_A = obj.sfill(exp(-4 * obj.p.rho), 'beta (annualized)');
+            
+            obj.beta_IG_Q = obj.sfill(obj.p.beta, 'beta_IG (quarterly)');
+		    obj.beta_IG_A = obj.sfill(obj.p.beta^4, 'beta_IG (annualized)');
 
 		    tmp = obj.expectation(shiftdim(obj.agrid, -1));
 		    obj.illiqw = obj.sfill(tmp, 'Mean illiquid wealth', 2);

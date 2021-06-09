@@ -117,9 +117,9 @@ function [outparams, n] = overall_htm_target(param_opts)
         
         % Various discount rates
         % rhos = [0.011, 0.0115, 0.012, 0.0125, 0.013];
-        rhos = [-0.001];
+        % rhos = [-0.00];
         % rhos = [0.012006];
-        % rhos = [0.013842];
+        rhos = [0.013842];
         % rhos = linspace(0.012006 * 0.7, 0.012006 * 1.3, 3);
         
         
@@ -128,8 +128,8 @@ function [outparams, n] = overall_htm_target(param_opts)
         % r_bs = [-0.06, -0.05, -0.04, -0.03, -0.02, -0.01, 0.0]/4;
         % r_bs = [-0.03, -0.02, -0.01, 0.0, 0.01]/4;
         % r_bs = [-0.010, -0.007, -0.003, 0, 0.003]/4;
-        r_bs = [0.01]/4;
-        % r_bs = [-0.00109423];
+        % r_bs = [0.01]/4;
+        r_bs = [-0.00109423];
         % r_bs = linspace(-0.00109423 * 0.7, -0.00109423 * 1.3, 3);
         
         % Various illiquid rates
@@ -151,11 +151,12 @@ function [outparams, n] = overall_htm_target(param_opts)
         % Various rebalance arrival rates
         % reb_rates = [0.05, 0.125, 0.25, 1, 3];
         % reb_rates = [0.05, 0.125, 0.25, 1];
-        % reb_rates = [0.25];
-        reb_rates = [0];
+        reb_rates = [0.25];
+        % reb_rates = [0];
         
         % IG
         betas = [0.5, 0.6, 0.7, 0.8, 0.9, 0.95, 0.99, 1.0, 1.01, 1.05, 1.1, 1.5].^(0.25);
+        % betas = [1.0].^(0.25);
         
         
         % Calibration stats to use
