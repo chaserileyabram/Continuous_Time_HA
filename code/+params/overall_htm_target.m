@@ -96,9 +96,9 @@ function [outparams, n] = overall_htm_target(param_opts)
         % Iterate over r_a, rho
         median_calibration = shared_params;
         % median_calibration.calibration_vars = {'rho', 'r_a'};
-        median_calibration.calibration_vars = {'rho'};
+        % median_calibration.calibration_vars = {'rho'};
         % median_calibration.calibration_vars = {'rho', 'r_b'};
-        % median_calibration.calibration_vars = {'rho', 'r_b', 'r_a', 'rebalance_cost'};
+        median_calibration.calibration_vars = {'rho', 'r_b', 'r_a', 'rebalance_cost'};
 
         % kappa_1s = [0.2:0.2:1, 1.5:0.5:5];
         % kappa_2s = [0.25, 0.5, 1.0, 1.5];
@@ -148,16 +148,18 @@ function [outparams, n] = overall_htm_target(param_opts)
         % reb_costs = [100, 300, 700, 1000, 2000]/anninc;
         % reb_costs = [900, 950, 1000, 1050, 1100]/anninc;
         % reb_costs = [0.0148001];
-        % reb_costs = linspace(0.0148001 * 0.2, 0.0148001 * 1.8, 7);
+        reb_costs = linspace(0.0148001 * 0.2, 0.0148001 * 5, 33);
         % reb_costs = [1e10];
-        reb_costs = [471.1954266]./anninc; % 6-8-1 Spec 60
+        % reb_costs = [471.1954266]./anninc; % 6-8-1 Spec 60
+        reb_costs = linspace(471.1954266 * 0.2, 471.1954266 * 5, 33)./anninc;
         
         % Various rebalance arrival rates
         % reb_rates = [0.05, 0.125, 0.25, 1, 3];
         % reb_rates = [0.05, 0.125, 0.25, 1];
         % reb_rates = [0.25];
         % reb_rates = [0];
-        reb_rates = linspace(0.25 * 0.0, 0.25 * 20, 100);
+        % reb_rates = linspace(0.25 * 0.0, 0.25 * 20, 100);
+        reb_rates = [0.25, 1.0, 3.0];
         
         % IG
         % betas = [0.5, 0.6, 0.7, 0.8, 0.9, 0.95, 0.99, 1.0, 1.01, 1.05, 1.1, 1.5].^(0.25);
@@ -252,9 +254,9 @@ function [outparams, n] = overall_htm_target(param_opts)
                                                 % params{ii}.r_a = mean(r_a_bds);
 
                                                 % Set calibrator
-                                                params{ii}.calibration_bounds = {rho_bds};
+                                                % params{ii}.calibration_bounds = {rho_bds};
                                                 % params{ii}.calibration_bounds = {rho_bds, r_b_bds};
-                                                % params{ii}.calibration_bounds = {rho_bds, r_b_bds, r_a_bds, reb_cost_bds};
+                                                params{ii}.calibration_bounds = {rho_bds, r_b_bds, r_a_bds, reb_cost_bds};
                                                 params{ii}.calibration_backup_x0 = {};
                                             end
                                             % params{ii}.calibration_stats = {'diff_median', 'median_liqw'};
@@ -270,8 +272,8 @@ function [outparams, n] = overall_htm_target(param_opts)
                                             params{ii}.calibration_targets = cal_targets{1, cal_i};
 
                                             % params{ii}.calibration_scales = [100, 100];
-                                            % params{ii}.calibration_scales = [1, 1, 1, 1]; % Scales deviation for calibration
-                                            params{ii}.calibration_scales = [1];
+                                            params{ii}.calibration_scales = [1, 1, 1, 1]; % Scales deviation for calibration
+                                            % params{ii}.calibration_scales = [1];
 
                                             params{ii}.calibration_crit = 1e-8;
 
