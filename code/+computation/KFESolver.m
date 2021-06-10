@@ -144,6 +144,7 @@ classdef KFESolver
 			iter = 0;
 			dst = 1e5;
 
+            disp('before KFE iterating... (in KFEsolver)')
 			if ~obj.options.quiet
 				fprintf('    --- Iterating over KFE ---\n')
 			end
@@ -175,7 +176,8 @@ classdef KFESolver
 			        fprintf('\tKFE iteration  = %i, distance = %e\n', iter, dst);
 			    end
 			    g = g1;
-			end
+            end
+            disp('outside KFE iterative loop')
 			obj.check_if_converged(dst, iter);
 			g = reshape(g, obj.p.nb_KFE, obj.p.na_KFE, obj.p.nz, obj.income.ny);
 		end

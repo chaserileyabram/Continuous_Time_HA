@@ -105,6 +105,7 @@ classdef TransitionMatrixConstructor < handle
             %   risky asset was neither backward nor forward. Risk computations
             %   for these states will be included outside the A matrix.
             
+            
             drifts = obj.compute_asset_drifts(model);
 
             A = obj.compute_liquid_transitions(drifts.b_B, drifts.b_F);
@@ -112,6 +113,7 @@ classdef TransitionMatrixConstructor < handle
             
             
             if obj.gridtype == "KFE"
+                disp(obj.compute_rebalance(model))
                 % Add rebalancing transitions for KFE
                 A = A + obj.compute_rebalance(model);
             end
@@ -342,7 +344,8 @@ classdef TransitionMatrixConstructor < handle
             % Transition matrix reflecting rate of rebalancing
             
             
-            A_rebalance = 0;
+            % A_rebalance = 0;
+            A_rebalance = sparse(obj.nb*obj.na*obj.nz*obj.ny, obj.nb*obj.na*obj.nz*obj.ny);
             
             % Conditional for no rebalance case
             if obj.p.rebalance_rate ~= 0
