@@ -113,7 +113,7 @@ classdef TransitionMatrixConstructor < handle
             
             
             if obj.gridtype == "KFE"
-                disp(obj.compute_rebalance(model))
+                % disp(obj.compute_rebalance(model))
                 % Add rebalancing transitions for KFE
                 A = A + obj.compute_rebalance(model);
             end

@@ -127,18 +127,18 @@ classdef Model < handle
 			% ---------------------------------------------------------------------
 			import computation.TransitionMatrixConstructor
             
-            disp('made to KFE')
+            % disp('made to KFE')
    
 			% True if returns should be treated as risky in the KFE
 			returns_risk = (obj.p.sigma_r > 0) && (obj.p.retrisk_KFE == 1);
 		    A_constructor_kfe = TransitionMatrixConstructor(obj.p,...
 		    	obj.income, obj.grids_KFE, returns_risk);
             
-            disp('ready for TransitionMatrixConstructor.construct with KFE')
+            % disp('ready for TransitionMatrixConstructor.construct with KFE')
             
 		    Au = A_constructor_kfe.construct(KFE, KFE.Vn); 
             
-            disp('done TransitionMatrixConstructor.construct with KFE')
+            % disp('done TransitionMatrixConstructor.construct with KFE')
 
 			if obj.income.norisk
 				wealth = NaN;
