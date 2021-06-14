@@ -93,12 +93,16 @@ function [outparams, n] = overall_htm_target(param_opts)
         params = {};
 
         %% TARGET MEDIAN TOTAL WEALTH AND MEDIAN LIQUID WEALTH
+        
+        % Note: the first calibration will be the baseline
+        
+        
         % Iterate over r_a, rho
         median_calibration = shared_params;
         % median_calibration.calibration_vars = {'rho', 'r_a'};
-        % median_calibration.calibration_vars = {'rho'};
+        median_calibration.calibration_vars = {'rho'};
         % median_calibration.calibration_vars = {'rho', 'r_b'};
-        median_calibration.calibration_vars = {'rho', 'r_b', 'r_a', 'rebalance_cost'};
+        % median_calibration.calibration_vars = {'rho', 'r_b', 'r_a', 'rebalance_cost'};
 
         % kappa_1s = [0.2:0.2:1, 1.5:0.5:5];
         % kappa_2s = [0.25, 0.5, 1.0, 1.5];
@@ -117,11 +121,11 @@ function [outparams, n] = overall_htm_target(param_opts)
         
         % Various discount rates
         % rhos = [0.011, 0.0115, 0.012, 0.0125, 0.013];
-        % rhos = [-0.002];
+        rhos = [-0.002];
         % rhos = [0.012006];
         % rhos = [0.013842];
         % rhos = linspace(0.012006 * 0.7, 0.012006 * 1.3, 3);
-        rhos = [0.01063]; % 6-8-1 Spec 60
+        % rhos = [0.01063]; % 6-8-1 Spec 60
         
         
         % Various liquid rates
@@ -129,10 +133,10 @@ function [outparams, n] = overall_htm_target(param_opts)
         % r_bs = [-0.06, -0.05, -0.04, -0.03, -0.02, -0.01, 0.0]/4;
         % r_bs = [-0.03, -0.02, -0.01, 0.0, 0.01]/4;
         % r_bs = [-0.010, -0.007, -0.003, 0, 0.003]/4;
-        % r_bs = [0.01]/4;
+        r_bs = [0.01]/4;
         % r_bs = [-0.00109423];
         % r_bs = linspace(-0.00109423 * 0.7, -0.00109423 * 1.3, 3);
-        r_bs = [-0.007105843]; % 6-8-1 Spec 60
+        % r_bs = [-0.007105843]; % 6-8-1 Spec 60
         
         % Various illiquid rates
         % r_as = [0.0, 0.01, 0.02, 0.03]/4;
@@ -148,10 +152,10 @@ function [outparams, n] = overall_htm_target(param_opts)
         % reb_costs = [100, 300, 700, 1000, 2000]/anninc;
         % reb_costs = [900, 950, 1000, 1050, 1100]/anninc;
         % reb_costs = [0.0148001];
-        reb_costs = linspace(0.0148001 * 0.2, 0.0148001 * 5, 33);
-        % reb_costs = [1e10];
+        % reb_costs = linspace(0.0148001 * 0.2, 0.0148001 * 5, 33);
+        reb_costs = [1e10]; % For 1-asset
         % reb_costs = [471.1954266]./anninc; % 6-8-1 Spec 60
-        reb_costs = linspace(471.1954266 * 0.2, 471.1954266 * 5, 33)./anninc;
+        % reb_costs = linspace(471.1954266 * 0.2, 471.1954266 * 5, 33)./anninc;
         
         % Various rebalance arrival rates
         % reb_rates = [0.05, 0.125, 0.25, 1, 3];
@@ -162,23 +166,23 @@ function [outparams, n] = overall_htm_target(param_opts)
         reb_rates = [0.25, 1.0, 3.0];
         
         % IG
-        % betas = [0.5, 0.6, 0.7, 0.8, 0.9, 0.95, 0.99, 1.0, 1.01, 1.05, 1.1, 1.5].^(0.25);
-        betas = [1.0].^(0.25);
+        betas = [1.0, 0.5, 0.6, 0.7, 0.8, 0.9, 0.95, 0.99, 1.01, 1.05, 1.1, 1.5].^(0.25);
+        % betas = [1.0].^(0.25);
         
         
         % Calibration stats to use
-        % cal_stats = {{'totw'}};
+        cal_stats = {{'totw'}};
         % cal_stats = {{'totw', 'median_totw'}};
         % cal_stats = {{'totw', 'liqw'}, {'totw', 'median_liqw'}};
         % cal_stats = {{'totw', 'liqw_lt_ysixth'}};
-        cal_stats = {{'totw', 'liqw', 'w_lt_ysixth', 'liqw_lt_ysixth'}};
+        % cal_stats = {{'totw', 'liqw', 'w_lt_ysixth', 'liqw_lt_ysixth'}};
         
         % Calibration targets to use
-        % cal_targets = {[scf.mean_totw]};
+        cal_targets = {[scf.mean_totw]};
         % cal_targets = {[scf.mean_totw, scf.median_totw]};
         % cal_targets = {[scf.mean_totw, scf.mean_liqw], [scf.mean_totw, scf.median_liqw]};
         % cal_targets = {[scf.mean_liqw, scf.htm]};
-        cal_targets = {[scf.mean_totw, scf.mean_liqw, scf.phtm, scf.htm]};
+        % cal_targets = {[scf.mean_totw, scf.mean_liqw, scf.phtm, scf.htm]};
         
         
 
@@ -254,9 +258,9 @@ function [outparams, n] = overall_htm_target(param_opts)
                                                 % params{ii}.r_a = mean(r_a_bds);
 
                                                 % Set calibrator
-                                                % params{ii}.calibration_bounds = {rho_bds};
+                                                params{ii}.calibration_bounds = {rho_bds};
                                                 % params{ii}.calibration_bounds = {rho_bds, r_b_bds};
-                                                params{ii}.calibration_bounds = {rho_bds, r_b_bds, r_a_bds, reb_cost_bds};
+                                                % params{ii}.calibration_bounds = {rho_bds, r_b_bds, r_a_bds, reb_cost_bds};
                                                 params{ii}.calibration_backup_x0 = {};
                                             end
                                             % params{ii}.calibration_stats = {'diff_median', 'median_liqw'};
@@ -272,8 +276,8 @@ function [outparams, n] = overall_htm_target(param_opts)
                                             params{ii}.calibration_targets = cal_targets{1, cal_i};
 
                                             % params{ii}.calibration_scales = [100, 100];
-                                            params{ii}.calibration_scales = [1, 1, 1, 1]; % Scales deviation for calibration
-                                            % params{ii}.calibration_scales = [1];
+                                            % params{ii}.calibration_scales = [1, 1, 1, 1]; % Scales deviation for calibration
+                                            params{ii}.calibration_scales = [1];
 
                                             params{ii}.calibration_crit = 1e-8;
 
