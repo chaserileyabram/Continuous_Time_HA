@@ -128,7 +128,7 @@ function [outparams, n] = overall_htm_target(param_opts)
         % rhos = [0.013842];
         % rhos = linspace(0.012006 * 0.7, 0.012006 * 1.3, 3);
         % rhos = [0.01063]; % 6-8-1 Spec 60
-        rhos = [-0.01322162677, -0.01138778959]; % Specs 74 and 88, from 6-8-21
+        rhos = [0.01322162677, 0.01138778959]; % Specs 74 and 88, from 6-8-21
         
         
         % Various liquid rates
