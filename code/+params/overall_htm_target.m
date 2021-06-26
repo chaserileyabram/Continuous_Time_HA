@@ -181,14 +181,16 @@ function [outparams, n] = overall_htm_target(param_opts)
         % cal_stats = {{'totw', 'median_totw'}};
         % cal_stats = {{'totw', 'liqw'}, {'totw', 'median_liqw'}};
         % cal_stats = {{'totw', 'liqw_lt_ysixth'}};
-        cal_stats = {{'totw', 'liqw', 'w_lt_ysixth', 'liqw_lt_ysixth'}};
+        % cal_stats = {{'totw', 'liqw', 'w_lt_ysixth', 'liqw_lt_ysixth'}}; % Mean
+        cal_stats = {{'totw', 'median_liqw', 'w_lt_ysixth', 'liqw_lt_ysixth'}}; % Median liquid
         
         % Calibration targets to use
         % cal_targets = {[scf.mean_totw]};
         % cal_targets = {[scf.mean_totw, scf.median_totw]};
         % cal_targets = {[scf.mean_totw, scf.mean_liqw], [scf.mean_totw, scf.median_liqw]};
         % cal_targets = {[scf.mean_liqw, scf.htm]};
-        cal_targets = {[scf.mean_totw, scf.mean_liqw, scf.phtm, scf.htm]};
+        % cal_targets = {[scf.mean_totw, scf.mean_liqw, scf.phtm, scf.htm]}; % Mean
+        cal_targets = {[scf.mean_totw, scf.median_liqw, scf.phtm, scf.htm]}; % Median liquid
         
         % Steps
         HJB_deltas = [1e3, 1e4, 1e5, 1e6];
