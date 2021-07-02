@@ -196,121 +196,201 @@ function [outparams, n] = overall_htm_target(param_opts)
         HJB_deltas = [1e3, 1e4, 1e5, 1e6];
         
 
-        ii = 1;
-        group_num = 0;
-        for icalibration = [1]
-            % for kappa2 = kappa_2s
-            for HJB_delta = HJB_deltas
-                for cal_i = 1:1
-                    for iy = 1:1
-                        for rho = rhos
-                            for r_b = r_bs
-                                for r_a = r_as
-                                    group_num = group_num + 1;
-            %                         for kappa1 = kappa_1s
-                                    for reb_cost = reb_costs 
-                                        for reb_rate = reb_rates
-                                            for beta = betas
-                                                params = [params {calibrations{icalibration}}];
-                                                % params{ii}.name = sprintf('iy=%d, kappa2=%g', iy, kappa2);
-
-                                                % params{ii}.kappa2 = kappa2;
-                                                params{ii}.HJB_delta = HJB_delta;
-
-                                                params{ii}.income_dir = incomedirs{iy};
-                                                params{ii}.IncomeDescr = IncomeDescriptions{iy};
-                                                params{ii}.group_num = group_num;
-
-                                                if params{ii}.no_transitory_incrisk
-                                                    % params{ii}.rho = 0.001;
-                                                    % params{ii}.r_a = 0.0052;
-                                                    % params{ii}.calibration_bounds = {[0.0008, 0.003],...
-                                                    % [shared_params.r_b + 0.0003, 0.009]};
-                                                    % params{ii}.calibration_backup_x0 = {};
-                                                else
-                                                    % disp('indicator 1 in overal_htm_target')
-                                                    % params{ii}.kappa1 = kappa1;
-
-                                                    params{ii}.kappa0 = 1e10;
-                                                    params{ii}.kappa1 = 1e10;
-
-                                                    % params{ii}.OneAsset = true;
-
-
-
-                                                    % params{ii}.rho = 0.005;
-                                                    params{ii}.rho = rho;
-                                                    % rho_bds = [0.0005, 0.03];
-                                                    rho_bds = [-0.0045, 0.03];
-
-                                                    params{ii}.r_b = r_b;
-                                                    r_b_bds = [-0.01, 0.02];
-
-
-                                                    params{ii}.r_a = r_a;
-                    %                                 params{ii}.r_a = r_a;
-                                                    % r_a_bds = [0.008, 0.02];
-                                                    r_a_bds = [0.005, 0.05];
-
-                                                    % Rebalance cost
-                                                    params{ii}.rebalance_cost = reb_cost;
-                                                    reb_cost_bds = [1,10000]/anninc;
-
-                                                    % Rebalancing rate
-                                                    params{ii}.rebalance_rate = reb_rate;
-
-                                                    % IG
-                                                    params{ii}.beta = beta;
-
-                                                    params{ii}.KFE_maxiters = 1e6;
-                                                    % params{ii}.a_lb = 0.3;
-
-                                                    % params{ii}.rho = mean(rho_bds);
-                                                    % params{ii}.r_a = mean(r_a_bds);
-
-                                                    % Set calibrator
-                                                    % params{ii}.calibration_bounds = {rho_bds};
-                                                    % params{ii}.calibration_bounds = {rho_bds, r_b_bds};
-                                                    params{ii}.calibration_bounds = {rho_bds, r_b_bds, r_a_bds, reb_cost_bds};
-                                                    params{ii}.calibration_backup_x0 = {};
-                                                end
-                                                % params{ii}.calibration_stats = {'diff_median', 'median_liqw'};
-                                                % params{ii}.calibration_targets = [1.49, 0.05];
-                                                % params{ii}.calibration_scales = [1, 10];
-
-                                                % params{ii}.calibration_stats = {'diff_mean', 'liqw'};
-                                                % params{ii}.calibration_targets = [4.1-0.56, 0.56];
-                                                % params{ii}.calibration_stats = {'totw', 'median_liqw'};
-                                                params{ii}.calibration_stats = cal_stats{1, cal_i};
-
-                                                % params{ii}.calibration_targets = [scf.mean_totw, scf.median_liqw];
-                                                params{ii}.calibration_targets = cal_targets{1, cal_i};
-
-                                                % params{ii}.calibration_scales = [100, 100];
-                                                params{ii}.calibration_scales = [1, 1, 1, 1]; % Scales deviation for calibration
-                                                % params{ii}.calibration_scales = [1];
-
-                                                params{ii}.calibration_crit = 1e-8;
-
-                                                % params{ii}.name = sprintf('IG beta: %d', params{ii}.beta);
-                                                params{ii}.name = sprintf('HJB delta: %d', params{ii}.HJB_delta);
-    %                                             if cal_i == 1
-    %                                                 params{ii}.name = sprintf('cal= (mean total=%d, mean liquid=%d), r_b=%d',params{ii}.calibration_targets(1), params{ii}.calibration_targets(2), params{ii}.r_b);
-    %                                             else
-    %                                                 params{ii}.name = sprintf('cal= (mean total=%d, median liquid=%d), r_b=%d, reb_cost=%d, reb_rate=%d',params{ii}.calibration_targets(1), params{ii}.calibration_targets(2), params{ii}.r_b, reb_cost, reb_rate);
-    %                                             end
-
-                                                ii = ii + 1;
-                                            end
-                                        end
-                                    end
-                                end
-                            end
-                        end
-                    end
-                end
-            end
-        end
+%         ii = 1;
+%         group_num = 0;
+%         for icalibration = [1]
+%             % for kappa2 = kappa_2s
+%             for HJB_delta = HJB_deltas
+%                 for cal_i = 1:1
+%                     for iy = 1:1
+%                         for rho = rhos
+%                             for r_b = r_bs
+%                                 for r_a = r_as
+%                                     group_num = group_num + 1;
+%             %                         for kappa1 = kappa_1s
+%                                     for reb_cost = reb_costs 
+%                                         for reb_rate = reb_rates
+%                                             for beta = betas
+%                                                 params = [params {calibrations{icalibration}}];
+%                                                 % params{ii}.name = sprintf('iy=%d, kappa2=%g', iy, kappa2);
+% 
+%                                                 % params{ii}.kappa2 = kappa2;
+%                                                 params{ii}.HJB_delta = HJB_delta;
+% 
+%                                                 params{ii}.income_dir = incomedirs{iy};
+%                                                 params{ii}.IncomeDescr = IncomeDescriptions{iy};
+%                                                 params{ii}.group_num = group_num;
+% 
+%                                                 if params{ii}.no_transitory_incrisk
+%                                                     % params{ii}.rho = 0.001;
+%                                                     % params{ii}.r_a = 0.0052;
+%                                                     % params{ii}.calibration_bounds = {[0.0008, 0.003],...
+%                                                     % [shared_params.r_b + 0.0003, 0.009]};
+%                                                     % params{ii}.calibration_backup_x0 = {};
+%                                                 else
+%                                                     % disp('indicator 1 in overal_htm_target')
+%                                                     % params{ii}.kappa1 = kappa1;
+% 
+%                                                     params{ii}.kappa0 = 1e10;
+%                                                     params{ii}.kappa1 = 1e10;
+% 
+%                                                     % params{ii}.OneAsset = true;
+% 
+% 
+% 
+%                                                     % params{ii}.rho = 0.005;
+%                                                     params{ii}.rho = rho;
+%                                                     % rho_bds = [0.0005, 0.03];
+%                                                     rho_bds = [-0.0045, 0.03];
+% 
+%                                                     params{ii}.r_b = r_b;
+%                                                     r_b_bds = [-0.01, 0.02];
+% 
+% 
+%                                                     params{ii}.r_a = r_a;
+%                     %                                 params{ii}.r_a = r_a;
+%                                                     % r_a_bds = [0.008, 0.02];
+%                                                     r_a_bds = [0.005, 0.05];
+% 
+%                                                     % Rebalance cost
+%                                                     params{ii}.rebalance_cost = reb_cost;
+%                                                     reb_cost_bds = [1,10000]/anninc;
+% 
+%                                                     % Rebalancing rate
+%                                                     params{ii}.rebalance_rate = reb_rate;
+% 
+%                                                     % IG
+%                                                     params{ii}.beta = beta;
+% 
+%                                                     params{ii}.KFE_maxiters = 1e6;
+%                                                     % params{ii}.a_lb = 0.3;
+% 
+%                                                     % params{ii}.rho = mean(rho_bds);
+%                                                     % params{ii}.r_a = mean(r_a_bds);
+% 
+%                                                     % Set calibrator
+%                                                     % params{ii}.calibration_bounds = {rho_bds};
+%                                                     % params{ii}.calibration_bounds = {rho_bds, r_b_bds};
+%                                                     params{ii}.calibration_bounds = {rho_bds, r_b_bds, r_a_bds, reb_cost_bds};
+%                                                     params{ii}.calibration_backup_x0 = {};
+%                                                 end
+%                                                 % params{ii}.calibration_stats = {'diff_median', 'median_liqw'};
+%                                                 % params{ii}.calibration_targets = [1.49, 0.05];
+%                                                 % params{ii}.calibration_scales = [1, 10];
+% 
+%                                                 % params{ii}.calibration_stats = {'diff_mean', 'liqw'};
+%                                                 % params{ii}.calibration_targets = [4.1-0.56, 0.56];
+%                                                 % params{ii}.calibration_stats = {'totw', 'median_liqw'};
+%                                                 params{ii}.calibration_stats = cal_stats{1, cal_i};
+% 
+%                                                 % params{ii}.calibration_targets = [scf.mean_totw, scf.median_liqw];
+%                                                 params{ii}.calibration_targets = cal_targets{1, cal_i};
+% 
+%                                                 % params{ii}.calibration_scales = [100, 100];
+%                                                 params{ii}.calibration_scales = [1, 1, 1, 1]; % Scales deviation for calibration
+%                                                 % params{ii}.calibration_scales = [1];
+% 
+%                                                 params{ii}.calibration_crit = 1e-8;
+% 
+%                                                 % params{ii}.name = sprintf('IG beta: %d', params{ii}.beta);
+%                                                 params{ii}.name = sprintf('HJB delta: %d', params{ii}.HJB_delta);
+%     %                                             if cal_i == 1
+%     %                                                 params{ii}.name = sprintf('cal= (mean total=%d, mean liquid=%d), r_b=%d',params{ii}.calibration_targets(1), params{ii}.calibration_targets(2), params{ii}.r_b);
+%     %                                             else
+%     %                                                 params{ii}.name = sprintf('cal= (mean total=%d, median liquid=%d), r_b=%d, reb_cost=%d, reb_rate=%d',params{ii}.calibration_targets(1), params{ii}.calibration_targets(2), params{ii}.r_b, reb_cost, reb_rate);
+%     %                                             end
+% 
+%                                                 ii = ii + 1;
+%                                             end
+%                                         end
+%                                     end
+%                                 end
+%                             end
+%                         end
+%                     end
+%                 end
+%             end
+%         end
+        
+        ii = 0;
+        % Manually set the params (so not just all permutations)
+        
+        % Baseline (Spec 3, 6_24_21)
+        ii = ii + 1;
+        params = [params {calibrations{1}}];
+        params{ii}.calibration_vars = {'rho'};
+        params{ii}.HJB_delta = 1e3;
+        % Income
+        params{ii}.income_dir = incomedirs{1};
+        params{ii}.IncomeDescr = IncomeDescriptions{1};
+        % Flow costs
+        params{ii}.kappa0 = 1e10;
+        params{ii}.kappa1 = 1e10;
+        % Calibrated
+        params{ii}.rho = 0.01295; 
+        rho_bds = [-0.0045, 0.03];
+        params{ii}.r_b = -0.006421023; 
+        params{ii}.r_a = 0.017442897;
+        params{ii}.rebalance_cost = 516.9930144/anninc;
+        params{ii}.rebalance_rate = 1.0;
+        params{ii}.calibration_bounds = {rho_bds};
+        params{ii}.calibration_stats = {'totw'};
+        params{ii}.calibration_targets = [scf.mean_totw];
+        params{ii}.calibration_scales = [1];
+        params{ii}.name = sprintf('Baseline');
+        
+        % Infrequent rebalance arrival
+        ii = ii + 1;
+        params = [params {calibrations{1}}];
+        params{ii} = params{1};
+        params{ii}.rebalance_rate = 0.25;
+        params{ii}.name = sprintf('Infrequent Rebalance');
+        
+        % Frequent rebalance arrival
+        ii = ii + 1;
+        params = [params {calibrations{1}}];
+        params{ii} = params{1};
+        params{ii}.rebalance_rate = 3.0;
+        params{ii}.name = sprintf('Frequent Rebalance');
+        
+        % Continuous b
+        ii = ii + 1;
+        params = [params {calibrations{1}}];
+        params{ii} = params{1};
+        params{ii}.income_dir = incomedirs{2};
+        params{ii}.IncomeDescr = IncomeDescriptions{2};
+        params{ii}.name = sprintf('Continuous b');
+        
+        % Low r_b
+        ii = ii + 1;
+        params = [params {calibrations{1}}];
+        params{ii} = params{1};
+        params{ii}.r_b = -0.008; 
+        params{ii}.name = sprintf('Low r_b');
+        
+        % High r_b
+        ii = ii + 1;
+        params = [params {calibrations{1}}];
+        params{ii} = params{1};
+        params{ii}.r_b = 0.00;
+        params{ii}.name = sprintf('High r_b');
+        
+        % Low r_a
+        ii = ii + 1;
+        params = [params {calibrations{1}}];
+        params{ii} = params{1};
+        params{ii}.r_a = 0.01;
+        params{ii}.name = sprintf('Low r_a');
+        
+        % High r_b
+        ii = ii + 1;
+        params = [params {calibrations{1}}];
+        params{ii} = params{1};
+        params{ii}.r_a = 0.02;
+        params{ii}.name = sprintf('High r_a');
+         
+        
+        
     end
     
     %% DO NOT CHANGE THIS SECTION
