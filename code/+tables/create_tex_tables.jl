@@ -23,6 +23,7 @@ using LaTeXStrings
 
 # Read in data
 xf = XLSX.readdata("output_table.xlsx", "Sheet1", "A2:DT161")
+# xf = XLSX.readdata("output_table.xlsx")
 
 for i in 1:size(xf,2)
     for j in 1:size(xf,1)

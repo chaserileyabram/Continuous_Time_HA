@@ -30,7 +30,7 @@ warning('off', 'MATLAB:nearlySingularMatrix')
 % SET OPTIONS
 % -------------------------------------------------------------------------
 
-param_opts.calibrate = true;
+param_opts.calibrate = false;
 param_opts.fast = true; % use small grid for debugging
 param_opts.ComputeMPCS = true;
 param_opts.ComputeMPCS_illiquid = true;
@@ -59,8 +59,8 @@ taskid_from_server = str2num(getenv('SLURM_ARRAY_TASK_ID'));
 % When running on server
 if ~isempty(taskid_from_server)
 	param_opts.param_index = taskid_from_server;
-	param_opts.fast = false; % Don't accidentally go fast...
-    param_opts.calibrate = true; % ... or forget to calibrate
+	param_opts.fast = true; % Don't accidentally go fast...
+    param_opts.calibrate = false; % ... or forget to calibrate
     run_opts.check_nparams = false;
 end
 addpath('code');
@@ -137,6 +137,10 @@ if runFinal
 
     table_gen = tables.StatsTable(p, {stats});
     results_table = table_gen.create(p, {stats})
+    
+    % Plots here?
+    make_plots(stats);
+    
 
     xlx_path = sprintf('run%d_table.xlsx', p.param_index);
     xlx_path = fullfile('output', xlx_path);
