@@ -1,18 +1,31 @@
-function make_plots(stats)
+function make_plots(stats, index)
     % Make all plots
-    plot_wdist(stats);
+    plot_wdist(stats, index);
     
 
 
 end
 
-function plot_wdist(stats)
+function plot_wdist(stats, index)
 
 % Lowest income (need to normalize for proper conditioning)
 surf(stats.agrid, stats.bgrid, stats.pmf(:,:,1,1)./sum(stats.pmf(:,:,1,1)));
 title("Wealth Distribution: Lowest Income");
-saveas(gcf, "output/wdist_ylow", "epsc");
+plot_path = sprintf('output/wdist_ylow%d', index);
+saveas(gcf, plot_path, "epsc");
 
+% Middle income (need to normalize for proper conditioning)
+surf(stats.agrid, stats.bgrid, stats.pmf(:,:,1,floor(stats.ny/2))./sum(stats.pmf(:,:,1,floor(stats.ny/2))));
+title("Wealth Distribution: Middle Income");
+plot_path = sprintf('output/wdist_ymid%d', index);
+saveas(gcf, plot_path, "epsc");
+
+
+% Highest income (need to normalize for proper conditioning)
+surf(stats.agrid, stats.bgrid, stats.pmf(:,:,1,stats.ny)./sum(stats.pmf(:,:,1,stats.ny)));
+title("Wealth Distribution: Highest Income");
+plot_path = sprintf('output/wdist_yhigh%d', index);
+saveas(gcf, plot_path, "epsc");
 
 end
 

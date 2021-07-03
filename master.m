@@ -139,7 +139,7 @@ if runFinal
     results_table = table_gen.create(p, {stats})
     
     % Plots here?
-    make_plots(stats);
+    make_plots(stats, p.param_index);
     
 
     xlx_path = sprintf('run%d_table.xlsx', p.param_index);

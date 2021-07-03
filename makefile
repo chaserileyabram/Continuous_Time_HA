@@ -22,6 +22,8 @@ copy_for_download :
 	-cp output/*.out "$(dldir)"
 	-cp output/*.err "$(dldir)"
 	-cp output/output_table.mat "$(dldir)"
+	-cp output/*.eps "$(dldir)"
+
 
 spath1 := "abram@midway2.rcc.uchicago.edu:/home/abram/Continuous_Time_HA/output/download/*"
 cdate := $(shell date +"%m-%d-%Y-%T")
