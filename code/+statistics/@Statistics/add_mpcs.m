@@ -85,5 +85,10 @@ function add_mpcs(obj, mpc_obj, simulated)
 		end
 	else
 		obj.illiquid_mpcs = mpcs_stats;
+        
+        obj.illiquid_mpcs_over_ss = cell(1, nshocks);
+		for ishock = 1:nshocks
+			obj.illiquid_mpcs_over_ss{ishock} =  mpc_obj.mpcs(ishock).mpcs(:,1);
+		end
 	end
 end

@@ -13,6 +13,8 @@ classdef Statistics < handle
 		sav0;
 
 		mpcs_over_ss;
+        illiquid_mpcs_over_ss;
+        
 		pmf_b;
 		cdf_b;
 		pmf_a;
@@ -84,6 +86,8 @@ classdef Statistics < handle
 		params = struct();
 
 		other = struct();
+        
+        c_KFE;
 	end
 
 	properties (Access=protected)
@@ -116,6 +120,8 @@ classdef Statistics < handle
 			obj.wealth_sorted = sortrows(tmp(:));
 
 			obj.pmf = model.g .* grdKFE.trapezoidal.matrix;
+            
+            obj.c_KFE = model.c_KFE;
 		end
 
 		function compute_statistics(obj)

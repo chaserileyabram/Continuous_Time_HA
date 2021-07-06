@@ -365,7 +365,7 @@ function [outparams, n] = overall_htm_target(param_opts)
         ii = ii + 1;
         params = [params {calibrations{1}}];
         params{ii} = params{1};
-        params{ii}.r_b = -0.008; 
+        params{ii}.r_b = -0.01; 
         params{ii}.name = sprintf('Low r_b');
         
         % High r_b
@@ -379,7 +379,7 @@ function [outparams, n] = overall_htm_target(param_opts)
         ii = ii + 1;
         params = [params {calibrations{1}}];
         params{ii} = params{1};
-        params{ii}.r_a = 0.01;
+        params{ii}.r_a = 0.013;
         params{ii}.name = sprintf('Low r_a');
         
         % High r_b

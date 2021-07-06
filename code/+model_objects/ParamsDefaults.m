@@ -11,7 +11,7 @@ classdef ParamsDefaults < handle
         DealWithSpecialCase;
         SolveNoRisk = true;
         fast = false;
-        saveGrids = false;
+        saveGrids = true;
         makePlots = false;
         IncomeDescr = '';
         
