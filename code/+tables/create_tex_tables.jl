@@ -1,4 +1,4 @@
-using Base: Number
+# using Base: Number
 # Chase Abram
 
 # For converting .xlsx output files into TeX for tables
@@ -21,8 +21,11 @@ using LaTeXStrings
 #     error("Not in Continuous_HA directory")
 # end
 
+cd("/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-07-06-2021-23:12:18")
+
 # Read in data
-xf = XLSX.readdata("output_table.xlsx", "Sheet1", "A2:DT161")
+# xf = XLSX.readdata("output_table.xlsx", "Sheet1", "A2:DT161")
+xf = XLSX.readdata("output_table.xlsx", "Sheet1", "A2:I161")
 # xf = XLSX.readdata("output_table.xlsx")
 
 for i in 1:size(xf,2)
@@ -36,6 +39,14 @@ for i in 1:size(xf,2)
         xf[j,i] = replace(string(xf[j,i]), "%" => raw"\%")
         # Fix $
         xf[j,i] = replace(string(xf[j,i]), "\$" => raw"\$")
+        # Fix _ 
+        if i > 1 && j > 1
+            xf[j,i] = replace(string(xf[j,i]), "_" => L"\_")
+        end
+        # xf[j,i] = replace(string(xf[j,i]), "_" => L"\_")
+
+        # Fix missing
+        xf[j,i] = replace(string(xf[j,i]), "missing" => raw"")
     end
 end
 
@@ -124,7 +135,17 @@ function alltables()
     txt *= header()
 
     # Table 1
-    txt *= table1(["HJB delta: 1000", "HJB delta: 10000"])
+    txt *= table1(["Baseline", "Infrequent Rebalance", "Frequent Rebalance"])
+
+    txt *= raw"
+    \newpage"
+    
+    txt *= table2(["Baseline", "Continuous b"])
+
+    txt *= raw"
+    \newpage"
+    
+    txt *= table3(["Baseline", "Low r_b", "High r_b", "Low r_a", "High r_a"])
 
     # Footer
     txt *= footer()
@@ -176,23 +197,92 @@ end
 
 # Produce Table 1
 function table1(models)
-    txt = starttable("Baselines", models)
+    txt = starttable("Rebalance Rates", models)
 
     # Put subtables here
     txt *= subtable(models,
-    ["Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500", "beta (annualized)"])
+    ["Rebalance arrival rate", "Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500"],
+    ["Rebalance arrival rate", "Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500"])
 
-    # some formatting stuff here
-    # txt *= subhead("Panel A: Income Statistics", models)
-    # txt *= subtable(models, 
-    # ["Mean gross annual income",
-    # "Stdev log gross annual income",
-    # "Stdev log net annual income"])
+    txt *= subhead("Calibrated Variables", models)
+    txt *= subtable(models, 
+    ["beta (annualized)",
+    "Liquid asset return (quarterly)",
+    "Illiquid asset return (quarterly)",
+    "Rebalance cost (\\\$)"],
+    ["beta (annualized)",
+    "Liquid asset return (quarterly)",
+    "Illiquid asset return (quarterly)",
+    "Rebalance cost (\\\$)"])
 
-    # txt *= subhead("Panel B: Wealth Statistics", models)
-    # txt *= subtable(models, 
-    # ["Mean total wealth", 
-    # "Mean liquid wealth"])
+    txt *= subhead("Targeted Statistics", models)
+    txt *= subtable(models, 
+    ["Mean total wealth",
+    "Mean liquid wealth",
+    "b_i <= y_i / 6",
+    "w_i <= y_i / 6"],
+    ["Mean total wealth",
+    "Mean liquid wealth",
+    L"b_i \leq y_i / 6",
+    L"w_i \leq y_i / 6"])
+
+    txt *= subhead("MPC Decomposition", models)
+    txt *= subtable(models, 
+    ["Effect of mpc fcn",
+    "Effect of mpc fcn (\\%)",
+    "Effect of distribution",
+    "Effect of distribution (\\%)",
+    "Distr effect, PHtM (eps = 0.05)"
+    "Distr effect (\\%), PHtM (eps = 0.05)",
+    "Distr effect, WHtM (eps = 0.05)",
+    "Distr effect (\\%), WHtM (eps = 0.05)",
+    "Distr effect, NHtM (eps = 0.05)",
+    "Distr effect (\\%), NHtM (eps = 0.05)",
+    "Interaction",
+    "Interaction (\\%)"],
+    ["Effect of mpc fcn",
+    "Effect of mpc fcn (\\%)",
+    "Effect of distribution",
+    "Effect of distribution (\\%)",
+    "Distr effect, PHtM (eps = 0.05)",
+    "Distr effect (\\%), PHtM (eps = 0.05)",
+    "Distr effect, WHtM (eps = 0.05)",
+    "Distr effect (\\%), WHtM (eps = 0.05)",
+    "Distr effect, NHtM (eps = 0.05)",
+    "Distr effect (\\%), NHtM (eps = 0.05)",
+    "Interaction",
+    "Interaction (\\%)"])
+
+#     Effect of mpc fcn
+# Effect of distribution
+# Distr effect, PHtM (eps = 0.05)
+# Distr effect, WHtM (eps = 0.05)
+# Distr effect, NHtM (eps = 0.05)
+# Interaction
+
+#     Effect of mpc fcn (%)
+# Effect of distribution (%)
+# Distr effect (%), PHtM (eps = 0.05)
+# Distr effect (%), WHtM (eps = 0.05)
+# Distr effect (%), NHtM (eps = 0.05)
+# Interaction (%)
+
+
+
+    
+    txt *= endtable()
+
+    return txt
+end
+
+# Produce Table 2
+function table2(models)
+    txt = starttable("Income Processes", models)
+
+    # Put subtables here
+    txt *= subtable(models,
+    ["Income Process", "Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500"],
+    ["Income Process", "Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500"])
 
     txt *= subhead("Calibrated Variables", models)
     txt *= subtable(models, 
@@ -221,6 +311,45 @@ function table1(models)
 
     return txt
 end
+
+# Produce Table 3
+function table3(models)
+    txt = starttable("Returns robustness", models)
+
+    # Put subtables here
+    txt *= subtable(models,
+    ["Liquid asset return (quarterly)", "Illiquid asset return (quarterly)", "Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500"],
+    ["Liquid asset return (quarterly)", "Illiquid asset return (quarterly)", "Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500"])
+
+    txt *= subhead("Calibrated Variables", models)
+    txt *= subtable(models, 
+    ["beta (annualized)",
+    "Liquid asset return (quarterly)",
+    "Illiquid asset return (quarterly)",
+    "Rebalance cost (\\\$)"],
+    ["beta (annualized)",
+    "Liquid asset return (quarterly)",
+    "Illiquid asset return (quarterly)",
+    "Rebalance cost (\\\$)"])
+
+    txt *= subhead("Targeted Statistics", models)
+    txt *= subtable(models, 
+    ["Mean total wealth",
+    "Mean liquid wealth",
+    "b_i <= y_i / 6",
+    "w_i <= y_i / 6"],
+    ["Mean total wealth",
+    "Mean liquid wealth",
+    L"b_i \leq y_i / 6",
+    L"w_i \leq y_i / 6"])
+
+    
+    txt *= endtable()
+
+    return txt
+end
+
+
 
 # Makes a subtable: col -> model, row -> stat
 function subtable(models, stats, statnames)

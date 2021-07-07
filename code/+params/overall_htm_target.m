@@ -359,7 +359,23 @@ function [outparams, n] = overall_htm_target(param_opts)
         params{ii} = params{1};
         params{ii}.income_dir = incomedirs{2};
         params{ii}.IncomeDescr = IncomeDescriptions{2};
-        params{ii}.name = sprintf('Continuous b');
+        params{ii}.name = sprintf('Cont b, rho only');
+        
+        % Continuous b
+        ii = ii + 1;
+        params = [params {calibrations{1}}];
+        params{ii} = params{1};
+        params{ii}.income_dir = incomedirs{2};
+        params{ii}.IncomeDescr = IncomeDescriptions{2};
+        params{ii}.calibration_vars = {'rho', 'r_b', 'r_a', 'rebalance_cost'};
+        r_b_bds = [-0.01, 0.02];
+        r_a_bds = [0.005, 0.05];
+        reb_cost_bds = [1,10000]/anninc;
+        params{ii}.calibration_bounds = {rho_bds, r_b_bds, r_a_bds, reb_cost_bds};
+        params{ii}.calibration_stats = {'totw', 'median_liqw', 'w_lt_ysixth', 'liqw_lt_ysixth'};
+        params{ii}.calibration_targets = [scf.mean_totw, scf.median_liqw, scf.phtm, scf.htm];
+        params{ii}.calibration_scales = [1, 1, 1, 1];
+        params{ii}.name = sprintf('Cont b, all');
         
         % Low r_b
         ii = ii + 1;
