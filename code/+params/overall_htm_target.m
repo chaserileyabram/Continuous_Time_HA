@@ -353,7 +353,7 @@ function [outparams, n] = overall_htm_target(param_opts)
         params{ii}.rebalance_rate = 3.0;
         params{ii}.name = sprintf('Frequent Rebalance');
         
-        % Continuous b
+        % Continuous b, rho only
         ii = ii + 1;
         params = [params {calibrations{1}}];
         params{ii} = params{1};
@@ -361,7 +361,7 @@ function [outparams, n] = overall_htm_target(param_opts)
         params{ii}.IncomeDescr = IncomeDescriptions{2};
         params{ii}.name = sprintf('Cont b, rho only');
         
-        % Continuous b
+        % Continuous b, all
         ii = ii + 1;
         params = [params {calibrations{1}}];
         params{ii} = params{1};
@@ -380,12 +380,104 @@ function [outparams, n] = overall_htm_target(param_opts)
         params{ii}.calibration_stats = {'totw', 'w_lt_ysixth', 'liqw_lt_ysixth'};
         params{ii}.calibration_targets = [scf.mean_totw, scf.phtm, scf.htm];
         params{ii}.calibration_scales = [1, 1, 1];
-        params{ii}.rho = 0.01395;
+%         params{ii}.rho = 0.01395;
 %         params{ii}.r_b = 0.0;
-        params{ii}.r_a = 0.018;
-        params{ii}.rebalance_cost = 232.0/anninc;
-        params{ii}.HJB_delta = 1e3;
-        params{ii}.name = sprintf('Cont b, all');
+%         params{ii}.r_a = 0.018;
+        params{ii}.rebalance_cost = 100.0/anninc;
+        params{ii}.HJB_delta = 1e6;
+        params{ii}.name = sprintf('Cont b, all 100');
+        
+        % Try a bunch
+        ii = ii + 1;
+        params = [params {calibrations{1}}];
+        params{ii} = params{ii-1};
+        params{ii}.rebalance_cost = 150.0/anninc;
+        params{ii}.name = sprintf('Cont b, all 150');
+        
+        ii = ii + 1;
+        params = [params {calibrations{1}}];
+        params{ii} = params{ii-1};
+        params{ii}.rebalance_cost = 200.0/anninc;
+        params{ii}.name = sprintf('Cont b, all 200');
+        
+        ii = ii + 1;
+        params = [params {calibrations{1}}];
+        params{ii} = params{ii-1};
+        params{ii}.rebalance_cost = 250.0/anninc;
+        params{ii}.name = sprintf('Cont b, all 250');
+        
+        ii = ii + 1;
+        params = [params {calibrations{1}}];
+        params{ii} = params{ii-1};
+        params{ii}.rebalance_cost = 300.0/anninc;
+        params{ii}.name = sprintf('Cont b, all 300');
+        
+        ii = ii + 1;
+        params = [params {calibrations{1}}];
+        params{ii} = params{ii-1};
+        params{ii}.rebalance_cost = 350.0/anninc;
+        params{ii}.name = sprintf('Cont b, all 350');
+        
+        ii = ii + 1;
+        params = [params {calibrations{1}}];
+        params{ii} = params{ii-1};
+        params{ii}.rebalance_cost = 400.0/anninc;
+        params{ii}.name = sprintf('Cont b, all 400');
+        
+        ii = ii + 1;
+        params = [params {calibrations{1}}];
+        params{ii} = params{ii-1};
+        params{ii}.rebalance_cost = 450.0/anninc;
+        params{ii}.name = sprintf('Cont b, all 450');
+        
+        ii = ii + 1;
+        params = [params {calibrations{1}}];
+        params{ii} = params{ii-1};
+        params{ii}.rebalance_cost = 500.0/anninc;
+        params{ii}.name = sprintf('Cont b, all 500');
+        
+        ii = ii + 1;
+        params = [params {calibrations{1}}];
+        params{ii} = params{ii-1};
+        params{ii}.rebalance_cost = 550.0/anninc;
+        params{ii}.name = sprintf('Cont b, all 550');
+        
+        ii = ii + 1;
+        params = [params {calibrations{1}}];
+        params{ii} = params{ii-1};
+        params{ii}.rebalance_cost = 600.0/anninc;
+        params{ii}.name = sprintf('Cont b, all 600');
+        
+        ii = ii + 1;
+        params = [params {calibrations{1}}];
+        params{ii} = params{ii-1};
+        params{ii}.rebalance_cost = 650.0/anninc;
+        params{ii}.name = sprintf('Cont b, all 650');
+        
+        ii = ii + 1;
+        params = [params {calibrations{1}}];
+        params{ii} = params{ii-1};
+        params{ii}.rebalance_cost = 700.0/anninc;
+        params{ii}.name = sprintf('Cont b, all 700');
+        
+        ii = ii + 1;
+        params = [params {calibrations{1}}];
+        params{ii} = params{ii-1};
+        params{ii}.rebalance_cost = 750.0/anninc;
+        params{ii}.name = sprintf('Cont b, all 750');
+        
+        ii = ii + 1;
+        params = [params {calibrations{1}}];
+        params{ii} = params{ii-1};
+        params{ii}.rebalance_cost = 800.0/anninc;
+        params{ii}.name = sprintf('Cont b, all 800');
+        
+        ii = ii + 1;
+        params = [params {calibrations{1}}];
+        params{ii} = params{ii-1};
+        params{ii}.rebalance_cost = 850.0/anninc;
+        params{ii}.name = sprintf('Cont b, all 850');
+        
         
         % Low r_b
         ii = ii + 1;
