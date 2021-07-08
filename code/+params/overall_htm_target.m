@@ -367,14 +367,19 @@ function [outparams, n] = overall_htm_target(param_opts)
         params{ii} = params{1};
         params{ii}.income_dir = incomedirs{2};
         params{ii}.IncomeDescr = IncomeDescriptions{2};
-        params{ii}.calibration_vars = {'rho', 'r_b', 'r_a', 'rebalance_cost'};
-        r_b_bds = [-0.01, 0.02];
+        params{ii}.calibration_vars = {'rho', 'r_a', 'rebalance_cost'};
+%         r_b_bds = [-0.01, 0.02];
         r_a_bds = [0.005, 0.05];
         reb_cost_bds = [1,10000]/anninc;
-        params{ii}.calibration_bounds = {rho_bds, r_b_bds, r_a_bds, reb_cost_bds};
-        params{ii}.calibration_stats = {'totw', 'median_liqw', 'w_lt_ysixth', 'liqw_lt_ysixth'};
-        params{ii}.calibration_targets = [scf.mean_totw, scf.median_liqw, scf.phtm, scf.htm];
-        params{ii}.calibration_scales = [1, 1, 1, 1];
+        params{ii}.calibration_bounds = {rho_bds, r_a_bds, reb_cost_bds};
+        params{ii}.calibration_stats = {'totw', 'liqw', 'w_lt_ysixth'};
+        params{ii}.calibration_targets = [scf.mean_totw, scf.mean_liqw, scf.phtm];
+        params{ii}.calibration_scales = [1, 1, 1];
+%         params{ii}.rho = 0.02;
+%         params{ii}.r_b = -0.01;
+%         params{ii}.r_a = 0.018;
+        params{ii}.rebalance_cost = 700.0/anninc;
+        params{ii}.HJB_delta = 1e3;
         params{ii}.name = sprintf('Cont b, all');
         
         % Low r_b

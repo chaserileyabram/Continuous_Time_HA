@@ -228,11 +228,12 @@ function table1(models)
 
     txt *= subhead("MPC Decomposition", models)
     txt *= subtable(models, 
-    ["Effect of mpc fcn",
+    ["E[MPC] - E[MPC_b]",
+    "Effect of mpc fcn",
     "Effect of mpc fcn (\\%)",
     "Effect of distribution",
     "Effect of distribution (\\%)",
-    "Distr effect, PHtM (eps = 0.05)"
+    "Distr effect, PHtM (eps = 0.05)",
     "Distr effect (\\%), PHtM (eps = 0.05)",
     "Distr effect, WHtM (eps = 0.05)",
     "Distr effect (\\%), WHtM (eps = 0.05)",
@@ -240,7 +241,8 @@ function table1(models)
     "Distr effect (\\%), NHtM (eps = 0.05)",
     "Interaction",
     "Interaction (\\%)"],
-    ["Effect of mpc fcn",
+    ["E[MPC] - E[MPC_b]",
+    "Effect of mpc fcn",
     "Effect of mpc fcn (\\%)",
     "Effect of distribution",
     "Effect of distribution (\\%)",
