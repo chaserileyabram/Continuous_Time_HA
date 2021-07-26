@@ -21,11 +21,11 @@ using LaTeXStrings
 #     error("Not in Continuous_HA directory")
 # end
 
-cd("/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-07-06-2021-23:12:18")
+cd("/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-07-11-2021-22:49:30")
 
 # Read in data
 # xf = XLSX.readdata("output_table.xlsx", "Sheet1", "A2:DT161")
-xf = XLSX.readdata("output_table.xlsx", "Sheet1", "A2:I161")
+xf = XLSX.readdata("output_table.xlsx", "Sheet1", "A2:N161")
 # xf = XLSX.readdata("output_table.xlsx")
 
 for i in 1:size(xf,2)
@@ -140,7 +140,18 @@ function alltables()
     txt *= raw"
     \newpage"
     
-    txt *= table2(["Baseline", "Continuous b"])
+    txt *= table2(["Baseline", "Cont b, rho only"])
+
+    txt *= raw"
+    \newpage"
+    
+    txt *= table2(["Baseline",
+    "Cont b, all 200", "Cont b, all 300", "Cont b, all 350"])
+
+    txt *= raw"
+    \newpage"
+    
+    txt *= table2(["Baseline", "Cont b, all 500", "Cont b, all 550"])
 
     txt *= raw"
     \newpage"
