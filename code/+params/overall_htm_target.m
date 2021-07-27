@@ -512,9 +512,82 @@ function [outparams, n] = overall_htm_target(param_opts)
         params = [params {calibrations{1}}];
         params{ii} = params{1};
         params{ii}.beta = 0.5;
-        params{ii}.name = sprintf('IG 0.5');
+        params{ii}.name = sprintf('IG = 0.5, rho = 0.01295');
         
         % IG 0.5
+        ii = ii + 1;
+        params = [params {calibrations{1}}];
+        params{ii} = params{1};
+        params{ii}.beta = 0.5;
+        params{ii}.rho = 0.012;
+        params{ii}.name = sprintf('IG = 0.5, rho = 0.012');
+        
+        % IG 0.5
+        ii = ii + 1;
+        params = [params {calibrations{1}}];
+        params{ii} = params{1};
+        params{ii}.beta = 0.5;
+        params{ii}.rho = 0.01;
+        params{ii}.name = sprintf('IG = 0.5, rho = 0.01');
+        
+        % IG 0.5
+        ii = ii + 1;
+        params = [params {calibrations{1}}];
+        params{ii} = params{1};
+        params{ii}.beta = 0.5;
+        params{ii}.rho = 0.001;
+        params{ii}.name = sprintf('IG = 0.5, rho = 0.001');
+        
+        % IG 0.5
+        ii = ii + 1;
+        params = [params {calibrations{1}}];
+        params{ii} = params{1};
+        params{ii}.beta = 0.5;
+        params{ii}.rho = 0.015;
+        params{ii}.name = sprintf('IG = 0.5, rho = 0.015');
+        
+        % IG 0.2 -------
+        
+        % IG 0.2
+        ii = ii + 1;
+        params = [params {calibrations{1}}];
+        params{ii} = params{1};
+        params{ii}.beta = 0.2;
+        params{ii}.name = sprintf('IG = 0.2, rho = 0.01295');
+        
+        % IG 0.2
+        ii = ii + 1;
+        params = [params {calibrations{1}}];
+        params{ii} = params{1};
+        params{ii}.beta = 0.2;
+        params{ii}.rho = 0.012;
+        params{ii}.name = sprintf('IG = 0.2, rho = 0.012');
+        
+        % IG 0.2
+        ii = ii + 1;
+        params = [params {calibrations{1}}];
+        params{ii} = params{1};
+        params{ii}.beta = 0.2;
+        params{ii}.rho = 0.01;
+        params{ii}.name = sprintf('IG = 0.2, rho = 0.01');
+        
+        % IG 0.2
+        ii = ii + 1;
+        params = [params {calibrations{1}}];
+        params{ii} = params{1};
+        params{ii}.beta = 0.2;
+        params{ii}.rho = 0.001;
+        params{ii}.name = sprintf('IG = 0.2, rho = 0.001');
+        
+        % IG 0.2
+        ii = ii + 1;
+        params = [params {calibrations{1}}];
+        params{ii} = params{1};
+        params{ii}.beta = 0.2;
+        params{ii}.rho = 0.015;
+        params{ii}.name = sprintf('IG = 0.2, rho = 0.015');
+        
+        % IG 0.2
         ii = ii + 1;
         params = [params {calibrations{1}}];
         params{ii} = params{1};

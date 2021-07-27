@@ -112,6 +112,7 @@ function fillrow(models,stat, statname)
     return txt
 end
 
+# Make subheading within table
 function subhead(s, models)
     txt = raw"
     \toprule
@@ -134,43 +135,69 @@ function alltables()
     # Header
     txt *= header()
 
-    # Table 1
-    txt *= table1(["Baseline", "Infrequent Rebalance", "Frequent Rebalance"])
+    txt *= stat_table("Rebalancing Frequency", 
+    ["Baseline", "Infrequent Rebalance", "Frequent Rebalance"], 
+    ["Rebalance arrival rate", "Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500"],
+    ["Rebalance arrival rate", "Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500"])
 
     txt *= raw"
     \newpage"
-    
-    txt *= table2(["Baseline", "Cont b, rho only"])
+
+    txt *= stat_table("Income Process", 
+    ["Baseline", "Cont b, rho only", "Cont b, all 500"], 
+    ["Income Process", "Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500"],
+    ["Income Process", "Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500"])
 
     txt *= raw"
     \newpage"
-    
-    txt *= table2(["Baseline",
-    "Cont b, all 200", "Cont b, all 300", "Cont b, all 350"])
+
+    txt *= stat_table("Returns Robustness", 
+    ["Baseline", "Low r_b", "High r_b", "Low r_a", "High r_a"], 
+    ["Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500"],
+    ["Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500"])
 
     txt *= raw"
     \newpage"
-    
-    txt *= table2(["Baseline", "Cont b, all 500", "Cont b, all 550"])
 
-    txt *= raw"
-    \newpage"
+
+
+    # # Rebalancing Frequency Table
+    # txt *= reb_table(["Baseline", "Infrequent Rebalance", "Frequent Rebalance"])
+
+    # txt *= raw"
+    # \newpage"
     
-    txt *= table3(["Baseline", "Low r_b", "High r_b", "Low r_a", "High r_a"])
+    # txt *= table2(["Baseline", "Cont b, rho only"])
+
+    # txt *= raw"
+    # \newpage"
+    
+    # txt *= table2(["Baseline",
+    # "Cont b, all 200", "Cont b, all 300", "Cont b, all 350"])
+
+    # txt *= raw"
+    # \newpage"
+    
+    # txt *= table2(["Baseline", "Cont b, all 500", "Cont b, all 550"])
+
+    # txt *= raw"
+    # \newpage"
+    
+    # txt *= table3(["Baseline", "Low r_b", "High r_b", "Low r_a", "High r_a"])
 
     # Footer
     txt *= footer()
     return txt
 end
 
-function starttable(s, models)
+function starttable(name, models)
     txt = raw"
     "
 
     txt *= raw"\begin{table}[ht] %
     \caption{"
     
-    txt *= s
+    txt *= name
 
     txt *= raw"} %
     \centering
@@ -206,15 +233,16 @@ function endtable()
 end
 
 
-# Produce Table 1
-function table1(models)
+# Produce Rebalancing Frequency Table
+function reb_table(models)
     txt = starttable("Rebalance Rates", models)
 
-    # Put subtables here
+    # Top stats
     txt *= subtable(models,
     ["Rebalance arrival rate", "Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500"],
     ["Rebalance arrival rate", "Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500"])
 
+    # Calibrated Variables
     txt *= subhead("Calibrated Variables", models)
     txt *= subtable(models, 
     ["beta (annualized)",
@@ -226,6 +254,7 @@ function table1(models)
     "Illiquid asset return (quarterly)",
     "Rebalance cost (\\\$)"])
 
+    # Targeted Stats
     txt *= subhead("Targeted Statistics", models)
     txt *= subtable(models, 
     ["Mean total wealth",
@@ -237,6 +266,7 @@ function table1(models)
     L"b_i \leq y_i / 6",
     L"w_i \leq y_i / 6"])
 
+    # MPC decomp
     txt *= subhead("MPC Decomposition", models)
     txt *= subtable(models, 
     ["E[MPC] - E[MPC_b]",
@@ -287,6 +317,109 @@ function table1(models)
 
     return txt
 end
+
+function stat_table(name, models, topstats, topstats_names)
+    txt = starttable(name, models)
+
+    # Top stats
+    txt *= subtable(models, topstats, topstats_names)
+
+    # Calibrated Variables
+    txt *= subhead("Calibrated Variables", models)
+    txt *= subtable(models, 
+    ["beta (annualized)",
+    "Liquid asset return (quarterly)",
+    "Illiquid asset return (quarterly)",
+    "Rebalance cost (\\\$)"],
+    ["beta (annualized)",
+    "Liquid asset return (quarterly)",
+    "Illiquid asset return (quarterly)",
+    "Rebalance cost (\\\$)"])
+
+    # Targeted Stats
+    txt *= subhead("Targeted Statistics", models)
+    txt *= subtable(models, 
+    ["Mean total wealth",
+    "Mean liquid wealth",
+    "b_i <= y_i / 6",
+    "w_i <= y_i / 6"],
+    ["Mean total wealth",
+    "Mean liquid wealth",
+    L"b_i \leq y_i / 6",
+    L"w_i \leq y_i / 6"])
+
+    # Other Wealth Stats
+    txt *= subhead("Wealth Statistics", models)
+    txt *= subtable(models, 
+    ["w, median",
+    "b, median",
+    "s = 0",
+    "b <= 0\\% mean ann inc",
+    "w <= 0\\% mean ann inc",
+    "b <= \\\$1000",
+    "w <= \\\$1000",
+    "b <= \\\$2000",
+    "w <= \\\$2000",
+    "b <= \\\$5000",
+    "w <= \\\$5000",
+    "b <= \\\$10000",
+    "w <= \\\$10000",
+    "w, Top 10\\% share",
+    "w, Top 1\\% share",
+    "Gini coefficient, wealth"],
+    ["Median total wealth",
+    "Median liquid wealth",
+    L"s = 0",
+    L"b \leq 0",
+    L"w \leq 0",
+    L"b \leq \$1000",
+    L"w \leq \$1000",
+    L"b \leq \$2000",
+    L"w \leq \$2000",
+    L"b \leq \$5000",
+    L"w \leq \$5000",
+    L"b \leq \$10000",
+    L"w \leq \$10000",
+    "Wealth, Top 10\\% share",
+    "Wealth, Top 1\\% share",
+    "Gini coefficient, wealth"])
+
+    # MPC decomp
+    txt *= subhead("MPC Decomposition", models)
+    txt *= subtable(models, 
+    ["E[MPC] - E[MPC_b]",
+    "Effect of mpc fcn",
+    "Effect of mpc fcn (\\%)",
+    "Effect of distribution",
+    "Effect of distribution (\\%)",
+    "Distr effect, PHtM (eps = 0.05)",
+    "Distr effect (\\%), PHtM (eps = 0.05)",
+    "Distr effect, WHtM (eps = 0.05)",
+    "Distr effect (\\%), WHtM (eps = 0.05)",
+    "Distr effect, NHtM (eps = 0.05)",
+    "Distr effect (\\%), NHtM (eps = 0.05)",
+    "Interaction",
+    "Interaction (\\%)"],
+    ["E[MPC] - E[MPC_b]",
+    "Effect of mpc fcn",
+    "Effect of mpc fcn (\\%)",
+    "Effect of distribution",
+    "Effect of distribution (\\%)",
+    "Distr effect, PHtM (eps = 0.05)",
+    "Distr effect (\\%), PHtM (eps = 0.05)",
+    "Distr effect, WHtM (eps = 0.05)",
+    "Distr effect (\\%), WHtM (eps = 0.05)",
+    "Distr effect, NHtM (eps = 0.05)",
+    "Distr effect (\\%), NHtM (eps = 0.05)",
+    "Interaction",
+    "Interaction (\\%)"])
+
+
+
+    txt *= endtable()
+    return txt
+end
+
 
 # Produce Table 2
 function table2(models)
