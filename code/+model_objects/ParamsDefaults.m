@@ -188,7 +188,10 @@ classdef ParamsDefaults < handle
     	rho_grid = [0];
         
         % Instantaneous Gratification as in Laibson, Maxted, and Moll
-        beta = 1.0
+        beta = 1.0;
+        
+        % Temptation
+        temptation = 0.0;
 
         %% -------------------------------------------
         % CALIBRATION
