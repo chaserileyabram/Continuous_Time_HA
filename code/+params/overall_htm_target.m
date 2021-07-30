@@ -642,7 +642,7 @@ function [outparams, n] = overall_htm_target(param_opts)
         end
         
         % IG match PHtM 1-asset
-        for rho = [0.001, 0.005, 0.01, 0.03]
+        for rho = [0.0005, 0.001, 0.002, 0.005, 0.01, 0.03]
             for beta = [0.1, 0.3, 0.5, 0.7, 1.0]
                 
                 ii = ii + 1;
@@ -652,12 +652,19 @@ function [outparams, n] = overall_htm_target(param_opts)
                 params{ii}.calibration_stats = {'totw', 'w_lt_ysixth'};
                 params{ii}.calibration_targets = [scf.mean_totw, scf.phtm];
                 params{ii}.calibration_scales = [1, 1];
+                
+%                 params{ii}.calibration_vars = {'rho'};
+%                 params{ii}.calibration_stats = {'totw'};
+%                 params{ii}.calibration_targets = [scf.mean_totw];
+%                 params{ii}.calibration_scales = [1];
                 % Start here
+                params{ii}.r_b = 0.01;
                 params{ii}.OneAsset = true;
-                params{ii}.rho = rho;
-                params{ii}.beta = beta;
+                params{ii}.rho = 0.003;
+                params{ii}.beta = 0.8;
                 beta_bds = [0.01, 1.3];
                 params{ii}.calibration_bounds = {rho_bds, beta_bds};
+%                 params{ii}.calibration_bounds = {rho_bds};
                 params{ii}.name = sprintf('IG match PHtM 1A, start rho=%d, beta=%d', params{ii}.rho, params{ii}.beta);
             end
         end

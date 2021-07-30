@@ -21,8 +21,8 @@ using LaTeXStrings
 #     error("Not in Continuous_HA directory")
 # end
 
-cd("/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-07-11-2021-22:49:30")
-
+# cd("/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-07-11-2021-22:49:30")
+cd("/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-07-28-2021-10:46:14")
 # Read in data
 # xf = XLSX.readdata("output_table.xlsx", "Sheet1", "A2:DT161")
 xf = XLSX.readdata("output_table.xlsx", "Sheet1", "A2:N161")
@@ -137,6 +137,7 @@ function alltables()
 
     txt *= stat_table("Rebalancing Frequency", 
     ["Baseline", "Infrequent Rebalance", "Frequent Rebalance"], 
+    ["Baseline", "Infrequent Rebalance", "Frequent Rebalance"],
     ["Rebalance arrival rate", "Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500"],
     ["Rebalance arrival rate", "Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500"])
 
@@ -144,7 +145,8 @@ function alltables()
     \newpage"
 
     txt *= stat_table("Income Process", 
-    ["Baseline", "Cont b, rho only", "Cont b, all 500"], 
+    ["Baseline", "Cont b, rho only", "Cont b, all 500"],
+    ["Baseline", "Cont b, rho recal", "Cont b, (rho, ra, reb\\_cost) recal"], 
     ["Income Process", "Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500"],
     ["Income Process", "Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500"])
 
@@ -152,9 +154,28 @@ function alltables()
     \newpage"
 
     txt *= stat_table("Returns Robustness", 
+    ["Baseline", "Low r_b", "High r_b", "Low r_a", "High r_a"],
     ["Baseline", "Low r_b", "High r_b", "Low r_a", "High r_a"], 
     ["Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500"],
     ["Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500"])
+
+    txt *= raw"
+    \newpage"
+
+    txt *= stat_table("Rebalance Costs", 
+    ["Baseline", "Reb cost \\\$250", "Reb cost \\\$1000", "Reb cost \\\$2000"],
+    ["Baseline", "Reb cost \\\$250", "Reb cost \\\$1000", "Reb cost \\\$2000"],
+    ["Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500"],
+    ["Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500"])
+
+    txt *= raw"
+    \newpage"
+
+    txt *= stat_table("Instantaneous Gratification", 
+    ["Baseline", "IG = 0.5, rho = 0.001", "IG = 0.2, rho = 0.001"],
+    ["Baseline", "beta_{IG} = 0.5", "beta_{IG} = 0.2"], 
+    ["beta_IG (annualized)", "Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500"],
+    [L"\beta_{IG}"*" annualized", "Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500"])
 
     txt *= raw"
     \newpage"
@@ -190,7 +211,7 @@ function alltables()
     return txt
 end
 
-function starttable(name, models)
+function starttable(name, modelnames)
     txt = raw"
     "
 
@@ -203,14 +224,14 @@ function starttable(name, models)
     \centering
     \begin{threeparttable} %
     \begin{tabular}{l"
-    for i in 1:length(models)
+    for i in 1:length(modelnames)
         txt *= "c"
     end
     txt *= raw"}
     \toprule
     {}"
 
-    for m in models
+    for m in modelnames
         txt *= " & "
         txt *= string(m)
     end
@@ -318,8 +339,8 @@ function reb_table(models)
     return txt
 end
 
-function stat_table(name, models, topstats, topstats_names)
-    txt = starttable(name, models)
+function stat_table(name, models, modelnames, topstats, topstats_names)
+    txt = starttable(name, modelnames)
 
     # Top stats
     txt *= subtable(models, topstats, topstats_names)

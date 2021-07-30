@@ -84,14 +84,14 @@ function [policies, V_deriv_risky_asset_nodrift] = find_policies(...
 
     % Moving this above the upwinds (not sure why it was between...?)
     if p.endogenous_labor
-    	hours_fn = {@(Vb) prefs.hrs_u1inv(nety_mat_liq .* Vb ./(1 + p.temptation))};
+    	hours_fn = {@(Vb) prefs.hrs_u1inv(nety_mat_liq .* Vb)};
         
     end
     
-    upwindB = upwind_consumption(net_income_liq_hourly, Vb.B ./(1 + p.temptation),...
+    upwindB = upwind_consumption(net_income_liq_hourly, Vb.B,...
         'B', prefs, hours_fn);
 
-    upwindF = upwind_consumption(net_income_liq_hourly, Vb.F ./(1 + p.temptation),...
+    upwindF = upwind_consumption(net_income_liq_hourly, Vb.F,...
         'F', prefs, hours_fn);
     HcB = upwindB.H;
     HcF = upwindF.H;
@@ -120,14 +120,16 @@ function [policies, V_deriv_risky_asset_nodrift] = find_policies(...
     
     % Now for IG implied actual choices, used in KFE
     if p.endogenous_labor
-    	hours_fn_KFE = {@(Vb) prefs.hrs_u1inv(nety_mat_liq .* p.beta .* Vb ./(1 + p.temptation))};
+    	hours_fn_KFE = {@(Vb) prefs.hrs_u1inv(nety_mat_liq .* p.beta .* Vb)};
+    else
+        hours_fn_KFE = hours_fn;
     end
     
-    upwindB_KFE = upwind_consumption(net_income_liq_hourly, p.beta .* Vb.B ./(1 + p.temptation),...
-        'B', prefs, hours_fn);
+    upwindB_KFE = upwind_consumption(net_income_liq_hourly, p.beta .* Vb.B,...
+        'B', prefs, hours_fn_KFE);
 
-    upwindF_KFE = upwind_consumption(net_income_liq_hourly, p.beta .* Vb.F ./(1 + p.temptation),...
-        'F', prefs, hours_fn);
+    upwindF_KFE = upwind_consumption(net_income_liq_hourly, p.beta .* Vb.F,...
+        'F', prefs, hours_fn_KFE);
     HcB_KFE = upwindB_KFE.H;
     HcF_KFE = upwindF_KFE.H;
 
