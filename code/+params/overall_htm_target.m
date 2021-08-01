@@ -738,8 +738,6 @@ function [outparams, n] = overall_htm_target(param_opts)
         params{ii}.name = sprintf('Temptation 0.07');
         
          
-        
-        
     end
     
     %% DO NOT CHANGE THIS SECTION

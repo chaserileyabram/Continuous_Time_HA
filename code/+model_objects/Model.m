@@ -101,7 +101,18 @@ classdef Model < handle
 			%% --------------------------------------------------------------------
 			% HJB
 			% ---------------------------------------------------------------------
-			HJB = obj.solve_HJB(hours_bc_HJB);
+			
+            % If temptation/self-control is present
+            if ~(obj.p.temptation == 0)
+                % Use indicator for which iteration on?
+                % 0 is use 10*rho and usual (phi = 0)
+                % 1 is use rho and W (phi = p.temptation)
+                % Need to trace this all the way down
+                HJB_tempt = obj.solve_HJB_tempt(hours_bc_HJB, zeros(obj.p.nb, obj.p.na, obj.p.nz, obj.p.ny), 0);
+                HJB = obj.solve_HJB_tempt(hours_bc_HJB, HJB_tempt.Vn, 1);
+            else
+                HJB = obj.solve_HJB(hours_bc_HJB);
+            end
 
 			% Interpolate value function from HJB grids into KFE grids, if necessary
 			if isequal(obj.grids_HJB.b.vec, obj.grids_KFE.b.vec) ...
@@ -170,6 +181,58 @@ classdef Model < handle
 			for nn	= 1:obj.p.HJB_maxiters
 				[HJB, V_deriv_risky_asset_nodrift] = computation.find_policies(...
 					obj.p, obj.income, obj.grids_HJB, Vn, hours_bc);
+
+			    % Construct transition matrix 
+		        [A, stationary] = obj.A_constructor_HJB.construct(HJB, Vn);
+
+		        % Update value function
+			    Vn1 = obj.hjb_solver.solve(obj.grids_HJB, A, HJB.u, HJB.Vstar, Vn,...
+			    	V_deriv_risky_asset_nodrift, stationary); % ignored unless SDU
+
+				% check for convergence
+			    Vdiff = Vn1 - Vn;
+			    Vn = Vn1;
+			    dst = max(abs(Vdiff(:)));
+		        if ((nn==1) || (mod(nn,25)==0)) & ~obj.options.quiet
+			    	fprintf('\tHJB iteration = %i, distance = %e\n', nn, dst);
+		        end
+
+		        if dst < obj.p.HJB_tol
+		        	if ~obj.options.quiet
+			        	fprintf('\tHJB converged after %i iterations\n', nn);
+			        end
+				 	break
+                end
+                % disp('in Model')
+                % disp(obj.p.rho)
+                
+				check_if_not_converging(dst, nn);
+		    end
+
+		    if (dst > obj.p.HJB_tol)
+		        error("HJB didn't converge");
+		    end
+		    
+		    % Store value function and policies on both grids
+		    HJB.Vn = Vn;
+        end
+        
+        function HJB = solve_HJB_tempt(obj, hours_bc, W, rho_tempt)
+			import computation.make_initial_guess
+
+			[Vn, gguess] = make_initial_guess(obj.p, obj.grids_HJB,...
+					obj.grids_KFE, obj.income);
+
+			if (obj.income.norisk & ~obj.options.quiet)
+				fprintf('    --- Iterating over HJB (no inc risk) ---\n')
+			elseif ~obj.options.quiet
+				fprintf('    --- Iterating over HJB ---\n')
+			end
+
+		    dst = 1e5;
+			for nn	= 1:obj.p.HJB_maxiters
+				[HJB, V_deriv_risky_asset_nodrift] = computation.find_policies_tempt(...
+					obj.p, obj.income, obj.grids_HJB, Vn, hours_bc, W);
 
 			    % Construct transition matrix 
 		        [A, stationary] = obj.A_constructor_HJB.construct(HJB, Vn);
