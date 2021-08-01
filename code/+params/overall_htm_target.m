@@ -534,13 +534,13 @@ function [outparams, n] = overall_htm_target(param_opts)
 %         params{ii}.rho = 0.01;
 %         params{ii}.name = sprintf('IG = 0.5, rho = 0.01');
         
-        % IG 0.5
+        % IG 0.5 2A
         ii = ii + 1;
         params = [params {calibrations{1}}];
         params{ii} = params{1};
         params{ii}.beta = 0.5;
         params{ii}.rho = 0.001;
-        params{ii}.name = sprintf('IG = 0.5, rho = 0.001');
+        params{ii}.name = sprintf('IG = 0.5, rho = 0.001, 2A');
         
         % IG 0.5
 %         ii = ii + 1;
@@ -575,13 +575,13 @@ function [outparams, n] = overall_htm_target(param_opts)
 %         params{ii}.rho = 0.01;
 %         params{ii}.name = sprintf('IG = 0.2, rho = 0.01');
         
-        % IG 0.2
+        % IG 0.2 2A
         ii = ii + 1;
         params = [params {calibrations{1}}];
         params{ii} = params{1};
         params{ii}.beta = 0.2;
         params{ii}.rho = 0.001;
-        params{ii}.name = sprintf('IG = 0.2, rho = 0.001');
+        params{ii}.name = sprintf('IG = 0.2, rho = 0.001, 2A');
         
         % IG 0.2
 %         ii = ii + 1;
@@ -599,27 +599,26 @@ function [outparams, n] = overall_htm_target(param_opts)
 %         params{ii}.name = sprintf('IG 0.2');
         
         
-        
-        % Reb cost 250
+        % IG 0.5 1A
         ii = ii + 1;
         params = [params {calibrations{1}}];
         params{ii} = params{1};
-        params{ii}.rebalance_cost = 250.0/anninc;
-        params{ii}.name = sprintf('Reb cost $250');
+        params{ii}.beta = 0.5;
+        params{ii}.rho = 0.003;
+        params{ii}.r_b = 0.0025; % 0.01
+        params{ii}.OneAsset = true;
+        params{ii}.name = sprintf('IG = 0.5, rho = 0.003, 1A');
         
-        % Reb cost 1000
+        % IG 0.2 1A
         ii = ii + 1;
         params = [params {calibrations{1}}];
         params{ii} = params{1};
-        params{ii}.rebalance_cost = 1000.0/anninc;
-        params{ii}.name = sprintf('Reb cost $1000');
+        params{ii}.beta = 0.2;
+        params{ii}.rho = 0.003;
+        params{ii}.r_b = 0.0025; % 0.01
+        params{ii}.OneAsset = true;
+        params{ii}.name = sprintf('IG = 0.2, rho = 0.003, 1A');
         
-        % Reb cost 2000
-        ii = ii + 1;
-        params = [params {calibrations{1}}];
-        params{ii} = params{1};
-        params{ii}.rebalance_cost = 2000.0/anninc;
-        params{ii}.name = sprintf('Reb cost $2000');
         
         % IG match PHtM 2-asset
         for rho = [0.001, 0.005, 0.01]
@@ -642,7 +641,7 @@ function [outparams, n] = overall_htm_target(param_opts)
         end
         
         % IG match PHtM 1-asset
-        for rho = [0.0005, 0.001, 0.002, 0.005, 0.01, 0.03]
+        for rho = [-0.01, -0.0005, -0.001, 0.0, 0.001, 0.005, 0.01, 0.03]
             for beta = [0.1, 0.3, 0.5, 0.7, 1.0]
                 
                 ii = ii + 1;
@@ -658,16 +657,37 @@ function [outparams, n] = overall_htm_target(param_opts)
 %                 params{ii}.calibration_targets = [scf.mean_totw];
 %                 params{ii}.calibration_scales = [1];
                 % Start here
-                params{ii}.r_b = 0.01;
+                params{ii}.r_b = 0.0025; % 0.01
                 params{ii}.OneAsset = true;
-                params{ii}.rho = 0.003;
-                params{ii}.beta = 0.8;
+                params{ii}.rho = rho; % 0.003
+                params{ii}.beta = beta; % 0.8
                 beta_bds = [0.01, 1.3];
                 params{ii}.calibration_bounds = {rho_bds, beta_bds};
 %                 params{ii}.calibration_bounds = {rho_bds};
                 params{ii}.name = sprintf('IG match PHtM 1A, start rho=%d, beta=%d', params{ii}.rho, params{ii}.beta);
             end
         end
+        
+        % Reb cost 250
+        ii = ii + 1;
+        params = [params {calibrations{1}}];
+        params{ii} = params{1};
+        params{ii}.rebalance_cost = 250.0/anninc;
+        params{ii}.name = sprintf('Reb cost $250');
+        
+        % Reb cost 1000
+        ii = ii + 1;
+        params = [params {calibrations{1}}];
+        params{ii} = params{1};
+        params{ii}.rebalance_cost = 1000.0/anninc;
+        params{ii}.name = sprintf('Reb cost $1000');
+        
+        % Reb cost 2000
+        ii = ii + 1;
+        params = [params {calibrations{1}}];
+        params{ii} = params{1};
+        params{ii}.rebalance_cost = 2000.0/anninc;
+        params{ii}.name = sprintf('Reb cost $2000');
         
 %         % Temptation 0.05
 %         ii = ii + 1;
