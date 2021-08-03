@@ -119,7 +119,7 @@ function [policies, V_deriv_risky_asset_nodrift] = find_policies(...
     
     % Now for IG implied actual choices, used in KFE
     if p.endogenous_labor
-    	hours_fn_KFE = {@(Vb) prefs.hrs_u1inv(nety_mat_liq .* p.beta .* Vb)};
+    	hours_fn_KFE = {@(Vb) prefs.hrs_u1inv(nety_mat_liq .* Vb)};
     else
         hours_fn_KFE = hours_fn;
     end

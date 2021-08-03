@@ -68,14 +68,14 @@ function [policies, V_deriv_risky_asset_nodrift] = find_policies_tempt(...
     Va.F(:,1:na-1,:,:) = max(Va.F(:,1:na-1,:,:), Vamin);
 
     % Derivatives liquid assets
-    Vb = fd_firstorder(Vn + p.temptation .* W, grd.b.dB, grd.b.dF, 1);
+    Vb = fd_firstorder(Vn, grd.b.dB, grd.b.dF, 1);
     Vb.B(2:nb,:,:,:) = max(Vb.B(2:nb,:,:,:), Vbmin);
     Vb.F(1:nb-1,:,:,:) = max(Vb.F(1:nb-1,:,:,:), Vbmin);
     
     % Derivative W
-%     Wb = fd_firstorder(W, grd.b.dB, grd.b.dF, 1);
-%     Wb.B(2:nb,:,:,:) = max(Wb.B(2:nb,:,:,:), Vbmin);
-%     Wb.F(1:nb-1,:,:,:) = max(Wb.F(1:nb-1,:,:,:), Vbmin);
+    Wb = fd_firstorder(W, grd.b.dB, grd.b.dF, 1);
+    Wb.B(2:nb,:,:,:) = max(Wb.B(2:nb,:,:,:), Vbmin);
+    Wb.F(1:nb-1,:,:,:) = max(Wb.F(1:nb-1,:,:,:), Vbmin);
     
     if strcmp(grd.gtype, 'HJB')
         net_income_liq_hourly = income.nety_HJB_liq_hourly;
@@ -89,13 +89,13 @@ function [policies, V_deriv_risky_asset_nodrift] = find_policies_tempt(...
 
     % Moving this above the upwinds (not sure why it was between...?)
     if p.endogenous_labor
-    	hours_fn = {@(Vb) prefs.hrs_u1inv(nety_mat_liq .* Vb ./ (1 + p.temptation};
+    	hours_fn = {@(Vb) prefs.hrs_u1inv(nety_mat_liq .* Vb)};
     end
     
-    upwindB = upwind_consumption(net_income_liq_hourly, Vb.B ./ (1 + p.temptation),...
+    upwindB = upwind_consumption(net_income_liq_hourly, (Vb.B + p.temptation*Wb.B) ./ (1 + p.temptation),...
         'B', prefs, hours_fn);
 
-    upwindF = upwind_consumption(net_income_liq_hourly, Vb.F ./ (1 + p.temptation),...
+    upwindF = upwind_consumption(net_income_liq_hourly, (Vb.F + p.temptation*Wb.F) ./ (1 + p.temptation),...
         'F', prefs, hours_fn);
     HcB = upwindB.H;
     HcF = upwindF.H;
@@ -124,15 +124,15 @@ function [policies, V_deriv_risky_asset_nodrift] = find_policies_tempt(...
     
     % Now for IG implied actual choices, used in KFE
     if p.endogenous_labor
-    	hours_fn_KFE = {@(Vb) prefs.hrs_u1inv(nety_mat_liq .* p.beta .* Vb ./ (1 + p.temptation))};
+    	hours_fn_KFE = {@(Vb) prefs.hrs_u1inv(nety_mat_liq .* Vb)};
     else
         hours_fn_KFE = hours_fn;
     end
     
-    upwindB_KFE = upwind_consumption(net_income_liq_hourly, p.beta .* Vb.B ./ (1 + p.temptation),...
+    upwindB_KFE = upwind_consumption(net_income_liq_hourly, p.beta .* (Vb.B + p.temptation*Wb.B) ./ (1 + p.temptation),...
         'B', prefs, hours_fn_KFE);
 
-    upwindF_KFE = upwind_consumption(net_income_liq_hourly, p.beta .* Vb.F ./ (1 + p.temptation),...
+    upwindF_KFE = upwind_consumption(net_income_liq_hourly, p.beta .* (Vb.F + p.temptation*Wb.F) ./ (1 + p.temptation),...
         'F', prefs, hours_fn_KFE);
     HcB_KFE = upwindB_KFE.H;
     HcF_KFE = upwindF_KFE.H;

@@ -103,13 +103,21 @@ classdef Model < handle
 			% ---------------------------------------------------------------------
 			
             % If temptation/self-control is present
-            if ~(obj.p.temptation == 0)
+            if obj.p.temptation ~= 0
                 % Use indicator for which iteration on?
                 % 0 is use 10*rho and usual (phi = 0)
                 % 1 is use rho and W (phi = p.temptation)
                 % Need to trace this all the way down
-                HJB_tempt = obj.solve_HJB_tempt(hours_bc_HJB, zeros(obj.p.nb, obj.p.na, obj.p.nz, obj.p.ny), 0);
-                HJB = obj.solve_HJB_tempt(hours_bc_HJB, HJB_tempt.Vn, 1);
+                
+                % Temp set rho to |10*rho| to find W
+                rho_sign = sign(obj.p.rho);
+                obj.p.set('rho', abs(obj.p.rho)*obj.p.tempt_scale);
+                HJB_tempt = obj.solve_HJB(hours_bc_HJB);
+                % Correct rho
+                obj.p.set('rho', rho_sign*obj.p.rho/obj.p.tempt_scale);
+                
+%                 HJB_tempt = obj.solve_HJB_tempt(hours_bc_HJB, zeros(obj.p.nb, obj.p.na, obj.p.nz, obj.p.ny), 0);
+                HJB = obj.solve_HJB_tempt(hours_bc_HJB, HJB_tempt.Vn);
             else
                 HJB = obj.solve_HJB(hours_bc_HJB);
             end
@@ -217,16 +225,16 @@ classdef Model < handle
 		    HJB.Vn = Vn;
         end
         
-        function HJB = solve_HJB_tempt(obj, hours_bc, W, rho_tempt)
+        function HJB = solve_HJB_tempt(obj, hours_bc, W)
 			import computation.make_initial_guess
 
 			[Vn, gguess] = make_initial_guess(obj.p, obj.grids_HJB,...
 					obj.grids_KFE, obj.income);
 
 			if (obj.income.norisk & ~obj.options.quiet)
-				fprintf('    --- Iterating over HJB (no inc risk) ---\n')
+				fprintf('    --- Iterating over HJB tempt (no inc risk) ---\n')
 			elseif ~obj.options.quiet
-				fprintf('    --- Iterating over HJB ---\n')
+				fprintf('    --- Iterating over HJB tempt ---\n')
 			end
 
 		    dst = 1e5;

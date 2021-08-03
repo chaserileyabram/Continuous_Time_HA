@@ -600,24 +600,26 @@ function [outparams, n] = overall_htm_target(param_opts)
         
         
         % IG 0.5 1A
-        ii = ii + 1;
-        params = [params {calibrations{1}}];
-        params{ii} = params{1};
-        params{ii}.beta = 0.5;
-        params{ii}.rho = 0.003;
-        params{ii}.r_b = 0.0025; % 0.01
-        params{ii}.OneAsset = true;
-        params{ii}.name = sprintf('IG = 0.5, rho = 0.003, 1A');
-        
-        % IG 0.2 1A
-        ii = ii + 1;
-        params = [params {calibrations{1}}];
-        params{ii} = params{1};
-        params{ii}.beta = 0.2;
-        params{ii}.rho = 0.003;
-        params{ii}.r_b = 0.0025; % 0.01
-        params{ii}.OneAsset = true;
-        params{ii}.name = sprintf('IG = 0.2, rho = 0.003, 1A');
+        for rho =[-0.1, -0.05, -0.03-0.02, -0.01, -0.005, 0]
+            ii = ii + 1;
+            params = [params {calibrations{1}}];
+            params{ii} = params{1};
+            params{ii}.beta = 0.5;
+            params{ii}.rho = rho;
+            params{ii}.r_b = 0.0025; % 0.01
+            params{ii}.OneAsset = true;
+            params{ii}.name = sprintf('IG = 0.5, rho = %d, 1A', rho);
+
+            % IG 0.2 1A
+            ii = ii + 1;
+            params = [params {calibrations{1}}];
+            params{ii} = params{1};
+            params{ii}.beta = 0.2;
+            params{ii}.rho = rho;
+            params{ii}.r_b = 0.0025; % 0.01
+            params{ii}.OneAsset = true;
+            params{ii}.name = sprintf('IG = 0.2, rho = %d, 1A', rho);
+        end
         
         
         % IG match PHtM 2-asset

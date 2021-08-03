@@ -192,6 +192,7 @@ classdef ParamsDefaults < handle
         
         % Temptation
         temptation = 0.0;
+        tempt_scale = 10.0;
 
         %% -------------------------------------------
         % CALIBRATION
