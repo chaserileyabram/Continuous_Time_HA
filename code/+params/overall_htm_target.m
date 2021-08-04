@@ -328,7 +328,7 @@ function [outparams, n] = overall_htm_target(param_opts)
         params{ii}.kappa1 = 1e10;
         % Calibrated
         params{ii}.rho = 0.01295; 
-        rho_bds = [-0.0045, 0.03];
+        rho_bds = [-0.45, 0.03];
         params{ii}.r_b = -0.006421023; 
         params{ii}.r_a = 0.017442897;
         params{ii}.rebalance_cost = 516.9930144/anninc;
@@ -600,15 +600,15 @@ function [outparams, n] = overall_htm_target(param_opts)
         
         
         % IG 0.5 1A
-        for rho =[-0.1, -0.05, -0.03-0.02, -0.01, -0.005, 0]
+        for rho = [-0.1, -0.05, -0.03, -0.02, -0.01, -0.005, 0]
             ii = ii + 1;
             params = [params {calibrations{1}}];
             params{ii} = params{1};
             params{ii}.beta = 0.5;
             params{ii}.rho = rho;
             params{ii}.r_b = 0.0025; % 0.01
-            params{ii}.OneAsset = true;
-            params{ii}.name = sprintf('IG = 0.5, rho = %d, 1A', rho);
+%             params{ii}.OneAsset = true;
+            params{ii}.name = sprintf('IG = 0.5, rho = %d, 1A', params{ii}.rho);
 
             % IG 0.2 1A
             ii = ii + 1;
@@ -643,7 +643,7 @@ function [outparams, n] = overall_htm_target(param_opts)
         end
         
         % IG match PHtM 1-asset
-        for rho = [-0.01, -0.0005, -0.001, 0.0, 0.001, 0.005, 0.01, 0.03]
+        for rho = [-0.0005, -0.002, -0.001, 0.0, 0.001, 0.002, 0.005, 0.01]
             for beta = [0.1, 0.3, 0.5, 0.7, 1.0]
                 
                 ii = ii + 1;
@@ -713,8 +713,8 @@ function [outparams, n] = overall_htm_target(param_opts)
         r_b_bds = [-0.01, 0.02];
         r_a_bds = [0.005, 0.05];
         params{ii}.calibration_bounds = {rho_bds, r_b_bds, r_a_bds};
-        params{ii}.calibration_stats = {'totw', 'liqw', 'w_lt_ysixth'};
-        params{ii}.calibration_targets = [scf.mean_totw, scf.mean_liqw, scf.phtm];
+        params{ii}.calibration_stats = {'totw', 'liqw_lt_ysixth', 'w_lt_ysixth'};
+        params{ii}.calibration_targets = [scf.mean_totw, scf.htm, scf.phtm];
         params{ii}.calibration_scales = [1, 1, 1];
 %         params{ii}.rho = 0.01395;
 %         params{ii}.r_b = 0.0;
@@ -730,8 +730,8 @@ function [outparams, n] = overall_htm_target(param_opts)
         r_b_bds = [-0.01, 0.02];
         r_a_bds = [0.005, 0.05];
         params{ii}.calibration_bounds = {rho_bds, r_b_bds, r_a_bds};
-        params{ii}.calibration_stats = {'totw', 'liqw', 'w_lt_ysixth'};
-        params{ii}.calibration_targets = [scf.mean_totw, scf.mean_liqw, scf.phtm];
+        params{ii}.calibration_stats = {'totw', 'liqw_lt_ysixth', 'w_lt_ysixth'};
+        params{ii}.calibration_targets = [scf.mean_totw, scf.htm, scf.phtm];
         params{ii}.calibration_scales = [1, 1, 1];
 %         params{ii}.rho = 0.01395;
 %         params{ii}.r_b = 0.0;

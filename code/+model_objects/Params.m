@@ -201,6 +201,7 @@ classdef Params < model_objects.ParamsDefaults
 
             fprintf('Chosen parameters were...\n\n')
 
+            fprintf('\trho = %f\n',obj.rho)
             fprintf('\tb_soft_constraint = %f\n',obj.b_soft_constraint)
             fprintf('\tbmin = %f\n',obj.bmin)
             fprintf('\tbmax = %f\n',obj.bmax)
