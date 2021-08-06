@@ -174,8 +174,8 @@ function alltables()
     \newpage"
 
     txt *= stat_table("Instantaneous Gratification", 
-    ["Baseline", "IG = 0.5, rho = 0.001, 2A", "IG = 0.2, rho = 0.001, 2A"],
-    ["Baseline", "beta_{IG} = 0.5", "beta_{IG} = 0.2"], 
+    ["Baseline", "IG = 0.5, rho = 0.001, 2A", "IG = 0.2, rho = 0.001, 2A", "IG match PHtM 2A, start rho=1.000000e-03, beta=1"],
+    ["Baseline", "beta_{IG} = 0.5", "beta_{IG} = 0.2", "IG match PHtM 2A"], 
     ["beta_IG", "Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500"],
     [L"\beta_{IG}", "Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500"])
 

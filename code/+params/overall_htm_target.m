@@ -486,7 +486,6 @@ function [outparams, n] = overall_htm_target(param_opts)
                 % Start here
                 params{ii}.r_b = 0.0025; % 0.01
                 params{ii}.OneAsset = true;
-                params{ii}.kappa1 = 1e8;
                 params{ii}.rho = rho; % 0.003
                 params{ii}.beta = beta; % 0.8
                 beta_bds = [0.01, 1.3];
@@ -530,8 +529,8 @@ function [outparams, n] = overall_htm_target(param_opts)
         params{ii}.calibration_targets = [scf.mean_totw, scf.htm, scf.phtm];
         params{ii}.calibration_scales = [1, 1, 1];
 %         params{ii}.rho = 0.01395;
-%         params{ii}.r_b = 0.0;
-%         params{ii}.r_a = 0.018;
+        params{ii}.r_b = 0.01;
+        params{ii}.r_a = 0.03;
         params{ii}.temptation = 0.05;
         params{ii}.name = sprintf('Temptation 0.05');
         
@@ -547,8 +546,8 @@ function [outparams, n] = overall_htm_target(param_opts)
         params{ii}.calibration_targets = [scf.mean_totw, scf.htm, scf.phtm];
         params{ii}.calibration_scales = [1, 1, 1];
 %         params{ii}.rho = 0.01395;
-%         params{ii}.r_b = 0.0;
-%         params{ii}.r_a = 0.018;
+        params{ii}.r_b = 0.01;
+        params{ii}.r_a = 0.03;
         params{ii}.temptation = 0.07;
         params{ii}.name = sprintf('Temptation 0.07');
         

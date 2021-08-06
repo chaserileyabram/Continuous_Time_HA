@@ -151,7 +151,7 @@ function [policies, V_deriv_risky_asset_nodrift] = find_policies(...
     s_c_KFE = IcF_KFE .* upwindF_KFE.s + IcB_KFE .* upwindB_KFE.s + Ic0_KFE .* s0_KFE;
 
     h_KFE = IcF_KFE .* upwindF_KFE.hours + IcB_KFE .* upwindB_KFE.hours + Ic0_KFE .* hours_bc;
-    u_KFE = prefs.u(c) - prefs.hrs_u(h);
+    u_KFE = prefs.u(c_KFE) - prefs.hrs_u(h_KFE);
     
 
     %% --------------------------------------------------------------------

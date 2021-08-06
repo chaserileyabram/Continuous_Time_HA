@@ -62,6 +62,7 @@ classdef Params < model_objects.ParamsDefaults
                 obj.na = 2;
                 obj.na_KFE = 2;
                 obj.kappa0 = 1e8;
+                obj.rebalance_rate = 0;
                 obj.r_a = obj.r_b;
                 obj.ComputeMPCS_illiquid = false;
             end
