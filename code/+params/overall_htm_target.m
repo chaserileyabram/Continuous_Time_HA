@@ -425,7 +425,8 @@ function [outparams, n] = overall_htm_target(param_opts)
         
         
         % IG 0.5 1A
-        for rho = [-0.1, -0.05, -0.03, -0.02, -0.01, -0.005, 0]
+%         rhos = linspace(-0.006,-0.002,100);
+        for rho = [-0.001]
             ii = ii + 1;
             params = [params {calibrations{1}}];
             params{ii} = params{1};
@@ -433,13 +434,13 @@ function [outparams, n] = overall_htm_target(param_opts)
             params{ii}.rho = rho;
             params{ii}.r_b = 0.0025; % 0.01
             params{ii}.OneAsset = true;
-            params{ii}.name = sprintf('IG = 0.5, rho = %d, 1A', params{ii}.rho);
+            params{ii}.name = sprintf('IG = %d, rho = %d, 1A', params{ii}.beta, params{ii}.rho);
 
             % IG 0.2 1A
             ii = ii + 1;
             params = [params {calibrations{1}}];
             params{ii} = params{1};
-            params{ii}.beta = 0.2;
+%             params{ii}.beta = 0.2;
             params{ii}.rho = rho;
             params{ii}.r_b = 0.0025; % 0.01
             params{ii}.OneAsset = true;
