@@ -22,10 +22,12 @@ using LaTeXStrings
 # end
 
 # cd("/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-07-11-2021-22:49:30")
-cd("/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-07-28-2021-10:46:14")
+# cd("/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-07-28-2021-10:46:14")
+cd("/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-08-05-2021-13:16:52")
+
 # Read in data
 # xf = XLSX.readdata("output_table.xlsx", "Sheet1", "A2:DT161")
-xf = XLSX.readdata("output_table.xlsx", "Sheet1", "A2:N161")
+xf = XLSX.readdata("output_table.xlsx", "Sheet1", "A2:V161")
 # xf = XLSX.readdata("output_table.xlsx")
 
 for i in 1:size(xf,2)
@@ -172,10 +174,19 @@ function alltables()
     \newpage"
 
     txt *= stat_table("Instantaneous Gratification", 
-    ["Baseline", "IG = 0.5, rho = 0.001", "IG = 0.2, rho = 0.001"],
+    ["Baseline", "IG = 0.5, rho = 0.001, 2A", "IG = 0.2, rho = 0.001, 2A"],
     ["Baseline", "beta_{IG} = 0.5", "beta_{IG} = 0.2"], 
-    ["beta_IG (annualized)", "Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500"],
-    [L"\beta_{IG}"*" annualized", "Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500"])
+    ["beta_IG", "Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500"],
+    [L"\beta_{IG}", "Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500"])
+
+    txt *= raw"
+    \newpage"
+
+    txt *= stat_table("Temptation", 
+    ["Baseline", "Temptation 0.05", "Temptation 0.07"],
+    ["Baseline", L"\varphi=0.05", L"\varphi=0.07"], 
+    ["Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500"],
+    ["Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500"])
 
     txt *= raw"
     \newpage"
