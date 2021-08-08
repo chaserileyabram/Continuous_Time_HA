@@ -425,17 +425,17 @@ function [outparams, n] = overall_htm_target(param_opts)
         
         
         
-        rhos = linspace(-0.006,-0.002,100);
+        rhos = linspace(-0.005,-0.004,150);
         for rho = rhos
             % IG 0.8 1A
-            ii = ii + 1;
-            params = [params {calibrations{1}}];
-            params{ii} = params{1};
-            params{ii}.beta = 0.8;
-            params{ii}.rho = rho;
-            params{ii}.r_b = 0.0025;
-            params{ii}.OneAsset = true;
-            params{ii}.name = sprintf('IG = %d, rho = %d, 1A', params{ii}.beta, params{ii}.rho);
+%             ii = ii + 1;
+%             params = [params {calibrations{1}}];
+%             params{ii} = params{1};
+%             params{ii}.beta = 0.8;
+%             params{ii}.rho = rho;
+%             params{ii}.r_b = 0.0025;
+%             params{ii}.OneAsset = true;
+%             params{ii}.name = sprintf('IG = %d, rho = %d, 1A', params{ii}.beta, params{ii}.rho);
             
             % IG 0.5 1A
             ii = ii + 1;
