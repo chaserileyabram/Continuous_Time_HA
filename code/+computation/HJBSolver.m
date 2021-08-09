@@ -62,6 +62,7 @@ classdef HJBSolver < handle
 		end
 
 		function V_update = solve(obj, grd, A, u, Vstar, V, varargin)
+            obj.create_rho_matrix();
 			% Updates the value function (grd only used for SDU derived class)
 			if obj.options.implicit
 				V_update = obj.solve_implicit(A, u, Vstar, V);

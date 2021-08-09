@@ -425,37 +425,58 @@ function [outparams, n] = overall_htm_target(param_opts)
         
         
         
-        rhos = linspace(-0.005,-0.004,150);
+%         rhos = linspace(-0.005,-0.004,150);
+        rhos = linspace(-0.005, -0.002, 100);
         for rho = rhos
             % IG 0.8 1A
+            ii = ii + 1;
+            params = [params {calibrations{1}}];
+            params{ii} = params{1};
+            params{ii}.beta = 0.8;
+            params{ii}.rho = rho;
+            params{ii}.r_b = 0.0025;
+            params{ii}.OneAsset = true;
+            params{ii}.name = sprintf('IG = %d, rho = %d, 1A', params{ii}.beta, params{ii}.rho);
+            
+            % IG 0.7 1A
+            ii = ii + 1;
+            params = [params {calibrations{1}}];
+            params{ii} = params{1};
+            params{ii}.beta = 0.7;
+            params{ii}.rho = rho;
+            params{ii}.r_b = 0.0025;
+            params{ii}.OneAsset = true;
+            params{ii}.name = sprintf('IG = %d, rho = %d, 1A', params{ii}.beta, params{ii}.rho);
+            
+            % IG 0.6 1A
+            ii = ii + 1;
+            params = [params {calibrations{1}}];
+            params{ii} = params{1};
+            params{ii}.beta = 0.6;
+            params{ii}.rho = rho;
+            params{ii}.r_b = 0.0025;
+            params{ii}.OneAsset = true;
+            params{ii}.name = sprintf('IG = %d, rho = %d, 1A', params{ii}.beta, params{ii}.rho);
+            
+            % IG 0.5 1A
 %             ii = ii + 1;
 %             params = [params {calibrations{1}}];
 %             params{ii} = params{1};
-%             params{ii}.beta = 0.8;
+%             params{ii}.beta = 0.5;
 %             params{ii}.rho = rho;
-%             params{ii}.r_b = 0.0025;
+%             params{ii}.r_b = 0.0025; % 0.01
 %             params{ii}.OneAsset = true;
 %             params{ii}.name = sprintf('IG = %d, rho = %d, 1A', params{ii}.beta, params{ii}.rho);
-            
-            % IG 0.5 1A
-            ii = ii + 1;
-            params = [params {calibrations{1}}];
-            params{ii} = params{1};
-            params{ii}.beta = 0.5;
-            params{ii}.rho = rho;
-            params{ii}.r_b = 0.0025; % 0.01
-            params{ii}.OneAsset = true;
-            params{ii}.name = sprintf('IG = %d, rho = %d, 1A', params{ii}.beta, params{ii}.rho);
-
-            % IG 0.2 1A
-            ii = ii + 1;
-            params = [params {calibrations{1}}];
-            params{ii} = params{1};
-            params{ii}.beta = 0.2;
-            params{ii}.rho = rho;
-            params{ii}.r_b = 0.0025; % 0.01
-            params{ii}.OneAsset = true;
-            params{ii}.name = sprintf('IG = %d, rho = %d, 1A', params{ii}.beta, params{ii}.rho);
+% 
+%             % IG 0.2 1A
+%             ii = ii + 1;
+%             params = [params {calibrations{1}}];
+%             params{ii} = params{1};
+%             params{ii}.beta = 0.2;
+%             params{ii}.rho = rho;
+%             params{ii}.r_b = 0.0025; % 0.01
+%             params{ii}.OneAsset = true;
+%             params{ii}.name = sprintf('IG = %d, rho = %d, 1A', params{ii}.beta, params{ii}.rho);
         end
         
         
@@ -481,7 +502,7 @@ function [outparams, n] = overall_htm_target(param_opts)
 %         
 %         % IG match PHtM 1-asset
         for rho = [-0.0005, -0.002, -0.001, 0.0, 0.001, 0.002, 0.005, 0.01]
-            for beta = [0.7, 1.0]
+            for beta = [0.8, 0.9]
                 
                 ii = ii + 1;
                 params = [params {calibrations{1}}];
@@ -529,46 +550,42 @@ function [outparams, n] = overall_htm_target(param_opts)
 %         params{ii}.name = sprintf('Reb cost $2000');
         
         
-        % Temptation 0.05
-        ii = ii + 1;
-        params = [params {calibrations{1}}];
-        params{ii} = params{1};
-        params{ii}.calibration_vars = {'rho', 'r_b', 'r_a'};
-        r_b_bds = [-0.01, 0.02];
-        r_a_bds = [0.005, 0.05];
-        params{ii}.calibration_bounds = {rho_bds, r_b_bds, r_a_bds};
-        params{ii}.calibration_stats = {'totw', 'liqw_lt_ysixth', 'w_lt_ysixth'};
-        params{ii}.calibration_targets = [scf.mean_totw, scf.htm, scf.phtm];
-        params{ii}.calibration_scales = [1, 1, 1];
-        params{ii}.rho = 0.009;
-%         params{ii}.r_b = 0.005;
-%         params{ii}.r_a = 0.03;
-        params{ii}.temptation = 0.05;
-        params{ii}.name = sprintf('Temptation 0.05');
-        
-        % For temptation 0.05
-%         Computing statistics
-%   -- function evaluation 19 --
-%     evaluated at: rho = 0.00708272, r_b = -0.00626328, r_a = 0.0182226
-%     target variables: totw = 4.27623, liqw_lt_ysixth = 0.503865, w_lt_ysixth = 0.245137
-%     norm: 0.217411
-        
-        % Temptation 0.07
-        ii = ii + 1;
-        params = [params {calibrations{1}}];
-        params{ii} = params{1};
-        params{ii}.calibration_vars = {'rho', 'r_b', 'r_a'};
-        r_b_bds = [-0.01, 0.02];
-        r_a_bds = [0.005, 0.05];
-        params{ii}.calibration_bounds = {rho_bds, r_b_bds, r_a_bds};
-        params{ii}.calibration_stats = {'totw', 'liqw_lt_ysixth', 'w_lt_ysixth'};
-        params{ii}.calibration_targets = [scf.mean_totw, scf.htm, scf.phtm];
-        params{ii}.calibration_scales = [1, 1, 1];
-%         params{ii}.rho = 0.01395;
-        params{ii}.r_b = 0.01;
-        params{ii}.r_a = 0.03;
-        params{ii}.temptation = 0.07;
-        params{ii}.name = sprintf('Temptation 0.07');
+        for rho = [-0.003, -0.001, 0, 0.001, 0.002, 0.005, 0.01]
+            % Temptation 0.05
+            ii = ii + 1;
+            params = [params {calibrations{1}}];
+            params{ii} = params{1};
+            params{ii}.calibration_vars = {'rho', 'r_b', 'r_a'};
+            r_b_bds = [-0.01, 0.02];
+            r_a_bds = [0.005, 0.05];
+            params{ii}.calibration_bounds = {rho_bds, r_b_bds, r_a_bds};
+            params{ii}.calibration_stats = {'totw', 'liqw_lt_ysixth', 'w_lt_ysixth'};
+            params{ii}.calibration_targets = [scf.mean_totw, scf.htm, scf.phtm];
+            params{ii}.calibration_scales = [1, 1, 1];
+            params{ii}.rho = rho;
+    %         params{ii}.r_b = 0.005;
+    %         params{ii}.r_a = 0.03;
+            params{ii}.temptation = 0.05;
+            params{ii}.name = sprintf('Temptation 0.05');
+
+
+            % Temptation 0.07
+            ii = ii + 1;
+            params = [params {calibrations{1}}];
+            params{ii} = params{1};
+            params{ii}.calibration_vars = {'rho', 'r_b', 'r_a'};
+            r_b_bds = [-0.01, 0.02];
+            r_a_bds = [0.005, 0.05];
+            params{ii}.calibration_bounds = {rho_bds, r_b_bds, r_a_bds};
+            params{ii}.calibration_stats = {'totw', 'liqw_lt_ysixth', 'w_lt_ysixth'};
+            params{ii}.calibration_targets = [scf.mean_totw, scf.htm, scf.phtm];
+            params{ii}.calibration_scales = [1, 1, 1];
+            params{ii}.rho = rho;
+    %         params{ii}.r_b = 0.01;
+    %         params{ii}.r_a = 0.03;
+            params{ii}.temptation = 0.07;
+            params{ii}.name = sprintf('Temptation 0.07');
+        end
         
          
     end
