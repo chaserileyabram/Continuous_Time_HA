@@ -103,7 +103,7 @@ function stats = main(p, varargin)
         stats.std_log_net_y_annual.value = incstats.std_logy;
     end
     
-    if false %final
+    if final
         stats.compute_HtM_trans();
     end
 
