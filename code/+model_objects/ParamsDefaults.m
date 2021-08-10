@@ -263,7 +263,7 @@ classdef ParamsDefaults < handle
         
         % ----------- statistics variables -------------------------------
         epsilon_HtM = [0 0.005 0.01 0.02 0.05 0.1 0.15]; % for looking at fraction HtM
-        dollars_HtM = [500, 1000, 2000, 5000, 10000];
+        dollars_HtM = [500, 1000, 2000, 5000, 10000, 50000, 100000];
         wpercentiles = [10 25 50 90 95 98 99 99.9];
         mpc_shocks = [-1e-5 -0.01 -0.1 1e-5 0.01 0.1];
         numeraire_in_dollars;

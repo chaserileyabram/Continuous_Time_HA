@@ -94,13 +94,17 @@ function stats = main(p, varargin)
     % COMPUTE STATISTICS
     % -----------------------------------------------------------------
     fprintf_internal('\nComputing statistics\n')    
-    stats = statistics.Statistics(p, income, grdKFE, KFE);
+    stats = statistics.Statistics(p, income, grdKFE, KFE, Au);
     stats.compute_statistics();
 
     if ~isempty(incstats)
         stats.mean_gross_y_annual.value = incstats.meany;
         stats.std_log_gross_y_annual.value = incstats.std_logy;
         stats.std_log_net_y_annual.value = incstats.std_logy;
+    end
+    
+    if false %final
+        stats.compute_HtM_trans();
     end
 
     %% ----------------------------------------------------------------
@@ -189,6 +193,9 @@ function stats = main(p, varargin)
     	mpc_finder_norisk.solve(KFE_nr, Au_nr);
     end
     stats.other.mpcs_nr = mpc_finder_norisk.mpcs;
+    
+    %% Correlation between MPC and APC
+    stats.compute_mpc_apc_corr();
     
     %% ----------------------------------------------------------------
     % DECOMPOSITIONS

@@ -87,6 +87,16 @@ classdef Statistics < handle
 		other = struct();
         
         c_KFE;
+        
+        apc;
+        mean_apc;
+        
+        mpc_apc_corr;
+        
+        A;
+        
+        b_lt_ysixth_1_year;
+        b_lt_ysixth_5_year;
 	end
 
 	properties (Access=protected)
@@ -101,7 +111,7 @@ classdef Statistics < handle
 	end
 
 	methods
-		function obj = Statistics(p, income, grdKFE, model)
+		function obj = Statistics(p, income, grdKFE, model, A)
 			obj.p = p;
 			obj.income = income;
 			obj.model = model;
@@ -121,6 +131,8 @@ classdef Statistics < handle
 			obj.pmf = model.g .* grdKFE.trapezoidal.matrix;
             
             obj.c_KFE = model.c_KFE;
+            
+            obj.A = A;
 		end
 
 		function compute_statistics(obj)
@@ -131,9 +143,34 @@ classdef Statistics < handle
 			obj.compute_inequality();
 			obj.compute_constrained();
 			obj.compute_deposit_stats();
+            obj.compute_apc()
             
             obj.compute_adjust();
-		end
+        end
+        
+        function compute_HtM_trans(obj)
+            % Need to "iterate" forward from steady-state to see how many HtM stay
+            % HtM, using A and pmf_ss?
+            b_lt_ysixth = (repmat(obj.bgrid, [1 obj.na obj.nz obj.ny]) ./ obj.income.y.wide) <= 1/6;
+            trans_1year = expm(obj.A' .* 4);
+            rem_pmf_1year = trans_1year * (obj.pmf(:) .* b_lt_ysixth(:)) ./ sum(obj.pmf(:) .* b_lt_ysixth(:), 'all');
+            obj.b_lt_ysixth_1_year = obj.sfill(sum(rem_pmf_1year .* b_lt_ysixth(:)), 'HtM 1year');
+
+            trans_5year = expm(obj.A' .* 20);
+            rem_pmf_5year = trans_5year * (obj.pmf(:) .* b_lt_ysixth(:)) ./ sum(obj.pmf(:) .* b_lt_ysixth(:), 'all');
+            obj.b_lt_ysixth_5_year = obj.sfill(sum(rem_pmf_5year .* b_lt_ysixth(:)), 'HtM 5year');
+            
+        end
+        
+        function compute_mpc_apc_corr(obj)
+            mpcs = reshape(obj.mpcs_over_ss{5}, [obj.nb obj.na obj.nz obj.ny]);
+            cov_mpc_apc = sum(obj.pmf .* obj.apc .* mpcs, 'all') - sum(obj.pmf .* obj.apc, 'all')*sum(obj.pmf .* mpcs, 'all');
+            var_mpc = sum(obj.pmf .* mpcs.^2, 'all') - sum(obj.pmf .* mpcs, 'all')^2;
+            var_apc = sum(obj.pmf .* obj.apc.^2, 'all') - sum(obj.pmf .* obj.apc, 'all')^2;
+            
+            obj.mpc_apc_corr = obj.sfill(cov_mpc_apc/(var_mpc^0.5 * var_apc^0.5), 'MPC APC Corr');
+        end
+        
 
 		function add_params(obj)
 			obj.params.group_num = obj.sfill(obj.p.group_num,...

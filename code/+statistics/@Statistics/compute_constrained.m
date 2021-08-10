@@ -102,6 +102,7 @@ function compute_constrained(obj)
 	
 	obj.w_lt_ysixth.value = wy_interp.keval(1/6);
 	obj.w_lt_ytwelfth.value = wy_interp.keval(1/12);
+    
 
 	% HtM Ratios
 	obj.WHtM_over_HtM_biweekly.value = ...

@@ -355,6 +355,12 @@ classdef MPCs < handle
 				pmf_whtm = pmf_whtm ./ sum(pmf_whtm(:));
 				obj.mpcs(ishock).quarterly_whtm = dot(mpcs(:,1), pmf_whtm(:));
 				obj.mpcs(ishock).annual_whtm = dot(sum(mpcs, 2), pmf_whtm(:));
+                
+                % Conditional on weath near 4.11
+                one_mpc = reshape(mpcs(:,1), [obj.grids.nb obj.grids.na obj.grids.nz obj.grids.ny]);
+                
+                mpcinterp = griddedInterpolant(assets, squeeze(con_period), 'linear');
+                
 			end
 		end
 	end

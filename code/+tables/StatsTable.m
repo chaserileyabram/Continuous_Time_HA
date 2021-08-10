@@ -100,6 +100,8 @@ classdef StatsTable < tables.BaseTable
 				stats.constrained_liq_dollars{3}
 				stats.constrained_liq_dollars{4}
 				stats.constrained_liq_dollars{5}
+                stats.constrained_liq_dollars{6}
+                stats.constrained_liq_dollars{7}
 				stats.liqw_lt_ysixth
 				stats.liqw_lt_ytwelfth
 				stats.WHtM_over_HtM_biweekly
@@ -353,6 +355,8 @@ classdef StatsTable < tables.BaseTable
 				stats.constrained_illiq_dollars{3}
 				stats.constrained_illiq_dollars{4}
 				stats.constrained_illiq_dollars{5}
+                stats.constrained_illiq_dollars{6}
+                stats.constrained_illiq_dollars{7}
 				stats.constrained_pct{1}
 				stats.constrained_pct{2}
 				stats.constrained_pct{3}
@@ -364,9 +368,14 @@ classdef StatsTable < tables.BaseTable
 				stats.constrained_dollars{3}
 				stats.constrained_dollars{4}
 				stats.constrained_dollars{5}
+                stats.constrained_dollars{6}
+                stats.constrained_dollars{7}
 				stats.w_lt_ysixth
 				stats.w_lt_ytwelfth
-                
+                stats.b_lt_ysixth_1_year
+                stats.b_lt_ysixth_5_year
+                stats.mean_apc
+                stats.mpc_apc_corr
                 stats.rebalance_frac
 			};
 
