@@ -393,7 +393,7 @@ classdef MPCsNews < handle
 			    		inctrans = sparse_diags(ez_adj(:,k,k), 0);
 			    		Vk_stacked 	= sum(squeeze(ez_adj(:,k,indx_k)) .* V_k(:,indx_k),2);
 			    	end
-			    	Bk = hjb_divisor(obj.options.delta, obj.p.deathrate, k, obj.A_HJB, inctrans, obj.rho_diag);
+			    	Bk = hjb_divisor(obj.options.delta, obj.p.deathrate, k, obj.A_HJB, inctrans, obj.rho_diag, obj.p.rebalance_rate);
                     V_k1(:,k) = Bk \ (obj.options.delta * (u_k(:,k) + Vk_stacked) + V_k(:,k));
                 end
                 obj.V = reshape(V_k1, obj.state_dims);

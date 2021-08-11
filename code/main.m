@@ -105,7 +105,7 @@ function stats = main(p, varargin)
     
     
     % TURN OFF ENTIRELY FOR TESTS
-    if false %final
+    if final
         fprintf_internal('\nComputing HtM remain probs\n')
         stats.compute_HtM_trans();
     end

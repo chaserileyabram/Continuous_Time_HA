@@ -99,7 +99,7 @@ classdef MPCs < handle
 
 			for ii = 1:6
 				obj.mpcs(ii).mpcs = NaN;
-				obj.mpcs(ii).quarterly = NaN(4,1);
+				obj.mpcs(ii).quarterly = NaN(5,1);
                 obj.mpcs(ii).annual = NaN;
 
                 obj.mpcs(ii).quarterly_htm = NaN;
@@ -185,13 +185,13 @@ classdef MPCs < handle
 			import computation.FeynmanKac
 
 			dim = obj.p.nb_KFE*obj.p.na_KFE*obj.p.nz*obj.income.ny;
-			obj.cumcon = zeros(dim,4);
-			for it = 4:-obj.options.delta:obj.options.delta
-				if mod(it*4,1) == 0
+			obj.cumcon = zeros(dim,5);
+			for it = 5:-obj.options.delta:obj.options.delta
+				if mod(it*5,1) == 0
 					fprintf('\tUpdating baseline cumulative consumption, quarter=%0.2f\n',it)
 				end
 
-				for period = ceil(it):4
+				for period = ceil(it):5
 					% When 'it' falls to 'period', start updating
 					% that 'period'
 					obj.cumcon(:,period) = FeynmanKac.update(obj.p, obj.grids,...
@@ -200,14 +200,14 @@ classdef MPCs < handle
 				end
 			end
 
-			obj.cum_con_baseline = zeros(dim,4);
+			obj.cum_con_baseline = zeros(dim,5);
 			obj.cum_con_baseline(:,1) = obj.cumcon(:,1);
-			for period = 2:4
+			for period = 2:5
 				obj.cum_con_baseline(:,period) = obj.cumcon(:,period)...
 					- obj.cumcon(:,period-1);
 			end
 
-		    obj.cum_con_baseline = reshape(obj.cum_con_baseline, [], 4);
+		    obj.cum_con_baseline = reshape(obj.cum_con_baseline, [], 5);
 		end
 
 		function cumulative_consumption_with_shock(obj, ishock)
@@ -267,7 +267,7 @@ classdef MPCs < handle
             value_grids = value_grids(inds);
 
 			reshape_vec = [obj.p.nb_KFE obj.p.na_KFE obj.p.nz obj.income.ny];
-			for period = 1:4
+			for period = 1:5
 				% cumulative consumption in 'period'
 	            con_period = reshape(obj.cum_con_baseline(:,period), reshape_vec);
 	            mpcinterp = griddedInterpolant(interp_grids, squeeze(con_period), 'linear');
@@ -323,7 +323,11 @@ classdef MPCs < handle
 
 			if ~obj.options.no_inc_risk
 				% Unconditional mean MPC
-				obj.mpcs(ishock).quarterly = dot(mpcs(:,1), pmf(:));
+% 				obj.mpcs(ishock).quarterly = dot(mpcs(:,1), pmf(:));
+                for i = 1:4
+                    obj.mpcs(ishock).quarterly(i) = dot(mpcs(:,i), pmf(:));
+                end
+                
 				obj.mpcs(ishock).annual = dot(sum(mpcs, 2), pmf(:));
 
 				% Conditional on HtM
@@ -356,10 +360,6 @@ classdef MPCs < handle
 				obj.mpcs(ishock).quarterly_whtm = dot(mpcs(:,1), pmf_whtm(:));
 				obj.mpcs(ishock).annual_whtm = dot(sum(mpcs, 2), pmf_whtm(:));
                 
-                % Conditional on weath near 4.11
-%                 one_mpc = reshape(mpcs(:,1), [obj.grids.nb obj.grids.na obj.grids.nz obj.grids.ny]);
-%                 
-%                 mpcinterp = griddedInterpolant(assets, squeeze(con_period), 'linear');
                 
 			end
 		end
