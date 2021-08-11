@@ -37,6 +37,12 @@ download_txt :
 	-mkdir -p output/server-txt-$(cdate)
 	-scp $(spath2) output/server-txt-$(cdate)
 
+spath3 := "abram@midway2.rcc.uchicago.edu:/home/abram/Continuous_Time_HA/output/*"
+cdate := $(shell date +"%m-%d-%Y-%T")
+download_all_out :
+	-mkdir -p output/server-all-$(cdate)
+	-scp $(spath3) output/server-all-$(cdate)
+
 readme :
 	-pandoc readme.md -o readme.pdf
 	-xdg-open readme.pdf

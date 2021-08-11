@@ -109,6 +109,7 @@ classdef StatsTable < tables.BaseTable
 				stats.w_top10share
 				stats.w_top1share
 				stats.wgini
+                stats.mpc_wmean
 			};
 
 			obj.update_current_column(out, new_entries);

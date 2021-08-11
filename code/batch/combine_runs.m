@@ -1,5 +1,9 @@
 clear
 
+% Change file path when running locally
+local_run = true;
+local_path = 'output/server-all-08-10-2021-12:22:19';
+
 [~, currdir] = fileparts(pwd());
 if ~strcmp(currdir, 'Continuous_Time_HA')
     msg = 'The user must cd into the Continuous_Time_HA directory';
@@ -15,7 +19,15 @@ try
     ind = 0;
     for irun = 1:999
         fname = sprintf('output_%d.mat', irun);
-        fpath = fullfile('output', fname);
+        
+        if local_run
+            fpath = fullfile(local_path, fname);
+        else
+            fpath = fullfile('output', fname);
+        end
+        
+        
+        
         if exist(fpath,'file')
             fprintf('start exist(fpath...) conditional: %s\n', fpath);
             ind = ind + 1;
@@ -30,13 +42,21 @@ try
             stats{ind} = s(ind).stats;
 
             % perform Empc1 - Empc0 decomposition
-            decomp_base(ind) = statistics.decomp_baseline(s(1), s(ind));
+            % Need to check to see why 1A break this
+            if ~params(ind).OneAsset
+                decomp_base(ind) = statistics.decomp_baseline(s(1), s(ind));
+                % perform decomp wrt one-asset model
+    %             decomp_oneasset(ind) = statistics.decomp_twoasset_oneasset(oneasset,s(ind));
 
-            % perform decomp wrt one-asset model
-            % decomp_oneasset(ind) = statistics.decomp_twoasset_oneasset(oneasset,s(ind));
+                stats{ind} = aux.add_comparison_decomps(params(ind),...
+                    stats{ind}, decomp_base(ind));
+                
+            else
+                % Junk to keep indexing right
+                decomp_base(ind) = decomp_base(ind-1);
+                stats{ind} = stats{ind-1};
+            end
             
-            stats{ind} = aux.add_comparison_decomps(params(ind),...
-                stats{ind}, decomp_base(ind));
             fprintf('end exist(fpath...) conditional: %s\n', fpath);
         end
     end

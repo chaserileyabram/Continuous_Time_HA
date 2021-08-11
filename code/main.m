@@ -104,6 +104,7 @@ function stats = main(p, varargin)
     end
     
     if final
+        fprintf_internal('\nComputing HtM remain probs\n')
         stats.compute_HtM_trans();
     end
 
@@ -194,8 +195,17 @@ function stats = main(p, varargin)
     end
     stats.other.mpcs_nr = mpc_finder_norisk.mpcs;
     
-    %% Correlation between MPC and APC
+    %% Misc. remaining MPC and APC
+    
+    % correlation
     stats.compute_mpc_apc_corr();
+    
+    % as a function of total wealth and quantiles of MPC
+    if ~p.OneAsset
+        stats.compute_mpc_w();
+    end
+    
+    % Check that mpc_wealth_quantile is in stats
     
     %% ----------------------------------------------------------------
     % DECOMPOSITIONS

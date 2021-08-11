@@ -98,6 +98,11 @@ classdef Statistics < handle
         
         b_lt_ysixth_1_year;
         b_lt_ysixth_5_year;
+        
+        pmf_int;
+        mpc_int;
+        
+        mpc_wmean;
 	end
 
 	properties (Access=protected)
@@ -171,6 +176,39 @@ classdef Statistics < handle
             
             obj.mpc_apc_corr = obj.sfill(cov_mpc_apc/(var_mpc^0.5 * var_apc^0.5), 'MPC APC Corr');
         end
+        
+        function compute_mpc_w(obj)
+            % Get MPCs
+            mpcs = reshape(obj.mpcs_over_ss{5}, [obj.nb obj.na obj.nz obj.ny]);
+            [bg, ag] = ndgrid(obj.bgrid, obj.agrid)
+            % interpolate pmf and mpcs
+            % Get pmf over (b,a)
+            pmf_ba = sum(obj.pmf,[3 4]);
+            obj.pmf_int = griddedInterpolant(bg, ag, pmf_ba,'linear','none');
+            % get MPCs over (b,a)
+            mpc_ba = sum(mpcs .* obj.pmf, [3 4]) ./ pmf_ba;
+            obj.mpc_int = griddedInterpolant(bg, ag, mpc_ba,'linear','none');
+            
+            % Get at mean wealth
+            wmean = 4.11;
+            bs = linspace(0, wmean, 100);
+            as = wmean - bs;
+            mpc_wmean = sum(obj.mpc_int(bs,as) .* obj.pmf_int(bs,as), 'all') / sum(obj.pmf_int(bs,as), 'all');
+            obj.mpc_wmean = obj.sfill(mpc_wmean, 'Mean MPC at Mean Wealth');
+        end
+        
+        function mpc_wq = mpc_wealth_quantile(obj,w,q)
+            bs = linspace(0,w,100);
+            as = w - bs;
+            pmfs = obj.pmf_int(bs, as);
+            pmfs = pmfs ./ sum(pmfs,'all');
+            mpcs = obj.mpc_int(bs, as);
+
+            cdf_int = aux.pctile_interpolant(mpcs, pmfs);
+
+            mpc_wq = cdf_int(q);
+        end
+        
         
 
 		function add_params(obj)
