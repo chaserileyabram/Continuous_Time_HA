@@ -2,7 +2,7 @@ clear
 
 % Change file path when running locally
 local_run = true;
-local_path = 'output/server-all-08-10-2021-12:22:19';
+local_path = 'output/server-all-08-10-2021-21:00:50';
 
 [~, currdir] = fileparts(pwd());
 if ~strcmp(currdir, 'Continuous_Time_HA')
@@ -47,15 +47,13 @@ try
                 decomp_base(ind) = statistics.decomp_baseline(s(1), s(ind));
                 % perform decomp wrt one-asset model
     %             decomp_oneasset(ind) = statistics.decomp_twoasset_oneasset(oneasset,s(ind));
-
-                stats{ind} = aux.add_comparison_decomps(params(ind),...
-                    stats{ind}, decomp_base(ind));
-                
             else
                 % Junk to keep indexing right
                 decomp_base(ind) = decomp_base(ind-1);
-                stats{ind} = stats{ind-1};
             end
+            
+            stats{ind} = aux.add_comparison_decomps(params(ind),...
+                    stats{ind}, decomp_base(ind));
             
             fprintf('end exist(fpath...) conditional: %s\n', fpath);
         end

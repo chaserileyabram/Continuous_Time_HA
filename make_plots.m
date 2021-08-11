@@ -1,3 +1,9 @@
+% Script for calling below functions to make tables
+
+% Need to open .mat of file(s) that will be used, then create plots.
+
+
+
 function make_plots(stats, index)
     % Make all plots
     plot_wdist(stats, index);

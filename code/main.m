@@ -201,10 +201,11 @@ function stats = main(p, varargin)
     stats.compute_mpc_apc_corr();
     
     % as a function of total wealth and quantiles of MPC
-    if ~p.OneAsset
-        stats.compute_mpc_w();
-    end
+%     if ~p.OneAsset
+%         stats.compute_mpc_w();
+%     end
     
+    stats.compute_mpc_w();
     % Check that mpc_wealth_quantile is in stats
     
     %% ----------------------------------------------------------------

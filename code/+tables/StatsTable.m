@@ -47,6 +47,7 @@ classdef StatsTable < tables.BaseTable
 				stats.mpcs(5).quarterly
 				stats.mpcs(5).annual
 				stats.beta_A
+                stats.beta_A_effective
                 stats.beta_IG
 			};
 

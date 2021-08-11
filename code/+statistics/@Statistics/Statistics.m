@@ -189,7 +189,8 @@ classdef Statistics < handle
             mpc_ba = sum(mpcs .* obj.pmf, [3 4]) ./ pmf_ba;
             obj.mpc_int = griddedInterpolant(bg, ag, mpc_ba,'linear','none');
             
-            % Get at mean wealth
+            % Get at mean wealth (need to make into percent to match other
+            % stats?)
             wmean = 4.11;
             bs = linspace(0, wmean, 100);
             as = wmean - bs;
@@ -208,6 +209,8 @@ classdef Statistics < handle
 
             mpc_wq = cdf_int(q);
         end
+        
+        % Need to write function for mean at w also
         
         
 
