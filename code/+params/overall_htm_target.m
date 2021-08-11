@@ -340,12 +340,15 @@ function [outparams, n] = overall_htm_target(param_opts)
         params{ii}.name = sprintf('Baseline 2A');
         
         % 1A Baseline
-        ii = ii + 1;
-        params = [params {calibrations{1}}];
-        params{ii} = params{1};
-        params{ii}.OneAsset = true;
-        params{ii}.r_b = 0.0025;
-        params{ii}.name = sprintf('Baseline 1A');
+        for rho = [-0.004, -0.003, -0.002, -0.001, 0, 0.001, 0.002]
+            ii = ii + 1;
+            params = [params {calibrations{1}}];
+            params{ii} = params{1};
+            params{ii}.OneAsset = true;
+            params{ii}.rho = rho
+            params{ii}.r_b = 0.0025;
+            params{ii}.name = sprintf('Baseline 1A');
+        end
         
         % Infrequent rebalance arrival
         ii = ii + 1;

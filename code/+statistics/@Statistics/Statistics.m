@@ -158,6 +158,8 @@ classdef Statistics < handle
             % Need to "iterate" forward from steady-state to see how many HtM stay
             % HtM, using A and pmf_ss?
             b_lt_ysixth = (repmat(obj.bgrid, [1 obj.na obj.nz obj.ny]) ./ obj.income.y.wide) <= 1/6;
+            % Need to use affine approx?
+            trans_1year_affine = eye(size(obj.A')) + obj.A' .* 4;
             trans_1year = expm(obj.A' .* 4);
             rem_pmf_1year = trans_1year * (obj.pmf(:) .* b_lt_ysixth(:)) ./ sum(obj.pmf(:) .* b_lt_ysixth(:), 'all');
             obj.b_lt_ysixth_1_year = obj.sfill(sum(rem_pmf_1year .* b_lt_ysixth(:)), 'HtM 1year');
