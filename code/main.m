@@ -103,6 +103,8 @@ function stats = main(p, varargin)
         stats.std_log_net_y_annual.value = incstats.std_logy;
     end
     
+    
+    % TURN OFF ENTIRELY FOR TESTS
     if final
         fprintf_internal('\nComputing HtM remain probs\n')
         stats.compute_HtM_trans();
@@ -197,16 +199,22 @@ function stats = main(p, varargin)
     
     %% Misc. remaining MPC and APC
     
+    % Maybe only do on final run?
     % correlation
-    stats.compute_mpc_apc_corr();
+    
     
     % as a function of total wealth and quantiles of MPC
 %     if ~p.OneAsset
 %         stats.compute_mpc_w();
 %     end
     
-    stats.compute_mpc_w();
+%     stats.compute_mpc_w();
     % Check that mpc_wealth_quantile is in stats
+    
+    if final
+        stats.compute_mpc_apc_corr();
+        stats.compute_mpc_w();
+    end
     
     %% ----------------------------------------------------------------
     % DECOMPOSITIONS
