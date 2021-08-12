@@ -378,6 +378,8 @@ classdef TransitionMatrixConstructor < handle
                                 reb_row(b2,a1,zi,yi) = (1-bmix)*amix*obj.p.rebalance_rate + reb_row(b2,a1,zi,yi);
                                 reb_row(b1,a2,zi,yi) = bmix*(1-amix)*obj.p.rebalance_rate + reb_row(b1,a2,zi,yi);
                                 reb_row(b2,a2,zi,yi) = (1-bmix)*(1-amix)*obj.p.rebalance_rate + reb_row(b2,a2,zi,yi);
+                                
+%                                 assert(sum(reb_row, 'all') == obj.p.rebalance_rate);
 
                                 % Add entering weights to row
                                 A_rebalance(row_count,:) = A_rebalance(row_count,:) + reb_row(:)';

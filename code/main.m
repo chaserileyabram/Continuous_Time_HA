@@ -94,13 +94,20 @@ function stats = main(p, varargin)
     % COMPUTE STATISTICS
     % -----------------------------------------------------------------
     fprintf_internal('\nComputing statistics\n')    
-    stats = statistics.Statistics(p, income, grdKFE, KFE);
+    stats = statistics.Statistics(p, income, grdKFE, KFE, Au);
     stats.compute_statistics();
 
     if ~isempty(incstats)
         stats.mean_gross_y_annual.value = incstats.meany;
         stats.std_log_gross_y_annual.value = incstats.std_logy;
         stats.std_log_net_y_annual.value = incstats.std_logy;
+    end
+    
+    
+    % TURN OFF ENTIRELY FOR TESTS
+    if final
+        fprintf_internal('\nComputing HtM remain probs\n')
+        stats.compute_HtM_trans();
     end
 
     %% ----------------------------------------------------------------
@@ -189,6 +196,25 @@ function stats = main(p, varargin)
     	mpc_finder_norisk.solve(KFE_nr, Au_nr);
     end
     stats.other.mpcs_nr = mpc_finder_norisk.mpcs;
+    
+    %% Misc. remaining MPC and APC
+    
+    % Maybe only do on final run?
+    % correlation
+    
+    
+    % as a function of total wealth and quantiles of MPC
+%     if ~p.OneAsset
+%         stats.compute_mpc_w();
+%     end
+    
+%     stats.compute_mpc_w();
+    % Check that mpc_wealth_quantile is in stats
+    
+    if final
+        stats.compute_mpc_apc_corr();
+        stats.compute_mpc_w();
+    end
     
     %% ----------------------------------------------------------------
     % DECOMPOSITIONS

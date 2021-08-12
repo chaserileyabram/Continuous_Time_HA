@@ -13,6 +13,6 @@ rebalance_frac = sum((obj.wealthmat > (obj.model.rebalance_ba(:,:,:,:,1) + obj.m
 rebalance_frac = rebalance_frac * obj.p.rebalance_rate;
 
 % Save
-obj.rebalance_frac = obj.sfill(rebalance_frac, 'Fraction Rebalancing', 2);
+obj.rebalance_frac = obj.sfill(rebalance_frac, 'Fraction Rebalancing (quarterly unconditional)', 2);
 
 end

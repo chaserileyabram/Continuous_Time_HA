@@ -44,9 +44,14 @@ classdef StatsTable < tables.BaseTable
 				'RowNames', {'Model'});
 
 			new_entries = {
-				stats.mpcs(5).quarterly
+                stats.mpcs(5).quarterly(1)
+                stats.mpcs(5).quarterly(2)
+                stats.mpcs(5).quarterly(3)
+                stats.mpcs(5).quarterly(4)
+                stats.mpcs(5).quarterly(5)
 				stats.mpcs(5).annual
 				stats.beta_A
+                stats.beta_A_effective
                 stats.beta_IG
 			};
 
@@ -100,6 +105,8 @@ classdef StatsTable < tables.BaseTable
 				stats.constrained_liq_dollars{3}
 				stats.constrained_liq_dollars{4}
 				stats.constrained_liq_dollars{5}
+                stats.constrained_liq_dollars{6}
+                stats.constrained_liq_dollars{7}
 				stats.liqw_lt_ysixth
 				stats.liqw_lt_ytwelfth
 				stats.WHtM_over_HtM_biweekly
@@ -117,8 +124,8 @@ classdef StatsTable < tables.BaseTable
 			out = obj.new_table_with_header(panel_name);
 
 			new_entries = {
-				stats.mpcs(4).quarterly
-				stats.mpcs(6).quarterly
+				stats.mpcs(4).quarterly(1)
+				stats.mpcs(6).quarterly(1)
 				stats.mpcs(4).annual
 				stats.mpcs(6).annual
 			};
@@ -131,9 +138,9 @@ classdef StatsTable < tables.BaseTable
 			out = obj.new_table_with_header(panel_name);
 
 			new_entries = {
-				stats.mpcs(1).quarterly
-				stats.mpcs(2).quarterly
-				stats.mpcs(3).quarterly
+				stats.mpcs(1).quarterly(1)
+				stats.mpcs(2).quarterly(1)
+				stats.mpcs(3).quarterly(1)
 				stats.mpcs(1).annual
 				stats.mpcs(2).annual
 				stats.mpcs(3).annual
@@ -166,7 +173,7 @@ classdef StatsTable < tables.BaseTable
 			panel_name = 'Decomps of E[MPC] wrt RA and no inc risk, $500 shock';
 			out = obj.new_table_with_header(panel_name);
 
-			tmp = stats.mpcs(5).quarterly;
+			tmp = stats.mpcs(5).quarterly(1);
 			tmp.label = 'Quarterly MPC (%)'
 			new_entries = {
 				tmp
@@ -262,12 +269,12 @@ classdef StatsTable < tables.BaseTable
 			out = obj.new_table_with_header(panel_name);
 
 			new_entries = {
-				stats.illiquid_mpcs(1).quarterly
-				stats.illiquid_mpcs(2).quarterly
-				stats.illiquid_mpcs(3).quarterly
-				stats.illiquid_mpcs(4).quarterly
-				stats.illiquid_mpcs(5).quarterly
-				stats.illiquid_mpcs(6).quarterly
+				stats.illiquid_mpcs(1).quarterly(1)
+				stats.illiquid_mpcs(2).quarterly(1)
+				stats.illiquid_mpcs(3).quarterly(1)
+				stats.illiquid_mpcs(4).quarterly(1)
+				stats.illiquid_mpcs(5).quarterly(1)
+				stats.illiquid_mpcs(6).quarterly(1)
 				stats.illiquid_mpcs(4).annual
 				stats.illiquid_mpcs(5).annual
 				stats.illiquid_mpcs(6).annual
@@ -353,6 +360,8 @@ classdef StatsTable < tables.BaseTable
 				stats.constrained_illiq_dollars{3}
 				stats.constrained_illiq_dollars{4}
 				stats.constrained_illiq_dollars{5}
+                stats.constrained_illiq_dollars{6}
+                stats.constrained_illiq_dollars{7}
 				stats.constrained_pct{1}
 				stats.constrained_pct{2}
 				stats.constrained_pct{3}
@@ -364,9 +373,15 @@ classdef StatsTable < tables.BaseTable
 				stats.constrained_dollars{3}
 				stats.constrained_dollars{4}
 				stats.constrained_dollars{5}
+                stats.constrained_dollars{6}
+                stats.constrained_dollars{7}
 				stats.w_lt_ysixth
 				stats.w_lt_ytwelfth
-                
+                stats.b_lt_ysixth_1_year
+                stats.b_lt_ysixth_5_year
+                stats.mean_apc
+                stats.mpc_apc_corr
+                stats.mpc_wmean
                 stats.rebalance_frac
 			};
 

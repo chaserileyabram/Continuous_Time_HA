@@ -397,7 +397,7 @@ classdef MPCsNews < handle
 			    		inctrans = sparse_diags(ez_adj(:,k,k), 0);
 			    		Vk_stacked 	= sum(squeeze(ez_adj(:,k,indx_k)) .* V_k(:,indx_k),2);
 			    	end
-			    	Bk = hjb_divisor(obj.options.delta, obj.p.deathrate, k, obj.A_HJB, inctrans, obj.rho_diag);
+			    	Bk = hjb_divisor(obj.options.delta, obj.p.deathrate, k, obj.A_HJB, inctrans, obj.rho_diag, obj.p.rebalance_rate);
                     V_k1(:,k) = Bk \ (obj.options.delta * (u_k(:,k) + Vk_stacked) + V_k(:,k));
                 end
                 obj.V = reshape(V_k1, obj.state_dims);
@@ -486,7 +486,7 @@ classdef MPCsNews < handle
             
             mpcs_1_quarterly = (obj.cum_con_q1{ishock} - cum_con_baseline(:,1)) / shock;
             obj.mpcs(ishock).avg_1_quarterly = mpcs_1_quarterly(:)' * pmf(:);
-
+            
             mpcs_2_quarterly = (obj.cum_con_q2{ishock} - cum_con_baseline(:,1)) / shock;
             obj.mpcs(ishock).avg_2_quarterly = mpcs_2_quarterly(:)' * pmf(:);
 
@@ -495,6 +495,10 @@ classdef MPCsNews < handle
 
             mpcs_4_quarterly = (obj.cum_con_q4{ishock} - cum_con_baseline) / shock;
             obj.mpcs(ishock).avg_4_quarterly = mpcs_4_quarterly' * pmf(:);
+            
+            % Add the marginal cons vars here
+            
+            
             obj.mpcs(ishock).avg_4_annual = sum(obj.mpcs(ishock).avg_4_quarterly);
 		end
 

@@ -88,6 +88,21 @@ classdef Statistics < handle
 		other = struct();
         
         c_KFE;
+        
+        apc;
+        mean_apc;
+        
+        mpc_apc_corr;
+        
+        A;
+        
+        b_lt_ysixth_1_year;
+        b_lt_ysixth_5_year;
+        
+        pmf_int;
+        mpc_int;
+        
+        mpc_wmean;
 	end
 
 	properties (Access=protected)
@@ -102,7 +117,7 @@ classdef Statistics < handle
 	end
 
 	methods
-		function obj = Statistics(p, income, grdKFE, model)
+		function obj = Statistics(p, income, grdKFE, model, A)
 			obj.p = p;
 			obj.income = income;
 			obj.model = model;
@@ -122,6 +137,8 @@ classdef Statistics < handle
 			obj.pmf = model.g .* grdKFE.trapezoidal.matrix;
             
             obj.c_KFE = model.c_KFE;
+            
+            obj.A = A;
 		end
 
 		function compute_statistics(obj)
@@ -132,9 +149,96 @@ classdef Statistics < handle
 			obj.compute_inequality();
 			obj.compute_constrained();
 			obj.compute_deposit_stats();
+            obj.compute_apc()
             
             obj.compute_adjust();
-		end
+        end
+        
+        function compute_HtM_trans(obj)
+            % Need to "iterate" forward from steady-state to see how many HtM stay
+            % HtM, using A and pmf_ss?
+            b_lt_ysixth = (repmat(obj.bgrid, [1 obj.na obj.nz obj.ny]) ./ obj.income.y.wide) <= 1/6;
+            % Need to use affine approx?
+            disp('\nComputing trans_1year\n')
+%             trans_1year = eye(size(obj.A')) + obj.A' .* 4;
+%             trans_1year = expm(obj.A' .* 4);
+%             rem_pmf_1year = trans_1year * (obj.pmf(:) .* b_lt_ysixth(:)) ./ sum(obj.pmf(:) .* b_lt_ysixth(:), 'all');
+%             obj.b_lt_ysixth_1_year = obj.sfill(sum(rem_pmf_1year .* b_lt_ysixth(:)), 'HtM 1year');
+%             obj.b_lt_ysixth_1_year = obj.sfill(0, 'HtM 1year');
+            htm_dist = (obj.pmf(:) .* b_lt_ysixth(:)) ./ sum(obj.pmf(:) .* b_lt_ysixth(:), 'all');
+            outflow = (speye(length(htm_dist)) - obj.A' .* 4) \ htm_dist;
+            obj.b_lt_ysixth_1_year = obj.sfill(sum(outflow .* b_lt_ysixth(:), 'all'), 'HtM 1year');
+
+            disp('\nComputing trans_5year\n')
+%             trans_5year = eye(size(obj.A')) + obj.A' .* 20;
+%             trans_5year = expm(obj.A' .* 20);
+%             rem_pmf_5year = trans_5year * (obj.pmf(:) .* b_lt_ysixth(:)) ./ sum(obj.pmf(:) .* b_lt_ysixth(:), 'all');
+%             obj.b_lt_ysixth_5_year = obj.sfill(sum(rem_pmf_5year .* b_lt_ysixth(:)), 'HtM 5year');
+%             obj.b_lt_ysixth_5_year = obj.sfill(0, 'HtM 5year');
+            htm_dist = (obj.pmf(:) .* b_lt_ysixth(:)) ./ sum(obj.pmf(:) .* b_lt_ysixth(:), 'all');
+            outflow = (speye(length(htm_dist)) - obj.A' .* 20) \ htm_dist;
+            obj.b_lt_ysixth_5_year = obj.sfill(sum(outflow .* b_lt_ysixth(:), 'all'), 'HtM 5year');
+            
+        end
+        
+        function compute_mpc_apc_corr(obj)
+            mpcs = reshape(obj.mpcs_over_ss{5}, [obj.nb obj.na obj.nz obj.ny]);
+            cov_mpc_apc = sum(obj.pmf .* obj.apc .* mpcs, 'all') - sum(obj.pmf .* obj.apc, 'all')*sum(obj.pmf .* mpcs, 'all');
+            var_mpc = sum(obj.pmf .* mpcs.^2, 'all') - sum(obj.pmf .* mpcs, 'all')^2;
+            var_apc = sum(obj.pmf .* obj.apc.^2, 'all') - sum(obj.pmf .* obj.apc, 'all')^2;
+            
+            obj.mpc_apc_corr = obj.sfill(cov_mpc_apc/(var_mpc^0.5 * var_apc^0.5), 'MPC APC Corr');
+        end
+        
+        function compute_mpc_w(obj)
+            % Get MPCs
+            mpcs = reshape(obj.mpcs_over_ss{5}, [obj.nb obj.na obj.nz obj.ny]);
+            [bg, ag] = ndgrid(obj.bgrid, obj.agrid);
+            % interpolate pmf and mpcs
+            % Get pmf over (b,a)
+            pmf_ba = sum(obj.pmf,[3 4]);
+            obj.pmf_int = griddedInterpolant(bg, ag, pmf_ba,'linear','none');
+            % get MPCs over (b,a)
+            % (convert decimal to % by doing *100)
+            mpc_ba = sum(mpcs .* obj.pmf, [3 4]) ./ pmf_ba .* 100;
+            obj.mpc_int = griddedInterpolant(bg, ag, mpc_ba,'linear','none');
+            
+            % Get at mean wealth (need to make into percent to match other
+            % stats?)
+            
+            obj.mpc_wmean = obj.sfill(obj.mpc_wealth_mean(4.11), 'Mean MPC at Mean Wealth (%)');
+            
+%             wmean = 4.11;
+%             bs = linspace(0, wmean, 100);
+%             as = wmean - bs;
+%             mpc_wmean = sum(obj.mpc_int(bs,as) .* obj.pmf_int(bs,as), 'all') / sum(obj.pmf_int(bs,as), 'all');
+%             obj.mpc_wmean = obj.sfill(mpc_wmean, 'Mean MPC at Mean Wealth (%)');
+        end
+        
+        function mpc_wq = mpc_wealth_quantile(obj,w,q)
+            bs = linspace(0,w,100);
+            as = w - bs;
+            pmfs = obj.pmf_int(bs, as);
+            pmfs = pmfs ./ sum(pmfs,'all');
+            mpcs = obj.mpc_int(bs, as);
+
+            cdf_int = aux.pctile_interpolant(mpcs, pmfs);
+
+            mpc_wq = cdf_int(q);
+        end
+        
+        % Need to write function for mean at w also
+        function mpc_w = mpc_wealth_mean(obj,w)
+            bs = linspace(0,w,100);
+            as = w - bs;
+            pmfs = obj.pmf_int(bs, as);
+            pmfs = pmfs ./ sum(pmfs,'all');
+            mpcs = obj.mpc_int(bs, as);
+
+            mpc_w = sum(mpcs .* pmfs, 'all');
+        end
+        
+        
 
 		function add_params(obj)
 			obj.params.group_num = obj.sfill(obj.p.group_num,...
