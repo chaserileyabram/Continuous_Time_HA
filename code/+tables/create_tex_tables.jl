@@ -34,7 +34,7 @@ cd("/Users/chaseabram/UChiGit/Continuous_Time_HA/output")
 ###############
 # CHANGE THIS #
 ###############
-xf = XLSX.readdata("output_table.xlsx", "Sheet1", "A2:AI172")
+xf = XLSX.readdata("output_table_fast.xlsx", "Sheet1", "A2:AN177")
 # xf = XLSX.readdata("output_table.xlsx")
 
 for i in 1:size(xf,2)
@@ -144,15 +144,27 @@ function alltables()
     # Header
     txt *= header()
 
-    txt *= stat_table("Table 1: Rebalancing Frequency", 
-    ["Baseline 2A", "Infrequent Rebalance", "Frequent Rebalance"], 
-    ["Baseline 2-asset", "Infrequent Rebalance", "Frequent Rebalance"],
-    ["Rebalance arrival rate", "Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500",
+    txt *= small_table("MPC Comparison",
+    ["Discrete Baseline", "Discrete Match HtM", "Discrete Beta het", "Discrete CRRA het", "Discrete Temptation", "Baseline 2A"],
+    ["1A Baseline", "1A Match HtM", "1A "*string(L"\beta")*" Het", "1A CRRA Het",
+     "1A Temptation", "2A Baseline"],
+    ["Quarterly  MPC (\\%), out of -\\\$5000, t=1", "Quarterly  MPC (\\%), out of -\\\$500, t=1", "Quarterly  MPC (\\%), out of -\\\$1, t=1",
+    "Quarterly  MPC (\\%), out of \\\$1, t=1", "Quarterly  MPC (\\%), out of \\\$500, t=1", "Quarterly  MPC (\\%), out of \\\$5000, t=1"],
+    ["Quarterly  MPC (\\%), out of -\\\$5000", "Quarterly  MPC (\\%), out of -\\\$500", "Quarterly  MPC (\\%), out of -\\\$1",
+    "Quarterly  MPC (\\%), out of \\\$1", "Quarterly  MPC (\\%), out of \\\$500", "Quarterly  MPC (\\%), out of \\\$5000"])
+
+    txt *= raw"
+    \newpage"
+
+    txt *= stat_table("Table 1: Baseline", 
+    ["Baseline 1A", "Baseline 2A", "Infrequent Rebalance"], 
+    ["Baseline 1-asset", "Baseline 2-asset", "Infrequent Rebalance"],
+    ["Rebalance arrival rate", "Quarterly  MPC (\\%), out of \\\$500, t=1", "Annual  MPC (\\%), out of \\\$500",
     "Quarterly  PHtM MPC (\\%), out of \\\$500", "Quarterly  WHtM MPC (\\%), out of \\\$500",
-    "HtM 1year", "MPC APC Corr"],
+    "Mean MPC at Mean Wealth (\\%)", "HtM 1year", "MPC APC Corr"],
     ["Rebalance arrival rate", "Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500",
     "Quarterly PHtM MPC (\\%), out of \\\$500", "Quarterly  WHtM MPC (\\%), out of \\\$500",
-    "Prob. HtM status at year t and year t+1", "Correlation between MPC and APC"])
+    "Mean MPC at Mean Wealth (\\%)", "Prob. HtM status at year t and year t+1", "Correlation between MPC and APC"])
 
     txt *= raw"
     \newpage"
@@ -167,14 +179,14 @@ function alltables()
     # \newpage"
 
     txt *= stat_table("Table 2: Returns Robustness", 
-    ["Baseline 2A", "Low r_b", "High r_b", "Low r_a", "High r_a"], 
-    ["Baseline 2A", "Low r_b", "High r_b", "Low r_a", "High r_a"],
-    ["Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500",
+    ["Baseline 2A", "Low r_b", "High r_b", "High r_a"], 
+    ["Baseline 2A", "Low r_b", "High r_b", "High r_a"],
+    ["Quarterly  MPC (\\%), out of \\\$500, t=1", "Annual  MPC (\\%), out of \\\$500",
     "Quarterly  PHtM MPC (\\%), out of \\\$500", "Quarterly  WHtM MPC (\\%), out of \\\$500",
-    "HtM 1year", "MPC APC Corr"],
+    "Mean MPC at Mean Wealth (\\%)", "HtM 1year", "MPC APC Corr"],
     ["Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500",
     "Quarterly PHtM MPC (\\%), out of \\\$500", "Quarterly  WHtM MPC (\\%), out of \\\$500",
-    "Prob. HtM status at year t and year t+1", "Correlation between MPC and APC"])
+    "Mean MPC at Mean Wealth (\\%)", "Prob. HtM status at year t and year t+1", "Correlation between MPC and APC"])
 
     # txt *= raw"
     # \newpage"
@@ -197,12 +209,12 @@ function alltables()
     txt *= stat_table("Appendix Table: Rebalance Costs", 
     ["Baseline 2A", "Reb cost \\\$250", "Reb cost \\\$1000", "Reb cost \\\$2000"],
     ["Baseline 2-asset", "Reb cost \\\$250", "Reb cost \\\$1000", "Reb cost \\\$2000"],
-    ["Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500",
+    ["Quarterly  MPC (\\%), out of \\\$500, t=1", "Annual  MPC (\\%), out of \\\$500",
     "Quarterly  PHtM MPC (\\%), out of \\\$500", "Quarterly  WHtM MPC (\\%), out of \\\$500",
-    "HtM 1year", "MPC APC Corr"],
+    "Mean MPC at Mean Wealth (\\%)", "HtM 1year", "MPC APC Corr"],
     ["Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500",
     "Quarterly PHtM MPC (\\%), out of \\\$500", "Quarterly  WHtM MPC (\\%), out of \\\$500",
-    "Prob. HtM status at year t and year t+1", "Correlation between MPC and APC"])
+    "Mean MPC at Mean Wealth (\\%)", "Prob. HtM status at year t and year t+1", "Correlation between MPC and APC"])
 
     # txt *= raw"
     # \newpage"
@@ -279,8 +291,15 @@ function starttable(name, modelnames)
     for i in 1:length(modelnames)
         txt *= " & "
         txt *= string(modelnames[i])
+    end
+
+    txt *= raw" \\
+    "
+    for i in 1:length(modelnames)
+        txt *= " & "
         txt *= string(" (", i, ") ")
     end
+    
 
     txt *= raw" \\
     \midrule"
@@ -385,6 +404,17 @@ function reb_table(models)
     return txt
 end
 
+function small_table(name, models, modelnames, topstats, topstats_names)
+    txt = starttable(name, modelnames)
+
+    # Top stats
+    txt *= subtable(models, topstats, topstats_names)
+
+    txt *= endtable()
+    return txt
+
+end
+
 function stat_table(name, models, modelnames, topstats, topstats_names)
     txt = starttable(name, modelnames)
 
@@ -394,11 +424,11 @@ function stat_table(name, models, modelnames, topstats, topstats_names)
     # Calibrated Variables
     txt *= subhead("Panel A: Calibrated Variables", models)
     txt *= subtable(models, 
-    ["beta (annualized)",
+    ["Effective discount rate",
     "Liquid asset return (quarterly)",
     "Illiquid asset return (quarterly)",
     "Rebalance cost (\\\$)"],
-    ["beta (annualized)",
+    ["Effective discount factor",
     "Liquid asset return (quarterly)",
     "Illiquid asset return (quarterly)",
     "Rebalance cost (\\\$)"])

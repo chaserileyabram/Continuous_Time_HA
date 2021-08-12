@@ -129,6 +129,10 @@ classdef MPCsNews < handle
 			obj.mpcs = struct();
 			for ishock = 1:6
 				obj.mpcs(ishock).avg_1_quarterly = NaN;
+                obj.mpcs(ishock).avg_2_quarterly = NaN;
+                obj.mpcs(ishock).avg_3_quarterly = NaN;
+                obj.mpcs(ishock).avg_4b_quarterly = NaN;
+                
 				obj.mpcs(ishock).avg_4_quarterly = NaN(4,1);
 				obj.mpcs(ishock).avg_4_annual = NaN;
             end
@@ -480,9 +484,14 @@ classdef MPCsNews < handle
             
             mpcs_1_quarterly = (obj.cum_con_q1{ishock} - cum_con_baseline(:,1)) / shock;
             obj.mpcs(ishock).avg_1_quarterly = mpcs_1_quarterly(:)' * pmf(:);
+            
 
             mpcs_4_quarterly = (obj.cum_con_q4{ishock} - cum_con_baseline(:,1:4)) / shock;
             obj.mpcs(ishock).avg_4_quarterly = mpcs_4_quarterly' * pmf(:);
+            
+            % Add the marginal cons vars here
+            
+            
             obj.mpcs(ishock).avg_4_annual = sum(obj.mpcs(ishock).avg_4_quarterly);
 		end
 

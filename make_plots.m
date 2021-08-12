@@ -3,11 +3,20 @@ clear
 
 % Need to open .mat of file(s) that will be used, then create plots.
 
-% Load baseline
+% Load baseline 2A
 load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-10-2021-21:00:50/output_1.mat')
+
+%% Load baseline 1A
+cd('/Users/chaseabram/UChiGit/Discrete_HA')
+load('/Users/chaseabram/Dropbox/AnnualReviewsFiles/variables2.mat')
+
+
 
 
 %% MPC surface
+% Load baseline 2A
+cd('/Users/chaseabram/UChiGit/Continuous_Time_HA')
+load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-10-2021-21:00:50/output_1.mat')
 % point in each dim
 % n = 100;
 % curve = 0.1;
