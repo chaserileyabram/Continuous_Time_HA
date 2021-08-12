@@ -481,7 +481,7 @@ classdef MPCsNews < handle
             mpcs_1_quarterly = (obj.cum_con_q1{ishock} - cum_con_baseline(:,1)) / shock;
             obj.mpcs(ishock).avg_1_quarterly = mpcs_1_quarterly(:)' * pmf(:);
 
-            mpcs_4_quarterly = (obj.cum_con_q4{ishock} - cum_con_baseline) / shock;
+            mpcs_4_quarterly = (obj.cum_con_q4{ishock} - cum_con_baseline(:,1:4)) / shock;
             obj.mpcs(ishock).avg_4_quarterly = mpcs_4_quarterly' * pmf(:);
             obj.mpcs(ishock).avg_4_annual = sum(obj.mpcs(ishock).avg_4_quarterly);
 		end

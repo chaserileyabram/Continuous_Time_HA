@@ -165,6 +165,7 @@ classdef Statistics < handle
 %             rem_pmf_1year = trans_1year * (obj.pmf(:) .* b_lt_ysixth(:)) ./ sum(obj.pmf(:) .* b_lt_ysixth(:), 'all');
 %             obj.b_lt_ysixth_1_year = obj.sfill(sum(rem_pmf_1year .* b_lt_ysixth(:)), 'HtM 1year');
             obj.b_lt_ysixth_1_year = obj.sfill(0, 'HtM 1year');
+%             obj.b_lt_ysixth_1_year = obj.sfill((eye(size(obj.A')) - obj.A' .* 4) \ (obj.pmf(:) .* b_lt_ysixth(:)) ./ sum(obj.pmf(:) .* b_lt_ysixth(:), 'all'), 'HtM 1year');
 
             disp('\nComputing trans_5year\n')
 %             trans_5year = eye(size(obj.A')) + obj.A' .* 20;
