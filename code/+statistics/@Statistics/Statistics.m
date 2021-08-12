@@ -166,7 +166,7 @@ classdef Statistics < handle
 %             obj.b_lt_ysixth_1_year = obj.sfill(sum(rem_pmf_1year .* b_lt_ysixth(:)), 'HtM 1year');
 %             obj.b_lt_ysixth_1_year = obj.sfill(0, 'HtM 1year');
             htm_dist = (obj.pmf(:) .* b_lt_ysixth(:)) ./ sum(obj.pmf(:) .* b_lt_ysixth(:), 'all');
-            outflow = (eye(size(obj.A')) - obj.A' .* 4) \ htm_dist;
+            outflow = (speye(length(htm_dist)) - obj.A' .* 4) \ htm_dist;
             obj.b_lt_ysixth_1_year = obj.sfill(sum(outflow .* b_lt_ysixth(:), 'all'), 'HtM 1year');
 
             disp('\nComputing trans_5year\n')
@@ -176,7 +176,7 @@ classdef Statistics < handle
 %             obj.b_lt_ysixth_5_year = obj.sfill(sum(rem_pmf_5year .* b_lt_ysixth(:)), 'HtM 5year');
 %             obj.b_lt_ysixth_5_year = obj.sfill(0, 'HtM 5year');
             htm_dist = (obj.pmf(:) .* b_lt_ysixth(:)) ./ sum(obj.pmf(:) .* b_lt_ysixth(:), 'all');
-            outflow = (eye(size(obj.A')) - obj.A' .* 20) \ htm_dist;
+            outflow = (speye(length(htm_dist)) - obj.A' .* 20) \ htm_dist;
             obj.b_lt_ysixth_5_year = obj.sfill(sum(outflow .* b_lt_ysixth(:), 'all'), 'HtM 5year');
             
         end

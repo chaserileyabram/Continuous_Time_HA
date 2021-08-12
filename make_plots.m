@@ -6,14 +6,24 @@ clear
 % Load baseline 2A
 load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-10-2021-21:00:50/output_1.mat')
 
-%% Load baseline 1A
+%% 1) MPC
+% Load baseline 1A
 cd('/Users/chaseabram/UChiGit/Discrete_HA')
 load('/Users/chaseabram/Dropbox/AnnualReviewsFiles/variables2.mat')
 
 
 
+%% 2) MPC with beta het
 
-%% MPC surface
+
+%% 3) MPC with rate of return het
+
+
+%% 4) MPC with EZ, RRA = 1, IES het
+
+
+
+%% 5) MPC surface
 % Load baseline 2A
 cd('/Users/chaseabram/UChiGit/Continuous_Time_HA')
 load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-10-2021-21:00:50/output_1.mat')
@@ -35,7 +45,7 @@ load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-10-2021-
 % saveas(gcf, plot_path, "epsc");
 
 
-%% MPC by total wealth (2A)
+%% 6) MPC by total wealth (2A)
 n = 100;
 curve = 0.1;
 ws = linspace(0,1,n);
@@ -74,9 +84,11 @@ legend('Mass', 'Mean', 'First Quartile', 'Third Quartile')
 plot_path = sprintf('output/mpc_w');
 saveas(gcf, plot_path, "epsc");
 
-%% 
+%% 7) MPC by total wealth 2A + 1A
 
 
+
+%% 8) MPC by total wealth 2A + (1A with beta het)
 
 
 %% Functions
