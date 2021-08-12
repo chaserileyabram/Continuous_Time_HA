@@ -2,7 +2,7 @@ clear
 
 % Change file path when running locally
 local_run = true;
-local_path = 'output/server-all-08-10-2021-21:00:50';
+local_path = 'output/server-all-08-12-2021-11:19:17';
 
 [~, currdir] = fileparts(pwd());
 if ~strcmp(currdir, 'Continuous_Time_HA')

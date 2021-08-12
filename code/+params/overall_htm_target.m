@@ -344,9 +344,14 @@ function [outparams, n] = overall_htm_target(param_opts)
             ii = ii + 1;
             params = [params {calibrations{1}}];
             params{ii} = params{1};
-            params{ii}.OneAsset = true;
-            params{ii}.rho = rho;
+%             params{ii}.OneAsset = true;
+            obj.na = 2;
+            obj.na_KFE = 2;
+            obj.rebalance_rate = 0;
             params{ii}.r_b = 0.0025;
+            obj.r_a = obj.r_b;
+            obj.ComputeMPCS_illiquid = false;
+            params{ii}.rho = rho;
             params{ii}.name = sprintf('Baseline 1A');
         end
         
