@@ -59,7 +59,7 @@ taskid_from_server = str2num(getenv('SLURM_ARRAY_TASK_ID'));
 % When running on server
 if ~isempty(taskid_from_server)
 	param_opts.param_index = taskid_from_server;
-	param_opts.fast = false; % Don't accidentally go fast...
+	param_opts.fast = true; % Don't accidentally go fast...
     param_opts.calibrate = true; % ... or forget to calibrate
     run_opts.check_nparams = false;
 end

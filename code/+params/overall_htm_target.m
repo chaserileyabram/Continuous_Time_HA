@@ -345,7 +345,7 @@ function [outparams, n] = overall_htm_target(param_opts)
             params = [params {calibrations{1}}];
             params{ii} = params{1};
             params{ii}.OneAsset = true;
-            params{ii}.rho = rho
+            params{ii}.rho = rho;
             params{ii}.r_b = 0.0025;
             params{ii}.name = sprintf('Baseline 1A');
         end

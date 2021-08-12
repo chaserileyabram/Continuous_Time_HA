@@ -67,6 +67,8 @@ classdef MPCsNews < handle
 
 		% Cumulative consumption for the q1, q4 shock.
 		cum_con_q1 = cell(1,6);
+        cum_con_q2 = cell(1,6);
+        cum_con_q3 = cell(1,6);
 		cum_con_q4 = cell(1,6);
 
 		% Results structure.

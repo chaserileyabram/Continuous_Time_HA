@@ -324,7 +324,7 @@ classdef MPCs < handle
 			if ~obj.options.no_inc_risk
 				% Unconditional mean MPC
 % 				obj.mpcs(ishock).quarterly = dot(mpcs(:,1), pmf(:));
-                for i = 1:4
+                for i = 1:5
                     obj.mpcs(ishock).quarterly(i) = dot(mpcs(:,i), pmf(:));
                 end
                 

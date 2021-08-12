@@ -44,7 +44,11 @@ classdef StatsTable < tables.BaseTable
 				'RowNames', {'Model'});
 
 			new_entries = {
-				stats.mpcs(5).quarterly
+                stats.mpcs(5).quarterly(1)
+                stats.mpcs(5).quarterly(2)
+                stats.mpcs(5).quarterly(3)
+                stats.mpcs(5).quarterly(4)
+                stats.mpcs(5).quarterly(5)
 				stats.mpcs(5).annual
 				stats.beta_A
                 stats.beta_A_effective
@@ -120,8 +124,8 @@ classdef StatsTable < tables.BaseTable
 			out = obj.new_table_with_header(panel_name);
 
 			new_entries = {
-				stats.mpcs(4).quarterly
-				stats.mpcs(6).quarterly
+				stats.mpcs(4).quarterly(1)
+				stats.mpcs(6).quarterly(1)
 				stats.mpcs(4).annual
 				stats.mpcs(6).annual
 			};
@@ -134,9 +138,9 @@ classdef StatsTable < tables.BaseTable
 			out = obj.new_table_with_header(panel_name);
 
 			new_entries = {
-				stats.mpcs(1).quarterly
-				stats.mpcs(2).quarterly
-				stats.mpcs(3).quarterly
+				stats.mpcs(1).quarterly(1)
+				stats.mpcs(2).quarterly(1)
+				stats.mpcs(3).quarterly(1)
 				stats.mpcs(1).annual
 				stats.mpcs(2).annual
 				stats.mpcs(3).annual
@@ -169,7 +173,7 @@ classdef StatsTable < tables.BaseTable
 			panel_name = 'Decomps of E[MPC] wrt RA and no inc risk, $500 shock';
 			out = obj.new_table_with_header(panel_name);
 
-			tmp = stats.mpcs(5).quarterly;
+			tmp = stats.mpcs(5).quarterly(1);
 			tmp.label = 'Quarterly MPC (%)'
 			new_entries = {
 				tmp
@@ -265,12 +269,12 @@ classdef StatsTable < tables.BaseTable
 			out = obj.new_table_with_header(panel_name);
 
 			new_entries = {
-				stats.illiquid_mpcs(1).quarterly
-				stats.illiquid_mpcs(2).quarterly
-				stats.illiquid_mpcs(3).quarterly
-				stats.illiquid_mpcs(4).quarterly
-				stats.illiquid_mpcs(5).quarterly
-				stats.illiquid_mpcs(6).quarterly
+				stats.illiquid_mpcs(1).quarterly(1)
+				stats.illiquid_mpcs(2).quarterly(1)
+				stats.illiquid_mpcs(3).quarterly(1)
+				stats.illiquid_mpcs(4).quarterly(1)
+				stats.illiquid_mpcs(5).quarterly(1)
+				stats.illiquid_mpcs(6).quarterly(1)
 				stats.illiquid_mpcs(4).annual
 				stats.illiquid_mpcs(5).annual
 				stats.illiquid_mpcs(6).annual
