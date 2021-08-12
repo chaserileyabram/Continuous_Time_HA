@@ -65,10 +65,10 @@ classdef MPCsNews < handle
 		% Income transitions with the diagonal removed.
 		ytrans_offdiag;
 
-		% Cumulative consumption for the q1, q4 shock.
+		% Cumulative consumption for the q1, q2, q3, q4 shocks.
 		cum_con_q1 = cell(1,6);
-        cum_con_q2 = cell(1,6);
-        cum_con_q3 = cell(1,6);
+		cum_con_q2 = cell(1,6);
+		cum_con_q3 = cell(1,6);
 		cum_con_q4 = cell(1,6);
 
 		% Results structure.
@@ -129,10 +129,8 @@ classdef MPCsNews < handle
 			obj.mpcs = struct();
 			for ishock = 1:6
 				obj.mpcs(ishock).avg_1_quarterly = NaN;
-                obj.mpcs(ishock).avg_2_quarterly = NaN;
-                obj.mpcs(ishock).avg_3_quarterly = NaN;
-                obj.mpcs(ishock).avg_4b_quarterly = NaN;
-                
+				obj.mpcs(ishock).avg_2_quarterly = NaN;
+				obj.mpcs(ishock).avg_3_quarterly = NaN;
 				obj.mpcs(ishock).avg_4_quarterly = NaN(4,1);
 				obj.mpcs(ishock).avg_4_annual = NaN;
             end
@@ -427,6 +425,10 @@ classdef MPCsNews < handle
 
 			        if (it == 3 + obj.options.delta)
 			        	obj.cum_con_q1{ishock} = obj.cumcon(:,4);
+			        elseif (it == 2 + obj.options.delta)
+			        	obj.cum_con_q2{ishock} = obj.cumcon(:,3);
+			        elseif (it == 1 + obj.options.delta)
+			        	obj.cum_con_q3{ishock} = obj.cumcon(:,2);
 			        end
                 end
 
@@ -485,8 +487,13 @@ classdef MPCsNews < handle
             mpcs_1_quarterly = (obj.cum_con_q1{ishock} - cum_con_baseline(:,1)) / shock;
             obj.mpcs(ishock).avg_1_quarterly = mpcs_1_quarterly(:)' * pmf(:);
             
+            mpcs_2_quarterly = (obj.cum_con_q2{ishock} - cum_con_baseline(:,1)) / shock;
+            obj.mpcs(ishock).avg_2_quarterly = mpcs_2_quarterly(:)' * pmf(:);
 
-            mpcs_4_quarterly = (obj.cum_con_q4{ishock} - cum_con_baseline(:,1:4)) / shock;
+            mpcs_3_quarterly = (obj.cum_con_q3{ishock} - cum_con_baseline(:,1)) / shock;
+            obj.mpcs(ishock).avg_3_quarterly = mpcs_3_quarterly(:)' * pmf(:);
+
+            mpcs_4_quarterly = (obj.cum_con_q4{ishock} - cum_con_baseline) / shock;
             obj.mpcs(ishock).avg_4_quarterly = mpcs_4_quarterly' * pmf(:);
             
             % Add the marginal cons vars here
