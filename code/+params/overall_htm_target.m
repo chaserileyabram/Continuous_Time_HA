@@ -352,7 +352,7 @@ function [outparams, n] = overall_htm_target(param_opts)
             params{ii}.r_a = params{ii}.r_b;
             params{ii}.ComputeMPCS_illiquid = false;
             params{ii}.rho = rho;
-            params{ii}.name = sprintf('Baseline 1A');
+            params{ii}.name = sprintf('Baseline 1A, rho=%d', params{ii}.rho);
         end
         
         % Infrequent rebalance arrival
@@ -582,7 +582,7 @@ function [outparams, n] = overall_htm_target(param_opts)
     %         params{ii}.r_b = 0.005;
     %         params{ii}.r_a = 0.03;
             params{ii}.temptation = 0.05;
-            params{ii}.name = sprintf('Temptation 0.05');
+            params{ii}.name = sprintf('Temptation %d, rho=%d', params{ii}.temptation, params{ii}.rho);
 
 
             % Temptation 0.07
@@ -600,7 +600,7 @@ function [outparams, n] = overall_htm_target(param_opts)
     %         params{ii}.r_b = 0.01;
     %         params{ii}.r_a = 0.03;
             params{ii}.temptation = 0.07;
-            params{ii}.name = sprintf('Temptation 0.07');
+            params{ii}.name = sprintf('Temptation %d, rho=%d', params{ii}.temptation, params{ii}.rho);
         end
         
     end
