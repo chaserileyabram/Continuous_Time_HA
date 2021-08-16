@@ -16,30 +16,30 @@ using Dates
 using XLSX
 using LaTeXStrings
 
-# Check if in proper directory
-# if pwd() != "/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-06-24-2021-07:29:39"
-#     error("Not in Continuous_HA directory")
-# end
-
-# cd("/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-07-11-2021-22:49:30")
-# cd("/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-07-28-2021-10:46:14")
 
 ###############
 # CHANGE THIS #
 ###############
-cd("/Users/chaseabram/UChiGit/Continuous_Time_HA/output")
+# Go directory with .xlsx
+# table_type = 2
+# cd("/Users/chaseabram/UChiGit/Continuous_Time_HA/output")
+# xf = XLSX.readdata("output_table.xlsx", "Sheet1", "A2:AF177")
 
-# Read in data
-# xf = XLSX.readdata("output_table.xlsx", "Sheet1", "A2:DT161")
+table_type = 1
+cd("/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final/One_Asset")
+xf = XLSX.readdata("1A_tables.xlsx", "Sheet1", "A2:AQ95")
+
 ###############
 # CHANGE THIS #
 ###############
-xf = XLSX.readdata("output_table_fast.xlsx", "Sheet1", "A2:AN177")
-# xf = XLSX.readdata("output_table.xlsx")
+# Read in data (be sure to put the proper rows and columns)
+# xf = XLSX.readdata("output_table_fast.xlsx", "Sheet1", "A2:AN177")
 
+# Fix some characters for tex
 for i in 1:size(xf,2)
     for j in 1:size(xf,1)
 
+        # Round the numbers
         if isa(xf[j,i], Number)
             xf[j,i] = round(xf[j,i], digits=3)
         end
@@ -52,26 +52,25 @@ for i in 1:size(xf,2)
         if i > 1 && j > 1
             xf[j,i] = replace(string(xf[j,i]), "_" => L"\_")
         end
-        # xf[j,i] = replace(string(xf[j,i]), "_" => L"\_")
 
         # Fix missing
         xf[j,i] = replace(string(xf[j,i]), "missing" => raw"")
     end
 end
 
-xf
+
 ##
 
 # Create dictionary of (model, statistic) -> model statistic
 # Model names MUST be unique or will get overwritten
 
-# Will need to make strings into LaTeX possibly
+# Initialize
 stats = Dict()
+
+# Read over data
 for i in 1:size(xf,2)
     for j in 1:size(xf,1)
-
         # Fill in object
-        # stats[(string(xf[1,i]), string(xf[j,1]))] = xf[j,i]
         stats[(xf[1,i], xf[j,1])] = xf[j,i]
     end
 end
@@ -144,9 +143,10 @@ function alltables()
     # Header
     txt *= header()
 
+    # MPC Comparison
     txt *= small_table("MPC Comparison",
     ["Discrete Baseline", "Discrete Match HtM", "Discrete Beta het", "Discrete CRRA het", "Discrete Temptation", "Baseline 2A"],
-    ["1A Baseline", "1A Match HtM", "1A "*string(L"\beta")*" Het", "1A CRRA Het",
+    ["Baseline 1A", "1A Match HtM", "1A "*string(L"\beta")*" Het", "1A CRRA Het",
      "1A Temptation", "2A Baseline"],
     ["Quarterly  MPC (\\%), out of -\\\$5000, t=1", "Quarterly  MPC (\\%), out of -\\\$500, t=1", "Quarterly  MPC (\\%), out of -\\\$1, t=1",
     "Quarterly  MPC (\\%), out of \\\$1, t=1", "Quarterly  MPC (\\%), out of \\\$500, t=1", "Quarterly  MPC (\\%), out of \\\$5000, t=1"],
@@ -156,8 +156,9 @@ function alltables()
     txt *= raw"
     \newpage"
 
+    # Table 1
     txt *= stat_table("Table 1: Baseline", 
-    ["Baseline 1A", "Baseline 2A", "Infrequent Rebalance"], 
+    ["Baseline 1A, rho=-4.000000e-03", "Baseline 2A", "Infrequent Rebalance"], 
     ["Baseline 1-asset", "Baseline 2-asset", "Infrequent Rebalance"],
     ["Rebalance arrival rate", "Quarterly  MPC (\\%), out of \\\$500, t=1", "Annual  MPC (\\%), out of \\\$500",
     "Quarterly  PHtM MPC (\\%), out of \\\$500", "Quarterly  WHtM MPC (\\%), out of \\\$500",
@@ -178,6 +179,7 @@ function alltables()
     # txt *= raw"
     # \newpage"
 
+    # Table 2
     txt *= stat_table("Table 2: Returns Robustness", 
     ["Baseline 2A", "Low r_b", "High r_b", "High r_a"], 
     ["Baseline 2A", "Low r_b", "High r_b", "High r_a"],
@@ -206,6 +208,7 @@ function alltables()
     # ["Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500"],
     # ["Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500"])
 
+    # Appendix
     txt *= stat_table("Appendix Table: Rebalance Costs", 
     ["Baseline 2A", "Reb cost \\\$250", "Reb cost \\\$1000", "Reb cost \\\$2000"],
     ["Baseline 2-asset", "Reb cost \\\$250", "Reb cost \\\$1000", "Reb cost \\\$2000"],
@@ -237,31 +240,156 @@ function alltables()
     # txt *= raw"
     # \newpage"
 
+    # Footer
+    txt *= footer()
+    return txt
+end
 
+# String of full tex
+function alltables1A()
+    txt = raw""
 
-    # # Rebalancing Frequency Table
-    # txt *= reb_table(["Baseline", "Infrequent Rebalance", "Frequent Rebalance"])
+    # Header
+    txt *= header()
+
+    # MPC Comparison
+    # txt *= small_table("MPC Comparison",
+    # ["Discrete Baseline", "Discrete Match HtM", "Discrete Beta het", "Discrete CRRA het", "Discrete Temptation", "Baseline 2A"],
+    # ["1A Baseline", "1A Match HtM", "1A "*string(L"\beta")*" Het", "1A CRRA Het",
+    #  "1A Temptation", "2A Baseline"],
+    # ["Quarterly  MPC (\\%), out of -\\\$5000, t=1", "Quarterly  MPC (\\%), out of -\\\$500, t=1", "Quarterly  MPC (\\%), out of -\\\$1, t=1",
+    # "Quarterly  MPC (\\%), out of \\\$1, t=1", "Quarterly  MPC (\\%), out of \\\$500, t=1", "Quarterly  MPC (\\%), out of \\\$5000, t=1"],
+    # ["Quarterly  MPC (\\%), out of -\\\$5000", "Quarterly  MPC (\\%), out of -\\\$500", "Quarterly  MPC (\\%), out of -\\\$1",
+    # "Quarterly  MPC (\\%), out of \\\$1", "Quarterly  MPC (\\%), out of \\\$500", "Quarterly  MPC (\\%), out of \\\$5000"])
 
     # txt *= raw"
     # \newpage"
-    
-    # txt *= table2(["Baseline", "Cont b, rho only"])
 
-    # txt *= raw"
-    # \newpage"
-    
-    # txt *= table2(["Baseline",
-    # "Cont b, all 200", "Cont b, all 300", "Cont b, all 350"])
+    # Table 1
+    txt *= stat_table_1A("Table 1", 
+    ["Baseline", "Calibration to total wealth, E[a] = 9.4", "Calibration to liquid wealth, median(a) = 0.046",
+    "Calibration to total wealth, E[a] = 0.5617", "Calibration to liquid wealth, median(a) = 1.54",
+    "Calibration to PHtM, HtM = 0.142"], 
+    ["Baseline", "E[a] = 9.4", "Median(a) = 0.046",
+    "E[a] = 0.5617", "Median(a) = 1.54", "HtM = 0.142"],
+    ["Quarterly MPC (\\%), out of \\\$500", "Annual MPC (\\%), out of \\\$500",
+    "Quarterly HtM1 MPC (\\%), out of \\\$500", "a_i <= y_i / 6",
+    "Corr(MPC, APC), shock of \\\$500", "Effective discount rate"],
+    ["Quarterly MPC (\\%), out of \\\$500", "Annual MPC (\\%), out of \\\$500",
+    "HtM1 MPC (\\%), out of \\\$500", L"a_i \leq y_i / 6",
+    "Corr(MPC, APC), shock of \\\$500", "Effective discount rate"])
 
-    # txt *= raw"
-    # \newpage"
-    
-    # txt *= table2(["Baseline", "Cont b, all 500", "Cont b, all 550"])
+    txt *= raw"
+    \newpage"
 
-    # txt *= raw"
-    # \newpage"
-    
-    # txt *= table3(["Baseline", "Low r_b", "High r_b", "Low r_a", "High r_a"])
+    # Table 2
+    txt *= stat_table_1A("Table 2", 
+    ["Baseline", "r = 0\\% p.a.", "r = 5\\% p.a.",
+    "CRRA 0.5", "CRRA 6"], 
+    ["Baseline", "r = 0\\% p.a.", "r = 5\\% p.a.",
+    "CRRA 0.5", "CRRA 6"],
+    ["Quarterly MPC (\\%), out of \\\$500", "Annual MPC (\\%), out of \\\$500",
+    "Quarterly HtM1 MPC (\\%), out of \\\$500", "a_i <= y_i / 6",
+    "Corr(MPC, APC), shock of \\\$500", "Effective discount rate"],
+    ["Quarterly MPC (\\%), out of \\\$500", "Annual MPC (\\%), out of \\\$500",
+    "Quarterly HtM1 MPC (\\%), out of \\\$500", L"a_i \leq y_i / 6",
+    "Corr(MPC, APC), shock of \\\$500", "Effective discount rate"])
+
+    txt *= raw"
+    \newpage"
+
+    # Table 3
+    txt *= stat_table_1A("Table 3", 
+    ["Baseline", "p = 0, spacing = 0.005", "p = 0, spacing = 0.01",
+    "p = 0.02, spacing = 0.01", "p = 0.1, spacing = 0.01",
+    "r in {-1, 1, 3}", "r in {-3,1,5}"], 
+    ["Baseline", "Small, Fixed \\beta", "Fixed \\beta",
+    "Small, Stochastic \\beta", "Stochastic \\beta",
+    "Small r", "Large r"],
+    ["Quarterly MPC (\\%), out of \\\$500", "Annual MPC (\\%), out of \\\$500",
+    "Quarterly HtM1 MPC (\\%), out of \\\$500", "a_i <= y_i / 6",
+    "Corr(MPC, APC), shock of \\\$500", "Effective discount rate"],
+    ["MPC (\\%), out of \\\$500", "Annual MPC (\\%), out of \\\$500",
+    "HtM1 MPC (\\%), out of \\\$500", L"a_i \leq y_i / 6",
+    "Corr(MPC, APC), shock of \\\$500", "Effective discount rate"])
+
+    txt *= raw"
+    \newpage"
+
+    # Table 4
+    txt *= stat_table_1A("Table 4", 
+    ["Baseline", "RA = exp(-2), ..., exp(2), IES = 1", 
+    "RA = 1, IES = exp(-2), ..., exp(2)", "RA = 1, IES = exp(-3), ..., exp(3)", 
+    "Temptation = 0.01", "Temptation = 0.05", "Temptation in {0, 0.05, 0.1}"], 
+    ["Baseline", "RA Small", "IES Small", "IES Large", 
+    "Temptation = 0.01", "0.05", "het"],
+    ["Quarterly MPC (\\%), out of \\\$500", "Annual MPC (\\%), out of \\\$500",
+    "Quarterly HtM1 MPC (\\%), out of \\\$500", "a_i <= y_i / 6",
+    "Corr(MPC, APC), shock of \\\$500", "Effective discount rate"],
+    ["MPC (\\%), out of \\\$500", "Annual MPC (\\%), out of \\\$500",
+    "HtM1 MPC (\\%), out of \\\$500", L"a_i \leq y_i / 6",
+    "Corr(MPC, APC), shock of \\\$500", "Effective discount rate"])
+
+    txt *= raw"
+    \newpage"
+
+    # Appendix Table 1
+    txt *= stat_table_1A("Appendix Table 1", 
+    ["Baseline", "Baseline Annual", "Baseline 1A, rho=-4.000000e-03"], 
+    ["Baseline", "Baseline Annual", "Baseline Continuous"],
+    ["Quarterly MPC (\\%), out of \\\$500", "Annual MPC (\\%), out of \\\$500",
+    "Quarterly HtM1 MPC (\\%), out of \\\$500", "a_i <= y_i / 6",
+    "Corr(MPC, APC), shock of \\\$500", "Effective discount rate"],
+    ["MPC (\\%), out of \\\$500", "Annual MPC (\\%), out of \\\$500",
+    "HtM1 MPC (\\%), out of \\\$500", L"a_i \leq y_i / 6",
+    "Corr(MPC, APC), shock of \\\$500", "Effective discount rate"])
+
+    txt *= raw"
+    \newpage"
+
+    # Appendix Table 2
+    txt *= stat_table_1A("Appendix Table 2", 
+    ["Baseline", "With Bequests"], 
+    ["Baseline", "With Bequests"],
+    ["Quarterly MPC (\\%), out of \\\$500", "Annual MPC (\\%), out of \\\$500",
+    "Quarterly HtM1 MPC (\\%), out of \\\$500", "a_i <= y_i / 6",
+    "Corr(MPC, APC), shock of \\\$500", "Effective discount rate"],
+    ["MPC (\\%), out of \\\$500", "Annual MPC (\\%), out of \\\$500",
+    "HtM1 MPC (\\%), out of \\\$500", L"a_i \leq y_i / 6",
+    "Corr(MPC, APC), shock of \\\$500", "Effective discount rate"])
+
+    txt *= raw"
+    \newpage"
+
+    # Appendix Table 3
+    txt *= stat_table_1A("Appendix Table 3", 
+    ["Baseline", "no_trans_shocks", "quart_c", "KMP", "quart_a", "Carrol process",
+    "High persistence", "FE heterogeneity"], 
+    ["Baseline", "no trans shocks", "quart_c", "KMP", "quart_a", "Carrol",
+    "High persistence", "FE het"],
+    ["Quarterly MPC (\\%), out of \\\$500", "Annual MPC (\\%), out of \\\$500",
+    "Quarterly HtM1 MPC (\\%), out of \\\$500", "a_i <= y_i / 6",
+    "Corr(MPC, APC), shock of \\\$500", "Effective discount rate"],
+    ["MPC (\\%), out of \\\$500", "Annual MPC (\\%), out of \\\$500",
+    "HtM1 MPC (\\%), out of \\\$500", L"a_i \leq y_i / 6",
+    "Corr(MPC, APC), shock of \\\$500", "Effective discount rate"])
+
+    txt *= raw"
+    \newpage"
+
+    # Appendix Table 4
+    txt *= stat_table_1A("Appendix Table 4", 
+    ["Baseline", "RA = 1, IES = 2", "RA = 1, IES = 0.25", "RA = 8, IES = 1", 
+    "RA = 0.5, IES = 1", "RA = 1, IES = exp(-1), ..., exp(1)"], 
+    ["Baseline", "RA=1, IES=2", "RA=1, IES=0.25", "RA=8, IES=1", 
+    "RA=0.5, IES=1", "RA=1, IES het"],
+    ["Quarterly MPC (\\%), out of \\\$500", "Annual MPC (\\%), out of \\\$500",
+    "Quarterly HtM1 MPC (\\%), out of \\\$500", "a_i <= y_i / 6",
+    "Corr(MPC, APC), shock of \\\$500", "Effective discount rate"],
+    ["MPC (\\%), out of \\\$500", "Annual MPC (\\%), out of \\\$500",
+    "HtM1 MPC (\\%), out of \\\$500", L"a_i \leq y_i / 6",
+    "Corr(MPC, APC), shock of \\\$500", "Effective discount rate"])
+
 
     # Footer
     txt *= footer()
@@ -319,91 +447,7 @@ function endtable()
 end
 
 
-# Produce Rebalancing Frequency Table
-function reb_table(models)
-    txt = starttable("Rebalance Rates", models)
-
-    # Top stats
-    txt *= subtable(models,
-    ["Rebalance arrival rate", "Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500"],
-    ["Rebalance arrival rate", "Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500"])
-
-    # Calibrated Variables
-    txt *= subhead("Calibrated Variables", models)
-    txt *= subtable(models, 
-    ["beta (annualized)",
-    "Liquid asset return (quarterly)",
-    "Illiquid asset return (quarterly)",
-    "Rebalance cost (\\\$)"],
-    ["beta (annualized)",
-    "Liquid asset return (quarterly)",
-    "Illiquid asset return (quarterly)",
-    "Rebalance cost (\\\$)"])
-
-    # Targeted Stats
-    txt *= subhead("Targeted Statistics", models)
-    txt *= subtable(models, 
-    ["Mean total wealth",
-    "Mean liquid wealth",
-    "b_i <= y_i / 6",
-    "w_i <= y_i / 6"],
-    ["Mean total wealth",
-    "Mean liquid wealth",
-    L"b_i \leq y_i / 6",
-    L"w_i \leq y_i / 6"])
-
-    # MPC decomp
-    txt *= subhead("MPC Decomposition", models)
-    txt *= subtable(models, 
-    ["E[MPC] - E[MPC_b]",
-    "Effect of mpc fcn",
-    "Effect of mpc fcn (\\%)",
-    "Effect of distribution",
-    "Effect of distribution (\\%)",
-    "Distr effect, PHtM (eps = 0.05)",
-    "Distr effect (\\%), PHtM (eps = 0.05)",
-    "Distr effect, WHtM (eps = 0.05)",
-    "Distr effect (\\%), WHtM (eps = 0.05)",
-    "Distr effect, NHtM (eps = 0.05)",
-    "Distr effect (\\%), NHtM (eps = 0.05)",
-    "Interaction",
-    "Interaction (\\%)"],
-    ["E[MPC] - E[MPC_b]",
-    "Effect of mpc fcn",
-    "Effect of mpc fcn (\\%)",
-    "Effect of distribution",
-    "Effect of distribution (\\%)",
-    "Distr effect, PHtM (eps = 0.05)",
-    "Distr effect (\\%), PHtM (eps = 0.05)",
-    "Distr effect, WHtM (eps = 0.05)",
-    "Distr effect (\\%), WHtM (eps = 0.05)",
-    "Distr effect, NHtM (eps = 0.05)",
-    "Distr effect (\\%), NHtM (eps = 0.05)",
-    "Interaction",
-    "Interaction (\\%)"])
-
-#     Effect of mpc fcn
-# Effect of distribution
-# Distr effect, PHtM (eps = 0.05)
-# Distr effect, WHtM (eps = 0.05)
-# Distr effect, NHtM (eps = 0.05)
-# Interaction
-
-#     Effect of mpc fcn (%)
-# Effect of distribution (%)
-# Distr effect (%), PHtM (eps = 0.05)
-# Distr effect (%), WHtM (eps = 0.05)
-# Distr effect (%), NHtM (eps = 0.05)
-# Interaction (%)
-
-
-
-    
-    txt *= endtable()
-
-    return txt
-end
-
+# Don't throw on the full stats
 function small_table(name, models, modelnames, topstats, topstats_names)
     txt = starttable(name, modelnames)
 
@@ -415,6 +459,7 @@ function small_table(name, models, modelnames, topstats, topstats_names)
 
 end
 
+# Full stats 2A
 function stat_table(name, models, modelnames, topstats, topstats_names)
     txt = starttable(name, modelnames)
 
@@ -445,7 +490,7 @@ function stat_table(name, models, modelnames, topstats, topstats_names)
     "Share hand-to-mouth",
     "Share poor hand-to-mouth"])
 
-    # Backup
+    # Backup ref
     # L"b_i \leq y_i / 6",
     # L"w_i \leq y_i / 6"
 
@@ -501,78 +546,84 @@ function stat_table(name, models, modelnames, topstats, topstats_names)
     return txt
 end
 
+# Full stats 1A
+function stat_table_1A(name, models, modelnames, topstats, topstats_names)
+    txt = starttable(name, modelnames)
 
-# Produce Table 2
-function table2(models)
-    txt = starttable("Income Processes", models)
+    # Top stats
+    txt *= subtable(models, topstats, topstats_names)
 
-    # Put subtables here
-    txt *= subtable(models,
-    ["Income Process", "Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500"],
-    ["Income Process", "Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500"])
-
-    txt *= subhead("Calibrated Variables", models)
+    # Panel A: Decomposition
+    txt *= subhead("Panel A: Decomposition", models)
     txt *= subtable(models, 
-    ["beta (annualized)",
-    "Liquid asset return (quarterly)",
-    "Illiquid asset return (quarterly)",
-    "Rebalance cost (\\\$)"],
-    ["beta (annualized)",
-    "Liquid asset return (quarterly)",
-    "Illiquid asset return (quarterly)",
-    "Rebalance cost (\\\$)"])
+    ["E[MPC] - E[MPC_baseline]", "Effect of MPC fcn", "Effect of distr",
+    "Effect of distr, HtM (a <= 0.0148961)", "Effect of distr, NHtM (a > 0.0148961)"],
+    ["Gap with Baseline MPC", "Effect of MPC Function", "Distributional Effect",
+    "Interaction hand-to-mouth", "Interaction non-hand-to-mouth"])
 
-    txt *= subhead("Targeted Statistics", models)
+    # Targeted Stats
+    txt *= subhead("Panel B: Wealth Statistics", models)
     txt *= subtable(models, 
-    ["Mean total wealth",
-    "Mean liquid wealth",
-    "b_i <= y_i / 6",
-    "w_i <= y_i / 6"],
-    ["Mean total wealth",
-    "Mean liquid wealth",
-    L"b_i \leq y_i / 6",
-    L"w_i \leq y_i / 6"])
+    ["Mean wealth", "Median wealth",
+    "a <= \\\$1000", "a <= \\\$5000", "a <= \\\$10000", 
+    "a <= \\\$50000", "a <= \\\$100000"],
+    ["Mean wealth", "Median wealth",
+    L"a \leq \$1000", L"a \leq \$5000", L"a \leq \$10000", 
+    L"a \leq \$50000", L"a \leq \$100000"])
 
-    
+    # Backup ref
+    # L"b_i \leq y_i / 6",
+    # L"w_i \leq y_i / 6"
+
+    # MPC decomp
+    # txt *= subhead("Panel C: Decomposition", models)
+    # txt *= subtable(models, 
+    # ["E[MPC] - E[MPC_b]",
+    # "Effect of mpc fcn",
+    # "Effect of distribution",
+    # "Distr effect, PHtM (eps = 0.05)",
+    # "Distr effect, WHtM (eps = 0.05)",
+    # "Distr effect, NHtM (eps = 0.05)",
+    # "Interaction"],
+    # ["Gap with Baseline MPC",
+    # "Effect of MPC function",
+    # "Distributional Effect",
+    # "Distributional Effect, poor hand-to-mouth",
+    # "Distributional Effect, wealthy hand-to-mouth",
+    # "Distributional Effect, non-hand-to-mouth",
+    # "Interaction"])
+
+    # # Other Wealth Stats
+    # txt *= subhead("Panel D: Wealth Statistics", models)
+    # txt *= subtable(models, 
+    # ["w, median",
+    # "b, median",
+    # "b <= \\\$1000",
+    # "b <= \\\$5000",
+    # "b <= \\\$10000",
+    # "w <= \\\$1000",
+    # "w <= \\\$5000",
+    # "w <= \\\$10000",
+    # "w <= \\\$50000",
+    # "w <= \\\$100000",
+    # "w, Top 10\\% share",
+    # "w, Top 1\\% share",
+    # "Gini coefficient, wealth"],
+    # ["Median total wealth",
+    # "Median liquid wealth",
+    # L"b \leq \$1000",
+    # L"b \leq \$5000",
+    # L"b \leq \$10000",
+    # L"w \leq \$1000",
+    # L"w \leq \$5000",
+    # L"w \leq \$10000",
+    # L"w \leq \$50000",
+    # L"w \leq \$100000",
+    # "Wealth, Top 10\\% share",
+    # "Wealth, Top 1\\% share",
+    # "Gini coefficient, total wealth"])
+
     txt *= endtable()
-
-    return txt
-end
-
-# Produce Table 3
-function table3(models)
-    txt = starttable("Returns robustness", models)
-
-    # Put subtables here
-    txt *= subtable(models,
-    ["Liquid asset return (quarterly)", "Illiquid asset return (quarterly)", "Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500"],
-    ["Liquid asset return (quarterly)", "Illiquid asset return (quarterly)", "Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500"])
-
-    txt *= subhead("Calibrated Variables", models)
-    txt *= subtable(models, 
-    ["beta (annualized)",
-    "Liquid asset return (quarterly)",
-    "Illiquid asset return (quarterly)",
-    "Rebalance cost (\\\$)"],
-    ["beta (annualized)",
-    "Liquid asset return (quarterly)",
-    "Illiquid asset return (quarterly)",
-    "Rebalance cost (\\\$)"])
-
-    txt *= subhead("Targeted Statistics", models)
-    txt *= subtable(models, 
-    ["Mean total wealth",
-    "Mean liquid wealth",
-    "b_i <= y_i / 6",
-    "w_i <= y_i / 6"],
-    ["Mean total wealth",
-    "Mean liquid wealth",
-    L"b_i \leq y_i / 6",
-    L"w_i \leq y_i / 6"])
-
-    
-    txt *= endtable()
-
     return txt
 end
 
@@ -598,25 +649,28 @@ function subtable(models, stats, statnames)
     return txt
 end
 
-# txt_test = "a"
-# println("before: ", txt_test)
-# println(table1A(["HJB delta: 1000", "HJB delta: 10000", "HJB delta: 100000"],
-#  ["Mean total wealth", "Mean liquid wealth"]))
-# println("after: ", txt_test)
+# Spot check
+println()
+println()
+println()
 
-# table1()
-
-# fillrow(["HJB delta: 1000", "HJB delta: 10000", "HJB delta: 100000"], "Mean total wealth")
-println()
-println()
-println()
-println(alltables())
+if table_type == 2
+    println(alltables())
+else
+    println(alltables1A())
+end
 ##
 
+# Write out
 function write_table()
-    io = open("tables.tex", "w")
+    io = open("tables_"*string(table_type)*".tex", "w")
     # io = open("tables_"*Dates.format(Dates.now(), "dd_u_yyyy_HH_MM_SS"), "w")
-    write(io, alltables())
+
+    if table_type == 2
+        write(io, alltables())
+    else
+        write(io, alltables1A())
+    end
     close(io)
 end
 

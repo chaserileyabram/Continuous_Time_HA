@@ -48,7 +48,9 @@ plot(bs, mpc_int(bs), 'LineWidth', 5, 'color', 'black');
 title('Baseline 1A');
 xlabel('Wealth');
 legend('Mass', 'MPC');
-plot_path = sprintf('output/mpc_1A_base');
+
+cd('/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final');
+plot_path = sprintf('Figures/mpc_1A_base');
 saveas(gcf, plot_path, "epsc");
 
 
@@ -115,7 +117,9 @@ plot(bs, mpc_int_high(bs), 'LineWidth', 3, 'LineStyle', '--', 'color', 'black');
 legend('Mass', 'Mass (Low type)', 'Low', 'Middle', 'High')
 title('Heterogeneous Discount Factor');
 xlabel('Wealth');
-plot_path = sprintf('output/mpc_beta_het');
+
+cd('/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final');
+plot_path = sprintf('Figures/mpc_beta_het');
 saveas(gcf, plot_path, "epsc");
 
 
@@ -176,7 +180,9 @@ plot(bs, mpc_int_high(bs), 'LineWidth', 3, 'LineStyle', ':', 'color', 'black');
 legend('Mass', 'Mass (Low type)', 'Low', 'Middle', 'High')
 title('Heterogeneous RRA=IES');
 xlabel('Wealth');
-plot_path = sprintf('output/mpc_rra_het');
+
+cd('/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final');
+plot_path = sprintf('Figures/mpc_rra_het');
 saveas(gcf, plot_path, "epsc");
 
 
@@ -240,7 +246,9 @@ plot(bs, mpc_int_high(bs), 'LineWidth', 3, 'LineStyle', ':', 'color', 'black');
 legend('Mass', 'Mass (Low type)', 'Low', 'Middle', 'High')
 title('Epstein-Zin, Heterogeneous IES');
 xlabel('Wealth');
-plot_path = sprintf('output/mpc_ez_het_ies');
+
+cd('/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final');
+plot_path = sprintf('Figures/mpc_ez_het_ies');
 saveas(gcf, plot_path, "epsc");
 
 
@@ -250,7 +258,7 @@ saveas(gcf, plot_path, "epsc");
 clear
 % Load baseline 2A
 cd('/Users/chaseabram/UChiGit/Continuous_Time_HA')
-load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-10-2021-21:00:50/output_1.mat')
+load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-15-2021-00:22:19/output_1.mat')
 % point in each dim
 n = 100;
 curve = 0.1;
@@ -267,23 +275,25 @@ surf(as, bs, mpcs, 'edgecolor', 'none')
 title('MPC vs. (Liquid Wealth, Illiquid Wealth)')
 xlabel('a'), ylabel('b'), zlabel('MPC (%)')
 view(130, 30);
-plot_path = sprintf('output/mpc_ab');
+
+cd('/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final');
+plot_path = sprintf('Figures/mpc_ab');
 saveas(gcf, plot_path, "epsc");
 
 
 %% 6) MPC by total wealth (2A)
 clear
 cd('/Users/chaseabram/UChiGit/Continuous_Time_HA')
-load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-10-2021-21:00:50/output_1.mat')
+load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-15-2021-00:22:19/output_1.mat')
 
 n = 100;
 curve = 0.1;
 ws = linspace(0,1,n);
 ws = ws .^ (1/curve);
 ws = ws .* 3;
-mpcs_25 = mpc_wealth_quantile(stats, ws, 0.25);
-mpcs_m = mpc_wealth_mean(stats, ws);
-mpcs_75 = mpc_wealth_quantile(stats, ws, 0.75);
+mpcs_25 = mpc_wealth_quantile(stats, ws, 0.25) ./ 100;
+mpcs_m = mpc_wealth_mean(stats, ws) ./ 100;
+mpcs_75 = mpc_wealth_quantile(stats, ws, 0.75) ./ 100;
 
 % Make histogram data
 m = 8;
@@ -311,20 +321,22 @@ hold on
 plot(ws, mpcs_75, 'LineWidth', 3, 'LineStyle', '--', 'color', 'black')
 legend('Mass','First Quartile', 'Mean', 'Third Quartile')
 xlabel('Wealth');
-plot_path = sprintf('output/mpc_w_2A');
+
+cd('/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final');
+plot_path = sprintf('Figures/mpc_w_2A');
 saveas(gcf, plot_path, "epsc");
 
 %% 7) MPC by total wealth 2A + 1A
 clear
 cd('/Users/chaseabram/UChiGit/Continuous_Time_HA')
-load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-10-2021-21:00:50/output_1.mat')
+load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-15-2021-00:22:19/output_1.mat')
 
 n = 100;
 curve = 0.1;
 ws = linspace(0,1,n);
 ws = ws .^ (1/curve);
 ws = ws .* 3;
-mpcs_2A = mpc_wealth_mean(stats, ws);
+mpcs_2A = mpc_wealth_mean(stats, ws) ./ 100;
 
 % Make histogram data
 m = 8;
@@ -389,21 +401,23 @@ plot(bs, mpcs_1A_int(bs), 'LineWidth', 3, 'LineStyle', '--', 'color', 'black');
 title('Baseline 2A and 1A');
 xlabel('Wealth');
 legend('2A Mass', '1A Mass', '2A Mean MPC', '1A MPC')
-plot_path = sprintf('output/mpc_2A_1A');
+
+cd('/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final');
+plot_path = sprintf('Figures/mpc_2A_1A');
 saveas(gcf, plot_path, "epsc");
 
 
 %% 8) MPC by total wealth 2A + (1A with beta het)
 clear
 cd('/Users/chaseabram/UChiGit/Continuous_Time_HA')
-load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-10-2021-21:00:50/output_1.mat')
+load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-15-2021-00:22:19/output_1.mat')
 
 n = 100;
 curve = 0.1;
 ws = linspace(0,1,n);
 ws = ws .^ (1/curve);
 ws = ws .* 3;
-mpcs_2A = mpc_wealth_mean(stats, ws);
+mpcs_2A = mpc_wealth_mean(stats, ws) ./ 100;
 
 % Make histogram data
 m = 8;
@@ -468,7 +482,9 @@ plot(bs, mpcs_1A_int(bs), 'LineWidth', 3, 'LineStyle', '--', 'color', 'black');
 title('Baseline 2A and (1A with discount factor heterogeneity)');
 xlabel('Wealth');
 legend('2A Mass', '1A Mass', '2A Mean MPC', '1A MPC')
-plot_path = sprintf('output/mpc_2A_1A_beta_het');
+
+cd('/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final');
+plot_path = sprintf('Figures/mpc_2A_1A_beta_het');
 saveas(gcf, plot_path, "epsc");
 
 %% Intertemporal MPCs

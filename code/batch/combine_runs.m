@@ -2,7 +2,7 @@ clear
 
 % Change file path when running locally
 local_run = true;
-local_path = 'output/server-all-08-12-2021-14:09:55';
+local_path = 'output/server-all-08-15-2021-00:22:19';
 
 [~, currdir] = fileparts(pwd());
 if ~strcmp(currdir, 'Continuous_Time_HA')
@@ -43,7 +43,7 @@ try
 
             % perform Empc1 - Empc0 decomposition
             % Need to check to see why 1A break this
-            if ~params(ind).OneAsset
+            if params(ind).rebalance_rate > 0
                 decomp_base(ind) = statistics.decomp_baseline(s(1), s(ind));
                 % perform decomp wrt one-asset model
     %             decomp_oneasset(ind) = statistics.decomp_twoasset_oneasset(oneasset,s(ind));
