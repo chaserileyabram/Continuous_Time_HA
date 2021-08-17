@@ -21,13 +21,13 @@ using LaTeXStrings
 # CHANGE THIS #
 ###############
 # Go directory with .xlsx
-# table_type = 2
-# cd("/Users/chaseabram/UChiGit/Continuous_Time_HA/output")
-# xf = XLSX.readdata("output_table.xlsx", "Sheet1", "A2:AF177")
+table_type = 2
+cd("/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final/Two_Asset")
+xf = XLSX.readdata("output_table.xlsx", "Sheet1", "A2:AF177")
 
-table_type = 1
-cd("/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final/One_Asset")
-xf = XLSX.readdata("1A_tables.xlsx", "Sheet1", "A2:AQ95")
+# table_type = 1
+# cd("/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final/One_Asset")
+# xf = XLSX.readdata("1A_tables.xlsx", "Sheet1", "A2:AQ95")
 
 ###############
 # CHANGE THIS #
@@ -228,8 +228,18 @@ function alltables()
     # ["beta_IG", "Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500"],
     # [L"\beta_{IG}", "Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500"])
 
-    # txt *= raw"
-    # \newpage"
+    txt *= raw"
+    \newpage"
+
+    txt *= stat_table("Appendix Table: Temptation", 
+    ["Baseline 2A", "Temptation 5.000000e-02, rho=1.000000e-02", "Temptation 5.000000e-02, rho=1.000000e-02"],
+    ["Baseline 2-asset", "Temptation 0.05", "Temptation 0.07"],
+    ["Quarterly  MPC (\\%), out of \\\$500, t=1", "Annual  MPC (\\%), out of \\\$500",
+    "Quarterly  PHtM MPC (\\%), out of \\\$500", "Quarterly  WHtM MPC (\\%), out of \\\$500",
+    "Mean MPC at Mean Wealth (\\%)", "HtM 1year", "MPC APC Corr"],
+    ["Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500",
+    "Quarterly PHtM MPC (\\%), out of \\\$500", "Quarterly  WHtM MPC (\\%), out of \\\$500",
+    "Mean MPC at Mean Wealth (\\%)", "Prob. HtM status at year t and year t+1", "Correlation between MPC and APC"])
 
     # txt *= stat_table("Temptation", 
     # ["Baseline 2A", "Temptation 0.05", "Temptation 0.07"],
@@ -267,11 +277,11 @@ function alltables1A()
 
     # Table 1
     txt *= stat_table_1A("Table 1", 
-    ["Baseline", "Calibration to total wealth, E[a] = 9.4", "Calibration to liquid wealth, median(a) = 0.046",
-    "Calibration to total wealth, E[a] = 0.5617", "Calibration to liquid wealth, median(a) = 1.54",
+    ["Baseline", "Calibration to total wealth, E[a] = 9.4", "Calibration to liquid wealth, median(a) = 1.54",
+    "Calibration to total wealth, E[a] = 0.5617", "Calibration to liquid wealth, median(a) = 0.046",
     "Calibration to PHtM, HtM = 0.142"], 
-    ["Baseline", "E[a] = 9.4", "Median(a) = 0.046",
-    "E[a] = 0.5617", "Median(a) = 1.54", "HtM = 0.142"],
+    ["Baseline", "E[a] = 9.4", "Median(a) = 1.54",
+    "E[a] = 0.5617", "Median(a) = 0.046", "HtM = 0.142"],
     ["Quarterly MPC (\\%), out of \\\$500", "Annual MPC (\\%), out of \\\$500",
     "Quarterly HtM1 MPC (\\%), out of \\\$500", "a_i <= y_i / 6",
     "Corr(MPC, APC), shock of \\\$500", "Effective discount rate"],
@@ -557,9 +567,10 @@ function stat_table_1A(name, models, modelnames, topstats, topstats_names)
     txt *= subhead("Panel A: Decomposition", models)
     txt *= subtable(models, 
     ["E[MPC] - E[MPC_baseline]", "Effect of MPC fcn", "Effect of distr",
-    "Effect of distr, HtM (a <= 0.0148961)", "Effect of distr, NHtM (a > 0.0148961)"],
-    ["Gap with Baseline MPC", "Effect of MPC Function", "Distributional Effect",
-    "Interaction hand-to-mouth", "Interaction non-hand-to-mouth"])
+    "Effect of distr, HtM (a <= 0.0148961)", "Effect of distr, NHtM (a > 0.0148961)",
+    "Interaction of MPCs and distr"],
+    ["Gap with Baseline MPC", "Effect of MPC Function", "Effect of Distribution",
+    "Distribution hand-to-mouth", "Ditribution non-hand-to-mouth", "Interaction"])
 
     # Targeted Stats
     txt *= subhead("Panel B: Wealth Statistics", models)

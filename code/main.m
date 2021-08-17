@@ -104,7 +104,7 @@ function stats = main(p, varargin)
     end
     
     
-    % TURN OFF ENTIRELY FOR TESTS
+    % Only compute when done calibrating
     if final
         fprintf_internal('\nComputing HtM remain probs\n')
         stats.compute_HtM_trans();
