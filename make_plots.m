@@ -660,6 +660,8 @@ liq_wealth_quantile(stats,[4.1],0.75)
 liq_wealth_quantile(stats,[4.1],1.0)
 
 
+mpc_ill_nn(stats)
+
 
 
 
@@ -729,6 +731,13 @@ function mpc_l = mpc_liquid_mean(s,ls)
 % 
 %         mpc_l(i) = sum(mpcs .* pmfs, 'all');
 %     end
+
+end
+
+% MPC out of illiquid wealth, no negative shocking allowed
+function mpc_ill_nn = mpc_ill_nn(s)
+    ill_ss = reshape(s.illiquid_mpcs_over_ss{5}, [s.nb s.na s.nz s.ny]);
+    mpc_ill_nn = sum(ill_ss .* s.pmf, 'all');
 
 end
 
