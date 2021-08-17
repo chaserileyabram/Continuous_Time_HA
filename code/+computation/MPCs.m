@@ -108,6 +108,8 @@ classdef MPCs < handle
                 obj.mpcs(ii).annual_whtm = NaN;
                 obj.mpcs(ii).quarterly_phtm = NaN;
                 obj.mpcs(ii).annual_phtm = NaN;
+                
+                obj.mpcs(ii).quarterly_noneg = NaN(5,1);
 			end
 		end
 
@@ -319,13 +321,26 @@ classdef MPCs < handle
 			mpcs = (obj.cum_con_shock{ishock} - obj.cum_con_baseline) / shock;
 			if ishock == 5
 				obj.mpcs(5).mpcs = mpcs;
-			end
+            end
+            
 
 			if ~obj.options.no_inc_risk
 				% Unconditional mean MPC
 % 				obj.mpcs(ishock).quarterly = dot(mpcs(:,1), pmf(:));
                 for i = 1:5
                     obj.mpcs(ishock).quarterly(i) = dot(mpcs(:,i), pmf(:));
+                    
+                    [bg, ag] = ndgrid(obj.grids.b.vec, obj.grids.a.vec);
+                    
+                    if obj.options.liquid_mpc
+                        pmf_noneg = pmf .* (bg + shock >=0);
+                    else
+                        pmf_noneg = pmf .* (ag + shock >=0);
+                    end
+                    
+                    pmf_noneg = pmf_noneg ./ sum(pmf_noneg, 'all');
+                    
+                    obj.mpcs(ishock).quarterly_noneg(i) = dot(mpcs(:,i), pmf_noneg(:));
                 end
                 
 				obj.mpcs(ishock).annual = dot(sum(mpcs, 2), pmf(:));

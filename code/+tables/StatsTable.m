@@ -128,6 +128,11 @@ classdef StatsTable < tables.BaseTable
 				stats.mpcs(6).quarterly(1)
 				stats.mpcs(4).annual
 				stats.mpcs(6).annual
+                stats.mpcs(2).quarterly_noneg(1)
+                stats.mpcs(2).quarterly_noneg(2)
+                stats.mpcs(2).quarterly_noneg(3)
+                stats.mpcs(2).quarterly_noneg(4)
+                stats.mpcs(2).quarterly_noneg(5)
 			};
 
 			obj.update_current_column(out, new_entries);
@@ -278,6 +283,11 @@ classdef StatsTable < tables.BaseTable
 				stats.illiquid_mpcs(4).annual
 				stats.illiquid_mpcs(5).annual
 				stats.illiquid_mpcs(6).annual
+                stats.illiquid_mpcs(2).quarterly_noneg(1)
+                stats.illiquid_mpcs(2).quarterly_noneg(2)
+                stats.illiquid_mpcs(2).quarterly_noneg(3)
+                stats.illiquid_mpcs(2).quarterly_noneg(4)
+                stats.illiquid_mpcs(2).quarterly_noneg(5)
 			};
 
 			obj.update_current_column(out, new_entries);
