@@ -339,6 +339,28 @@ function [outparams, n] = overall_htm_target(param_opts)
         params{ii}.calibration_scales = [1];
         params{ii}.name = sprintf('Baseline 2A');
         
+        % 2A Baseline Alternative
+        for r_a = [0.001, 0.005, 0.01, 0.012, 0.0125, 0.015, 0.018, 0.02]
+            for reb_cost = [400/anninc, 450/anninc, 500/anninc, 516/anninc, 550/anninc, 600/anninc]
+                ii = ii + 1;
+                params = [params {calibrations{1}}];
+                params{ii} = params{1};
+                params{ii}.r_b = 0;
+                params{ii}.r_a = r_a;
+                r_a_bounds = [0, 0.126];
+                params{ii}.rebalance_cost = reb_cost;
+                reb_bounds = [400/anninc, 600/anninc];
+                params{ii}.calibration_vars = {'rho', 'r_a', 'rebalance_cost'};
+                params{ii}.calibration_bounds = {rho_bds, r_a_bounds, reb_bounds};
+                params{ii}.calibration_stats = {'totw', 'liqw_lt_ysixth', 'w_lt_ysixth'};
+                params{ii}.calibration_targets = [scf.mean_totw, scf.htm, scf.phtm];
+                params{ii}.calibration_scales = [1, 1, 1];
+                params{ii}.name = sprintf('Baseline 2A Alt, r_a start=%d, reb_cost start=%d', params{ii}.r_a, params{ii}.rebalance_cost);
+            end
+        end
+        
+        
+        
 %         % 1A Baseline
 %         for rho = [-0.004, -0.003, -0.002, -0.001, 0, 0.001, 0.002]
 %             ii = ii + 1;
@@ -603,26 +625,27 @@ function [outparams, n] = overall_htm_target(param_opts)
 %             params{ii}.name = sprintf('Temptation %d, rho=%d', params{ii}.temptation, params{ii}.rho);
 %         end
         
-        for rho = [-0.01, -0.005, -0.001, 0, 0.001, 0.002, 0.005, 0.01]
-            for r_a = [0.005, 0.01, 0.015, 0.02]
-                % Temptation 0.05
-                ii = ii + 1;
-                params = [params {calibrations{1}}];
-                params{ii} = params{1};
-                params{ii}.calibration_vars = {'rho'};
-%                 r_b_bds = [-0.01, 0.02];
-%                 r_a_bds = [0.005, 0.05];
-                params{ii}.calibration_bounds = {rho_bds};
-                params{ii}.calibration_stats = {'totw'};
-                params{ii}.calibration_targets = [scf.mean_totw];
-                params{ii}.calibration_scales = [1];
-                params{ii}.rho = rho;
-                params{ii}.r_b = 0.0;
-                params{ii}.r_a = r_a;
-                params{ii}.temptation = 0.05;
-                params{ii}.name = sprintf('Temptation %d, rho start=%d', params{ii}.temptation, params{ii}.rho);
-            end
-        end
+          % For tempt with exog rb and ra
+%         for rho = [-0.01, -0.005, -0.001, 0, 0.001, 0.002, 0.005, 0.01]
+%             for r_a = [0.005, 0.01, 0.015, 0.02]
+%                 % Temptation 0.05
+%                 ii = ii + 1;
+%                 params = [params {calibrations{1}}];
+%                 params{ii} = params{1};
+%                 params{ii}.calibration_vars = {'rho'};
+% %                 r_b_bds = [-0.01, 0.02];
+% %                 r_a_bds = [0.005, 0.05];
+%                 params{ii}.calibration_bounds = {rho_bds};
+%                 params{ii}.calibration_stats = {'totw'};
+%                 params{ii}.calibration_targets = [scf.mean_totw];
+%                 params{ii}.calibration_scales = [1];
+%                 params{ii}.rho = rho;
+%                 params{ii}.r_b = 0.0;
+%                 params{ii}.r_a = r_a;
+%                 params{ii}.temptation = 0.05;
+%                 params{ii}.name = sprintf('Temptation %d, rho start=%d', params{ii}.temptation, params{ii}.rho);
+%             end
+%         end
         
     end
     

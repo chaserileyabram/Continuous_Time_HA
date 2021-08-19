@@ -34,7 +34,7 @@ hist_locs = linspace(3/(2*m),3 - 3/(2*m),m-1);
 hist_mass = zeros(m-1,1);
 
 for i = 2:m
-    in_chunk = (bg > hist_chunks(i-1)) .* (bg <= hist_chunks(i));
+    in_chunk = (bg >= hist_chunks(i-1)) .* (bg < hist_chunks(i));
     hist_mass(i-1) = sum(pmf_b .* in_chunk, 'all');
 end
 
@@ -45,7 +45,7 @@ p.FaceAlpha = 0.5;
 xlim([0 3])
 hold on
 plot(bs, mpc_int(bs), 'LineWidth', 5, 'color', 'black');
-title('Baseline 1A');
+% title('Baseline 1A');
 xlabel('Wealth');
 legend('Mass', 'MPC');
 
@@ -85,7 +85,7 @@ hist_locs = linspace(3/(2*m),3 - 3/(2*m),m-1);
 hist_mass = zeros(m-1,1);
 
 for i = 2:m
-    in_chunk = (bg > hist_chunks(i-1)) .* (bg <= hist_chunks(i));
+    in_chunk = (bg >= hist_chunks(i-1)) .* (bg < hist_chunks(i));
     hist_mass(i-1) = sum(pmf_b .* in_chunk, 'all');
 end
 
@@ -96,7 +96,7 @@ p.FaceAlpha = 0.5;
 xlim([0 3])
 hold on
 plot(bs, mpc_int(bs), 'LineWidth', 5, 'color', 'black');
-title('1A, E[a] = 0.56');
+% title('1A, E[a] = 0.56');
 xlabel('Wealth');
 legend('Mass', 'MPC');
 
@@ -106,23 +106,23 @@ plot_path = sprintf('Figures/mpc_1A_Ea056.pdf');
 saveas(gcf, plot_path);
 
 
-%% 2) MPC with beta het
+%% 2a) MPC with beta het
 clear
 load('/Users/chaseabram/Dropbox/AnnualReviewsFiles/variables22.mat')
 
 mpcs = reshape(results.mpcs(5).mpcs_1_t{1}, size(results.stats.pmf));
 
 pmf_b = results.stats.pmf_a;
-pmf_low = sum(results.stats.pmf(:,:,:,1), 2); 
+pmf_low = sum(results.stats.pmf(:,:,:,1), 2) ./ sum(results.stats.pmf(:,:,:,1), 'all'); 
 
 mpcs_low = sum(mpcs(:,:,:,1) .* results.stats.pmf(:,:,:,1), 2) ./ sum(results.stats.pmf(:,:,:,1), 2);
-mpcs_mid = sum(mpcs(:,:,:,3) .* results.stats.pmf(:,:,:,3), 2) ./ sum(results.stats.pmf(:,:,:,3), 2);
+% mpcs_mid = sum(mpcs(:,:,:,3) .* results.stats.pmf(:,:,:,3), 2) ./ sum(results.stats.pmf(:,:,:,3), 2);
 mpcs_high = sum(mpcs(:,:,:,5) .* results.stats.pmf(:,:,:,5), 2) ./ sum(results.stats.pmf(:,:,:,5), 2);
 
 bg = ndgrid(results.stats.agrid);
 
 mpc_int_low = griddedInterpolant(bg, mpcs_low,'linear','none');
-mpc_int_mid = griddedInterpolant(bg, mpcs_mid,'linear','none');
+% mpc_int_mid = griddedInterpolant(bg, mpcs_mid,'linear','none');
 mpc_int_high = griddedInterpolant(bg, mpcs_high,'linear','none');
 
 n = 100;
@@ -141,7 +141,7 @@ hist_mass = zeros(m-1,1);
 hist_low_mass = zeros(m-1,1);
 
 for i = 2:m
-    in_chunk = (bg > hist_chunks(i-1)) .* (bg <= hist_chunks(i));
+    in_chunk = (bg >= hist_chunks(i-1)) .* (bg < hist_chunks(i));
     hist_mass(i-1) = sum(pmf_b .* in_chunk, 'all');
     hist_low_mass(i-1) = sum(pmf_low .* in_chunk, 'all');
 end
@@ -149,24 +149,108 @@ end
 hist_mass(m-1) = 1 - sum(hist_mass(1:m-2), 'all');
 hist_low_mass(m-1) = 1 - sum(hist_low_mass(1:m-2), 'all');
 
-p = bar(hist_locs, hist_mass);
-p.FaceAlpha = 0.5;
+
+hist_low_mass = hist_low_mass .* sum(results.stats.pmf(:,:,:,1), 'all');
+
+hist_mass = hist_mass - hist_low_mass;
+
+total_hist = [hist_low_mass hist_mass];
+
+p = bar(hist_locs, total_hist, 'stacked');
+
+% p = bar(hist_locs, hist_mass);
+p(1).FaceAlpha = 0.5;
+p(2).FaceAlpha = 0.5;
 xlim([0 3])
 hold on
-p2 = bar(hist_locs, hist_low_mass);
-p2.FaceAlpha = 0.5;
+% p2 = bar(hist_locs, hist_low_mass);
+% p2.FaceAlpha = 0.5;
+% hold on
+plot(bs, mpc_int_low(bs), 'LineWidth', 5, 'color', 'black');
 hold on
-plot(bs, mpc_int_low(bs), 'LineWidth', 3, 'LineStyle', '--', 'color', 'black');
-hold on
-plot(bs, mpc_int_mid(bs), 'LineWidth', 5, 'color', 'black');
-hold on
-plot(bs, mpc_int_high(bs), 'LineWidth', 3, 'LineStyle', '--', 'color', 'black');
-legend('Mass', 'Mass (Low type)', 'Low', 'Middle', 'High')
-title('Heterogeneous Discount Factor');
+% plot(bs, mpc_int_mid(bs), 'LineWidth', 5, 'color', 'black');
+% hold on
+plot(bs, mpc_int_high(bs), 'LineWidth', 5, 'LineStyle', '--', 'color', 'black');
+legend('Mass (Low \beta)', 'Mass (Other \beta)', 'Low \beta', 'High \beta')
+% title('Heterogeneous Discount Factor');
 xlabel('Wealth');
 
 cd('/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final');
 plot_path = sprintf('Figures/mpc_beta_het.pdf');
+% saveas(gcf, plot_path, "epsc");
+saveas(gcf, plot_path);
+
+%% 2b) MPC with beta het, betaH cal to hit total wealth (and does well on MPC)
+clear
+load('/Users/chaseabram/Dropbox/AnnualReviewsFiles/variables55.mat')
+
+mpcs = reshape(results.mpcs(5).mpcs_1_t{1}, size(results.stats.pmf));
+
+pmf_b = results.stats.pmf_a;
+pmf_low = sum(results.stats.pmf(:,:,:,1), 2) ./ sum(results.stats.pmf(:,:,:,1), 'all'); 
+
+mpcs_low = sum(mpcs(:,:,:,1) .* results.stats.pmf(:,:,:,1), 2) ./ sum(results.stats.pmf(:,:,:,1), 2);
+mpcs_high = sum(mpcs(:,:,:,2) .* results.stats.pmf(:,:,:,2), 2) ./ sum(results.stats.pmf(:,:,:,2), 2);
+
+bg = ndgrid(results.stats.agrid);
+
+mpc_int_low = griddedInterpolant(bg, mpcs_low,'linear','none');
+p_low = polyfit(bg(1:175), mpcs_low(1:175), 80);
+mpc_int_low = @(x) polyval(p_low, x);
+mpc_int_high = griddedInterpolant(bg, mpcs_high,'linear','none');
+
+n = 100;
+curve = 0.1;
+% b from 0 to 1
+bs = linspace(0,1,n);
+bs = bs .^ (1/curve);
+bs = bs .* 3;
+
+
+% Make histogram data
+m = 8;
+hist_chunks = linspace(0,3,m);
+hist_locs = linspace(3/(2*m),3 - 3/(2*m),m-1);
+hist_mass = zeros(m-1,1);
+hist_low_mass = zeros(m-1,1);
+
+for i = 2:m
+    in_chunk = (bg >= hist_chunks(i-1)) .* (bg < hist_chunks(i));
+    hist_mass(i-1) = sum(pmf_b .* in_chunk, 'all');
+    hist_low_mass(i-1) = sum(pmf_low .* in_chunk, 'all');
+end
+
+hist_mass(m-1) = 1 - sum(hist_mass(1:m-2), 'all');
+hist_low_mass(m-1) = 1 - sum(hist_low_mass(1:m-2), 'all');
+
+
+hist_low_mass = hist_low_mass .* sum(results.stats.pmf(:,:,:,1), 'all');
+
+hist_mass = hist_mass - hist_low_mass;
+
+total_hist = [hist_low_mass hist_mass];
+
+p = bar(hist_locs, total_hist, 'stacked');
+
+% p = bar(hist_locs, hist_mass);
+p(1).FaceAlpha = 0.5;
+p(2).FaceAlpha = 0.5;
+xlim([0 3])
+hold on
+% p2 = bar(hist_locs, hist_low_mass);
+% p2.FaceAlpha = 0.5;
+% hold on
+plot(bs, mpc_int_low(bs), 'LineWidth', 5, 'color', 'black');
+hold on
+% plot(bs, mpc_int_mid(bs), 'LineWidth', 5, 'color', 'black');
+% hold on
+plot(bs, mpc_int_high(bs), 'LineWidth', 5, 'LineStyle', '--', 'color', 'black');
+legend('Mass (Low \beta)', 'Mass (High \beta)', 'Low \beta', 'High \beta')
+% title('Heterogeneous Discount Factor');
+xlabel('Wealth');
+
+cd('/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final');
+plot_path = sprintf('Figures/mpc_beta_het_Hcal.pdf');
 % saveas(gcf, plot_path, "epsc");
 saveas(gcf, plot_path);
 
@@ -208,7 +292,7 @@ hist_mass = zeros(m-1,1);
 hist_high_mass = zeros(m-1,1);
 
 for i = 2:m
-    in_chunk = (bg > hist_chunks(i-1)) .* (bg <= hist_chunks(i));
+    in_chunk = (bg >= hist_chunks(i-1)) .* (bg < hist_chunks(i));
     hist_mass(i-1) = sum(pmf_b .* in_chunk, 'all');
 %     hist_low_mass(i-1) = sum(pmf_low .* in_chunk, 'all');
     hist_high_mass(i-1) = sum(pmf_high .* in_chunk, 'all');
@@ -218,21 +302,30 @@ hist_mass(m-1) = 1 - sum(hist_mass(1:m-2), 'all');
 % hist_low_mass(m-1) = 1 - sum(hist_low_mass(1:m-2), 'all');
 hist_high_mass(m-1) = 1 - sum(hist_high_mass(1:m-2), 'all');
 
-p = bar(hist_locs, hist_mass);
-p.FaceAlpha = 0.5;
+hist_high_mass = hist_high_mass .* sum(results.stats.pmf(:,:,:,5), 'all');
+hist_mass = hist_mass - hist_high_mass;
+
+total_mass = [hist_high_mass hist_mass];
+
+p = bar(hist_locs, total_mass, 'stacked');
+p(1).FaceAlpha = 0.5;
+p(2).FaceAlpha = 0.5;
+
+% p = bar(hist_locs, hist_mass);
+% p.FaceAlpha = 0.5;
 xlim([0 3])
 hold on
 % p2 = bar(hist_locs, hist_low_mass);
-p2 = bar(hist_locs, hist_high_mass);
-p2.FaceAlpha = 0.5;
-hold on
+% p2 = bar(hist_locs, hist_high_mass);
+% p2.FaceAlpha = 0.5;
+% hold on
 plot(bs, mpc_int_low(bs), 'LineWidth', 3, 'LineStyle', '--', 'color', 'black');
 hold on
 plot(bs, mpc_int_mid(bs), 'LineWidth', 3, 'color', 'black');
 hold on
 plot(bs, mpc_int_high(bs), 'LineWidth', 3, 'LineStyle', ':', 'color', 'black');
-legend('Mass', 'Mass (High type)', 'Low', 'Middle', 'High')
-title('Heterogeneous RRA=IES');
+legend('Mass (High return)', 'Mass (Other return)', 'Low return', 'Middle return', 'High return')
+% title('Heterogeneous RRA=IES');
 xlabel('Wealth');
 
 cd('/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final');
@@ -252,13 +345,13 @@ pmf_b = results.stats.pmf_a;
 pmf_high = sum(results.stats.pmf(:,:,:,5), 2) ./ sum(results.stats.pmf(:,:,:,5), 'all');
 
 mpcs_low = sum(mpcs(:,:,:,1) .* results.stats.pmf(:,:,:,1), 2) ./ sum(results.stats.pmf(:,:,:,1), 2);
-mpcs_mid = sum(mpcs(:,:,:,3) .* results.stats.pmf(:,:,:,3), 2) ./ sum(results.stats.pmf(:,:,:,3), 2);
+% mpcs_mid = sum(mpcs(:,:,:,3) .* results.stats.pmf(:,:,:,3), 2) ./ sum(results.stats.pmf(:,:,:,3), 2);
 mpcs_high = sum(mpcs(:,:,:,5) .* results.stats.pmf(:,:,:,5), 2) ./ sum(results.stats.pmf(:,:,:,5), 2);
 
 bg = ndgrid(results.stats.agrid);
 
 mpc_int_low = griddedInterpolant(bg, mpcs_low,'linear','none');
-mpc_int_mid = griddedInterpolant(bg, mpcs_mid,'linear','none');
+% mpc_int_mid = griddedInterpolant(bg, mpcs_mid,'linear','none');
 mpc_int_high = griddedInterpolant(bg, mpcs_high,'linear','none');
 
 n = 100;
@@ -278,7 +371,7 @@ hist_mass = zeros(m-1,1);
 hist_high_mass = zeros(m-1,1);
 
 for i = 2:m
-    in_chunk = (bg > hist_chunks(i-1)) .* (bg <= hist_chunks(i));
+    in_chunk = (bg >= hist_chunks(i-1)) .* (bg < hist_chunks(i));
     hist_mass(i-1) = sum(pmf_b .* in_chunk, 'all');
 %     hist_low_mass(i-1) = sum(pmf_low .* in_chunk, 'all');
     hist_high_mass(i-1) = sum(pmf_high .* in_chunk, 'all');
@@ -287,29 +380,36 @@ end
 hist_mass(m-1) = 1 - sum(hist_mass(1:m-2), 'all');
 hist_high_mass(m-1) = 1 - sum(hist_high_mass(1:m-2), 'all');
 
-p = bar(hist_locs, hist_mass);
-p.FaceAlpha = 0.5;
+
+hist_high_mass = hist_high_mass .* sum(results.stats.pmf(:,:,:,5), 'all');
+hist_mass = hist_mass - hist_high_mass;
+total_mass = [hist_high_mass hist_mass];
+
+p = bar(hist_locs, total_mass, 'stacked');
+p(1).FaceAlpha = 0.5;
+p(2).FaceAlpha = 0.5;
+
+% p = bar(hist_locs, hist_mass);
+% p.FaceAlpha = 0.5;
 xlim([0 3])
 hold on
 % bar(hist_locs, hist_low_mass);
-p2 = bar(hist_locs, hist_high_mass);
-p2.FaceAlpha = 0.5;
-hold on
+% p2 = bar(hist_locs, hist_high_mass);
+% p2.FaceAlpha = 0.5;
+% hold on
 plot(bs, mpc_int_low(bs), 'LineWidth', 3, 'LineStyle', '--', 'color', 'black');
 hold on
-plot(bs, mpc_int_mid(bs), 'LineWidth', 3, 'color', 'black');
-hold on
-plot(bs, mpc_int_high(bs), 'LineWidth', 3, 'LineStyle', ':', 'color', 'black');
-legend('Mass', 'Mass (High type)', 'Low', 'Middle', 'High')
-title('Epstein-Zin, Heterogeneous IES');
+% plot(bs, mpc_int_mid(bs), 'LineWidth', 3, 'color', 'black');
+% hold on
+plot(bs, mpc_int_high(bs), 'LineWidth', 3, 'color', 'black');
+legend('Mass (High IES)', 'Mass (Other IES)', 'Low IES', 'High IES')
+% title('Epstein-Zin, Heterogeneous IES');
 xlabel('Wealth');
 
 cd('/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final');
 plot_path = sprintf('Figures/mpc_ez_het_ies.pdf');
 saveas(gcf, plot_path);
 % saveas(gcf, plot_path, "epsc");
-
-
 
 
 %% 5) MPC surface
@@ -330,7 +430,7 @@ as = 3 .* as;
 full_as = repmat(as, [n 1]);
 mpcs = stats.mpc_int(full_bs,full_as);
 p = surf(as, bs, mpcs, 'edgecolor', 'none');
-title('MPC vs. (Liquid Wealth, Illiquid Wealth)')
+% title('MPC vs. (Liquid Wealth, Illiquid Wealth)')
 xlabel('a'), ylabel('b'), zlabel('MPC (%)')
 % set(p, 'Xdir', 'reverse');
 view(220, 30);
@@ -363,7 +463,7 @@ hist_locs = linspace(3/(2*m),3 - 3/(2*m),m-1);
 hist_mass = zeros(m-1,1);
 
 for i = 2:m
-    in_chunk = ((stats.bgrid + stats.agrid') > hist_chunks(i-1)) .* ((stats.bgrid + stats.agrid') <= hist_chunks(i));
+    in_chunk = ((stats.bgrid + stats.agrid') >= hist_chunks(i-1)) .* ((stats.bgrid + stats.agrid') < hist_chunks(i));
     hist_mass(i-1) = sum(stats.pmf_b_a .* in_chunk, 'all');
 end
 
@@ -374,7 +474,7 @@ p.FaceAlpha = 0.5;
 xlim([0 3])
 hold on
 plot(ws, mpcs_25, 'LineWidth', 3, 'LineStyle', '--', 'color', 'black')
-title('MPC vs. Total Wealth')
+% title('MPC vs. Total Wealth')
 xlabel('Total Wealth')
 hold on
 plot(ws,mpcs_m, 'LineWidth', 3, 'color', 'black')
@@ -415,7 +515,7 @@ hist_locs = linspace(3/(2*m),3 - 3/(2*m),m-1);
 hist_mass = zeros(m-1,1);
 
 for i = 2:m
-    in_chunk = ((stats.bgrid + stats.agrid') > hist_chunks(i-1)) .* ((stats.bgrid + stats.agrid') <= hist_chunks(i));
+    in_chunk = ((stats.bgrid + stats.agrid') >= hist_chunks(i-1)) .* ((stats.bgrid + stats.agrid') < hist_chunks(i));
     hist_mass(i-1) = sum(stats.pmf_b_a .* in_chunk, 'all');
 end
 
@@ -426,7 +526,7 @@ p.FaceAlpha = 0.5;
 xlim([0 3])
 hold on
 plot(ws, mpcs_25, 'LineWidth', 3, 'LineStyle', '--', 'color', 'black')
-title('MPC vs. Total Wealth (include above MPCs)')
+% title('MPC vs. Total Wealth (include above MPCs)')
 xlabel('Total Wealth')
 hold on
 plot(ws,mpcs_m, 'LineWidth', 3, 'color', 'black')
@@ -448,9 +548,9 @@ load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-15-2021-
 n = 100;
 max_l = 3.0;
 curve = 0.1;
-bs = linspace(0,max_l,n);
+bs = linspace(0,1,n);
 bs = bs .^ (1/curve);
-% bs = bs .* 3;
+bs = bs .* max_l;
 mpc_l = mpc_liquid_mean(stats,bs) ./ 100;
 
 % Make histogram data
@@ -460,8 +560,8 @@ hist_locs = linspace(max_l/(2*m),max_l - max_l/(2*m),m-1);
 hist_mass = zeros(m-1,1);
 
 for i = 2:m
-    in_chunk = (stats.bgrid > hist_chunks(i-1)) .* (stats.bgrid <= hist_chunks(i));
-    hist_mass(i-1) = sum(stats.pmf_b_a .* in_chunk, 'all');
+    in_chunk = (stats.bgrid >= hist_chunks(i-1)) .* (stats.bgrid < hist_chunks(i));
+    hist_mass(i-1) = sum(stats.pmf_b .* in_chunk, 'all');
 end
 
 hist_mass(m-1) = 1 - sum(hist_mass(1:m-2), 'all');
@@ -470,13 +570,115 @@ p = bar(hist_locs, hist_mass);
 p.FaceAlpha = 0.5;
 xlim([0 max_l])
 hold on
-plot(bs, mpc_l, 'LineWidth', 3, 'LineStyle', '--', 'color', 'black')
-title('MPC vs. Liquid Wealth')
+plot(bs, mpc_l, 'LineWidth', 3, 'color', 'black')
+% title('MPC vs. Liquid Wealth')
 xlabel('Liquid Wealth')
 legend('Mass','Mean')
 
 cd('/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final');
 plot_path = sprintf('Figures/mpc_l_2A.pdf');
+% saveas(gcf, plot_path, "epsc");
+saveas(gcf, plot_path);
+
+%% 6c) MPC by illiquid wealth (2A)
+clear
+cd('/Users/chaseabram/UChiGit/Continuous_Time_HA')
+load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-15-2021-00:22:19/output_1.mat')
+
+n = 100;
+max_i = 3.0;
+curve = 0.1;
+as = linspace(0.6,1,n);
+as = as .^ (1/curve);
+as = as .* max_i;
+mpc_i = mpc_illiquid_mean(stats,as) ./ 100;
+
+% Make histogram data
+m = 8;
+hist_chunks = linspace(0,max_i,m);
+hist_locs = linspace(max_i/(2*m),max_i - max_i/(2*m),m-1);
+hist_mass = zeros(m-1,1);
+
+for i = 2:m
+    in_chunk = (stats.agrid >= hist_chunks(i-1)) .* (stats.agrid < hist_chunks(i));
+    hist_mass(i-1) = sum(stats.pmf_a .* in_chunk, 'all');
+end
+
+hist_mass(m-1) = 1 - sum(hist_mass(1:m-2), 'all');
+
+p = bar(hist_locs, hist_mass);
+p.FaceAlpha = 0.5;
+xlim([0 max_i])
+hold on
+plot(as, mpc_i, 'LineWidth', 3, 'color', 'black')
+% title('MPC vs. Liquid Wealth')
+xlabel('Illiquid Wealth')
+legend('Mass','Mean')
+
+cd('/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final');
+plot_path = sprintf('Figures/mpc_i_2A.pdf');
+% saveas(gcf, plot_path, "epsc");
+saveas(gcf, plot_path);
+
+%% 6d) MPC by illiquid wealth with HtM bars (2A)
+clear
+cd('/Users/chaseabram/UChiGit/Continuous_Time_HA')
+load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-15-2021-00:22:19/output_1.mat')
+
+n = 100;
+max_i = 3.0;
+curve = 0.1;
+as = linspace(0.6,1,n);
+as = as .^ (1/curve);
+as = as .* max_i;
+mpc_i = mpc_illiquid_mean(stats,as) ./ 100;
+
+[bg, ag, yg] = ndgrid(stats.bgrid, stats.agrid, income.y.vec);
+HtM_1000 = 1000/67131.733;
+pmf_b_a_y = squeeze(stats.pmf);
+
+% pmf_htm = stats.pmf_b_a .* (bg <= HtM_1000) ./ sum(stats.pmf_b_a .* (bg <= HtM_1000), 'all');
+pmf_htm = pmf_b_a_y .* (bg <= yg/6) ./ sum(pmf_b_a_y .* (bg <= yg/6), 'all');
+pmf_htm = sum(pmf_htm, [1 3]);
+
+
+% Make histogram data
+m = 8;
+hist_chunks = linspace(0,max_i,m);
+hist_locs = linspace(max_i/(2*m),max_i - max_i/(2*m),m-1);
+hist_mass = zeros(m-1,1);
+hist_mass_htm = zeros(m-1,1);
+
+for i = 2:m
+    in_chunk = (stats.agrid >= hist_chunks(i-1)) .* (stats.agrid < hist_chunks(i));
+    hist_mass(i-1) = sum(stats.pmf_a .* in_chunk, 'all');
+    hist_mass_htm(i-1) = sum(pmf_htm' .* in_chunk, 'all');
+end
+
+hist_mass(m-1) = 1 - sum(hist_mass(1:m-2), 'all');
+hist_mass_htm(m-1) = 1 - sum(hist_mass_htm(1:m-2), 'all');
+
+hist_mass_htm = hist_mass_htm .* sum(pmf_b_a_y .* (bg <= yg/6), 'all');
+
+hist_mass = hist_mass - hist_mass_htm;
+
+both_mass = [hist_mass_htm hist_mass];
+
+p = bar(hist_locs, both_mass, 'stacked');
+p(1).FaceAlpha = 0.5;
+p(2).FaceAlpha = 0.5;
+
+% p = bar(hist_locs, hist_mass);
+% p.FaceAlpha = 0.5;
+xlim([0 max_i])
+hold on
+plot(as, mpc_i, 'LineWidth', 3, 'color', 'black')
+% title('MPC vs. Liquid Wealth')
+xlabel('Illiquid Wealth')
+legend('Mass (HtM)', 'Mass (Other)','Mean')
+
+cd('/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final');
+plot_path = sprintf('Figures/mpc_i_2A_HtM.pdf');
 % saveas(gcf, plot_path, "epsc");
 saveas(gcf, plot_path);
 
@@ -499,7 +701,7 @@ hist_locs_2A = linspace(3/(2*m),3 - 3/(2*m),m-1);
 hist_mass_2A = zeros(m-1,1);
 
 for i = 2:m
-    in_chunk = ((stats.bgrid + stats.agrid') > hist_chunks(i-1)) .* ((stats.bgrid + stats.agrid') <= hist_chunks(i));
+    in_chunk = ((stats.bgrid + stats.agrid') >= hist_chunks(i-1)) .* ((stats.bgrid + stats.agrid') < hist_chunks(i));
     hist_mass_2A(i-1) = sum(stats.pmf_b_a .* in_chunk, 'all');
 end
 
@@ -534,25 +736,30 @@ hist_locs_1A = linspace(3/(2*m),3 - 3/(2*m),m-1);
 hist_mass_1A = zeros(m-1,1);
 
 for i = 2:m
-    in_chunk = (bg > hist_chunks(i-1)) .* (bg <= hist_chunks(i));
+    in_chunk = (bg >= hist_chunks(i-1)) .* (bg < hist_chunks(i));
     hist_mass_1A(i-1) = sum(pmf_b .* in_chunk, 'all');
 end
 
 hist_mass_1A(m-1) = 1 - sum(hist_mass_1A(1:m-2), 'all');
 
+both_mass = [hist_mass_2A, hist_mass_1A];
 
-p2 = bar(hist_locs_2A, hist_mass_2A);
-p2.FaceAlpha = 0.5;
+p2 = bar(hist_locs_2A, both_mass, 'stacked');
+p2(1).FaceAlpha = 0.5;
+p2(2).FaceAlpha = 0.5;
+
+% p2 = bar(hist_locs_2A, hist_mass_2A);
+% p2.FaceAlpha = 0.5;
 xlim([0 3])
 hold on
-p1 = bar(hist_locs_1A, hist_mass_1A);
-p1.FaceAlpha = 0.5;
-xlim([0 3])
-hold on
+% p1 = bar(hist_locs_1A, hist_mass_1A);
+% p1.FaceAlpha = 0.5;
+% xlim([0 3])
+% hold on
 plot(ws, mpcs_2A, 'LineWidth', 3, 'color', 'black');
 hold on
 plot(bs, mpcs_1A_int(bs), 'LineWidth', 3, 'LineStyle', '--', 'color', 'black');
-title('Baseline 2A and 1A');
+% title('Baseline 2A and 1A');
 xlabel('Wealth');
 legend('2A Mass', '1A Mass', '2A Mean MPC', '1A MPC')
 
@@ -581,14 +788,14 @@ hist_locs_2A = linspace(3/(2*m),3 - 3/(2*m),m-1);
 hist_mass_2A = zeros(m-1,1);
 
 for i = 2:m
-    in_chunk = ((stats.bgrid + stats.agrid') > hist_chunks(i-1)) .* ((stats.bgrid + stats.agrid') <= hist_chunks(i));
+    in_chunk = ((stats.bgrid + stats.agrid') >= hist_chunks(i-1)) .* ((stats.bgrid + stats.agrid') < hist_chunks(i));
     hist_mass_2A(i-1) = sum(stats.pmf_b_a .* in_chunk, 'all');
 end
 
 hist_mass_2A(m-1) = 1 - sum(hist_mass_2A(1:m-2), 'all');
 
 
-% Load baseline 1A
+% Load 1A with beta het
 cd('/Users/chaseabram/UChiGit/Discrete_HA')
 load('/Users/chaseabram/Dropbox/AnnualReviewsFiles/variables22.mat')
 
@@ -616,25 +823,31 @@ hist_locs_1A = linspace(3/(2*m),3 - 3/(2*m),m-1);
 hist_mass_1A = zeros(m-1,1);
 
 for i = 2:m
-    in_chunk = (bg > hist_chunks(i-1)) .* (bg <= hist_chunks(i));
+    in_chunk = (bg >= hist_chunks(i-1)) .* (bg < hist_chunks(i));
     hist_mass_1A(i-1) = sum(pmf_b .* in_chunk, 'all');
 end
 
 hist_mass_1A(m-1) = 1 - sum(hist_mass_1A(1:m-2), 'all');
 
+both_mass = [hist_mass_2A, hist_mass_1A];
 
-p2 = bar(hist_locs_2A, hist_mass_2A);
-p2.FaceAlpha = 0.5;
+p2 = bar(hist_locs_2A, both_mass, 'stacked');
+p2(1).FaceAlpha = 0.5;
+p2(2).FaceAlpha = 0.5;
+
+
+% p2 = bar(hist_locs_2A, hist_mass_2A);
+% p2.FaceAlpha = 0.5;
 xlim([0 3])
 hold on
-p1 = bar(hist_locs_1A, hist_mass_1A);
-p1.FaceAlpha = 0.5;
-xlim([0 3])
-hold on
+% p1 = bar(hist_locs_1A, hist_mass_1A);
+% p1.FaceAlpha = 0.5;
+% xlim([0 3])
+% hold on
 plot(ws, mpcs_2A, 'LineWidth', 3, 'color', 'black');
 hold on
 plot(bs, mpcs_1A_int(bs), 'LineWidth', 3, 'LineStyle', '--', 'color', 'black');
-title('Baseline 2A and (1A with discount factor heterogeneity)');
+% title('Baseline 2A and (1A with discount factor heterogeneity)');
 xlabel('Wealth');
 legend('2A Mass', '1A Mass', '2A Mean MPC', '1A MPC')
 
@@ -695,7 +908,7 @@ function lw_q = liq_wealth_quantile(s,ws,q)
 end
 
 
-% Need to write function for mean at w also
+% function for mean at w
 function mpc_w = mpc_wealth_mean(s,ws)
     for i = 1:length(ws)
         bs = linspace(0,ws(i),100);
@@ -712,8 +925,8 @@ end
 
 function mpc_l = mpc_liquid_mean(s,ls)
 
-    pmf_l = sum(s.pmf, [2 3 4 5]);
-    pmf_int = griddedInterpolant(s.bgrid, pmf_l,'linear','none');
+%     pmf_l = sum(s.pmf, [2 3 4 5]);
+%     pmf_int = griddedInterpolant(s.bgrid, pmf_l,'linear','none');
     
     [bg, ag] = ndgrid(s.bgrid, s.agrid);
     mpc_tmp = sum(s.mpc_int(bg, ag) .* s.pmf_b_a, 2) ./ sum(s.pmf_b_a, 2);
@@ -721,17 +934,19 @@ function mpc_l = mpc_liquid_mean(s,ls)
     mpc_int = griddedInterpolant(s.bgrid, mpc_tmp,'linear','none');
     
     mpc_l = mpc_int(ls);
+end
 
-%     for i = 1:length(ls)
-%         
-%         pmfs = s.pmf_int(bs, as);
-%         pmfs = pmfs ./ sum(pmfs,'all');
-%         mpcs = s.mpc_int(bs, as);
-% 
-% 
-%         mpc_l(i) = sum(mpcs .* pmfs, 'all');
-%     end
+function mpc_i = mpc_illiquid_mean(s,is)
 
+%     pmf_i = sum(s.pmf, [1 3 4 5]);
+%     pmf_int = griddedInterpolant(s.agrid, pmf_i,'linear','none');
+    
+    [bg, ag] = ndgrid(s.bgrid, s.agrid);
+    mpc_tmp = sum(s.mpc_int(bg, ag) .* s.pmf_b_a, 1) ./ sum(s.pmf_b_a, 1);
+    
+    mpc_int = griddedInterpolant(s.agrid, mpc_tmp,'linear','none');
+    
+    mpc_i = mpc_int(is);
 end
 
 % MPC out of illiquid wealth, no negative shocking allowed

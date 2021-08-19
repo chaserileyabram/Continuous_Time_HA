@@ -1,8 +1,12 @@
 clear
 
+cd('/Users/chaseabram/UChiGit/Continuous_Time_HA');
+
 % Change file path when running locally
 local_run = true;
+% local_path = 'output/server-all-08-19-2021-07:32:10';
 local_path = 'output/server-all-08-15-2021-00:22:19';
+name_ext = '';
 
 [~, currdir] = fileparts(pwd());
 if ~strcmp(currdir, 'Continuous_Time_HA')
@@ -48,8 +52,8 @@ try
                 % perform decomp wrt one-asset model
     %             decomp_oneasset(ind) = statistics.decomp_twoasset_oneasset(oneasset,s(ind));
             else
-                % Junk to keep indexing right
-                decomp_base(ind) = decomp_base(ind-1);
+                % Make 1A the baseline for 1A decomps
+                decomp_base(ind) = statistics.decomp_baseline(s(ind), s(1));
             end
             
             stats{ind} = aux.add_comparison_decomps(params(ind),...
@@ -63,14 +67,19 @@ try
 
     tobj = tables.StatsTable(params, stats);
     output_table = tobj.create(params, stats);
-
-    csvpath = fullfile('output', 'output_table.csv');
+    
+    csvname = strcat('output_table_', name_ext, '.csv');
+%     csvpath = fullfile('output', 'output_table.csv');
+    csvpath = fullfile('output', csvname);
     writetable(output_table, csvpath, 'WriteRowNames', true);
 
-    xlxpath = fullfile('output', 'output_table.xlsx');
+    xlxname = strcat('output_table_', name_ext, '.xlsx');
+%     xlxpath = fullfile('output', 'output_table.xlsx');
+    xlxpath = fullfile('output', xlxname);
     writetable(output_table, xlxpath, 'WriteRowNames', true);
 
-    matpath = fullfile('output', 'output_table.mat');
+    matname = strcat('output_table_', name_ext, '.mat');
+    matpath = fullfile('output', matname);
     save(matpath, 'output_table');
 catch ME
     fprintf('Catching display_exception_stack...?\n')
