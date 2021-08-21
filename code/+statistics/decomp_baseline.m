@@ -70,12 +70,23 @@ function decomp = decomp_baseline(s0, s1)
     Em1 = dot(m1(:), pmf1(:));
     
     if p0.rebalance_rate == 0
-        m0_x = sum(m0_x .*pmf0_x, 2);
+        m0_x = sum(m0_x .*pmf0_x, 2) ./ sum(pmf0_x,2);
         pmf0_x = sum(pmf0_x, 2);
         
-        m1_x = sum(m1_x .*pmf1_x, 2);
-        pmf1_x = sum(pmf1_x, 2);
+%         m1_x = sum(m1_x .*pmf1_x, 2) ./ sum(pmf1_x,2);
+%         pmf1_x = sum(pmf1_x, 2);
+        
+        m1_x = mpc_wealth_mean(stats1,bgrid)';
+        pmf1_x = mpc_wealth_pmf(stats1,bgrid)';
+        
+        % Make match Em1 if aggregated
+        m1_x = m1_x .* Em1 ./ sum(m1_x .* pmf1_x, 'all');
     end
+    
+    
+    
+    
+    
 
     if p0.rebalance_rate == 0 %p0.OneAsset
         grids = {bgrid};
@@ -101,7 +112,8 @@ function decomp = decomp_baseline(s0, s1)
         if p0.rebalance_rate == 0 %p0.OneAsset
             b0_a0 = x;
             b0_amax = x;
-            bmax = inf;
+            bmax_a0 = inf;
+            bmax_amax = inf;
         else%if ~p0.OneAsset
             b0_a0 = [x, x];
             b0_amax = [x, inf];
@@ -111,9 +123,11 @@ function decomp = decomp_baseline(s0, s1)
 
         decomp.term2a(ia) = m0g1interp(b0_a0) - m0g0interp(b0_a0);
 
-        if p0.rebalance_rate == 0 %p0.OneAsset
-            decomp.term2b(ia) = (m0g1interp(inf) - m0g1interp(x)) ...
-                - (m0g0interp(inf) - m0g0interp(x));
+        if false %p0.rebalance_rate == 0 %p0.OneAsset
+%             decomp.term2b(ia) = (m0g1interp(inf) - m0g1interp(x)) ...
+%                 - (m0g0interp(inf) - m0g0interp(x));
+%             decomp.term2c(ia) = (m0g1interp(inf) - m0g1interp(b0_a0)) ...
+%                 - (m0g0interp(b0_a0) - m0g0interp(b0_a0));
         else
             decomp.term2b(ia) = (m0g1interp(b0_amax) - m0g1interp(b0_a0)) ...
                 - (m0g0interp(b0_amax) - m0g0interp(b0_a0));
@@ -126,7 +140,7 @@ end
 % function for mean at w
 function mpc_w = mpc_wealth_mean(s,ws)
     for i = 1:length(ws)
-        bs = linspace(0,ws(i),100);
+        bs = linspace(0,ws(i),10000);
         as = ws(i) - bs;
         pmfs = s.pmf_int(bs, as);
         pmfs = pmfs ./ sum(pmfs,'all');
@@ -141,15 +155,15 @@ end
 % function for pmf at w
 function w_pmf = mpc_wealth_pmf(s,ws)
     for i = 1:length(ws)
-        bs = linspace(0,ws(i),100);
+        bs = linspace(0,ws(i),10000);
         as = ws(i) - bs;
-        pmfs = s.pmf_int(bs, as);
-%         pmfs = pmfs ./ sum(pmfs,'all');
+        pmfs_raw = s.pmf_int(bs, as);
+        pmfs = pmfs_raw ./ sum(pmfs_raw,'all');
 %         mpcs = s.mpc_int(bs, as);
 
 %         cdf_int = aux.pctile_interpolant(mpcs, pmfs);
 
-        w_pmf(i) = sum(pmfs, 'all');
+        w_pmf(i) = sum(pmfs_raw .* pmfs, 'all');
     end
     
     w_pmf = w_pmf ./ sum(w_pmf,'all');

@@ -337,27 +337,31 @@ function [outparams, n] = overall_htm_target(param_opts)
         params{ii}.calibration_stats = {'totw'};
         params{ii}.calibration_targets = [scf.mean_totw];
         params{ii}.calibration_scales = [1];
-        params{ii}.name = sprintf('Baseline 2A');
+        if param_opts.ComputeMPCS_news
+            params{ii}.name = sprintf('Baseline 2A (with news)');
+        else
+            params{ii}.name = sprintf('Baseline 2A');
+        end
         
         % 2A Baseline Alternative
-        for r_a = [0.001, 0.005, 0.01, 0.012, 0.0125, 0.015, 0.018, 0.02]
-            for reb_cost = [400/anninc, 450/anninc, 500/anninc, 516/anninc, 550/anninc, 600/anninc]
-                ii = ii + 1;
-                params = [params {calibrations{1}}];
-                params{ii} = params{1};
-                params{ii}.r_b = 0;
-                params{ii}.r_a = r_a;
-                r_a_bounds = [0, 0.126];
-                params{ii}.rebalance_cost = reb_cost;
-                reb_bounds = [400/anninc, 600/anninc];
-                params{ii}.calibration_vars = {'rho', 'r_a', 'rebalance_cost'};
-                params{ii}.calibration_bounds = {rho_bds, r_a_bounds, reb_bounds};
-                params{ii}.calibration_stats = {'totw', 'liqw_lt_ysixth', 'w_lt_ysixth'};
-                params{ii}.calibration_targets = [scf.mean_totw, scf.htm, scf.phtm];
-                params{ii}.calibration_scales = [1, 1, 1];
-                params{ii}.name = sprintf('Baseline 2A Alt, r_a start=%d, reb_cost start=%d', params{ii}.r_a, params{ii}.rebalance_cost);
-            end
-        end
+%         for r_a = [0.001, 0.005, 0.01, 0.012, 0.0125, 0.015, 0.018, 0.02]
+%             for reb_cost = [400/anninc, 450/anninc, 500/anninc, 516/anninc, 550/anninc, 600/anninc]
+%                 ii = ii + 1;
+%                 params = [params {calibrations{1}}];
+%                 params{ii} = params{1};
+%                 params{ii}.r_b = 0;
+%                 params{ii}.r_a = r_a;
+%                 r_a_bounds = [0, 0.126];
+%                 params{ii}.rebalance_cost = reb_cost;
+%                 reb_bounds = [400/anninc, 600/anninc];
+%                 params{ii}.calibration_vars = {'rho', 'r_a', 'rebalance_cost'};
+%                 params{ii}.calibration_bounds = {rho_bds, r_a_bounds, reb_bounds};
+%                 params{ii}.calibration_stats = {'totw', 'liqw_lt_ysixth', 'w_lt_ysixth'};
+%                 params{ii}.calibration_targets = [scf.mean_totw, scf.htm, scf.phtm];
+%                 params{ii}.calibration_scales = [1, 1, 1];
+%                 params{ii}.name = sprintf('Baseline 2A Alt, r_a start=%d, reb_cost start=%d', params{ii}.r_a, params{ii}.rebalance_cost);
+%             end
+%         end
         
         
         

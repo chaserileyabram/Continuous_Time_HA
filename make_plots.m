@@ -13,9 +13,12 @@ mpcs = reshape(results.mpcs(5).mpcs_1_t{1}, size(results.stats.pmf));
 
 pmf_b = sum(results.stats.pmf, 2);
 
+
 mpcs_b = sum(mpcs .* results.stats.pmf, 2) ./ pmf_b;
 
 bg = ndgrid(results.stats.agrid);
+
+pmf_htm = sum(results.stats.pmf .* (bg < 1000/Sparams.numeraire_in_dollars), 2)./ sum(results.stats.pmf .* (bg < 1000/Sparams.numeraire_in_dollars), 'all');
 
 mpc_int = griddedInterpolant(bg, mpcs_b,'linear','none');
 
@@ -32,29 +35,38 @@ m = 8;
 hist_chunks = linspace(0,3,m);
 hist_locs = linspace(3/(2*m),3 - 3/(2*m),m-1);
 hist_mass = zeros(m-1,1);
+hist_mass_htm = zeros(m-1,1);
 
 for i = 2:m
     in_chunk = (bg >= hist_chunks(i-1)) .* (bg < hist_chunks(i));
     hist_mass(i-1) = sum(pmf_b .* in_chunk, 'all');
+    hist_mass_htm(i-1) = sum(pmf_htm .* in_chunk, 'all');
 end
 
 hist_mass(m-1) = 1 - sum(hist_mass(1:m-2), 'all');
+hist_mass_htm(m-1) = 1 - sum(hist_mass_htm(1:m-2), 'all');
+hist_mass_htm = hist_mass_htm .* sum(results.stats.pmf .* (bg < 1000/Sparams.numeraire_in_dollars), 'all');
+hist_mass = hist_mass - hist_mass_htm;
 
-p = bar(hist_locs, hist_mass);
-p.FaceAlpha = 0.5;
+total_mass = [hist_mass hist_mass_htm];
+
+p = bar(hist_locs, total_mass, 'stacked');
+p(1).FaceAlpha = 0.5;
+p(2).FaceAlpha = 0.5;
 xlim([0 3])
 hold on
 plot(bs, mpc_int(bs), 'LineWidth', 5, 'color', 'black');
 % title('Baseline 1A');
 xlabel('Wealth');
-legend('Mass', 'MPC');
-
+legend('Mass (NHtM)', 'Mass (HtM)', 'MPC', 'Location', 'north');
+ax = gca;
+ax.FontSize = 14;
 cd('/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final');
 plot_path = sprintf('Figures/mpc_1A_base.pdf');
 % saveas(gcf, plot_path, "epsc");
 saveas(gcf, plot_path);
 
-%% 1b) MPC
+%% 1b) MPC with Ea = 0.56
 clear
 % Load baseline 1A
 cd('/Users/chaseabram/UChiGit/Discrete_HA')
@@ -68,6 +80,8 @@ mpcs_b = sum(mpcs .* results.stats.pmf, 2) ./ pmf_b;
 
 bg = ndgrid(results.stats.agrid);
 
+pmf_htm = sum(results.stats.pmf .* (bg < 1000/Sparams.numeraire_in_dollars), 2)./ sum(results.stats.pmf .* (bg < 1000/Sparams.numeraire_in_dollars), 'all');
+
 mpc_int = griddedInterpolant(bg, mpcs_b,'linear','none');
 
 n = 100;
@@ -83,23 +97,32 @@ m = 8;
 hist_chunks = linspace(0,3,m);
 hist_locs = linspace(3/(2*m),3 - 3/(2*m),m-1);
 hist_mass = zeros(m-1,1);
+hist_mass_htm = zeros(m-1,1);
 
 for i = 2:m
     in_chunk = (bg >= hist_chunks(i-1)) .* (bg < hist_chunks(i));
     hist_mass(i-1) = sum(pmf_b .* in_chunk, 'all');
+    hist_mass_htm(i-1) = sum(pmf_htm .* in_chunk, 'all');
 end
 
 hist_mass(m-1) = 1 - sum(hist_mass(1:m-2), 'all');
+hist_mass_htm(m-1) = 1 - sum(hist_mass_htm(1:m-2), 'all');
+hist_mass_htm = hist_mass_htm .* sum(results.stats.pmf .* (bg < 1000/Sparams.numeraire_in_dollars), 'all');
+hist_mass = hist_mass - hist_mass_htm;
 
-p = bar(hist_locs, hist_mass);
-p.FaceAlpha = 0.5;
+total_mass = [hist_mass hist_mass_htm];
+
+p = bar(hist_locs, total_mass, 'stacked');
+p(1).FaceAlpha = 0.5;
+p(2).FaceAlpha = 0.5;
 xlim([0 3])
 hold on
 plot(bs, mpc_int(bs), 'LineWidth', 5, 'color', 'black');
 % title('1A, E[a] = 0.56');
 xlabel('Wealth');
-legend('Mass', 'MPC');
-
+legend('Mass', 'MPC', 'Location', 'north');
+ax = gca;
+ax.FontSize = 14;
 cd('/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final');
 plot_path = sprintf('Figures/mpc_1A_Ea056.pdf');
 % saveas(gcf, plot_path, "epsc");
@@ -113,9 +136,9 @@ load('/Users/chaseabram/Dropbox/AnnualReviewsFiles/variables22.mat')
 mpcs = reshape(results.mpcs(5).mpcs_1_t{1}, size(results.stats.pmf));
 
 pmf_b = results.stats.pmf_a;
-pmf_low = sum(results.stats.pmf(:,:,:,1), 2) ./ sum(results.stats.pmf(:,:,:,1), 'all'); 
+pmf_low = sum(results.stats.pmf(:,:,:,1:2), [2 4]) ./ sum(results.stats.pmf(:,:,:,1:2), 'all'); 
 
-mpcs_low = sum(mpcs(:,:,:,1) .* results.stats.pmf(:,:,:,1), 2) ./ sum(results.stats.pmf(:,:,:,1), 2);
+mpcs_low = sum(mpcs(:,:,:,1:2) .* results.stats.pmf(:,:,:,1:2), [2 4]) ./ sum(results.stats.pmf(:,:,:,1:2), [2 4]);
 % mpcs_mid = sum(mpcs(:,:,:,3) .* results.stats.pmf(:,:,:,3), 2) ./ sum(results.stats.pmf(:,:,:,3), 2);
 mpcs_high = sum(mpcs(:,:,:,5) .* results.stats.pmf(:,:,:,5), 2) ./ sum(results.stats.pmf(:,:,:,5), 2);
 
@@ -150,11 +173,11 @@ hist_mass(m-1) = 1 - sum(hist_mass(1:m-2), 'all');
 hist_low_mass(m-1) = 1 - sum(hist_low_mass(1:m-2), 'all');
 
 
-hist_low_mass = hist_low_mass .* sum(results.stats.pmf(:,:,:,1), 'all');
+hist_low_mass = hist_low_mass .* sum(results.stats.pmf(:,:,:,1:2), 'all');
 
 hist_mass = hist_mass - hist_low_mass;
 
-total_hist = [hist_low_mass hist_mass];
+total_hist = [hist_mass hist_low_mass];
 
 p = bar(hist_locs, total_hist, 'stacked');
 
@@ -171,7 +194,9 @@ hold on
 % plot(bs, mpc_int_mid(bs), 'LineWidth', 5, 'color', 'black');
 % hold on
 plot(bs, mpc_int_high(bs), 'LineWidth', 5, 'LineStyle', '--', 'color', 'black');
-legend('Mass (Low \beta)', 'Mass (Other \beta)', 'Low \beta', 'High \beta')
+legend('Mass (Other \beta)', 'Mass (Low \beta s)', 'Low \beta s', 'High \beta', 'Location', 'north')
+ax = gca;
+ax.FontSize = 14;
 % title('Heterogeneous Discount Factor');
 xlabel('Wealth');
 
@@ -228,24 +253,31 @@ hist_low_mass = hist_low_mass .* sum(results.stats.pmf(:,:,:,1), 'all');
 
 hist_mass = hist_mass - hist_low_mass;
 
-total_hist = [hist_low_mass hist_mass];
+total_hist = [hist_mass hist_low_mass];
 
 p = bar(hist_locs, total_hist, 'stacked');
 
 % p = bar(hist_locs, hist_mass);
 p(1).FaceAlpha = 0.5;
 p(2).FaceAlpha = 0.5;
-xlim([0 3])
+xlim([0.03 3])
 hold on
 % p2 = bar(hist_locs, hist_low_mass);
 % p2.FaceAlpha = 0.5;
 % hold on
-plot(bs, mpc_int_low(bs), 'LineWidth', 5, 'color', 'black');
+cut = 85;
+bs1 = bs(1:cut);
+bs2 = bs(cut+1:end);
+plot(bs1, mpc_int_low(bs1), 'LineWidth', 5, 'color', 'black');
+hold on
+plot(bs2, mpc_int_low(bs2), 'LineWidth', 5, 'LineStyle', ':', 'color', 'black');
 hold on
 % plot(bs, mpc_int_mid(bs), 'LineWidth', 5, 'color', 'black');
 % hold on
 plot(bs, mpc_int_high(bs), 'LineWidth', 5, 'LineStyle', '--', 'color', 'black');
-legend('Mass (Low \beta)', 'Mass (High \beta)', 'Low \beta', 'High \beta')
+legend('Mass (High \beta)', 'Mass (Low \beta)', 'Low \beta', 'Low \beta (no mass)', 'High \beta', 'Location', 'north')
+ax = gca;
+ax.FontSize = 14;
 % title('Heterogeneous Discount Factor');
 xlabel('Wealth');
 
@@ -305,7 +337,7 @@ hist_high_mass(m-1) = 1 - sum(hist_high_mass(1:m-2), 'all');
 hist_high_mass = hist_high_mass .* sum(results.stats.pmf(:,:,:,5), 'all');
 hist_mass = hist_mass - hist_high_mass;
 
-total_mass = [hist_high_mass hist_mass];
+total_mass = [hist_mass hist_high_mass];
 
 p = bar(hist_locs, total_mass, 'stacked');
 p(1).FaceAlpha = 0.5;
@@ -324,7 +356,9 @@ hold on
 plot(bs, mpc_int_mid(bs), 'LineWidth', 3, 'color', 'black');
 hold on
 plot(bs, mpc_int_high(bs), 'LineWidth', 3, 'LineStyle', ':', 'color', 'black');
-legend('Mass (High return)', 'Mass (Other return)', 'Low return', 'Middle return', 'High return')
+legend('Mass (Other return)', 'Mass (High return)', 'Low return', 'Middle return', 'High return', 'Location', 'north')
+ax = gca;
+ax.FontSize = 14;
 % title('Heterogeneous RRA=IES');
 xlabel('Wealth');
 
@@ -383,7 +417,7 @@ hist_high_mass(m-1) = 1 - sum(hist_high_mass(1:m-2), 'all');
 
 hist_high_mass = hist_high_mass .* sum(results.stats.pmf(:,:,:,5), 'all');
 hist_mass = hist_mass - hist_high_mass;
-total_mass = [hist_high_mass hist_mass];
+total_mass = [hist_mass hist_high_mass];
 
 p = bar(hist_locs, total_mass, 'stacked');
 p(1).FaceAlpha = 0.5;
@@ -402,7 +436,9 @@ hold on
 % plot(bs, mpc_int_mid(bs), 'LineWidth', 3, 'color', 'black');
 % hold on
 plot(bs, mpc_int_high(bs), 'LineWidth', 3, 'color', 'black');
-legend('Mass (High IES)', 'Mass (Other IES)', 'Low IES', 'High IES')
+legend('Mass (Other IES)', 'Mass (High IES)', 'Low IES', 'High IES', 'Location', 'north')
+ax = gca;
+ax.FontSize = 14;
 % title('Epstein-Zin, Heterogeneous IES');
 xlabel('Wealth');
 
@@ -432,6 +468,8 @@ mpcs = stats.mpc_int(full_bs,full_as);
 p = surf(as, bs, mpcs, 'edgecolor', 'none');
 % title('MPC vs. (Liquid Wealth, Illiquid Wealth)')
 xlabel('a'), ylabel('b'), zlabel('MPC (%)')
+ax = gca;
+ax.FontSize = 14;
 % set(p, 'Xdir', 'reverse');
 view(220, 30);
 % view(30, 30);
@@ -479,8 +517,10 @@ xlabel('Total Wealth')
 hold on
 plot(ws,mpcs_m, 'LineWidth', 3, 'color', 'black')
 hold on
-plot(ws, mpcs_75, 'LineWidth', 3, 'LineStyle', '--', 'color', 'black')
-legend('Mass','First Quartile', 'Mean', 'Third Quartile')
+plot(ws, mpcs_75, 'LineWidth', 3, 'LineStyle', ':', 'color', 'black')
+legend('Mass','First Quartile', 'Mean', 'Third Quartile', 'Location', 'north')
+ax = gca;
+ax.FontSize = 14;
 xlabel('Wealth');
 
 cd('/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final');
@@ -531,8 +571,10 @@ xlabel('Total Wealth')
 hold on
 plot(ws,mpcs_m, 'LineWidth', 3, 'color', 'black')
 hold on
-plot(ws, mpcs_75, 'LineWidth', 3, 'LineStyle', '--', 'color', 'black')
-legend('Mass','First Quartile', 'Mean', 'Third Quartile')
+plot(ws, mpcs_75, 'LineWidth', 3, 'LineStyle', ':', 'color', 'black')
+legend('Mass','First Quartile', 'Mean', 'Third Quartile', 'Location', 'north')
+ax = gca;
+ax.FontSize = 14;
 xlabel('Wealth');
 
 cd('/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final');
@@ -573,8 +615,9 @@ hold on
 plot(bs, mpc_l, 'LineWidth', 3, 'color', 'black')
 % title('MPC vs. Liquid Wealth')
 xlabel('Liquid Wealth')
-legend('Mass','Mean')
-
+legend('Mass','Mean', 'Location', 'north')
+ax = gca;
+ax.FontSize = 14;
 cd('/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final');
 plot_path = sprintf('Figures/mpc_l_2A.pdf');
 % saveas(gcf, plot_path, "epsc");
@@ -613,8 +656,9 @@ hold on
 plot(as, mpc_i, 'LineWidth', 3, 'color', 'black')
 % title('MPC vs. Liquid Wealth')
 xlabel('Illiquid Wealth')
-legend('Mass','Mean')
-
+legend('Mass','Mean', 'Location', 'north')
+ax = gca;
+ax.FontSize = 14;
 cd('/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final');
 plot_path = sprintf('Figures/mpc_i_2A.pdf');
 % saveas(gcf, plot_path, "epsc");
@@ -662,7 +706,7 @@ hist_mass_htm = hist_mass_htm .* sum(pmf_b_a_y .* (bg <= yg/6), 'all');
 
 hist_mass = hist_mass - hist_mass_htm;
 
-both_mass = [hist_mass_htm hist_mass];
+both_mass = [hist_mass hist_mass_htm];
 
 p = bar(hist_locs, both_mass, 'stacked');
 p(1).FaceAlpha = 0.5;
@@ -675,8 +719,9 @@ hold on
 plot(as, mpc_i, 'LineWidth', 3, 'color', 'black')
 % title('MPC vs. Liquid Wealth')
 xlabel('Illiquid Wealth')
-legend('Mass (HtM)', 'Mass (Other)','Mean')
-
+legend('Mass (Other)', 'Mass (HtM)','Mean', 'Location', 'north')
+ax = gca;
+ax.FontSize = 14;
 cd('/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final');
 plot_path = sprintf('Figures/mpc_i_2A_HtM.pdf');
 % saveas(gcf, plot_path, "epsc");
@@ -761,8 +806,9 @@ hold on
 plot(bs, mpcs_1A_int(bs), 'LineWidth', 3, 'LineStyle', '--', 'color', 'black');
 % title('Baseline 2A and 1A');
 xlabel('Wealth');
-legend('2A Mass', '1A Mass', '2A Mean MPC', '1A MPC')
-
+legend('2A Mass', '1A Mass', '2A Mean MPC', '1A MPC', 'Location', 'north')
+ax = gca;
+ax.FontSize = 14;
 cd('/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final');
 plot_path = sprintf('Figures/mpc_2A_1A.pdf');
 % saveas(gcf, plot_path, "epsc");
@@ -849,8 +895,9 @@ hold on
 plot(bs, mpcs_1A_int(bs), 'LineWidth', 3, 'LineStyle', '--', 'color', 'black');
 % title('Baseline 2A and (1A with discount factor heterogeneity)');
 xlabel('Wealth');
-legend('2A Mass', '1A Mass', '2A Mean MPC', '1A MPC')
-
+legend('2A Mass', '1A Mass', '2A Mean MPC', '1A MPC', 'Location', 'north')
+ax = gca;
+ax.FontSize = 14;
 cd('/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final');
 plot_path = sprintf('Figures/mpc_2A_1A_beta_het');
 % saveas(gcf, plot_path, "epsc");
