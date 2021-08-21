@@ -313,7 +313,7 @@ function [outparams, n] = overall_htm_target(param_opts)
 %         end
         
         % temp change to not override new run
-        ii = 1;
+        ii = 0;
         % Manually set the params (so not just all permutations)
         
         % 2A Baseline (Spec 3, 6_24_21)
@@ -366,7 +366,7 @@ function [outparams, n] = overall_htm_target(param_opts)
             end
         end
         
-        % 2A Baseline Alternative with temptaittion
+        % 2A Baseline Alternative with temptation
         for r_b = [-0.0025, -0.005]
             for r_a = [0.005, 0.01, 0.012, 0.0125, 0.015]
                 for reb_cost = [500/anninc, 516/anninc, 550/anninc]
