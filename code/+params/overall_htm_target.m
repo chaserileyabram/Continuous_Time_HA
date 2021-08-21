@@ -312,7 +312,8 @@ function [outparams, n] = overall_htm_target(param_opts)
 %             end
 %         end
         
-        ii = 0;
+        % temp change to not override new run
+        ii = 1;
         % Manually set the params (so not just all permutations)
         
         % 2A Baseline (Spec 3, 6_24_21)
@@ -344,24 +345,53 @@ function [outparams, n] = overall_htm_target(param_opts)
         end
         
         % 2A Baseline Alternative
-%         for r_a = [0.001, 0.005, 0.01, 0.012, 0.0125, 0.015, 0.018, 0.02]
-%             for reb_cost = [400/anninc, 450/anninc, 500/anninc, 516/anninc, 550/anninc, 600/anninc]
-%                 ii = ii + 1;
-%                 params = [params {calibrations{1}}];
-%                 params{ii} = params{1};
-%                 params{ii}.r_b = 0;
-%                 params{ii}.r_a = r_a;
-%                 r_a_bounds = [0, 0.126];
-%                 params{ii}.rebalance_cost = reb_cost;
-%                 reb_bounds = [400/anninc, 600/anninc];
-%                 params{ii}.calibration_vars = {'rho', 'r_a', 'rebalance_cost'};
-%                 params{ii}.calibration_bounds = {rho_bds, r_a_bounds, reb_bounds};
-%                 params{ii}.calibration_stats = {'totw', 'liqw_lt_ysixth', 'w_lt_ysixth'};
-%                 params{ii}.calibration_targets = [scf.mean_totw, scf.htm, scf.phtm];
-%                 params{ii}.calibration_scales = [1, 1, 1];
-%                 params{ii}.name = sprintf('Baseline 2A Alt, r_a start=%d, reb_cost start=%d', params{ii}.r_a, params{ii}.rebalance_cost);
-%             end
-%         end
+        for r_b = [-0.0025, -0.005]
+            for r_a = [0.005, 0.01, 0.012, 0.0125, 0.015]
+                for reb_cost = [500/anninc, 516/anninc, 550/anninc]
+                    ii = ii + 1;
+                    params = [params {calibrations{1}}];
+                    params{ii} = params{1};
+                    params{ii}.r_b = r_b;
+                    params{ii}.r_a = r_a;
+                    r_a_bounds = [0, 0.126];
+                    params{ii}.rebalance_cost = reb_cost;
+                    reb_bounds = [400/anninc, 600/anninc];
+                    params{ii}.calibration_vars = {'rho', 'r_a', 'rebalance_cost'};
+                    params{ii}.calibration_bounds = {rho_bds, r_a_bounds, reb_bounds};
+                    params{ii}.calibration_stats = {'totw', 'liqw_lt_ysixth', 'w_lt_ysixth'};
+                    params{ii}.calibration_targets = [scf.mean_totw, scf.htm, scf.phtm];
+                    params{ii}.calibration_scales = [1, 1, 1];
+                    params{ii}.name = sprintf('Baseline 2A Alt, r_b=%d, r_a start=%d, reb_cost start=%d', params{ii}.r_b, params{ii}.r_a, params{ii}.rebalance_cost);
+                end
+            end
+        end
+        
+        % 2A Baseline Alternative with temptaittion
+        for r_b = [-0.0025, -0.005]
+            for r_a = [0.005, 0.01, 0.012, 0.0125, 0.015]
+                for reb_cost = [500/anninc, 516/anninc, 550/anninc]
+                    ii = ii + 1;
+                    params = [params {calibrations{1}}];
+                    params{ii} = params{1};
+                    params{ii}.r_b = r_b;
+                    params{ii}.r_a = r_a;
+                    r_a_bounds = [0, 0.126];
+                    params{ii}.rebalance_cost = reb_cost;
+                    reb_bounds = [400/anninc, 600/anninc];
+                    params{ii}.calibration_vars = {'rho', 'r_a', 'rebalance_cost'};
+                    params{ii}.calibration_bounds = {rho_bds, r_a_bounds, reb_bounds};
+                    params{ii}.calibration_stats = {'totw', 'liqw_lt_ysixth', 'w_lt_ysixth'};
+                    params{ii}.calibration_targets = [scf.mean_totw, scf.htm, scf.phtm];
+                    params{ii}.calibration_scales = [1, 1, 1];
+                    params{ii}.temptation = 0.05;
+                    params{ii}.name = sprintf('Temptation 2A Alt, r_b=%d, r_a start=%d, reb_cost start=%d', params{ii}.r_b, params{ii}.r_a, params{ii}.rebalance_cost);
+                end
+            end
+        end
+        
+        
+        
+        
         
         
         
@@ -464,6 +494,30 @@ function [outparams, n] = overall_htm_target(param_opts)
 %         params{ii}.beta = 0.2;
 %         params{ii}.rho = 0.001;
 %         params{ii}.name = sprintf('IG = 0.2, rho = 0.001, 2A');
+
+        % IG 0.7 2A
+        ii = ii + 1;
+        params = [params {calibrations{1}}];
+        params{ii} = params{1};
+        params{ii}.beta = 0.7;
+        params{ii}.rho = 0.001;
+        params{ii}.name = sprintf('IG = 0.7, rho start = 0.001, 2A');
+        
+        % IG 0.8 2A
+        ii = ii + 1;
+        params = [params {calibrations{1}}];
+        params{ii} = params{1};
+        params{ii}.beta = 0.8;
+        params{ii}.rho = 0.001;
+        params{ii}.name = sprintf('IG = 0.8, rho start = 0.001, 2A');
+        
+        % IG 0.9 2A
+        ii = ii + 1;
+        params = [params {calibrations{1}}];
+        params{ii} = params{1};
+        params{ii}.beta = 0.9;
+        params{ii}.rho = 0.001;
+        params{ii}.name = sprintf('IG = 0.9, rho start = 0.001, 2A');
         
         
         
