@@ -496,28 +496,28 @@ function [outparams, n] = overall_htm_target(param_opts)
 %         params{ii}.name = sprintf('IG = 0.2, rho = 0.001, 2A');
 
         % IG 0.7 2A
-        ii = ii + 1;
-        params = [params {calibrations{1}}];
-        params{ii} = params{1};
-        params{ii}.beta = 0.7;
-        params{ii}.rho = 0.001;
-        params{ii}.name = sprintf('IG = 0.7, rho start = 0.001, 2A');
-        
-        % IG 0.8 2A
-        ii = ii + 1;
-        params = [params {calibrations{1}}];
-        params{ii} = params{1};
-        params{ii}.beta = 0.8;
-        params{ii}.rho = 0.001;
-        params{ii}.name = sprintf('IG = 0.8, rho start = 0.001, 2A');
-        
-        % IG 0.9 2A
-        ii = ii + 1;
-        params = [params {calibrations{1}}];
-        params{ii} = params{1};
-        params{ii}.beta = 0.9;
-        params{ii}.rho = 0.001;
-        params{ii}.name = sprintf('IG = 0.9, rho start = 0.001, 2A');
+%         ii = ii + 1;
+%         params = [params {calibrations{1}}];
+%         params{ii} = params{1};
+%         params{ii}.beta = 0.7;
+%         params{ii}.rho = 0.001;
+%         params{ii}.name = sprintf('IG = 0.7, rho start = 0.001, 2A');
+%         
+%         % IG 0.8 2A
+%         ii = ii + 1;
+%         params = [params {calibrations{1}}];
+%         params{ii} = params{1};
+%         params{ii}.beta = 0.8;
+%         params{ii}.rho = 0.001;
+%         params{ii}.name = sprintf('IG = 0.8, rho start = 0.001, 2A');
+%         
+%         % IG 0.9 2A
+%         ii = ii + 1;
+%         params = [params {calibrations{1}}];
+%         params{ii} = params{1};
+%         params{ii}.beta = 0.9;
+%         params{ii}.rho = 0.001;
+%         params{ii}.name = sprintf('IG = 0.9, rho start = 0.001, 2A');
         
         
         
@@ -526,65 +526,65 @@ function [outparams, n] = overall_htm_target(param_opts)
         for rho = rhos
             
             % IG 0.95 1A
-            ii = ii + 1;
-            params = [params {calibrations{1}}];
-            params{ii} = params{2};
-            params{ii}.beta = 0.95;
-            params{ii}.rho = rho;
-            params{ii}.r_b = 0.0025;
-%             params{ii}.OneAsset = true;
-            params{ii}.name = sprintf('IG = %d, rho = %d, 1A', params{ii}.beta, params{ii}.rho);
-            
-            
-            % IG 0.9 1A
-            ii = ii + 1;
-            params = [params {calibrations{1}}];
-            params{ii} = params{2};
-            params{ii}.beta = 0.9;
-            params{ii}.rho = rho;
-            params{ii}.r_b = 0.0025;
-%             params{ii}.OneAsset = true;
-            params{ii}.name = sprintf('IG = %d, rho = %d, 1A', params{ii}.beta, params{ii}.rho);
-            
-            % IG 0.85 1A
-            ii = ii + 1;
-            params = [params {calibrations{1}}];
-            params{ii} = params{2};
-            params{ii}.beta = 0.85;
-            params{ii}.rho = rho;
-            params{ii}.r_b = 0.0025;
-%             params{ii}.OneAsset = true;
-            params{ii}.name = sprintf('IG = %d, rho = %d, 1A', params{ii}.beta, params{ii}.rho);
-            
-            % IG 0.8 1A
-            ii = ii + 1;
-            params = [params {calibrations{1}}];
-            params{ii} = params{2};
-            params{ii}.beta = 0.8;
-            params{ii}.rho = rho;
-            params{ii}.r_b = 0.0025;
-%             params{ii}.OneAsset = true;
-            params{ii}.name = sprintf('IG = %d, rho = %d, 1A', params{ii}.beta, params{ii}.rho);
-            
-            % IG 0.75 1A
-            ii = ii + 1;
-            params = [params {calibrations{1}}];
-            params{ii} = params{2};
-            params{ii}.beta = 0.75;
-            params{ii}.rho = rho;
-            params{ii}.r_b = 0.0025;
-%             params{ii}.OneAsset = true;
-            params{ii}.name = sprintf('IG = %d, rho = %d, 1A', params{ii}.beta, params{ii}.rho);
+%             ii = ii + 1;
+%             params = [params {calibrations{1}}];
+%             params{ii} = params{2};
+%             params{ii}.beta = 0.95;
+%             params{ii}.rho = rho;
+%             params{ii}.r_b = 0.0025;
+% %             params{ii}.OneAsset = true;
+%             params{ii}.name = sprintf('IG = %d, rho = %d, 1A', params{ii}.beta, params{ii}.rho);
+%             
+%             
+%             % IG 0.9 1A
+%             ii = ii + 1;
+%             params = [params {calibrations{1}}];
+%             params{ii} = params{2};
+%             params{ii}.beta = 0.9;
+%             params{ii}.rho = rho;
+%             params{ii}.r_b = 0.0025;
+% %             params{ii}.OneAsset = true;
+%             params{ii}.name = sprintf('IG = %d, rho = %d, 1A', params{ii}.beta, params{ii}.rho);
+%             
+%             % IG 0.85 1A
+%             ii = ii + 1;
+%             params = [params {calibrations{1}}];
+%             params{ii} = params{2};
+%             params{ii}.beta = 0.85;
+%             params{ii}.rho = rho;
+%             params{ii}.r_b = 0.0025;
+% %             params{ii}.OneAsset = true;
+%             params{ii}.name = sprintf('IG = %d, rho = %d, 1A', params{ii}.beta, params{ii}.rho);
+%             
+%             % IG 0.8 1A
+%             ii = ii + 1;
+%             params = [params {calibrations{1}}];
+%             params{ii} = params{2};
+%             params{ii}.beta = 0.8;
+%             params{ii}.rho = rho;
+%             params{ii}.r_b = 0.0025;
+% %             params{ii}.OneAsset = true;
+%             params{ii}.name = sprintf('IG = %d, rho = %d, 1A', params{ii}.beta, params{ii}.rho);
+%             
+%             % IG 0.75 1A
+%             ii = ii + 1;
+%             params = [params {calibrations{1}}];
+%             params{ii} = params{2};
+%             params{ii}.beta = 0.75;
+%             params{ii}.rho = rho;
+%             params{ii}.r_b = 0.0025;
+% %             params{ii}.OneAsset = true;
+%             params{ii}.name = sprintf('IG = %d, rho = %d, 1A', params{ii}.beta, params{ii}.rho);
             
             % IG 0.7 1A
-            ii = ii + 1;
-            params = [params {calibrations{1}}];
-            params{ii} = params{2};
-            params{ii}.beta = 0.7;
-            params{ii}.rho = rho;
-            params{ii}.r_b = 0.0025;
-%             params{ii}.OneAsset = true;
-            params{ii}.name = sprintf('IG = %d, rho = %d, 1A', params{ii}.beta, params{ii}.rho);
+%             ii = ii + 1;
+%             params = [params {calibrations{1}}];
+%             params{ii} = params{2};
+%             params{ii}.beta = 0.7;
+%             params{ii}.rho = rho;
+%             params{ii}.r_b = 0.0025;
+% %             params{ii}.OneAsset = true;
+%             params{ii}.name = sprintf('IG = %d, rho = %d, 1A', params{ii}.beta, params{ii}.rho);
             
             % IG 0.6 1A
 %             ii = ii + 1;

@@ -31,7 +31,7 @@ bs = bs .* 3;
 
 
 % Make histogram data
-m = 8;
+m = 40;
 hist_chunks = linspace(0,3,m);
 hist_locs = linspace(3/(2*m),3 - 3/(2*m),m-1);
 hist_mass = zeros(m-1,1);
@@ -50,7 +50,7 @@ hist_mass = hist_mass - hist_mass_htm;
 
 total_mass = [hist_mass_htm hist_mass];
 
-p = bar(hist_locs, total_mass, 'stacked');
+p = bar(hist_locs, total_mass, 'stacked', 'BarWidth', 1);
 p(1).FaceAlpha = 0.5;
 p(2).FaceAlpha = 0.5;
 orange = [0.8500, 0.3250, 0.0980];
@@ -58,7 +58,7 @@ blue = [0, 0.4470, 0.7410];
 p(1).FaceColor = orange;
 p(2).FaceColor = blue;
 xlim([0 3])
-ylim([0 0.7])
+ylim([0 1.0])
 hold on
 plot(bs, mpc_int(bs), 'LineWidth', 5, 'color', 'black');
 % title('Baseline 1A');
@@ -615,7 +615,7 @@ plot_path = sprintf('Figures/mpc_w_2A_above.pdf');
 % saveas(gcf, plot_path, "epsc");
 saveas(gcf, plot_path);
 
-%% 6b) MPC by liquid wealth (with HtM bars) (2A)
+%% 6bi) MPC by liquid wealth (with HtM bars) (2A)
 clear
 cd('/Users/chaseabram/UChiGit/Continuous_Time_HA')
 load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-15-2021-00:22:19/output_1.mat')
@@ -631,9 +631,12 @@ mpc_l = mpc_liquid_mean(stats,bs) ./ 100;
 [bg, ag, yg] = ndgrid(stats.bgrid, stats.agrid, income.y.vec);
 pmf_b_a_y = squeeze(stats.pmf);
 
+% htm_thresh = 1000/p.numeraire_in_dollars;
+htm_thresh = yg/6;
+
 % pmf_htm = stats.pmf_b_a .* (bg <= HtM_1000) ./ sum(stats.pmf_b_a .* (bg <= HtM_1000), 'all');
 % pmf_htm = pmf_b_a_y .* (bg <= yg/6) ./ sum(pmf_b_a_y .* (bg <= yg/6), 'all');
-pmf_htm = pmf_b_a_y .* (bg <= 1000/p.numeraire_in_dollars) ./ sum(pmf_b_a_y .* (bg <= 1000/p.numeraire_in_dollars), 'all');
+pmf_htm = pmf_b_a_y .* (bg <= htm_thresh) ./ sum(pmf_b_a_y .* (bg <= htm_thresh), 'all');
 pmf_htm = sum(pmf_htm, [2 3]);
 
 
@@ -653,7 +656,7 @@ end
 hist_mass(m-1) = 1 - sum(hist_mass(1:m-2), 'all');
 hist_mass_htm(m-1) = 1 - sum(hist_mass_htm(1:m-2), 'all');
 
-hist_mass_htm = hist_mass_htm .* sum(stats.pmf_b .* (stats.bgrid < 1000/p.numeraire_in_dollars), 'all');
+hist_mass_htm = hist_mass_htm .* sum(pmf_b_a_y .* (bg <= htm_thresh), 'all');
 
 hist_mass = hist_mass - hist_mass_htm;
 
@@ -678,6 +681,75 @@ ax = gca;
 ax.FontSize = 14;
 cd('/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final');
 plot_path = sprintf('Figures/mpc_l_2A.pdf');
+% saveas(gcf, plot_path, "epsc");
+saveas(gcf, plot_path);
+
+%% 6bii) MPC by liquid wealth (with HtM bars), fixed rb (2A)
+clear
+cd('/Users/chaseabram/UChiGit/Continuous_Time_HA')
+load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-22-2021-23:02:15/output_20.mat')
+
+n = 100;
+max_l = 3.0;
+curve = 0.1;
+bs = linspace(0,1,n);
+bs = bs .^ (1/curve);
+bs = bs .* max_l;
+mpc_l = mpc_liquid_mean(stats,bs) ./ 100;
+
+[bg, ag, yg] = ndgrid(stats.bgrid, stats.agrid, income.y.vec);
+pmf_b_a_y = squeeze(stats.pmf);
+
+% htm_thresh = 1000/p.numeraire_in_dollars;
+htm_thresh = yg/6;
+
+% pmf_htm = stats.pmf_b_a .* (bg <= HtM_1000) ./ sum(stats.pmf_b_a .* (bg <= HtM_1000), 'all');
+% pmf_htm = pmf_b_a_y .* (bg <= yg/6) ./ sum(pmf_b_a_y .* (bg <= yg/6), 'all');
+pmf_htm = pmf_b_a_y .* (bg <= htm_thresh) ./ sum(pmf_b_a_y .* (bg <= htm_thresh), 'all');
+pmf_htm = sum(pmf_htm, [2 3]);
+
+
+% Make histogram data
+m = 8;
+hist_chunks = linspace(0,max_l,m);
+hist_locs = linspace(max_l/(2*m),max_l - max_l/(2*m),m-1);
+hist_mass = zeros(m-1,1);
+hist_mass_htm = zeros(m-1,1);
+
+for i = 2:m
+    in_chunk = (stats.bgrid >= hist_chunks(i-1)) .* (stats.bgrid < hist_chunks(i));
+    hist_mass(i-1) = sum(stats.pmf_b .* in_chunk, 'all');
+    hist_mass_htm(i-1) = sum(pmf_htm .* in_chunk, 'all');
+end
+
+hist_mass(m-1) = 1 - sum(hist_mass(1:m-2), 'all');
+hist_mass_htm(m-1) = 1 - sum(hist_mass_htm(1:m-2), 'all');
+
+hist_mass_htm = hist_mass_htm .* sum(pmf_b_a_y .* (bg <= htm_thresh), 'all');
+
+hist_mass = hist_mass - hist_mass_htm;
+
+total_mass = [hist_mass_htm hist_mass];
+
+p = bar(hist_locs, total_mass, 'stacked');
+p(1).FaceAlpha = 0.5;
+p(2).FaceAlpha = 0.5;
+orange = [0.8500, 0.3250, 0.0980];
+blue = [0, 0.4470, 0.7410];
+p(1).FaceColor = orange;
+p(2).FaceColor = blue;
+
+xlim([0 max_l])
+ylim([0 0.9])
+hold on
+plot(bs, mpc_l, 'LineWidth', 3, 'color', 'black')
+% title('MPC vs. Liquid Wealth')
+xlabel('Liquid Wealth')
+legend('HtM', 'Non HtM','MPC', 'Location', 'north')
+ax = gca;
+ax.FontSize = 14;
+cd('/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final');
+plot_path = sprintf('Figures/mpc_l_2A_rbgap.pdf');
 % saveas(gcf, plot_path, "epsc");
 saveas(gcf, plot_path);
 
@@ -723,7 +795,7 @@ saveas(gcf, plot_path);
 % % saveas(gcf, plot_path, "epsc");
 % saveas(gcf, plot_path);
 
-%% 6d) MPC by illiquid wealth with HtM bars (2A)
+%% 6di) MPC by illiquid wealth with HtM bars (2A)
 clear
 cd('/Users/chaseabram/UChiGit/Continuous_Time_HA')
 load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-15-2021-00:22:19/output_1.mat')
@@ -739,9 +811,12 @@ mpc_i = mpc_illiquid_mean(stats,as) ./ 100;
 [bg, ag, yg] = ndgrid(stats.bgrid, stats.agrid, income.y.vec);
 pmf_b_a_y = squeeze(stats.pmf);
 
+% htm_thresh = 1000/p.numeraire_in_dollars;
+htm_thresh = yg/6;
+
 % pmf_htm = stats.pmf_b_a .* (bg <= HtM_1000) ./ sum(stats.pmf_b_a .* (bg <= HtM_1000), 'all');
 % pmf_htm = pmf_b_a_y .* (bg <= yg/6) ./ sum(pmf_b_a_y .* (bg <= yg/6), 'all');
-pmf_htm = pmf_b_a_y .* (bg <= 1000/p.numeraire_in_dollars) ./ sum(pmf_b_a_y .* (bg <= 1000/p.numeraire_in_dollars), 'all');
+pmf_htm = pmf_b_a_y .* (bg <= htm_thresh) ./ sum(pmf_b_a_y .* (bg <= htm_thresh), 'all');
 pmf_htm = sum(pmf_htm, [1 3]);
 
 
@@ -761,7 +836,7 @@ end
 hist_mass(m-1) = 1 - sum(hist_mass(1:m-2), 'all');
 hist_mass_htm(m-1) = 1 - sum(hist_mass_htm(1:m-2), 'all');
 
-hist_mass_htm = hist_mass_htm .* sum(pmf_b_a_y .* (bg <= 1000/p.numeraire_in_dollars), 'all');
+hist_mass_htm = hist_mass_htm .* sum(pmf_b_a_y .* (bg <= htm_thresh), 'all');
 
 hist_mass = hist_mass - hist_mass_htm;
 
@@ -788,6 +863,77 @@ ax = gca;
 ax.FontSize = 14;
 cd('/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final');
 plot_path = sprintf('Figures/mpc_i_2A_HtM.pdf');
+% saveas(gcf, plot_path, "epsc");
+saveas(gcf, plot_path);
+
+%% 6dii) MPC by illiquid wealth with HtM bars, fixed rb (2A)
+clear
+cd('/Users/chaseabram/UChiGit/Continuous_Time_HA')
+load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-22-2021-23:02:15/output_20.mat')
+
+n = 100;
+max_i = 3.0;
+curve = 0.1;
+as = linspace(0.6,1,n);
+as = as .^ (1/curve);
+as = as .* max_i;
+mpc_i = mpc_illiquid_mean(stats,as) ./ 100;
+
+[bg, ag, yg] = ndgrid(stats.bgrid, stats.agrid, income.y.vec);
+pmf_b_a_y = squeeze(stats.pmf);
+
+% htm_thresh = 1000/p.numeraire_in_dollars;
+htm_thresh = yg/6;
+
+% pmf_htm = stats.pmf_b_a .* (bg <= HtM_1000) ./ sum(stats.pmf_b_a .* (bg <= HtM_1000), 'all');
+% pmf_htm = pmf_b_a_y .* (bg <= yg/6) ./ sum(pmf_b_a_y .* (bg <= yg/6), 'all');
+pmf_htm = pmf_b_a_y .* (bg <= htm_thresh) ./ sum(pmf_b_a_y .* (bg <= htm_thresh), 'all');
+pmf_htm = sum(pmf_htm, [1 3]);
+
+
+% Make histogram data
+m = 8;
+hist_chunks = linspace(0,max_i,m);
+hist_locs = linspace(max_i/(2*m),max_i - max_i/(2*m),m-1);
+hist_mass = zeros(m-1,1);
+hist_mass_htm = zeros(m-1,1);
+
+for i = 2:m
+    in_chunk = (stats.agrid >= hist_chunks(i-1)) .* (stats.agrid < hist_chunks(i));
+    hist_mass(i-1) = sum(stats.pmf_a .* in_chunk, 'all');
+    hist_mass_htm(i-1) = sum(pmf_htm' .* in_chunk, 'all');
+end
+
+hist_mass(m-1) = 1 - sum(hist_mass(1:m-2), 'all');
+hist_mass_htm(m-1) = 1 - sum(hist_mass_htm(1:m-2), 'all');
+
+hist_mass_htm = hist_mass_htm .* sum(pmf_b_a_y .* (bg <= htm_thresh), 'all');
+
+hist_mass = hist_mass - hist_mass_htm;
+
+both_mass = [hist_mass_htm hist_mass];
+
+p = bar(hist_locs, both_mass, 'stacked');
+p(1).FaceAlpha = 0.5;
+p(2).FaceAlpha = 0.5;
+orange = [0.8500, 0.3250, 0.0980];
+blue = [0, 0.4470, 0.7410];
+p(1).FaceColor = orange;
+p(2).FaceColor = blue;
+
+% p = bar(hist_locs, hist_mass);
+% p.FaceAlpha = 0.5;
+xlim([0 max_i])
+ylim([0 0.7])
+hold on
+plot(as, mpc_i, 'LineWidth', 3, 'color', 'black')
+% title('MPC vs. Liquid Wealth')
+xlabel('Illiquid Wealth')
+legend('HtM', 'Non HtM','MPC Mean', 'Location', 'north')
+ax = gca;
+ax.FontSize = 14;
+cd('/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final');
+plot_path = sprintf('Figures/mpc_i_2A_HtM_rbgap.pdf');
 % saveas(gcf, plot_path, "epsc");
 saveas(gcf, plot_path);
 
