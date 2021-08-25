@@ -9,10 +9,95 @@ clear
 cd('/Users/chaseabram/UChiGit/Discrete_HA')
 load('/Users/chaseabram/Dropbox/AnnualReviewsFiles/variables2.mat')
 
+% Get MPCs
+mpcs = reshape(results.mpcs(5).mpcs_1_t{1}, size(results.stats.pmf));
+
+% Get pmf
+pmf_b = sum(results.stats.pmf, 2);
+
+% Condition on b
+mpcs_b = sum(mpcs .* results.stats.pmf, 2) ./ pmf_b;
+
+% conformable b grid
+bg = ndgrid(results.stats.agrid);
+
+% pmf of HtM
+pmf_htm = sum(results.stats.pmf .* (bg < 1000/Sparams.numeraire_in_dollars), 2)./ sum(results.stats.pmf .* (bg < 1000/Sparams.numeraire_in_dollars), 'all');
+
+% interpolate MPC fcn
+mpc_int = griddedInterpolant(bg, mpcs_b,'linear','none');
+
+% Grid for plot
+n = 100;
+curve = 0.1;
+% b from 0 to 1
+bs = linspace(0.6,1,n);
+bs = bs .^ (1/curve);
+bs = bs .* 3;
+
+
+% Make histogram data
+m = 40;
+hist_chunks = linspace(0,3,m);
+hist_locs = linspace(3/(2*m),3 - 3/(2*m),m-1);
+hist_mass = zeros(m-1,1);
+hist_mass_htm = zeros(m-1,1);
+
+for i = 2:m
+    in_chunk = (bg >= hist_chunks(i-1)) .* (bg < hist_chunks(i));
+    hist_mass(i-1) = sum(pmf_b .* in_chunk, 'all');
+    hist_mass_htm(i-1) = sum(pmf_htm .* in_chunk, 'all');
+end
+
+% Last bar contains remaining mass
+hist_mass(m-1) = 1 - sum(hist_mass(1:m-2), 'all');
+hist_mass_htm(m-1) = 1 - sum(hist_mass_htm(1:m-2), 'all');
+hist_mass_htm = hist_mass_htm .* sum(results.stats.pmf .* (bg < 1000/Sparams.numeraire_in_dollars), 'all');
+hist_mass = hist_mass - hist_mass_htm;
+
+% Combine for stacking
+total_mass = [hist_mass_htm hist_mass];
+
+% Black axes
+colororder({'k', 'k'});
+% Right for histogram
+yyaxis right
+% Make stacked histogram
+p = bar(hist_locs, total_mass, 'stacked', 'BarWidth', 1);
+p(1).FaceAlpha = 0.5;
+p(2).FaceAlpha = 0.5;
+orange = [0.8500, 0.3250, 0.0980];
+blue = [0, 0.4470, 0.7410];
+p(1).FaceColor = orange;
+p(2).FaceColor = blue;
+xlim([0 3])
+
+ylabel('Mass', 'color', 'black')
+% ylim([0 1.0])
+hold on
+% Left for MPC
+yyaxis left
+ylabel('MPC', 'color', 'black')
+plot(bs, mpc_int(bs), 'LineWidth', 5, 'color', 'black');
+% title('Baseline 1A');
+xlabel('Wealth');
+legend('MPC', 'HtM', 'Non NHtM', 'Location', 'north');
+ax = gca;
+ax.FontSize = 14;
+cd('/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final');
+plot_path = sprintf('Figures/mpc_1A_base.pdf');
+% saveas(gcf, plot_path, "epsc");
+saveas(gcf, plot_path);
+
+%% 1b) MPC with Ea = 0.56
+clear
+% Load baseline 1A
+cd('/Users/chaseabram/UChiGit/Discrete_HA')
+load('/Users/chaseabram/Dropbox/AnnualReviewsFiles/variables10.mat')
+disp(Sparams.descr{1})
 mpcs = reshape(results.mpcs(5).mpcs_1_t{1}, size(results.stats.pmf));
 
 pmf_b = sum(results.stats.pmf, 2);
-
 
 mpcs_b = sum(mpcs .* results.stats.pmf, 2) ./ pmf_b;
 
@@ -50,6 +135,8 @@ hist_mass = hist_mass - hist_mass_htm;
 
 total_mass = [hist_mass_htm hist_mass];
 
+colororder({'k', 'k'});
+yyaxis right
 p = bar(hist_locs, total_mass, 'stacked', 'BarWidth', 1);
 p(1).FaceAlpha = 0.5;
 p(2).FaceAlpha = 0.5;
@@ -58,79 +145,15 @@ blue = [0, 0.4470, 0.7410];
 p(1).FaceColor = orange;
 p(2).FaceColor = blue;
 xlim([0 3])
-ylim([0 1.0])
+ylabel('Mass', 'color', 'black')
+% ylim([0 0.7])
 hold on
+yyaxis left
 plot(bs, mpc_int(bs), 'LineWidth', 5, 'color', 'black');
-% title('Baseline 1A');
-xlabel('Wealth');
-legend('HtM', 'Non NHtM', 'MPC', 'Location', 'north');
-ax = gca;
-ax.FontSize = 14;
-cd('/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final');
-plot_path = sprintf('Figures/mpc_1A_base.pdf');
-% saveas(gcf, plot_path, "epsc");
-saveas(gcf, plot_path);
-
-%% 1b) MPC with Ea = 0.56
-clear
-% Load baseline 1A
-cd('/Users/chaseabram/UChiGit/Discrete_HA')
-load('/Users/chaseabram/Dropbox/AnnualReviewsFiles/variables10.mat')
-disp(Sparams.descr{1})
-mpcs = reshape(results.mpcs(5).mpcs_1_t{1}, size(results.stats.pmf));
-
-pmf_b = sum(results.stats.pmf, 2);
-
-mpcs_b = sum(mpcs .* results.stats.pmf, 2) ./ pmf_b;
-
-bg = ndgrid(results.stats.agrid);
-
-pmf_htm = sum(results.stats.pmf .* (bg < 1000/Sparams.numeraire_in_dollars), 2)./ sum(results.stats.pmf .* (bg < 1000/Sparams.numeraire_in_dollars), 'all');
-
-mpc_int = griddedInterpolant(bg, mpcs_b,'linear','none');
-
-n = 100;
-curve = 0.1;
-% b from 0 to 1
-bs = linspace(0.6,1,n);
-bs = bs .^ (1/curve);
-bs = bs .* 3;
-
-
-% Make histogram data
-m = 8;
-hist_chunks = linspace(0,3,m);
-hist_locs = linspace(3/(2*m),3 - 3/(2*m),m-1);
-hist_mass = zeros(m-1,1);
-hist_mass_htm = zeros(m-1,1);
-
-for i = 2:m
-    in_chunk = (bg >= hist_chunks(i-1)) .* (bg < hist_chunks(i));
-    hist_mass(i-1) = sum(pmf_b .* in_chunk, 'all');
-    hist_mass_htm(i-1) = sum(pmf_htm .* in_chunk, 'all');
-end
-
-hist_mass(m-1) = 1 - sum(hist_mass(1:m-2), 'all');
-hist_mass_htm(m-1) = 1 - sum(hist_mass_htm(1:m-2), 'all');
-hist_mass_htm = hist_mass_htm .* sum(results.stats.pmf .* (bg < 1000/Sparams.numeraire_in_dollars), 'all');
-hist_mass = hist_mass - hist_mass_htm;
-
-total_mass = [hist_mass_htm hist_mass];
-
-p = bar(hist_locs, total_mass, 'stacked');
-p(1).FaceAlpha = 0.5;
-p(2).FaceAlpha = 0.5;
-orange = [0.8500, 0.3250, 0.0980];
-blue = [0, 0.4470, 0.7410];
-p(1).FaceColor = orange;
-p(2).FaceColor = blue;
-xlim([0 3])
-ylim([0 0.7])
-hold on
-plot(bs, mpc_int(bs), 'LineWidth', 5, 'color', 'black');
+ylabel('MPC', 'color', 'black')
 % title('1A, E[a] = 0.56');
 xlabel('Wealth');
-legend('HtM', 'Non HtM', 'MPC', 'Location', 'north');
+legend('MPC', 'HtM', 'Non HtM', 'Location', 'north');
 ax = gca;
 ax.FontSize = 14;
 cd('/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final');
@@ -167,7 +190,7 @@ bs = bs .* 3;
 
 
 % Make histogram data
-m = 8;
+m = 40;
 hist_chunks = linspace(0,3,m);
 hist_locs = linspace(3/(2*m),3 - 3/(2*m),m-1);
 hist_mass = zeros(m-1,1);
@@ -189,8 +212,10 @@ hist_mass = hist_mass - hist_low_mass;
 
 total_hist = [hist_low_mass hist_mass];
 
+colororder({'k', 'k'});
+yyaxis right
 p = bar(hist_locs, total_hist, 'stacked');
-
+ylabel('Mass')
 % p = bar(hist_locs, hist_mass);
 p(1).FaceAlpha = 0.5;
 p(2).FaceAlpha = 0.5;
@@ -204,12 +229,14 @@ hold on
 % p2 = bar(hist_locs, hist_low_mass);
 % p2.FaceAlpha = 0.5;
 % hold on
+yyaxis left
 plot(bs, mpc_int_low(bs), 'LineWidth', 5, 'color', 'black');
 hold on
 % plot(bs, mpc_int_mid(bs), 'LineWidth', 5, 'color', 'black');
 % hold on
 plot(bs, mpc_int_high(bs), 'LineWidth', 5, 'LineStyle', '--', 'color', 'black');
-legend('Low \beta s', 'Other \beta s', 'MPC Low \beta s', 'MPC High \beta', 'Location', 'north')
+legend('MPC Low \beta s', 'MPC High \beta', 'Low \beta s', 'Other \beta s', 'Location', 'north')
+ylabel('MPC')
 ax = gca;
 ax.FontSize = 14;
 % title('Heterogeneous Discount Factor');
@@ -221,6 +248,7 @@ plot_path = sprintf('Figures/mpc_beta_het.pdf');
 saveas(gcf, plot_path);
 
 %% 2b) MPC with beta het, betaH cal to hit total wealth (and does well on MPC)
+% (Spender-Saver)
 clear
 load('/Users/chaseabram/Dropbox/AnnualReviewsFiles/variables55.mat')
 
@@ -248,7 +276,7 @@ bs = bs .* 3;
 
 
 % Make histogram data
-m = 8;
+m = 40;
 hist_chunks = linspace(0,3,m);
 hist_locs = linspace(3/(2*m),3 - 3/(2*m),m-1);
 hist_mass = zeros(m-1,1);
@@ -270,8 +298,10 @@ hist_mass = hist_mass - hist_low_mass;
 
 total_hist = [hist_low_mass hist_mass];
 
+colororder({'k', 'k'});
+yyaxis right
 p = bar(hist_locs, total_hist, 'stacked');
-
+ylabel('Mass')
 % p = bar(hist_locs, hist_mass);
 p(1).FaceAlpha = 0.5;
 p(2).FaceAlpha = 0.5;
@@ -279,8 +309,8 @@ orange = [0.8500, 0.3250, 0.0980];
 blue = [0, 0.4470, 0.7410];
 p(1).FaceColor = orange;
 p(2).FaceColor = blue;
-xlim([0.07 3])
-ylim([0 0.7])
+xlim([0.0 3])
+% ylim([0 0.7])
 hold on
 % p2 = bar(hist_locs, hist_low_mass);
 % p2.FaceAlpha = 0.5;
@@ -294,8 +324,10 @@ hold on
 % hold on
 % plot(bs, mpc_int_mid(bs), 'LineWidth', 5, 'color', 'black');
 % hold on
-plot(bs, mpc_int_high(bs), 'LineWidth', 5, 'LineStyle', '--', 'color', 'black');
-legend('Spender', 'Saver', 'MPC Saver', 'Location', 'north')
+yyaxis left
+plot(bs, mpc_int_high(bs), 'LineWidth', 5, 'color', 'black');
+ylabel('MPC')
+legend('MPC Saver', 'Spender', 'Saver', 'Location', 'north')
 ax = gca;
 ax.FontSize = 14;
 % title('Heterogeneous Discount Factor');
@@ -997,15 +1029,22 @@ end
 
 hist_mass_1A(m-1) = 1 - sum(hist_mass_1A(1:m-2), 'all');
 
-both_mass = [hist_mass_2A, hist_mass_1A];
+both_mass = [hist_mass_2A hist_mass_1A];
 
-p2 = bar(hist_locs_2A, both_mass, 'stacked');
-p2(1).FaceAlpha = 0.5;
-p2(2).FaceAlpha = 0.5;
+% p2 = bar(hist_locs_2A, both_mass, 'stacked');
 orange = [0.8500, 0.3250, 0.0980];
 blue = [0, 0.4470, 0.7410];
-p2(1).FaceColor = orange;
-p2(2).FaceColor = blue;
+
+p1 = bar(hist_locs_2A, both_mass(:,1));
+p1.FaceAlpha = 0.5;
+p1.FaceColor = orange;
+hold on
+p2 = bar(hist_locs_2A, both_mass(:,2));
+p2.FaceAlpha = 0.3;
+p2.FaceColor = blue;
+
+% p2.FaceColor = orange;
+% p2.FaceColor = blue;
 
 % p2 = bar(hist_locs_2A, hist_mass_2A);
 % p2.FaceAlpha = 0.5;
@@ -1092,13 +1131,26 @@ hist_mass_1A(m-1) = 1 - sum(hist_mass_1A(1:m-2), 'all');
 
 both_mass = [hist_mass_2A, hist_mass_1A];
 
-p2 = bar(hist_locs_2A, both_mass, 'stacked');
-p2(1).FaceAlpha = 0.5;
-p2(2).FaceAlpha = 0.5;
 orange = [0.8500, 0.3250, 0.0980];
 blue = [0, 0.4470, 0.7410];
-p2(1).FaceColor = orange;
-p2(2).FaceColor = blue;
+
+p1 = bar(hist_locs_2A, both_mass(:,1));
+p1.FaceAlpha = 0.5;
+p1.FaceColor = orange;
+hold on
+p2 = bar(hist_locs_2A, both_mass(:,2));
+p2.FaceAlpha = 0.3;
+p2.FaceColor = blue;
+
+% p2 = bar(hist_locs_2A, both_mass, 'stacked');
+% p2(1).FaceAlpha = 0.5;
+% p2(2).FaceAlpha = 0.5;
+% orange = [0.8500, 0.3250, 0.0980];
+% blue = [0, 0.4470, 0.7410];
+% p2(1).FaceColor = orange;
+% p2(2).FaceColor = blue;
+
+
 
 % p2 = bar(hist_locs_2A, hist_mass_2A);
 % p2.FaceAlpha = 0.5;
@@ -1121,6 +1173,141 @@ cd('/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final');
 plot_path = sprintf('Figures/mpc_2A_1A_beta_het.pdf');
 % saveas(gcf, plot_path, "epsc");
 saveas(gcf, plot_path);
+
+%% 9) MPC IG
+clear
+cd('/Users/chaseabram/UChiGit/Continuous_Time_HA')
+load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-23-2021-18:57:08/output_17.mat')
+
+% IG
+n = 100;
+curve = 0.1;
+ws = linspace(0,1,n);
+ws = ws .^ (1/curve);
+ws = ws .* 3;
+mpcs_IG = mpc_wealth_mean(stats, ws) ./ 100;
+
+mpcs_IG(1) = stats.mpc_int(0,0) ./ 100;
+
+% [bg, ag] = ndgrid(stats.bgrid, stats.agrid);
+% mpcs_IG(1) = sum(stats.mpc_int(bg, 1) .* stats.pmf_int(
+
+% Make histogram data
+m = 8;
+hist_chunks = linspace(0,3,m);
+hist_locs_IG = linspace(3/(2*m),3 - 3/(2*m),m-1);
+hist_mass_IG = zeros(m-1,1);
+
+for i = 2:m
+    in_chunk = ((stats.bgrid + stats.agrid') >= hist_chunks(i-1)) .* ((stats.bgrid + stats.agrid') < hist_chunks(i));
+    hist_mass_IG(i-1) = sum(stats.pmf_b_a .* in_chunk, 'all');
+end
+
+hist_mass_IG(m-1) = 1 - sum(hist_mass_IG(1:m-2), 'all');
+
+load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-23-2021-18:57:08/output_2.mat')
+
+% Baseline
+n = 100;
+curve = 0.1;
+ws = linspace(0,1,n);
+ws = ws .^ (1/curve);
+ws = ws .* 3;
+mpcs_1A = mpc_wealth_mean(stats, ws) ./ 100;
+
+% Make histogram data
+m = 8;
+hist_chunks = linspace(0,3,m);
+hist_locs_1A = linspace(3/(2*m),3 - 3/(2*m),m-1);
+hist_mass_1A = zeros(m-1,1);
+
+for i = 2:m
+    in_chunk = ((stats.bgrid + stats.agrid') >= hist_chunks(i-1)) .* ((stats.bgrid + stats.agrid') < hist_chunks(i));
+    hist_mass_1A(i-1) = sum(stats.pmf_b_a .* in_chunk, 'all');
+end
+
+hist_mass_1A(m-1) = 1 - sum(hist_mass_1A(1:m-2), 'all');
+
+
+% Load baseline 1A
+% cd('/Users/chaseabram/UChiGit/Discrete_HA')
+% load('/Users/chaseabram/Dropbox/AnnualReviewsFiles/variables2.mat')
+% 
+% mpcs = reshape(results.mpcs(5).mpcs_1_t{1}, size(results.stats.pmf));
+% 
+% pmf_b = sum(results.stats.pmf, 2);
+% 
+% mpcs_b = sum(mpcs .* results.stats.pmf, 2) ./ pmf_b;
+% 
+% bg = ndgrid(results.stats.agrid);
+% 
+% mpcs_1A_int = griddedInterpolant(bg, mpcs_b,'linear','none');
+% 
+% n = 100;
+% curve = 0.1;
+% % b from 0 to 1
+% bs = linspace(0.6,1,n);
+% bs = bs .^ (1/curve);
+% bs = bs .* 3;
+% 
+% % Make histogram data
+% m = 8;
+% hist_chunks = linspace(0,3,m);
+% hist_locs_1A = linspace(3/(2*m),3 - 3/(2*m),m-1);
+% hist_mass_1A = zeros(m-1,1);
+% 
+% for i = 2:m
+%     in_chunk = (bg >= hist_chunks(i-1)) .* (bg < hist_chunks(i));
+%     hist_mass_1A(i-1) = sum(pmf_b .* in_chunk, 'all');
+% end
+% 
+% hist_mass_1A(m-1) = 1 - sum(hist_mass_1A(1:m-2), 'all');
+
+both_mass = [hist_mass_IG, hist_mass_1A];
+
+p2 = bar(hist_locs_1A, both_mass, 'stacked');
+p2(1).FaceAlpha = 0.5;
+p2(2).FaceAlpha = 0.5;
+orange = [0.8500, 0.3250, 0.0980];
+blue = [0, 0.4470, 0.7410];
+p2(1).FaceColor = orange;
+p2(2).FaceColor = blue;
+
+% p2 = bar(hist_locs_2A, hist_mass_2A);
+% p2.FaceAlpha = 0.5;
+xlim([0 3])
+% ylim([0 0.7])
+hold on
+% p1 = bar(hist_locs_1A, hist_mass_1A);
+% p1.FaceAlpha = 0.5;
+% xlim([0 3])
+% hold on
+% r = 0.01;
+% x = 0;
+% y = 0.08;
+% th = 0:pi/50:2*pi;
+% xunit = r * cos(th) + x;
+% yunit = r * sin(th) + y;
+% h = plot(xunit, yunit);
+
+hold on
+cut = 50;
+plot(ws(cut:end), mpcs_IG(cut:end), 'LineWidth', 3, 'color', 'black');
+hold on
+plot(ws, mpcs_1A, 'LineWidth', 3, 'LineStyle', '--', 'color', 'black');
+% title('Baseline 2A and 1A');
+xlabel('Wealth');
+% plot(nsidedpoly(1000, 'Center', [0 0.08], 'Radius', 0.005), 'FaceColor', 'black', 'LineColor', 'black')
+rectangle('Position', [0 0.075 0.02 0.005],'FaceColor', 'black')
+legend('\beta_{IG} = 0.7', 'Baseline', 'MPC \beta_{IG} = 0.7', 'MPC Baseline', 'Location', 'north')
+% text(0.05,0.09,['$\leftarrow $' 'Discontinuity'],'FontSize',11,'Interpreter','latex','Color','k');
+ax = gca;
+ax.FontSize = 14;
+cd('/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final');
+plot_path = sprintf('Figures/mpc_1A_IG.pdf');
+% saveas(gcf, plot_path, "epsc");
+saveas(gcf, plot_path);
+
 
 %% Intertemporal MPCs
 clear
