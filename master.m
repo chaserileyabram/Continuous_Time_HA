@@ -65,10 +65,10 @@ if ~isempty(taskid_from_server)
 end
 
 % News only for first
-if taskid_from_server == 1
-    param_opts.calibrate = false;
-    param_opts.ComputeMPCS_news = true;
-end
+% if taskid_from_server == 1
+%     param_opts.calibrate = false;
+%     param_opts.ComputeMPCS_news = true;
+% end
 
 addpath('code');
 addpath('factorization_lib');
