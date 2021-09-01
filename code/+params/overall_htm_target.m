@@ -317,33 +317,84 @@ function [outparams, n] = overall_htm_target(param_opts)
         % Manually set the params (so not just all permutations)
         
         % 2A Baseline (Spec 3, 6_24_21)
-        ii = ii + 1;
-        params = [params {calibrations{1}}];
-        params{ii}.calibration_vars = {'rho'};
-        params{ii}.HJB_delta = 1e3;
-        % Income
-        params{ii}.income_dir = incomedirs{1};
-        params{ii}.IncomeDescr = IncomeDescriptions{1};
-        % Flow costs
-        params{ii}.kappa0 = 1e10;
-        params{ii}.kappa1 = 1e10;
-        % Calibrated
-        params{ii}.rho = 0.01295; 
-        rho_bds = [-0.45, 0.03];
-        params{ii}.r_b = -0.006421023; 
-        params{ii}.r_a = 0.017442897;
-        params{ii}.rebalance_cost = 516.9930144/anninc;
-        params{ii}.rebalance_rate = 1.0;
-        params{ii}.calibration_bounds = {rho_bds};
-        params{ii}.calibration_stats = {'totw'};
-        params{ii}.calibration_targets = [scf.mean_totw];
-        params{ii}.calibration_scales = [1];
-        if param_opts.ComputeMPCS_news
-            params{ii}.name = sprintf('Baseline 2A (with news)');
-        else
-            params{ii}.name = sprintf('Baseline 2A');
+%         ii = ii + 1;
+%         params = [params {calibrations{1}}];
+%         params{ii}.calibration_vars = {'rho'};
+%         params{ii}.HJB_delta = 1e3;
+%         % Income
+%         params{ii}.income_dir = incomedirs{1};
+%         params{ii}.IncomeDescr = IncomeDescriptions{1};
+%         % Flow costs
+%         params{ii}.kappa0 = 1e10;
+%         params{ii}.kappa1 = 1e10;
+%         % Calibrated
+%         params{ii}.rho = 0.01295; 
+%         rho_bds = [-0.45, 0.03];
+%         params{ii}.r_b = -0.006421023; 
+%         params{ii}.r_a = 0.017442897;
+%         params{ii}.rebalance_cost = 516.9930144/anninc;
+%         params{ii}.rebalance_rate = 1.0;
+%         params{ii}.calibration_bounds = {rho_bds};
+%         params{ii}.calibration_stats = {'totw'};
+%         params{ii}.calibration_targets = [scf.mean_totw];
+%         params{ii}.calibration_scales = [1];
+%         if param_opts.ComputeMPCS_news
+%             params{ii}.name = sprintf('Baseline 2A (with news)');
+%         else
+%             params{ii}.name = sprintf('Baseline 2A');
+%         end
+        
+        % 2A Baseline (Spec 3, 9_1_21)
+        reb_costs = [500, 300, 400, 600, 700]./anninc;
+        for reb_cost = reb_costs
+            ii = ii + 1;
+            params = [params {calibrations{1}}];
+            params{ii}.calibration_vars = {'rho', 'r_a', 'rebalance_cost'};
+            params{ii}.HJB_delta = 1e3;
+            % Income
+            params{ii}.income_dir = incomedirs{1};
+            params{ii}.IncomeDescr = IncomeDescriptions{1};
+            % Flow costs
+            params{ii}.kappa0 = 1e10;
+            params{ii}.kappa1 = 1e10;
+            % Calibrated
+            params{ii}.rho = 0.01295; 
+            rho_bds = [-0.45, 0.03];
+    %         params{ii}.r_b = -0.006421023; 
+            params{ii}.r_b = -0.005;
+            params{ii}.r_a = 0.017442897;
+            r_a_bds = [0, 0.04];
+%             params{ii}.rebalance_cost = 516.9930144/anninc;
+            params{ii}.rebalance_cost = reb_cost;
+            reb_cost_bds = [200, 700]/anninc;
+    %         params{ii}.rebalance_rate = 1.0;
+            params{ii}.rebalance_rate = 3.0;
+            params{ii}.calibration_bounds = {rho_bds, r_a_bds, reb_cost_bds};
+            params{ii}.calibration_stats = {'totw', 'liqw_lt_ysixth', 'w_lt_ysixth'};
+            params{ii}.calibration_targets = [scf.mean_totw, scf.htm, scf.phtm];
+            params{ii}.calibration_scales = [1,1,1];
+            if param_opts.ComputeMPCS_news
+                params{ii}.name = sprintf('Baseline 2A (with news)');
+            else
+                params{ii}.name = sprintf('Baseline 2A (9-1)');
+            end
         end
         
+        % Less frequent arrivals
+        ii = ii + 1;
+        params = [params {calibrations{1}}];
+        params{ii} = params{1};
+        params{ii}.rebalance_rate = 1.0;
+        params{ii}.name = sprintf('Quarterly Rebalance');
+        
+        ii = ii + 1;
+        params = [params {calibrations{1}}];
+        params{ii} = params{1};
+        params{ii}.rebalance_rate = 0.25;
+        params{ii}.name = sprintf('Annual Rebalance');
+        
+        
+
         % 2A Baseline Alternative
 %         for r_b = [-0.0025, -0.005]
 %             for r_a = [0.005, 0.01, 0.012, 0.0125, 0.015]
@@ -396,20 +447,20 @@ function [outparams, n] = overall_htm_target(param_opts)
         
         
 %         % 1A Baseline
-        for rho = [-0.004] %, -0.003, -0.002, -0.001, 0, 0.001, 0.002]
-            ii = ii + 1;
-            params = [params {calibrations{1}}];
-            params{ii} = params{1};
-%             params{ii}.OneAsset = true;
-            params{ii}.na = 2;
-            params{ii}.na_KFE = 2;
-            params{ii}.rebalance_rate = 0;
-            params{ii}.r_b = 0.0025;
-            params{ii}.r_a = params{ii}.r_b;
-            params{ii}.ComputeMPCS_illiquid = false;
-            params{ii}.rho = rho;
-            params{ii}.name = sprintf('Baseline 1A, rho=%d', params{ii}.rho);
-        end
+%         for rho = [-0.004] %, -0.003, -0.002, -0.001, 0, 0.001, 0.002]
+%             ii = ii + 1;
+%             params = [params {calibrations{1}}];
+%             params{ii} = params{1};
+% %             params{ii}.OneAsset = true;
+%             params{ii}.na = 2;
+%             params{ii}.na_KFE = 2;
+%             params{ii}.rebalance_rate = 0;
+%             params{ii}.r_b = 0.0025;
+%             params{ii}.r_a = params{ii}.r_b;
+%             params{ii}.ComputeMPCS_illiquid = false;
+%             params{ii}.rho = rho;
+%             params{ii}.name = sprintf('Baseline 1A, rho=%d', params{ii}.rho);
+%         end
 %         
 %         % Infrequent rebalance arrival
 %         ii = ii + 1;

@@ -25,13 +25,13 @@ using LaTeXStrings
 for_slides = false
 
 # Go directory with .xlsx
-# table_type = 2
-# cd("/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final/Two_Asset")
-# xf = XLSX.readdata("output_table.xlsx", "Sheet1", "A2:AF177")
+table_type = 2
+cd("/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final/Two_Asset")
+xf = XLSX.readdata("output_table.xlsx", "Sheet1", "A2:AF177")
 
-table_type = 1
-cd("/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final/One_Asset")
-xf = XLSX.readdata("1A_tables.xlsx", "Sheet1", "A2:AX102")
+# table_type = 1
+# cd("/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final/One_Asset")
+# xf = XLSX.readdata("1A_tables.xlsx", "Sheet1", "A2:AX102")
 
 ###############
 # CHANGE THIS #
@@ -43,7 +43,8 @@ shares = ["a_i <= y_i / 6", "a_i <= y_i / 12",
 "a <= \\\$1000", "a <= \\\$5000", "a <= \\\$10000", "a <= \\\$50000", "a <= \\\$100000",
 "Wealth, top 10\\% share"]
 
-two_dec = ["Beta (annualized)", "Effective discount rate"]
+two_dec = ["Beta (annualized)", "Effective discount rate",
+"pswitch"]
 
 # Fix some characters for tex
 for i in 1:size(xf,2)
@@ -98,9 +99,27 @@ end
 
 # Write text to tex file with table name
 function write_text(text, name)
-    io = open("table_"*name*".tex", "w")
+    io = open(name*".tex", "w")
     write(io, text)
     close(io)
+end
+
+function include_table(tab_name, label)
+    txt = raw"
+    \begin{table}[ht]
+    \label{"
+    
+    txt *= label 
+    
+    txt *= raw"}
+    \input{"
+
+    txt *= tab_name
+
+    txt *= raw"}
+    \end{table}"
+
+    return txt
 end
 
 ##
@@ -172,7 +191,7 @@ function alltables()
     txt *= header()
 
     # MPC Comparison
-    txt *= small_table("MPC Comparison",
+    txt *= small_table("MPC Comparison", "small",
     ["Discrete Baseline", "Discrete Match HtM", "Discrete Beta het", "Discrete CRRA het", "Discrete Temptation", "Baseline 2A"],
     ["Baseline 1A", "1A Match HtM", "1A "*string(L"\beta")*" Het", "1A CRRA Het",
      "1A Temptation", "2A Baseline"],
@@ -186,7 +205,7 @@ function alltables()
 
     if for_slides
         # Table 1
-        txt *= stat_table("Table 1: Baseline", 
+        txt *= stat_table("Table 1: Baseline", "two_asset_baseline",
         ["Baseline 1A, rho=-4.000000e-03", "Baseline 2A"], 
         ["Baseline 1-asset", "Baseline 2-asset"],
         ["Rebalance arrival rate", "Quarterly  MPC (\\%), out of \\\$500, t=1", "Annual  MPC (\\%), out of \\\$500",
@@ -197,7 +216,7 @@ function alltables()
         "Mean MPC at Mean Wealth (\\%)", "Prob. HtM status at year t and year t+1"])
     else
         # Table 1
-        txt *= stat_table("Table 1: Baseline", 
+        tmp_tab = stat_table("Table 1: Baseline", "two_asset_baseline",
         ["Baseline 1A, rho=-4.000000e-03", "Baseline 2A", "Infrequent Rebalance"], 
         ["Baseline 1-asset", "Baseline 2-asset", "Infrequent Rebalance"],
         ["Rebalance arrival rate", "Quarterly  MPC (\\%), out of \\\$500, t=1", "Annual  MPC (\\%), out of \\\$500",
@@ -206,6 +225,11 @@ function alltables()
         ["Rebalance arrival rate", "Quarterly  MPC (\\%)", "Annual  MPC (\\%)",
         "Quarterly PHtM MPC (\\%)", "Quarterly WHtM MPC (\\%)",
         "Mean MPC at Mean Wealth (\\%)", "Prob. HtM status at year t and year t+1"])
+
+        write_text(tmp_tab, "two_asset_baseline")
+
+        txt *= include_table("two_asset_baseline", "tab:two_asset_baseline")
+
     end
 
     txt *= raw"
@@ -221,7 +245,7 @@ function alltables()
     # \newpage"
 
     # Table 2
-    txt *= stat_table("Table 2: Returns Robustness", 
+    txt *= stat_table("Table 2: Returns Robustness", "asdf",
     ["Baseline 2A", "Low r_b", "High r_b", "Low r_a", "High r_a"], 
     ["Baseline 2A", "Low r_b", "High r_b", "Low r_a", "High r_a"],
     ["Quarterly  MPC (\\%), out of \\\$500, t=1", "Annual  MPC (\\%), out of \\\$500",
@@ -231,6 +255,9 @@ function alltables()
     "Quarterly PHtM MPC (\\%)", "Quarterly  WHtM MPC (\\%)",
     "Mean MPC at Mean Wealth (\\%)", "Prob. HtM status at year t and year t+1"])
 
+    write_text(tmp_tab,"2A_ret_rob")
+
+    txt *= include_table("2A_ret_rob", "tab:2A_ret_rob")
     # txt *= raw"
     # \newpage"
 
@@ -250,7 +277,7 @@ function alltables()
     # ["Quarterly  MPC (\\%), out of \\\$500", "Annual  MPC (\\%), out of \\\$500"])
 
     # Appendix
-    txt *= stat_table("Appendix Table: Rebalance Costs", 
+    tmp_tab = stat_table("Appendix Table: Rebalance Costs", "asdf",
     ["Baseline 2A", "Reb cost \\\$250", "Reb cost \\\$1000", "Reb cost \\\$2000"],
     ["Baseline 2-asset", "Reb cost \\\$250", "Reb cost \\\$1000", "Reb cost \\\$2000"],
     ["Quarterly  MPC (\\%), out of \\\$500, t=1", "Annual  MPC (\\%), out of \\\$500",
@@ -259,6 +286,11 @@ function alltables()
     ["Quarterly  MPC (\\%)", "Annual  MPC (\\%)",
     "Quarterly PHtM MPC (\\%)", "Quarterly  WHtM MPC (\\%)",
     "Mean MPC at Mean Wealth (\\%)", "Prob. HtM status at year t and year t+1"])
+
+    write_text(tmp_tab, "reb_costs")
+
+    txt *= include_table("reb_costs", "tab:reb_costs")
+    
 
     # txt *= raw"
     # \newpage"
@@ -272,7 +304,7 @@ function alltables()
     txt *= raw"
     \newpage"
 
-    txt *= stat_table("Appendix Table: Temptation", 
+    txt *= stat_table("Appendix Table: Temptation", "asdf",
     ["Baseline 2A", "Temptation 5.000000e-02, rho=1.000000e-02", "Temptation 5.000000e-02, rho=1.000000e-02"],
     ["Baseline 2-asset", "Temptation 0.05", "Temptation 0.07"],
     ["Quarterly  MPC (\\%), out of \\\$500, t=1", "Annual  MPC (\\%), out of \\\$500",
@@ -344,16 +376,16 @@ function alltables1A()
         "Quarterly MPC of the HtM (\\%)", "Share HtM",
         "Effective discount rate"])
 
-        write_text(tmp_tab, "1_1A")
+        write_text(tmp_tab, "table_baseline")
 
-        txt *= tmp_tab
+        txt *= include_table("table_baseline", "tab:table_baseline")
     end
 
     txt *= raw"
     \newpage"
 
     # Table 2
-    tmp_tab = stat_table_1A("Table 2", "table_r_rra",
+    tmp_tab = stat_table_1A("Table 2", "asdf",
     ["Baseline", "r = 0\\% p.a.", "r = 5\\% p.a.",
     "CRRA 0.5", "CRRA 6"], 
     ["Baseline", "r = 0\\% p.a.", "r = 5\\% p.a.",
@@ -365,9 +397,9 @@ function alltables1A()
     "Quarterly MPC of the HtM (\\%)", "Share HtM",
     "Effective discount rate"])
 
-    write_text(tmp_tab, "2_1A")
+    write_text(tmp_tab, "table_r_rra")
 
-    txt *= tmp_tab
+    txt *= include_table("table_r_rra", "tab:table_r_rra")
 
     txt *= raw"
     \newpage"
@@ -387,7 +419,7 @@ function alltables1A()
         "Effective discount rate"])
     else
             # Table 3
-            txt *= stat_table_1A("Table 3", "table",
+            tmp_tab = stat_table_1A("Table 3", "table",
             ["Baseline", "p = 0, spacing = 0.005", "p = 0, spacing = 0.01",
             "p = 0.02, spacing = 0.01", "p = 0.1, spacing = 0.01",
             "r in {-1, 1, 3}", "r in {-3,1,5}"], 
@@ -401,6 +433,10 @@ function alltables1A()
             ["Set of \\beta", "Switch probability \\beta", "Set of r", "Quarterly MPC (\\%)", "Annual MPC (\\%)",
             "Quarterly MPC of the HtM (\\%)", "Share HtM",
             "Effective discount rate"])
+
+            write_text(tmp_tab, "beta_r_het")
+            
+            txt *= include_table("beta_r_het","tab:beta_r_het")
     end
 
     txt *= raw"
@@ -421,7 +457,7 @@ function alltables1A()
         "Effective discount rate"])
     else
             # Table 4
-        txt *= stat_table_1A("Table 4", "table",
+        tmp_tab = stat_table_1A("Table 4", "table",
         ["Baseline", "RA = 1, IES = exp(-1), ..., exp(1)",
         "RA = 1, IES = exp(-2), ..., exp(2)", "RA = 1, IES = exp(-3), ..., exp(3)",
         "Temptation = 0.01", "Temptation = 0.05", "Temptation in {0, 0.05, 0.1}"], 
@@ -433,6 +469,10 @@ function alltables1A()
         ["Set of IES", "Set of Temptation", "Quarterly MPC (\\%)", "Annual MPC (\\%)",
         "Quarterly MPC of the HtM (\\%)", "Share HtM",
         "Effective discount rate"])
+
+        write_text(tmp_tab, "ies_tempt")
+
+        txt *= include_table("ies_tempt", "tab:ies_tempt")
     end
 
     txt *= raw"
@@ -483,7 +523,7 @@ function alltables1A()
     \newpage"
 
     # Appendix Table 4
-    txt *= stat_table_1A("Appendix Table 4", "table",
+    tmp_tab = stat_table_1A("Appendix Table 4", "table",
     ["Baseline", "RA = 1, IES = 2", "RA = 1, IES = 0.25", "RA = 8, IES = 1", 
     "RA = 0.5, IES = 1"], 
     ["Baseline", "RA=1, IES=2", "RA=1, IES=0.25", "RA=8, IES=1", 
@@ -495,8 +535,12 @@ function alltables1A()
     "Quarterly MPC of the HtM (\\%)", "Share HtM",
     "Effective discount rate"])
 
-    # Appendix Table 6
-    txt *= stat_table_1A("Appendix Table 5", "table",
+    write_text(tmp_tab, "ez_no_het")
+
+    txt *= include_table("ez_no_het", "tab:ez_no_het")
+
+    # Appendix Table 5
+    tmp_tab = stat_table_1A("Appendix Table 5", "table",
     ["Baseline 1A, rho=-4.000000e-03", "IG = 9.000000e-01, rho = -4.111111e-03, 1A", 
     "IG = 8.000000e-01, rho = -4.111111e-03, 1A", 
     "IG = 7.000000e-01, rho = -4.111111e-03, 1A"], 
@@ -507,6 +551,11 @@ function alltables1A()
     ["Quarterly MPC (\\%)", "Annual MPC (\\%)",
     "Quarterly MPC of the HtM (\\%)", "Share HtM",
     "Effective discount rate"])
+
+    write_text(tmp_tab, "in_grat")
+
+    txt *= include_table("in_grat", "tab:in_grat")
+
 
     # Appendix Table 6
     txt *= stat_table_1A("Appendix Table 6", "table",
@@ -530,7 +579,10 @@ function starttable(name, modelnames)
     txt = raw"
     "
 
-    txt *= raw"\begin{table}[ht] %
+    # txt *= raw"\begin{table}[ht] %
+    # \caption*{"
+
+    txt *= raw"
     \caption*{"
     
     txt *= name
@@ -567,16 +619,24 @@ function starttable(name, modelnames)
 end
 
 function endtable(label)
+    # txt = raw"
+    # \bottomrule
+    # \end{tabular}
+    # \end{threeparttable} %
+    # \label{tab:"
+
+    # txt *= label
+
+    # txt *= raw"}
+    # \end{table} %"
+    # # \clearpage"
+
+    # return txt
+
     txt = raw"
     \bottomrule
     \end{tabular}
-    \end{threeparttable} %
-    \label{tab:"
-
-    txt *= label
-
-    txt *= raw"}
-    \end{table} %"
+    \end{threeparttable} %"
     # \clearpage"
 
     return txt
@@ -584,19 +644,19 @@ end
 
 
 # Don't throw on the full stats
-function small_table(name, models, modelnames, topstats, topstats_names)
+function small_table(name, label, models, modelnames, topstats, topstats_names)
     txt = starttable(name, modelnames)
 
     # Top stats
     txt *= subtable(models, topstats, topstats_names)
 
-    txt *= endtable()
+    txt *= endtable(label)
     return txt
 
 end
 
 # Full stats 2A
-function stat_table(name, models, modelnames, topstats, topstats_names)
+function stat_table(name, label, models, modelnames, topstats, topstats_names)
     txt = starttable(name, modelnames)
 
     # Top stats
@@ -678,7 +738,7 @@ function stat_table(name, models, modelnames, topstats, topstats_names)
     "Wealth, Top 1\\% share",
     "Gini coefficient, total wealth"])
 
-    txt *= endtable()
+    txt *= endtable(label)
     return txt
 end
 
@@ -796,6 +856,9 @@ if table_type == 2
 else
     println(alltables1A())
 end
+
+
+
 ##
 
 # Write out

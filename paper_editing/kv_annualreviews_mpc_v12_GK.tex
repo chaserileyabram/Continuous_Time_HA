@@ -155,7 +155,13 @@ We estimate the parameters of the income process by matching moments of the hous
 \paragraph{Wealth Distribution.}
 We choose the effective discount factor $\beta$ so that mean wealth in the stationary distribution is consistent with mean wealth in the United States. We express all values as multiples of mean annual household earnings, which we define as labor income plus social security income for retired households. Our income and wealth statistics come from the 2019 Survey of Consumer Finances, from which we exclude households in the the top 5\% of the wealth distribution.\footnote{The top 5\% holds 65\% of the total net worth in the economy. We exclude this group from our calibration because the simple precautionary savings models we consider here are not well suited to explain the top tails of the wealth distribution. \citep{benhabib2018skewed,de2017saving}. } Based on this definition, mean annual earnings is \$67,000 and mean net worth is \$275,000 or 4.1 times mean annual earnings.
 
-\input{table_1_1A}
+%TABLE 1
+\begin{table}[ht]
+\label{tab:table_baseline}
+\input{table_baseline.tex}
+\end{table}
+
+%\input{table_1_1A}
 
 Table \ref{tab:table_baseline} (Panel B, Column (1)) reports key wealth statistics from the baseline model, with the discount factor chosen to hit this target. The implied annualized value for $\beta$ is $0.98$. Median wealth in the model (1.34) is quite close to its value in the  data (1.54) despite not being explicitly targeted. The baseline model generates fewer very low wealth households than in the data: less than 1\% with zero or negative wealth, compared with 11\% in the data; 2.5\% with less than \$1,000, compared with 15\% in the data; and 12\% with less than \$5,000, compared with 20\% in the data. A common definition of hand-to-mouth households in the literature is households whose wealth is less than half their monthly income \citet{kaplan2014wealthy}. According to this definition, only 2.5\% of households in the model are hand-to-mouth compared with 14\% in the data, because optimizing households seek to save themselves away from hand-to-mouth regions of the asset space. 
 
@@ -259,7 +265,13 @@ Despite the apparent success of liquid wealth calibrations at generating high MP
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \paragraph{Interest rate}
 
-\input{table_2_1A}
+%TABLE 2
+\begin{table}[ht]
+\label{tab:table_r_rra}
+\input{table_r_rra.tex}
+\end{table}
+
+%\input{table_2_1A}
 
 Table \ref{tab:table_r_rra} shows that lowering the interest rate from 1\% p.a. to 0\% p.a has a negligible effect on the MPC. Raising the interest rate to 5\% p.a. increases the average quarterly MPC by around half a percentage point. A higher interest rates leads to a calibration with a lower discount factor, which raises the certainty MPC $1-\beta$. This is confirmed by the decomposition which shows that the entirety of the difference in MPC relative to the baseline is due to the consumption function. 
 
