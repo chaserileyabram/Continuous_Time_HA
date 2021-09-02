@@ -265,6 +265,8 @@ classdef MPCsNews < handle
 
 		    	u_k = reshape(KFE_terminal.u, [], obj.income.ny);
 
+		    	Vstar_k = reshape(KFE_terminal.Vstar, [], obj.income.ny);
+
 		    	V1_terminal_k = zeros(obj.states_per_income, obj.income.ny);
                 obj.options.delta_terminal = 1e-3;
 		    	for k = 1:obj.p.ny
@@ -283,10 +285,10 @@ classdef MPCsNews < handle
 			    		inctrans = sparse_diags(ez_adj(:,k,k), 0);
 			    	end
 
-			    	RHS = obj.options.delta_terminal* (u_k(:,k) + Vk_stacked)...
+			    	RHS = obj.options.delta_terminal* (u_k(:,k) + Vk_stacked + obj.p.rebalance_rate * Vstar_k(:,k))...
 			           		+ obj.options.delta_terminal*Vg_terminal_k(:,k)/obj.options.delta + V_terminal_k(:,k);
 			        LHS = obj.rho_diag + (1/obj.options.delta + 1/obj.options.delta_terminal + ...
-			        			obj.p.deathrate) * speye(obj.states_per_income) - Ak - inctrans;
+			        			obj.p.deathrate + obj.p.rebalance_rate) * speye(obj.states_per_income) - Ak - inctrans;
 			       	LHS = obj.options.delta_terminal * LHS;
 		        	V1_terminal_k(:,k) = LHS \ RHS;
 		    	end
@@ -378,6 +380,8 @@ classdef MPCsNews < handle
                 if obj.p.SDU
                 	ez_adj = obj.income.income_transitions_SDU(obj.p, obj.V);
 			    end
+
+			    Vstar_k = reshape(obj.KFEint.Vstar, [], obj.income.ny);
                 
                 u_k = reshape(obj.KFEint.u,[],obj.p.ny);
                 V_k = reshape(obj.V,[],obj.p.ny);
@@ -398,7 +402,8 @@ classdef MPCsNews < handle
 			    		Vk_stacked 	= sum(squeeze(ez_adj(:,k,indx_k)) .* V_k(:,indx_k),2);
 			    	end
 			    	Bk = hjb_divisor(obj.options.delta, obj.p.deathrate, k, obj.A_HJB, inctrans, obj.rho_diag, obj.p.rebalance_rate);
-                    V_k1(:,k) = Bk \ (obj.options.delta * (u_k(:,k) + Vk_stacked) + V_k(:,k));
+                    V_k1(:,k) = Bk \ (obj.options.delta * (u_k(:,k) + Vk_stacked ...
+                    	+ obj.p.rebalance_rate * Vstar_k(:,k)) + V_k(:,k));
                 end
                 obj.V = reshape(V_k1, obj.state_dims);
 
