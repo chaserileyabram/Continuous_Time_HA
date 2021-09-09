@@ -25,13 +25,13 @@ using LaTeXStrings
 for_slides = false
 
 # Go directory with .xlsx
-table_type = 2
-cd("/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final/Two_Asset")
-xf = XLSX.readdata("output_table.xlsx", "Sheet1", "A2:AF177")
+# table_type = 2
+# cd("/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final/Two_Asset")
+# xf = XLSX.readdata("output_table.xlsx", "Sheet1", "A2:AF177")
 
-# table_type = 1
-# cd("/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final/One_Asset")
-# xf = XLSX.readdata("1A_tables.xlsx", "Sheet1", "A2:AX102")
+table_type = 1
+cd("/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final/One_Asset")
+xf = XLSX.readdata("1A_tables.xlsx", "Sheet1", "A2:BB102")
 
 ###############
 # CHANGE THIS #
@@ -507,7 +507,7 @@ function alltables1A()
     \newpage"
 
     # Appendix Table 3
-    txt *= stat_table_1A("Appendix Table 3", "table",
+    tmp_tab = stat_table_1A("Appendix Table 3", "table",
     ["Baseline", "no_trans_shocks", "quart_c", "KMP", "quart_a", "Carrol process",
     "High persistence", "FE heterogeneity"], 
     ["Baseline", "no trans shocks", "quart_c", "KMP", "quart_a", "Carrol",
@@ -518,6 +518,12 @@ function alltables1A()
     ["Quarterly MPC (\\%)", "Annual MPC (\\%)",
     "Quarterly MPC of the HtM (\\%)", "Share HtM",
     "Effective discount rate"])
+
+    write_text(tmp_tab, "income_proc")
+
+    txt *= include_table("income_proc", "tab:income_proc")
+
+
 
     txt *= raw"
     \newpage"
@@ -558,16 +564,39 @@ function alltables1A()
 
 
     # Appendix Table 6
-    txt *= stat_table_1A("Appendix Table 6", "table",
-    ["Baseline", "RA = exp(-2), ..., exp(2), IES = 1", 
-    "RA = exp(-3), ..., exp(3), IES = 1"], 
-    ["Baseline", "Het CRRA", "Het CRRA"],
+    tmp_tab = stat_table_1A("Appendix Table 6", "table",
+    ["Baseline", "RA = exp(1), ..., exp(-1), IES = exp(-1), ..., exp(1)", 
+    "RA = exp(2), ..., exp(-2), IES = exp(-2), ..., exp(2)",
+    "RA = exp(3), ..., exp(-3), IES = exp(-3), ..., exp(3)"], 
+    ["Baseline", "Het CRRA", "Het CRRA", "Het CRRA"],
     ["crra het", "Quarterly MPC (\\%), out of \\\$500", "Annual MPC (\\%), out of \\\$500",
     "Quarterly HtM1 MPC (\\%), out of \\\$500", "a_i <= y_i / 6",
     "Effective discount rate"],
     ["Set of CRRA", "Quarterly MPC (\\%)", "Annual MPC (\\%)",
     "Quarterly MPC of the HtM (\\%)", "Share HtM",
     "Effective discount rate"])
+
+    write_text(tmp_tab, "crra_het")
+
+    txt *= include_table("crra_het", "tab:crra_het")
+
+    # Appendix Table 7
+    tmp_tab = stat_table_1A("Appendix Table 7", "table",
+    ["Baseline (Annual)", "Baseline",
+    "Baseline 1A, rho=-4.000000e-03"], 
+    ["Annual (Discrete)", "Quarterly (Discrete)", "Quarterly (Continuous)"],
+    ["Quarterly MPC (\\%), out of \\\$500", "Annual MPC (\\%), out of \\\$500",
+    "Quarterly HtM1 MPC (\\%), out of \\\$500", "a_i <= y_i / 6",
+    "Effective discount rate"],
+    ["Quarterly MPC (\\%)", "Annual MPC (\\%)",
+    "Quarterly MPC of the HtM (\\%)", "Share HtM",
+    "Effective discount rate"])
+
+    write_text(tmp_tab, "base_disc_cts")
+
+    txt *= include_table("base_disc_cts", "tab:base_disc_cts")
+
+
 
 
     # Footer
