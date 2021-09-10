@@ -3,7 +3,7 @@
 #SBATCH --output=/home/abram/Continuous_Time_HA/output/run%a.out
 #SBATCH --error=/home/abram/Continuous_Time_HA/output/run%a.err
 #SBATCH --partition=broadwl
-#SBATCH --array=1-50
+#SBATCH --array=1-350
 #SBATCH --time=36:00:00
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1

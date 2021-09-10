@@ -345,7 +345,7 @@ function [outparams, n] = overall_htm_target(param_opts)
 %         end
         
         % 2A Baseline (Spec 3, 9_1_21)
-        reb_costs = [500, 300, 400, 600, 700]./anninc;
+        reb_costs = [500, 700, 1400, 2000]./anninc;
         for reb_cost = reb_costs
             ii = ii + 1;
             params = [params {calibrations{1}}];
@@ -376,63 +376,64 @@ function [outparams, n] = overall_htm_target(param_opts)
             if param_opts.ComputeMPCS_news
                 params{ii}.name = sprintf('Baseline 2A (with news)');
             else
-                params{ii}.name = sprintf('Baseline 2A (9-1)');
+                params{ii}.name = sprintf('Baseline 2A (9-1), reb_start = %d', reb_cost);
             end
         end
+        
+        rhos = linspace(-0.01, 0.01, 10);
+        r_as = [0.05 0.04 0.03]./4;
 
         for reb_cost = reb_costs
-            % Less frequent arrivals
-            ii = ii + 1;
-            params = [params {calibrations{1}}];
-            params{ii} = params{1};
-            params{ii}.rebalance_rate = 1.0;
-            params{ii}.rebalance_cost = reb_cost;
-            params{ii}.name = sprintf('Quarterly Rebalance');
-
-            ii = ii + 1;
-            params = [params {calibrations{1}}];
-            params{ii} = params{1};
-            params{ii}.rebalance_rate = 0.25;
-            params{ii}.rebalance_cost = reb_cost;
-            params{ii}.name = sprintf('Annual Rebalance');
-
-
-            % ra robustness
-            r_as = [0.05 0.04 0.03]./4;
-            for r_a = r_as
+            for rho = rhos
+                % Less frequent arrivals
                 ii = ii + 1;
                 params = [params {calibrations{1}}];
                 params{ii} = params{1};
-                params{ii}.calibration_vars = {'rho', 'rebalance_cost'};
-                params{ii}.calibration_bounds = {rho_bds, reb_cost_bds};
-                params{ii}.calibration_stats = {'totw', 'liqw_lt_ysixth'};
-                params{ii}.calibration_targets = [scf.mean_totw, scf.htm];
-                params{ii}.calibration_scales = [1,1];
-                params{ii}.r_a = r_a;
-                params{ii}.name = sprintf('r_a=%d, rho reb_cost robustness', r_a);
-            end
-        end
-        
-        rhos = [0.005, 0.01, 0.012, 0.013, 0.015];
-        for rho = rhos
-            for r_a = r_as
+                params{ii}.rebalance_rate = 1.0;
+                params{ii}.rebalance_cost = reb_cost;
+                params{ii}.name = sprintf('Quarterly Rebalance, rc = %d, rho = %d', reb_cost, rho);
+
                 ii = ii + 1;
                 params = [params {calibrations{1}}];
                 params{ii} = params{1};
-                params{ii}.calibration_vars = {'rho'};
-                params{ii}.calibration_bounds = {rho_bds};
-                params{ii}.calibration_stats = {'totw'};
-                params{ii}.calibration_targets = [scf.mean_totw];
-                params{ii}.calibration_scales = [1];
-                params{ii}.rho = rho;
-                params{ii}.r_a = r_a;
-                params{ii}.rebalance_cost = 1453.906838;
-                params{ii}.name = sprintf('r_a=%d, rho robustness', r_a);
+                params{ii}.rebalance_rate = 0.25;
+                params{ii}.rebalance_cost = reb_cost;
+                params{ii}.name = sprintf('Annual Rebalance, rc = %d, rho = %d', reb_cost, rho);
+
+
+                % ra robustness
+                for r_a = r_as
+                    ii = ii + 1;
+                    params = [params {calibrations{1}}];
+                    params{ii} = params{1};
+                    params{ii}.calibration_vars = {'rho', 'rebalance_cost'};
+                    params{ii}.calibration_bounds = {rho_bds, reb_cost_bds};
+                    params{ii}.calibration_stats = {'totw', 'liqw_lt_ysixth'};
+                    params{ii}.calibration_targets = [scf.mean_totw, scf.htm];
+                    params{ii}.calibration_scales = [1,1];
+                    params{ii}.r_a = r_a;
+                    params{ii}.rebalance_cost = reb_cost;
+                    params{ii}.name = sprintf('r_a=%d, rho=%d rho reb_cost robustness', r_a, rho);
+                    
+                    ii = ii + 1;
+                    params = [params {calibrations{1}}];
+                    params{ii} = params{1};
+                    params{ii}.calibration_vars = {'rho'};
+                    params{ii}.calibration_bounds = {rho_bds};
+                    params{ii}.calibration_stats = {'totw'};
+                    params{ii}.calibration_targets = [scf.mean_totw];
+                    params{ii}.calibration_scales = [1];
+                    params{ii}.rho = rho;
+                    params{ii}.r_a = r_a;
+                    params{ii}.rebalance_cost = reb_cost; %1453.906838;
+                    params{ii}.name = sprintf('r_a=%d, rho=%d, rho robustness', r_a, rho);
+                end
             end
         end
         
+%         rhos = [0.005, 0.01, 0.012, 0.013, 0.015];
         
-
+        
         % 2A Baseline Alternative
 %         for r_b = [-0.0025, -0.005]
 %             for r_a = [0.005, 0.01, 0.012, 0.0125, 0.015]
