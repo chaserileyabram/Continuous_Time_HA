@@ -31,7 +31,7 @@ for_slides = false
 
 table_type = 1
 cd("/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final/One_Asset")
-xf = XLSX.readdata("1A_tables.xlsx", "Sheet1", "A2:BB102")
+xf = XLSX.readdata("1A_tables.xlsx", "Sheet1", "A2:BB103")
 
 ###############
 # CHANGE THIS #
@@ -41,10 +41,12 @@ xf = XLSX.readdata("1A_tables.xlsx", "Sheet1", "A2:BB102")
 
 shares = ["a_i <= y_i / 6", "a_i <= y_i / 12",
 "a <= \\\$1000", "a <= \\\$5000", "a <= \\\$10000", "a <= \\\$50000", "a <= \\\$100000",
-"Wealth, top 10\\% share"]
+"Wealth, top 10\\% share", "b_i <= y_i / 6"]
 
-two_dec = ["Beta (annualized)", "Effective discount rate",
+two_dec = ["Beta (annualized)",
 "pswitch"]
+
+three_dec = ["Effective discount rate"]
 
 # Fix some characters for tex
 for i in 1:size(xf,2)
@@ -54,9 +56,11 @@ for i in 1:size(xf,2)
 
         if isa(xf[j,i], Number)
             if xf[j,1] in shares
-                xf[j,i] = Int64(round(100*xf[j,i], digits=0))
+                xf[j,i] = round(100*xf[j,i], digits=1)
             elseif xf[j,1] in two_dec
                 xf[j,i] = round(xf[j,i], digits=2)
+            elseif xf[j,1] in three_dec
+                xf[j,i] = round(xf[j,i], digits=3)
             else
                 xf[j,i] = round(xf[j,i], digits=1)
             end
@@ -359,7 +363,7 @@ function alltables1A()
         "Quarterly HtM1 MPC (\\%), out of \\\$500", "a_i <= y_i / 6",
         "Effective discount rate"],
         ["Quarterly MPC (\\%)", "Annual MPC (\\%)",
-        "Quarterly MPC of the HtM (\\%)", "Share HtM (\\%)",
+        "Quarterly MPC of the HtM (\\%)", "Share of HtM (\\%)",
         "Effective discount rate"])
     else
     # Table 1
@@ -373,7 +377,7 @@ function alltables1A()
         "Quarterly HtM1 MPC (\\%), out of \\\$500", "a_i <= y_i / 6",
         "Effective discount rate"],
         ["Quarterly MPC (\\%)", "Annual MPC (\\%)",
-        "Quarterly MPC of the HtM (\\%)", "Share HtM",
+        "Quarterly MPC of the HtM (\\%)", "Share of HtM (\\%)",
         "Effective discount rate"])
 
         write_text(tmp_tab, "table_baseline")
@@ -388,13 +392,13 @@ function alltables1A()
     tmp_tab = stat_table_1A("Table 2", "asdf",
     ["Baseline", "r = 0\\% p.a.", "r = 5\\% p.a.",
     "CRRA 0.5", "CRRA 6"], 
-    ["Baseline", "r = 0\\% p.a.", "r = 5\\% p.a.",
-    "CRRA 0.5", "CRRA 6"],
+    ["Baseline", "r = 0\\%", "r = 5\\%",
+    "RRA=0.5", "RRA=6"],
     ["Quarterly MPC (\\%), out of \\\$500", "Annual MPC (\\%), out of \\\$500",
     "Quarterly HtM1 MPC (\\%), out of \\\$500", "a_i <= y_i / 6",
     "Effective discount rate"],
     ["Quarterly MPC (\\%)", "Annual MPC (\\%)",
-    "Quarterly MPC of the HtM (\\%)", "Share HtM",
+    "Quarterly MPC of the HtM (\\%)", "Share of HtM (\\%)",
     "Effective discount rate"])
 
     write_text(tmp_tab, "table_r_rra")
@@ -415,23 +419,23 @@ function alltables1A()
         "Quarterly HtM1 MPC (\\%), out of \\\$500", "a_i <= y_i / 6",
         "Effective discount rate"],
         ["Quarterly MPC (\\%)", "Annual MPC (\\%)",
-        "Quarterly MPC of the HtM (\\%)", "Share HtM",
+        "Quarterly MPC of the HtM (\\%)", "Share of HtM (\\%)",
         "Effective discount rate"])
     else
             # Table 3
             tmp_tab = stat_table_1A("Table 3", "table",
             ["Baseline", "p = 0, spacing = 0.005", "p = 0, spacing = 0.01",
             "p = 0.02, spacing = 0.01", "p = 0.1, spacing = 0.01",
-            "r in {-1, 1, 3}", "r in {-3,1,5}"], 
+            "r in {-1, 1, 3}", "r in {-3,1,5}", "betaL = 0.4, betaH calibrated"], 
             ["Baseline", " Het \\beta", 
             "Het \\beta",
             "Het \\beta", "Het \\beta",
-            "Het r", "Het r"],
-            ["beta het", "pswitch", "r het", "Quarterly MPC (\\%), out of \\\$500", "Annual MPC (\\%), out of \\\$500",
+            "Het r", "Het r", "Spender-saver"],
+            ["beta het", "effective beta het", "pswitch", "r het", "Quarterly MPC (\\%), out of \\\$500", "Annual MPC (\\%), out of \\\$500",
             "Quarterly HtM1 MPC (\\%), out of \\\$500", "a_i <= y_i / 6",
             "Effective discount rate"],
-            ["Set of \\beta", "Switch probability \\beta", "Set of r", "Quarterly MPC (\\%)", "Annual MPC (\\%)",
-            "Quarterly MPC of the HtM (\\%)", "Share HtM",
+            ["Set of \\beta", "Set of effective \\beta", "Switch probability \\beta", "Set of r", "Quarterly MPC (\\%)", "Annual MPC (\\%)",
+            "Quarterly MPC of the HtM (\\%)", "Share of HtM (\\%)",
             "Effective discount rate"])
 
             write_text(tmp_tab, "beta_r_het")
@@ -453,7 +457,7 @@ function alltables1A()
         "Quarterly HtM1 MPC (\\%), out of \\\$500", "a_i <= y_i / 6",
         "Effective discount rate"],
         ["Quarterly MPC (\\%)", "Annual MPC (\\%)",
-        "Quarterly MPC of the HtM (\\%)", "Share HtM",
+        "Quarterly MPC of the HtM (\\%)", "Share of HtM (\\%)",
         "Effective discount rate"])
     else
             # Table 4
@@ -467,7 +471,7 @@ function alltables1A()
         "Quarterly HtM1 MPC (\\%), out of \\\$500", "a_i <= y_i / 6",
         "Effective discount rate"],
         ["Set of IES", "Set of Temptation", "Quarterly MPC (\\%)", "Annual MPC (\\%)",
-        "Quarterly MPC of the HtM (\\%)", "Share HtM",
+        "Quarterly MPC of the HtM (\\%)", "Share of HtM (\\%)",
         "Effective discount rate"])
 
         write_text(tmp_tab, "ies_tempt")
@@ -486,22 +490,26 @@ function alltables1A()
     "Quarterly HtM1 MPC (\\%), out of \\\$500", "a_i <= y_i / 6",
     "Effective discount rate"],
     ["Quarterly MPC (\\%)", "Annual MPC (\\%)",
-    "Quarterly MPC of the HtM (\\%)", "Share HtM",
+    "Quarterly MPC of the HtM (\\%)", "Share of HtM (\\%)",
     "Effective discount rate"])
 
     txt *= raw"
     \newpage"
 
     # Appendix Table 2
-    txt *= stat_table_1A("Appendix Table 2", "table",
+    tmp_tab *= stat_table_1A("Appendix Table 2", "table",
     ["Baseline", "With Bequests", "No Death", "Annuities"], 
     ["Baseline", "With Bequests", "No Death", "Annuities"],
     ["Quarterly MPC (\\%), out of \\\$500", "Annual MPC (\\%), out of \\\$500",
     "Quarterly HtM1 MPC (\\%), out of \\\$500", "a_i <= y_i / 6",
     "Effective discount rate"],
     ["Quarterly MPC (\\%)", "Annual MPC (\\%)",
-    "Quarterly MPC of the HtM (\\%)", "Share HtM",
+    "Quarterly MPC of the HtM (\\%)", "Share of HtM (\\%)",
     "Effective discount rate"])
+
+    write_text(tmp_tab, "bequest")
+
+    txt *= include_table("bequest", "tab:bequest")
 
     txt *= raw"
     \newpage"
@@ -516,7 +524,7 @@ function alltables1A()
     "Quarterly HtM1 MPC (\\%), out of \\\$500", "a_i <= y_i / 6",
     "Effective discount rate"],
     ["Quarterly MPC (\\%)", "Annual MPC (\\%)",
-    "Quarterly MPC of the HtM (\\%)", "Share HtM",
+    "Quarterly MPC of the HtM (\\%)", "Share of HtM (\\%)",
     "Effective discount rate"])
 
     write_text(tmp_tab, "income_proc")
@@ -538,7 +546,7 @@ function alltables1A()
     "Quarterly HtM1 MPC (\\%), out of \\\$500", "a_i <= y_i / 6",
     "Effective discount rate"],
     ["Quarterly MPC (\\%)", "Annual MPC (\\%)",
-    "Quarterly MPC of the HtM (\\%)", "Share HtM",
+    "Quarterly MPC of the HtM (\\%)", "Share of HtM (\\%)",
     "Effective discount rate"])
 
     write_text(tmp_tab, "ez_no_het")
@@ -555,7 +563,7 @@ function alltables1A()
     "Quarterly HtM1 MPC (\\%), out of \\\$500", "a_i <= y_i / 6",
     "Effective discount rate"],
     ["Quarterly MPC (\\%)", "Annual MPC (\\%)",
-    "Quarterly MPC of the HtM (\\%)", "Share HtM",
+    "Quarterly MPC of the HtM (\\%)", "Share of HtM (\\%)",
     "Effective discount rate"])
 
     write_text(tmp_tab, "in_grat")
@@ -573,7 +581,7 @@ function alltables1A()
     "Quarterly HtM1 MPC (\\%), out of \\\$500", "a_i <= y_i / 6",
     "Effective discount rate"],
     ["Set of CRRA", "Quarterly MPC (\\%)", "Annual MPC (\\%)",
-    "Quarterly MPC of the HtM (\\%)", "Share HtM",
+    "Quarterly MPC of the HtM (\\%)", "Share of HtM (\\%)",
     "Effective discount rate"])
 
     write_text(tmp_tab, "crra_het")
@@ -582,14 +590,14 @@ function alltables1A()
 
     # Appendix Table 7
     tmp_tab = stat_table_1A("Appendix Table 7", "table",
-    ["Baseline (Annual)", "Baseline",
+    ["Baseline", "Baseline (Annual)",
     "Baseline 1A, rho=-4.000000e-03"], 
-    ["Annual (Discrete)", "Quarterly (Discrete)", "Quarterly (Continuous)"],
+    ["Quarterly (Discrete)", "Annual (Discrete)", "Quarterly (Continuous)"],
     ["Quarterly MPC (\\%), out of \\\$500", "Annual MPC (\\%), out of \\\$500",
     "Quarterly HtM1 MPC (\\%), out of \\\$500", "a_i <= y_i / 6",
     "Effective discount rate"],
     ["Quarterly MPC (\\%)", "Annual MPC (\\%)",
-    "Quarterly MPC of the HtM (\\%)", "Share HtM",
+    "Quarterly MPC of the HtM (\\%)", "Share of HtM (\\%)",
     "Effective discount rate"])
 
     write_text(tmp_tab, "base_disc_cts")
@@ -611,12 +619,14 @@ function starttable(name, modelnames)
     # txt *= raw"\begin{table}[ht] %
     # \caption*{"
 
-    txt *= raw"
-    \caption*{"
+    # txt *= raw"
+    # \caption*{"
     
-    txt *= name
+    # txt *= name
 
-    txt *= raw"} %
+    # txt *= raw"} %
+
+    txt *= raw"
     \centering
     \begin{threeparttable} %
     \begin{tabular}{l"

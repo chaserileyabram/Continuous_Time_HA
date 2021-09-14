@@ -717,7 +717,25 @@ for i = 2:m
     hist_mass_htm(i-1) = sum(pmf_htm .* in_chunk, 'all');
 end
 
-hist_mass(m-1) = 1 - sum(hist_mass(1:m-2), 'all');
+% hist_mass(m-1) = 1 - sum(hist_mass(1:m-2), 'all');
+
+tot_mass = sum(hist_mass(1:m-2), 'all');
+
+% interpolate to remove gaps
+locs_int = [];
+mass_int = [];
+for i = 1:(m-1)
+    if hist_mass(i) ~= 0 || i == (m-1)
+        locs_int = [locs_int hist_locs(i)];
+        mass_int = [mass_int hist_mass(i)];
+    end
+end
+hist_int = griddedInterpolant(locs_int, mass_int,'linear','none');
+hist_mass = hist_int(hist_locs)';
+hist_mass = hist_mass ./ sum(hist_mass, 'all') .* tot_mass;
+
+hist_mass(m-1) = 1 - tot_mass;
+
 hist_mass_htm(m-1) = 1 - sum(hist_mass_htm(1:m-2), 'all');
 
 hist_mass_htm = hist_mass_htm .* sum(pmf_b_a_y .* (bg <= htm_thresh), 'all');
@@ -793,6 +811,7 @@ for i = 2:m
 end
 
 hist_mass(m-1) = 1 - sum(hist_mass(1:m-2), 'all');
+
 hist_mass_htm(m-1) = 1 - sum(hist_mass_htm(1:m-2), 'all');
 
 hist_mass_htm = hist_mass_htm .* sum(pmf_b_a_y .* (bg <= htm_thresh), 'all');
@@ -909,8 +928,45 @@ for i = 2:m
     hist_mass_htm(i-1) = sum(pmf_htm' .* in_chunk, 'all');
 end
 
-hist_mass(m-1) = 1 - sum(hist_mass(1:m-2), 'all');
-hist_mass_htm(m-1) = 1 - sum(hist_mass_htm(1:m-2), 'all');
+tot_mass = sum(hist_mass(1:m-2), 'all');
+
+% interpolate to remove gaps
+locs_int = [];
+mass_int = [];
+for i = 1:(m-1)
+    if hist_mass(i) ~= 0 || i == (m-1)
+        locs_int = [locs_int hist_locs(i)];
+        mass_int = [mass_int hist_mass(i)];
+    end
+end
+
+hist_int = griddedInterpolant(locs_int, mass_int,'linear','none');
+hist_mass = hist_int(hist_locs)';
+hist_mass = hist_mass ./ sum(hist_mass, 'all') .* tot_mass;
+
+hist_mass(m-1) = 1 - tot_mass;
+
+tot_mass_htm = sum(hist_mass_htm(1:m-2), 'all');
+
+locs_int = [];
+mass_int = [];
+for i = 1:(m-1)
+    if hist_mass_htm(i) ~= 0 || i == (m-1)
+        locs_int = [locs_int hist_locs(i)];
+        mass_int = [mass_int hist_mass_htm(i)];
+    end
+end
+
+hist_int = griddedInterpolant(locs_int, mass_int,'linear','none');
+hist_mass_htm = hist_int(hist_locs)';
+hist_mass_htm = hist_mass_htm ./ sum(hist_mass_htm, 'all') .* tot_mass_htm;
+
+hist_mass_htm(m-1) = 1 - tot_mass_htm;
+
+
+
+% hist_mass(m-1) = 1 - sum(hist_mass(1:m-2), 'all');
+% hist_mass_htm(m-1) = 1 - sum(hist_mass_htm(1:m-2), 'all');
 
 hist_mass_htm = hist_mass_htm .* sum(pmf_b_a_y .* (bg <= htm_thresh), 'all');
 
@@ -1505,7 +1561,8 @@ saveas(gcf, plot_path);
 %% Extra stats
 clear
 cd('/Users/chaseabram/UChiGit/Continuous_Time_HA')
-load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-15-2021-00:22:19/output_1.mat')
+% load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-15-2021-00:22:19/output_1.mat')
+load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-09-03-2021-08:20:13/output_4.mat')
 
 liq_wealth_quantile(stats,[4.1],0.0)
 liq_wealth_quantile(stats,[4.1],0.25)
