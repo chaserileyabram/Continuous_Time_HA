@@ -430,14 +430,17 @@ function [outparams, n] = overall_htm_target(param_opts)
 % %                 params{ii}.rebalance_cost = reb_cost; %1453.906838;
 %                 params{ii}.name = sprintf('r_a=%d, rho=%d, rho robustness', r_a, rho);
                 
-                ii = ii + 1;
-                params = [params {calibrations{1}}];
-                params{ii} = params{1};
-                params{ii}.r_a = r_a;
-                params{ii}.name = sprintf('r_a = %d', r_a);
+                for rho=[0.0001, 0.001, 0.005, 0.0114]
+                    ii = ii + 1;
+                    params = [params {calibrations{1}}];
+                    params{ii} = params{1};
+                    params{ii}.r_a = r_a;
+                    params{ii}.rho = rho;
+                    params{ii}.name = sprintf('r_a = %d, rho=%d', r_a, rho);
+                end
             end
 
-            r_bs = [-0.03, -0.02, -0.01, 0]/4;
+            r_bs = [-0.03, -0.01, 0]/4;
             % rb robustness
             for r_b = r_bs
 %                 ii = ii + 1;
@@ -453,11 +456,14 @@ function [outparams, n] = overall_htm_target(param_opts)
 % %                 params{ii}.rebalance_cost = reb_cost; %1453.906838;
 %                 params{ii}.name = sprintf('r_b=%d, rho=%d, rho robustness', r_b, rho);
                 
-                ii = ii + 1;
-                params = [params {calibrations{1}}];
-                params{ii} = params{1};
-                params{ii}.r_b = r_b;
-                params{ii}.name = sprintf('r_b = %d', r_b);
+                for rho=[0.0001, 0.001, 0.005, 0.0114]
+                    ii = ii + 1;
+                    params = [params {calibrations{1}}];
+                    params{ii} = params{1};
+                    params{ii}.r_b = r_b;
+                    params{ii}.rho = rho;
+                    params{ii}.name = sprintf('r_b = %d, rho=%d', r_b, rho);
+                end
             end
 
             reb_costs = [0, 500, 1000, 2000, 2500, 3000]./anninc;

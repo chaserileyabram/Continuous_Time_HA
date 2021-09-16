@@ -532,7 +532,8 @@ saveas(gcf, plot_path);
 clear
 % Load baseline 2A
 cd('/Users/chaseabram/UChiGit/Continuous_Time_HA')
-load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-15-2021-00:22:19/output_1.mat')
+% load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-15-2021-00:22:19/output_1.mat')
+load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-09-15-2021-18:13:10/output_1.mat')
 % point in each dim
 n = 100;
 curve = 0.1;
@@ -563,7 +564,8 @@ saveas(gcf, plot_path);
 %% 6a) MPC by total wealth (2A)
 clear
 cd('/Users/chaseabram/UChiGit/Continuous_Time_HA')
-load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-15-2021-00:22:19/output_1.mat')
+% load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-15-2021-00:22:19/output_1.mat')
+load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-09-15-2021-18:13:10/output_1.mat')
 
 n = 100;
 curve = 0.1;
@@ -682,7 +684,8 @@ saveas(gcf, plot_path);
 %% 6bi) MPC by liquid wealth (with HtM bars) (2A)
 clear
 cd('/Users/chaseabram/UChiGit/Continuous_Time_HA')
-load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-15-2021-00:22:19/output_1.mat')
+% load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-15-2021-00:22:19/output_1.mat')
+load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-09-15-2021-18:13:10/output_1.mat')
 
 n = 100;
 max_l = 3.0;
@@ -893,7 +896,8 @@ saveas(gcf, plot_path);
 %% 6di) MPC by illiquid wealth with HtM bars (2A)
 clear
 cd('/Users/chaseabram/UChiGit/Continuous_Time_HA')
-load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-15-2021-00:22:19/output_1.mat')
+% load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-15-2021-00:22:19/output_1.mat')
+load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-09-15-2021-18:13:10/output_1.mat')
 
 n = 100;
 max_i = 3.0;
@@ -1084,7 +1088,8 @@ saveas(gcf, plot_path);
 %% 7) MPC by total wealth 2A + 1A
 clear
 cd('/Users/chaseabram/UChiGit/Continuous_Time_HA')
-load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-15-2021-00:22:19/output_1.mat')
+% load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-15-2021-00:22:19/output_1.mat')
+load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-09-15-2021-18:13:10/output_1.mat')
 
 n = 100;
 curve = 0.1;
@@ -1190,7 +1195,8 @@ saveas(gcf, plot_path);
 %% 8) MPC by total wealth 2A + (1A with beta het)
 clear
 cd('/Users/chaseabram/UChiGit/Continuous_Time_HA')
-load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-15-2021-00:22:19/output_1.mat')
+% load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-15-2021-00:22:19/output_1.mat')
+load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-09-15-2021-18:13:10/output_1.mat')
 
 n = 100;
 curve = 0.1;
@@ -1494,7 +1500,8 @@ tmp = [tmp results.mpcs(5).avg_s_t{1,4}.value];
 spend_sav = [tmp results.mpcs(5).avg_s_t{1,5}.value];
 
 cd('/Users/chaseabram/UChiGit/Continuous_Time_HA')
-load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-30-2021-12:43:22/output_1.mat')
+% load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-30-2021-12:43:22/output_1.mat')
+load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-09-15-2021-18:13:10/output_1.mat')
 % base2A = [4.2 4.5 5.2 6.5 stats.mpcs(5).quarterly.value] ./ 100;
 n1 = stats.mpcs_news_one_year(5).quarterly.value(1)./1000;
 n2 = stats.mpcs_news_one_year(5).quarterly.value(2)./1000;
@@ -1509,17 +1516,17 @@ plot(ts, base1A, 'LineWidth', 3);
 hold on
 % plot(ts, Ea56, 'LineWidth', 3);
 % hold on
-% plot(ts, beta_het, 'LineWidth', 3);
-% hold on
+plot(ts, beta_het, 'LineWidth', 3);
+hold on
 plot(ts, spend_sav, 'LineWidth', 3);
 hold on
-% plot(ts(5:9), base2A, 'LineWidth', 3)
-plot(ts, base2A, 'LineWidth', 3)
+plot(ts(5:9), base2A(5:9), 'LineWidth', 3)
+% plot(ts, base2A, 'LineWidth', 3)
 hold on
 xlabel('Time')
 ylim([0 0.2]);
 % legend('Baseline 1A', 'E[a] = 0.56', '\beta het', 'Spender-saver', 'Baseline 2A');
-legend('One Asset', 'Spender Saver', 'Two Asset');
+legend('One Asset', '\beta Het', 'Spender Saver', 'Two Asset');
 ax = gca;
 ax.FontSize = 14;
 grid on
@@ -1529,30 +1536,30 @@ plot_path = sprintf('Figures/mpc_intertemp.pdf');
 saveas(gcf, plot_path);
 hold off
 
-ts = [-4:1:4];
-plot(ts, base1A, 'LineWidth', 3);
-hold on
-% plot(ts, Ea56, 'LineWidth', 3);
+% ts = [-4:1:4];
+% plot(ts, base1A, 'LineWidth', 3);
 % hold on
+% % plot(ts, Ea56, 'LineWidth', 3);
+% % hold on
 % plot(ts, beta_het, 'LineWidth', 3);
 % hold on
-plot(ts, spend_sav, 'LineWidth', 3);
-hold on
-plot(ts(1:5), base2A(1:5), 'LineWidth', 3, 'LineStyle', '--')
-burnt_yellow = [0.9290, 0.6940, 0.1250];
-plot(ts(5:9), base2A(5:9), 'LineWidth', 3, 'color', burnt_yellow)
-hold on
-xlabel('Time')
-ylim([0 0.2]);
-% legend('Baseline 1A', 'E[a] = 0.56', '\beta het', 'Spender-saver', 'Baseline 2A');
-legend('One Asset', 'Spender Saver', '', 'Two Asset');
-ax = gca;
-ax.FontSize = 14;
-grid on
-cd('/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final');
-plot_path = sprintf('Figures/mpc_intertemp_fake.pdf');
-% saveas(gcf, plot_path, "epsc");
-saveas(gcf, plot_path);
+% plot(ts, spend_sav, 'LineWidth', 3);
+% hold on
+% % plot(ts(1:5), base2A(1:5), 'LineWidth', 3, 'LineStyle', '--')
+% burnt_yellow = [0.9290, 0.6940, 0.1250];
+% plot(ts(5:9), base2A(5:9), 'LineWidth', 3, 'color', burnt_yellow)
+% hold on
+% xlabel('Time')
+% ylim([0 0.2]);
+% % legend('Baseline 1A', 'E[a] = 0.56', '\beta het', 'Spender-saver', 'Baseline 2A');
+% legend('One Asset', '\beta Het', 'Spender Saver', 'Two Asset');
+% ax = gca;
+% ax.FontSize = 14;
+% grid on
+% cd('/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final');
+% plot_path = sprintf('Figures/mpc_intertemp_fake.pdf');
+% % saveas(gcf, plot_path, "epsc");
+% saveas(gcf, plot_path);
 
 
 
@@ -1562,7 +1569,8 @@ saveas(gcf, plot_path);
 clear
 cd('/Users/chaseabram/UChiGit/Continuous_Time_HA')
 % load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-15-2021-00:22:19/output_1.mat')
-load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-09-03-2021-08:20:13/output_4.mat')
+% load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-09-03-2021-08:20:13/output_4.mat')
+load('/Users/chaseabram/Dropbox/AnnualReviewsFiles/variables55.mat')
 
 liq_wealth_quantile(stats,[4.1],0.0)
 liq_wealth_quantile(stats,[4.1],0.25)
