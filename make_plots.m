@@ -1309,12 +1309,13 @@ clear
 cd('/Users/chaseabram/UChiGit/Continuous_Time_HA')
 load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-23-2021-18:57:08/output_17.mat')
 
+max_w = 10.0;
 % IG
 n = 100;
 curve = 0.1;
 ws = linspace(0,1,n);
 ws = ws .^ (1/curve);
-ws = ws .* 3;
+ws = ws .* max_w;
 mpcs_IG = mpc_wealth_mean(stats, ws) ./ 100;
 
 mpcs_IG(1) = stats.mpc_int(0,0) ./ 100;
@@ -1324,8 +1325,8 @@ mpcs_IG(1) = stats.mpc_int(0,0) ./ 100;
 
 % Make histogram data
 m = 40;
-hist_chunks = linspace(0,3,m);
-hist_locs_IG = linspace(3/(2*m),3 - 3/(2*m),m-1);
+hist_chunks = linspace(0,max_w,m);
+hist_locs_IG = linspace(max_w/(2*m),max_w - max_w/(2*m),m-1);
 hist_mass_IG = zeros(m-1,1);
 
 for i = 2:m
@@ -1342,13 +1343,13 @@ n = 100;
 curve = 0.1;
 ws = linspace(0,1,n);
 ws = ws .^ (1/curve);
-ws = ws .* 3;
+ws = ws .* max_w;
 mpcs_1A = mpc_wealth_mean(stats, ws) ./ 100;
 
 % Make histogram data
 m = 40;
-hist_chunks = linspace(0,3,m);
-hist_locs_1A = linspace(3/(2*m),3 - 3/(2*m),m-1);
+hist_chunks = linspace(0,max_w,m);
+hist_locs_1A = linspace(max_w/(2*m),max_w - max_w/(2*m),m-1);
 hist_mass_1A = zeros(m-1,1);
 
 for i = 2:m
@@ -1410,7 +1411,7 @@ p2.FaceColor = blue;
 
 % p2 = bar(hist_locs_2A, hist_mass_2A);
 % p2.FaceAlpha = 0.5;
-xlim([0 3])
+xlim([0 max_w])
 ylim([0 0.55])
 ylabel('Mass')
 hold on
@@ -1443,7 +1444,7 @@ legend('MPC \beta_{IG} = 0.7', 'MPC Baseline', '\beta_{IG} = 0.7', 'Baseline', '
 ax = gca;
 ax.FontSize = 14;
 cd('/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final');
-plot_path = sprintf('Figures/mpc_1A_IG.pdf');
+plot_path = sprintf('Figures/mpc_1A_IG_10.pdf');
 % saveas(gcf, plot_path, "epsc");
 saveas(gcf, plot_path);
 
@@ -1497,7 +1498,7 @@ tmp = [tmp results.mpcs(5).avg_s_t{1,1}.value];
 tmp = [tmp results.mpcs(5).avg_s_t{1,2}.value];
 tmp = [tmp results.mpcs(5).avg_s_t{1,3}.value];
 tmp = [tmp results.mpcs(5).avg_s_t{1,4}.value];
-spend_sav = [tmp results.mpcs(5).avg_s_t{1,5}.value];
+spend_sav = [tmp results.mpcs(5).avg_s_t{1,5}.value];m
 
 cd('/Users/chaseabram/UChiGit/Continuous_Time_HA')
 % load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-30-2021-12:43:22/output_1.mat')

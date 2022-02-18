@@ -44,12 +44,16 @@ xf = XLSX.readdata("output_table_new_2A_base_all_robs.xlsx", "Sheet1", "A2:P177"
 shares = ["a_i <= y_i / 6", "a_i <= y_i / 12",
 "w_i <= y_i / 6", "w_i <= y_i / 12",
 "a <= \\\$1000", "a <= \\\$5000", "a <= \\\$10000", "a <= \\\$50000", "a <= \\\$100000",
-"Wealth, top 10\\% share", "b_i <= y_i / 6"]
+"Wealth, top 10\\% share", "b_i <= y_i / 6",
+"b <= \\\$1000","b <= \\\$5000", "b <= \\\$10000",
+"w <= \\\$1000", "w <= \\\$5000", "w <= \\\$10000",
+"w <= \\\$50000", "w <= \\\$100000", "w, Top 10\\% share",
+"w, Top 1\\% share"]
 # ,
 # "w, Top 10\\% share", "w, Top 1\\% share"]
 
 two_dec = ["Beta (annualized)",
-"pswitch"]
+"pswitch", "Rebalance arrival rate"]
 
 three_dec = ["Effective discount rate"]
 
@@ -273,8 +277,8 @@ function alltables()
     "Quarterly Rebalance", "Annual Rebalance",
     "reb_cost = 0", "reb_cost = 4.468825e-02"], 
     ["Baseline 2-asset", 
-    "frequency=1", "frequency=0.25", 
-    "transaction=0", "transaction=3000"],
+    "\$\\chi\$=1", "\$\\chi\$=0.25", 
+    "\$\\kappa\$=0", "\$\\kappa\$=3000"],
     ["Rebalance arrival rate", "Quarterly  MPC (\\%), out of \\\$500, t=1", "Annual  MPC (\\%), out of \\\$500",
     "Quarterly  PHtM MPC (\\%), out of \\\$500", "Quarterly  WHtM MPC (\\%), out of \\\$500",
     "Mean MPC at Mean Wealth (\\%)", "HtM 1year"],
@@ -737,9 +741,9 @@ function stat_table(name, label, models, modelnames, topstats, topstats_names)
     "Liquid asset return (quarterly)",
     "Illiquid asset return (quarterly)",
     "Rebalance cost (\\\$)"],
-    ["Effective discount factor (annual)",
-    "Liquid asset return (quarterly)",
-    "Illiquid asset return (quarterly)",
+    ["Annualized discount factor",
+    "Annualized liquid return",
+    "Annualized illiquid return",
     "Rebalance cost (\\\$)"])
 
     # Targeted Stats
@@ -762,17 +766,11 @@ function stat_table(name, label, models, modelnames, topstats, topstats_names)
     ["E[MPC] - E[MPC_b]",
     "Effect of mpc fcn",
     "Effect of distribution",
-    "Distr effect, PHtM (eps = 0.05)",
-    "Distr effect, WHtM (eps = 0.05)",
-    "Distr effect, NHtM (eps = 0.05)",
     "Interaction"],
     ["Gap with Baseline MPC",
-    "Effect of MPC function",
-    "Distributional Effect",
-    "\\quad Poor hand-to-mouth",
-    "\\quad Wealthy hand-to-mouth",
-    "\\quad Non-hand-to-mouth",
-    "Interaction"])
+    "\\quad Effect of MPC function",
+    "\\quad Distributional Effect",
+    "\\quad Interaction"])
 
     # Other Wealth Stats
     txt *= subhead("Panel D: Wealth Statistics", models)

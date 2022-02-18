@@ -366,10 +366,16 @@ function [outparams, n] = overall_htm_target(param_opts)
             params{ii}.r_a = 0.0156; %0.016340226; %0.01563035; %0.017442897;
             r_a_bds = [0, 0.04];
 %             params{ii}.rebalance_cost = 516.9930144/anninc;
-            params{ii}.rebalance_cost = 0.0217; %reb_cost; %1453.906838;
+            params{ii}.rebalance_cost = 0.0217; %reb_cost; %1453.906838; % Was used before changes Feb 16, 2022
             reb_cost_bds = [200, 3000]/anninc;
     %         params{ii}.rebalance_rate = 1.0;
             params{ii}.rebalance_rate = 3.0;
+
+%             params{ii}.rebalance_rate = 0.0;
+            
+            % Add temptation
+%             params{ii}.temptation = 0.01;
+            
             params{ii}.calibration_bounds = {rho_bds};
             params{ii}.calibration_stats = {'totw'};
             params{ii}.calibration_targets = [scf.mean_totw];
@@ -379,6 +385,87 @@ function [outparams, n] = overall_htm_target(param_opts)
             else
                 params{ii}.name = sprintf('Baseline 2A (fixed 9-14)');
             end
+            
+            rhos = linspace(-0.01, 0.01, 5);
+            rhos = [params{1}.rho rhos];
+            
+            % Temptation robustness (try different rho starts)
+            tempts = [0.01, 0.05];
+            for tempt = tempts
+                for rho = rhos
+                    ii = ii + 1;
+                    params = [params {calibrations{1}}];
+                    params{ii} = params{1};
+                    params{ii}.rho = rho;
+                    params{ii}.temptation = tempt;
+                    params{ii}.name = sprintf('Temptation = %d, rho = %d', tempt, rho);
+                end
+            end
+            
+            
+            % SDU
+            rras = [0.5, 1, 8];
+            iess = [0.25, 1, 2];
+            for rra = rras
+                for ies = iess
+                    ii = ii + 1;
+                    params = [params {calibrations{1}}];
+                    params{ii} = params{1};
+                    params{ii}.SDU = true;
+                    params{ii}.riskaver = rra;
+                    params{ii}.invies = ies;
+                    params{ii}.name = sprintf('SDU, RRA=%d, IES=%d', rra, ies);
+                end
+            end
+            
+            
+            % Het CRRA = IES
+            rra_hets = [1,2,3];
+            for rra_het = rra_hets
+                ii = ii + 1;
+                params = [params {calibrations{1}}];
+                params{ii} = params{1};
+                params{ii}.riskaver = linspace(exp(-rra_het), exp(rra_het), 5);
+                linspace(-0.01, 0.01, 5)
+                params{ii}.name = sprintf('SDU, RRA=%d, IES=%d', rra, ies);
+            end
+            
+            
+            
+            
+            % SDU with het RRA
+            rra_hets = [1,2,3];
+            for rra_het = rra_hets
+                ii = ii + 1;
+                params = [params {calibrations{1}}];
+                params{ii} = params{1};
+                params{ii}.SDU = true;
+                params{ii}.riskaver = linspace(exp(-rra_het), exp(rra_het), 5);
+                params{ii}.name = sprintf('SDU, RRA het exp(%d)', rra_het);
+            end
+            
+            
+            
+            % SDU with het IES
+            % Not yet
+            
+            
+            
+            % IG
+            betas = [0.9, 0.8, 0.7];
+            for beta = betas
+                ii = ii + 1;
+                params = [params {calibrations{1}}];
+                params{ii} = params{1};
+                params{ii}.beta = beta;
+                params{ii}.name = sprintf('IG=%d', beta);
+            end
+            
+            
+            
+            
+            
+            
 %         end
         
 %         rhos = linspace(-0.01, 0.01, 5);
