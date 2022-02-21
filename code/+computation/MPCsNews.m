@@ -416,16 +416,16 @@ classdef MPCsNews < handle
 			    if obj.options.compute_mpcs
 				    if (obj.p.sigma_r > 0) && (~obj.p.retrisk_KFE)
 	                    FKmats = FeynmanKac.divisor(obj.p, obj.income,...
-	                    			obj.options.delta, obj.A_FK, true);
+	                    			obj.options.delta, obj.A_FK, false);
 	                else
 	                	FKmats = FeynmanKac.divisor(obj.p, obj.income,...
-	                				obj.options.delta, obj.A_HJB, true);
+	                				obj.options.delta, obj.A_HJB, false);
 	                end
 
 			        for period = ceil(it):4
 			        	obj.cumcon(:,period) = FeynmanKac.update(obj.p, obj.grids,...
 							obj.income, obj.cumcon(:,period), FKmats, obj.KFEint.c,...
-							obj.options.delta);
+							obj.options.delta, false);
 	                end
 
 			        if (it == 3 + obj.options.delta)

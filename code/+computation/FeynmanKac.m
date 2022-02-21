@@ -1,12 +1,17 @@
 classdef FeynmanKac
 	methods (Static)
-		function cumcon_update = update(p, grids, income, cumcon_t, FKmats, c, stepsize)
+		function cumcon_update = update(p, grids, income, cumcon_t, FKmats, c, stepsize,...
+                inverted)
 			% Computes inflows for death
 			%
 			% Parameters
 			% ----------
 			% cumcon_t_k : cumulative consumption for period t,
 			%	of shape (nb_KFE*na_KFE*nz, ny)
+            
+            if nargin <= 7
+                inverted = true;
+            end
 			
 			cumcon_update = zeros(size(cumcon_t));
 			cumcon_t_k = reshape(cumcon_t, [], income.ny);
@@ -26,7 +31,12 @@ classdef FeynmanKac
 		        ind2 = p.na_KFE * p.nb_KFE * p.nz * k;
 		        RHS = reshape(c(:,:,:,k), [], 1) + ytrans_cc_k + deathin_cc_k ...
 		                    + cumcon_t_k(:,k) / stepsize;
-		        cumcon_update(ind1:ind2) = FKmats{k} * RHS;
+                        
+                if inverted
+                    cumcon_update(ind1:ind2) = FKmats{k} * RHS;
+                else
+                    cumcon_update(ind1:ind2) = FKmats{k} \ RHS;
+                end
 			end
 		end
 
@@ -64,7 +74,7 @@ classdef FeynmanKac
 			%	operator. If false, B is the array on the
 			%	left-hand-side of the Feynman-Kac equation.
 
-			if nargin == 4
+			if nargin <= 4
 				invert = false;
 			end
 

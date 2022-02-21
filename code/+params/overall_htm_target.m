@@ -426,8 +426,8 @@ function [outparams, n] = overall_htm_target(param_opts)
                 params = [params {calibrations{1}}];
                 params{ii} = params{1};
                 params{ii}.riskaver = linspace(exp(-rra_het), exp(rra_het), 5);
-                linspace(-0.01, 0.01, 5)
-                params{ii}.name = sprintf('SDU, RRA=%d, IES=%d', rra, ies);
+                params{ii}.name = sprintf('het RRA exp(%d)', rra, ies);
+                
             end
             
             
