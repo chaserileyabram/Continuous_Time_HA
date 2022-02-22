@@ -30,15 +30,15 @@ warning('off', 'MATLAB:nearlySingularMatrix')
 % SET OPTIONS
 % -------------------------------------------------------------------------
 
-param_opts.calibrate = false;
+param_opts.calibrate = true;
 param_opts.fast = true; % use small grid for debugging
 param_opts.ComputeMPCS = true;
 param_opts.ComputeMPCS_illiquid = true;
 param_opts.SimulateMPCS = false; % also estimate MPCs by simulation
-param_opts.ComputeMPCS_news = true;
+param_opts.ComputeMPCS_news = false;
 param_opts.SimulateMPCS_news = false;
 param_opts.DealWithSpecialCase = false; % need to recode this
-param_opts.param_index = 1;
+param_opts.param_index = 3;
 param_opts.makePlots = false; % not coded yet -> coded, but not through this option
 
 run_opts.check_nparams = false;
@@ -59,8 +59,8 @@ taskid_from_server = str2num(getenv('SLURM_ARRAY_TASK_ID'));
 % When running on server
 if ~isempty(taskid_from_server)
 	param_opts.param_index = taskid_from_server;
-	param_opts.fast = true; % Don't accidentally go fast...
-    param_opts.calibrate = false; % ... or forget to calibrate
+	param_opts.fast = false; % Don't accidentally go fast...
+    param_opts.calibrate = true; % ... or forget to calibrate
     run_opts.check_nparams = false;
 end
 

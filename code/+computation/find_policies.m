@@ -40,7 +40,7 @@ function [policies, V_deriv_risky_asset_nodrift] = find_policies(...
         rho_bc = shiftdim(p.rhos, -2);
         prefs.set_SDU(p.invies, rho_bc + p.deathrate);
     else
-        prefs.set_crra(p.invies);
+        prefs.set_crra(p.riskaver_fulldim);
     end
 
     if p.endogenous_labor

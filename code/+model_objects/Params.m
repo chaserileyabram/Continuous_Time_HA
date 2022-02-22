@@ -51,7 +51,8 @@ classdef Params < model_objects.ParamsDefaults
             obj.riskaver_fulldim = reshape(obj.riskaver, [1 1 numel(obj.riskaver) 1]);
 
             if ~obj.SDU
-                obj.invies = obj.riskaver;
+%                 obj.invies = obj.riskaver;
+                obj.invies = obj.riskaver_fulldim;
             end
 
             % adjust interest rates

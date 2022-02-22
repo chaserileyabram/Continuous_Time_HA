@@ -339,6 +339,11 @@ classdef TransitionMatrixConstructor < handle
             stationary = (driftB >= 0) & (driftF <= 0);
         end
         
+        function col = ind_to_col(obj,b,a,z,y)
+%             col = (b-1)*obj.nb + (a-1)*obj.na + (z-1)*obj.nz + y;
+            col = (y-1)*obj.nz*obj.na*obj.nb + (z-1)*obj.na*obj.nb + (a-1)*obj.nb + b;
+        end
+        
         
         function A_rebalance = compute_rebalance(obj, model)
             % Transition matrix reflecting rate of rebalancing
@@ -382,7 +387,27 @@ classdef TransitionMatrixConstructor < handle
 %                                 assert(sum(reb_row, 'all') == obj.p.rebalance_rate);
 
                                 % Add entering weights to row
-                                A_rebalance(row_count,:) = A_rebalance(row_count,:) + reb_row(:)';
+%                                 A_rebalance(row_count,:) = A_rebalance(row_count,:) + reb_row(:)';
+                                
+                                
+                                % Take advantage of fact that most updating
+                                % above is just 0 -> 0 (no need to update
+                                % whole row)
+                                if b1 == b2 && a1 == a2
+                                    A_rebalance(row_count,obj.ind_to_col(b2,a2,zi,yi)) = A_rebalance(row_count,obj.ind_to_col(b2,a2,zi,yi)) + reb_row(b2,a2,zi,yi);
+                                elseif b1 == b2
+                                    A_rebalance(row_count,obj.ind_to_col(b2,a1,zi,yi)) = A_rebalance(row_count,obj.ind_to_col(b2,a1,zi,yi)) + reb_row(b2,a1,zi,yi);
+                                    A_rebalance(row_count,obj.ind_to_col(b2,a2,zi,yi)) = A_rebalance(row_count,obj.ind_to_col(b2,a2,zi,yi)) + reb_row(b2,a2,zi,yi);
+                                elseif a1 == a2
+                                    A_rebalance(row_count,obj.ind_to_col(b1,a2,zi,yi)) = A_rebalance(row_count,obj.ind_to_col(b1,a2,zi,yi)) + reb_row(b1,a2,zi,yi);
+                                    A_rebalance(row_count,obj.ind_to_col(b2,a2,zi,yi)) = A_rebalance(row_count,obj.ind_to_col(b2,a2,zi,yi)) + reb_row(b2,a2,zi,yi);
+                                else
+                                    A_rebalance(row_count,obj.ind_to_col(b1,a1,zi,yi)) = A_rebalance(row_count,obj.ind_to_col(b1,a1,zi,yi)) + reb_row(b1,a1,zi,yi);
+                                    A_rebalance(row_count,obj.ind_to_col(b2,a1,zi,yi)) = A_rebalance(row_count,obj.ind_to_col(b2,a1,zi,yi)) + reb_row(b2,a1,zi,yi);
+                                    A_rebalance(row_count,obj.ind_to_col(b1,a2,zi,yi)) = A_rebalance(row_count,obj.ind_to_col(b1,a2,zi,yi)) + reb_row(b1,a2,zi,yi);
+                                    A_rebalance(row_count,obj.ind_to_col(b2,a2,zi,yi)) = A_rebalance(row_count,obj.ind_to_col(b2,a2,zi,yi)) + reb_row(b2,a2,zi,yi);
+                                end
+                                
 
                             end
                         end

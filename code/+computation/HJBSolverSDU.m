@@ -10,19 +10,20 @@ classdef HJBSolverSDU < computation.HJBSolver
 			obj = obj@computation.HJBSolver(p, income, varargin{:});
 		end
 
-		function V_update = solve(obj, grd, A, u, V, varargin)
+		function V_update = solve(obj, grd, A, u, Vstar, V, varargin)
 			% Updates the value function.
-			obj.check_inputs(A, u, V);
+            % Vstar not used (RISKY RETURNS DEPRECATED)
 
 			obj.risk_adj = obj.compute_risk_adjustment_for_nodrift_case(...
 	    		grd, V, varargin{:});
 
 			if obj.options.implicit
+                error('implicit out-of-date wrt new adj cost specification')
 				V_update = obj.solve_implicit(A, u, V);
 			else
 				obj.sdu_adj = obj.income.income_transitions_SDU(obj.p, V);
 
-				V_update = obj.solve_implicit_explicit(A, u, V);
+				V_update = obj.solve_implicit_explicit(A, u, Vstar, V);
 			end
 		end
 	end
@@ -57,6 +58,8 @@ classdef HJBSolverSDU < computation.HJBSolver
 		    %	the term with Va^2 
 
 			if ~isempty(stationary) & (obj.p.sigma_r > 0)
+                error('Risky returns out-of-date for new adj cost specification')
+
 				% there are states with neither backward nor forward drift,
 				% need to compute additional term for risk
 				if obj.p.invies == 1
@@ -80,14 +83,14 @@ classdef HJBSolverSDU < computation.HJBSolver
 		end
 
 		function Vn1_k = update_Vk_implicit_explicit(...
-			obj, V_k, u_k, k, Bk, inctrans_k)   
+			obj, V_k, u_k, Vstar_k, k, Bk, inctrans_k)   
 
 			if obj.p.sigma_r > 0
 	           	obj.sdu_k_adj = obj.options.delta * obj.risk_adj(:,k);
 	        end
 
 			Vn1_k = update_Vk_implicit_explicit@computation.HJBSolver(...
-				obj, V_k, u_k, k, Bk, inctrans_k);
+				obj, V_k, u_k, Vstar_k, k, Bk, inctrans_k);
 		end
 	end
 end
