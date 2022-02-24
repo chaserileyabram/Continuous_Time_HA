@@ -386,7 +386,7 @@ function [outparams, n] = overall_htm_target(param_opts)
                 params{ii}.name = sprintf('Baseline 2A (fixed 9-14)');
             end
             
-            rhos = linspace(-0.1, 0.01, 5);
+            rhos = linspace(-0.1, 0.1, 10);
             rhos = [params{1}.rho rhos];
             
             % Temptation robustness (try different rho starts)
@@ -404,19 +404,19 @@ function [outparams, n] = overall_htm_target(param_opts)
             
             
             % SDU
-            rras = [0.5, 1.001, 8];
-            iess = [0.25, 1.001, 2];
-            for rra = rras
-                for ies = iess
-                    ii = ii + 1;
-                    params = [params {calibrations{1}}];
-                    params{ii} = params{1};
-                    params{ii}.SDU = true;
-                    params{ii}.riskaver = rra;
-                    params{ii}.invies = ies;
-                    params{ii}.name = sprintf('SDU, RRA=%d, IES=%d', rra, ies);
-                end
-            end
+%             rras = [0.5, 1.001, 8];
+%             iess = [0.25, 1.001, 2];
+%             for rra = rras
+%                 for ies = iess
+%                     ii = ii + 1;
+%                     params = [params {calibrations{1}}];
+%                     params{ii} = params{1};
+%                     params{ii}.SDU = true;
+%                     params{ii}.riskaver = rra;
+%                     params{ii}.invies = ies;
+%                     params{ii}.name = sprintf('SDU, RRA=%d, IES=%d', rra, ies);
+%                 end
+%             end
             
             
             % Het CRRA = IES
@@ -436,19 +436,19 @@ function [outparams, n] = overall_htm_target(param_opts)
             
             
             % SDU with het RRA
-            rra_hets = [1,2,3];
-            iess = [0.25, 1.001, 2];
-            for rra_het = rra_hets
-                for ies = iess
-                    ii = ii + 1;
-                    params = [params {calibrations{1}}];
-                    params{ii} = params{1};
-                    params{ii}.SDU = true;
-                    params{ii}.ies = ies;
-                    params{ii}.riskaver = linspace(exp(-rra_het), exp(rra_het), 5);
-                    params{ii}.name = sprintf('SDU, RRA het exp(%d), IES=%d', rra_het, ies);
-                end
-            end
+%             rra_hets = [1,2,3];
+%             iess = [0.25, 1.001, 2];
+%             for rra_het = rra_hets
+%                 for ies = iess
+%                     ii = ii + 1;
+%                     params = [params {calibrations{1}}];
+%                     params{ii} = params{1};
+%                     params{ii}.SDU = true;
+%                     params{ii}.ies = ies;
+%                     params{ii}.riskaver = linspace(exp(-rra_het), exp(rra_het), 5);
+%                     params{ii}.name = sprintf('SDU, RRA het exp(%d), IES=%d', rra_het, ies);
+%                 end
+%             end
             
             
             
@@ -456,7 +456,7 @@ function [outparams, n] = overall_htm_target(param_opts)
             % Not yet
             
             
-            rhos = linspace(-0.05, 0.01, 10);
+            rhos = linspace(-0.05, 0.1, 10);
             rhos = [params{1}.rho rhos];
             
             % IG
@@ -645,35 +645,35 @@ function [outparams, n] = overall_htm_target(param_opts)
         
 %         % 1A Baseline
 %         for rho = [-0.004] %, -0.003, -0.002, -0.001, 0, 0.001, 0.002]
-            ii = ii + 1;
-            ii1A = ii;
-            params = [params {calibrations{1}}];
-            params{ii} = params{1};
-%             params{ii}.OneAsset = true;
-            params{ii}.na = 2;
-            params{ii}.na_KFE = 2;
-            params{ii}.rebalance_rate = 0;
-            params{ii}.r_b = 0.0025;
-            params{ii}.r_a = params{ii}.r_b;
-            params{ii}.ComputeMPCS_illiquid = false;
-%             params{ii}.rho = rho;
-            params{ii}.name = sprintf('Baseline 1A, rho=%d', params{ii}.rho);
+%             ii = ii + 1;
+%             ii1A = ii;
+%             params = [params {calibrations{1}}];
+%             params{ii} = params{1};
+% %             params{ii}.OneAsset = true;
+%             params{ii}.na = 2;
+%             params{ii}.na_KFE = 2;
+%             params{ii}.rebalance_rate = 0;
+%             params{ii}.r_b = 0.0025;
+%             params{ii}.r_a = params{ii}.r_b;
+%             params{ii}.ComputeMPCS_illiquid = false;
+% %             params{ii}.rho = rho;
+%             params{ii}.name = sprintf('Baseline 1A, rho=%d', params{ii}.rho);
 %         end
             
             % Temptation robust to scaling of rho?
-            tempt_scales = linspace(10,100,10);
-            tempt_scales = [tempt_scales linspace(200,1000,9)];
-            for tempt_scale = tempt_scales
-                for rho = rhos
-                ii = ii + 1;
-                params = [params {calibrations{1}}];
-                params{ii} = params{ii1A};
-                params{ii}.rho = rho;
-                params{ii}.temptation = 0.05;
-                params{ii}.tempt_scale = tempt_scale;
-                params{ii}.name = sprintf('Tempt 1A, tempt=%d, scale=%d, rho=%d', 0.05, tempt_scale, rho);
-                end
-            end
+%             tempt_scales = linspace(10,100,10);
+%             tempt_scales = [tempt_scales linspace(200,1000,9)];
+%             for tempt_scale = tempt_scales
+%                 for rho = rhos
+%                 ii = ii + 1;
+%                 params = [params {calibrations{1}}];
+%                 params{ii} = params{ii1A};
+%                 params{ii}.rho = rho;
+%                 params{ii}.temptation = 0.05;
+%                 params{ii}.tempt_scale = tempt_scale;
+%                 params{ii}.name = sprintf('Tempt 1A, tempt=%d, scale=%d, rho=%d', 0.05, tempt_scale, rho);
+%                 end
+%             end
             
             
             
