@@ -26,6 +26,7 @@ classdef MPCsNews < handle
 		p;
 		income;
 		grids;
+        grids_HJB;
 
 		% Value function at given instant in time.
 		V;
@@ -140,7 +141,10 @@ classdef MPCsNews < handle
             % Initialize constructors of the A matrix
             returns_risk = (obj.p.sigma_r > 0);
 		    obj.A_constructor_HJB = TransitionMatrixConstructor(...
-                	obj.p, obj.income, obj.grids, returns_risk);
+                	obj.p, obj.income, obj.grids, returns_risk, false);
+                
+            obj.A_constructor_FK = TransitionMatrixConstructor(...
+                	obj.p, obj.income, obj.grids, returns_risk, true);
 
 		    % If returns are risky and returns risk is used in the KFE,
 		    % this A constructor will be used instead:
@@ -261,6 +265,11 @@ classdef MPCsNews < handle
 		    for ii = 1:5000
 		    	KFE_terminal = computation.find_policies(...
 		    		obj.p, obj.income, obj.grids, V_terminal, hours);
+                
+                % Make grid type HJB to avoid getting rebalancing effects in
+                % policies
+%                 obj.grids
+                
 		    	A_terminal = obj.A_constructor_HJB.construct(KFE_terminal);
 
 		    	u_k = reshape(KFE_terminal.u, [], obj.income.ny);
@@ -418,8 +427,10 @@ classdef MPCsNews < handle
 	                    FKmats = FeynmanKac.divisor(obj.p, obj.income,...
 	                    			obj.options.delta, obj.A_FK, false);
 	                else
-	                	FKmats = FeynmanKac.divisor(obj.p, obj.income,...
-	                				obj.options.delta, obj.A_HJB, false);
+% 	                	FKmats = FeynmanKac.divisor(obj.p, obj.income,...
+% 	                				obj.options.delta, obj.A_HJB, false);
+                        FKmats = FeynmanKac.divisor(obj.p, obj.income,...
+                            obj.options.delta, obj.A_FK, false);
 	                end
 
 			        for period = ceil(it):4
@@ -478,6 +489,7 @@ classdef MPCsNews < handle
 			%
 			% obj.A_FK : 
 			obj.A_HJB = obj.A_constructor_HJB.construct(obj.KFEint);
+            obj.A_FK = obj.A_constructor_FK.construct(obj.KFEint);
 
 			if (obj.p.sigma_r > 0) && (~obj.p.retrisk_KFE)
 				obj.A_FK = obj.A_constructor_FK.construct(obj.KFEint);

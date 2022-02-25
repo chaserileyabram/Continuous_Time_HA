@@ -55,7 +55,7 @@ classdef Model < handle
 
 			returns_risk = obj.p.sigma_r > 0;
 			obj.A_constructor_HJB = TransitionMatrixConstructor(obj.p, obj.income,...
-				obj.grids_HJB, returns_risk);
+				obj.grids_HJB, returns_risk, false);
 
 			obj.kfe_solver = KFESolver(obj.p, obj.income,...
 				obj.grids_KFE, obj.p.kfe_options, 'quiet', obj.options.quiet);
@@ -110,14 +110,18 @@ classdef Model < handle
                 % Need to trace this all the way down
                 
                 % Temp set rho to |10*rho| to find W
-                rho_sign = sign(obj.p.rho);
-                obj.p.set('rho', abs(obj.p.rho)*obj.p.tempt_scale);
+%                 rho_sign = sign(obj.p.rho);
+%                 obj.p.set('rho', abs(obj.p.rho)*obj.p.tempt_scale);
+                real_rho = obj.p.rho;
+                obj.p.set('rho', obj.p.tempt_delta); % "Big" temptation factor of delta = 0.9
                 HJB_tempt = obj.solve_HJB(hours_bc_HJB);
                 % Correct rho
-                obj.p.set('rho', rho_sign*obj.p.rho/obj.p.tempt_scale);
+%                 obj.p.set('rho', rho_sign*obj.p.rho/obj.p.tempt_scale);
+                obj.p.set('rho', real_rho);
                 
 %                 HJB_tempt = obj.solve_HJB_tempt(hours_bc_HJB, zeros(obj.p.nb, obj.p.na, obj.p.nz, obj.p.ny), 0);
-                HJB = obj.solve_HJB_tempt(hours_bc_HJB, HJB_tempt.Vn);
+%                 HJB = obj.solve_HJB_tempt(hours_bc_HJB, HJB_tempt.Vn);
+                HJB = obj.solve_HJB_tempt(hours_bc_HJB, HJB_tempt.Vn, HJB_tempt.Vstar);
             else
                 HJB = obj.solve_HJB(hours_bc_HJB);
             end
@@ -151,7 +155,7 @@ classdef Model < handle
 			% True if returns should be treated as risky in the KFE
 			returns_risk = (obj.p.sigma_r > 0) && (obj.p.retrisk_KFE == 1);
 		    A_constructor_kfe = TransitionMatrixConstructor(obj.p,...
-		    	obj.income, obj.grids_KFE, returns_risk);
+		    	obj.income, obj.grids_KFE, returns_risk, true);
             
             % disp('ready for TransitionMatrixConstructor.construct with KFE')
             
@@ -225,7 +229,7 @@ classdef Model < handle
 		    HJB.Vn = Vn;
         end
         
-        function HJB = solve_HJB_tempt(obj, hours_bc, W)
+        function HJB = solve_HJB_tempt(obj, hours_bc, W, Wstar)
 			import computation.make_initial_guess
 
 			[Vn, gguess] = make_initial_guess(obj.p, obj.grids_HJB,...
@@ -240,7 +244,7 @@ classdef Model < handle
 		    dst = 1e5;
 			for nn	= 1:obj.p.HJB_maxiters
 				[HJB, V_deriv_risky_asset_nodrift] = computation.find_policies_tempt(...
-					obj.p, obj.income, obj.grids_HJB, Vn, hours_bc, W);
+					obj.p, obj.income, obj.grids_HJB, Vn, hours_bc, W, Wstar);
 
 			    % Construct transition matrix 
 		        [A, stationary] = obj.A_constructor_HJB.construct(HJB, Vn);

@@ -1455,9 +1455,9 @@ cd('/Users/chaseabram/UChiGit/Discrete_HA')
 load('/Users/chaseabram/Dropbox/AnnualReviewsFiles/variables2.mat')
 tmp = results;
 tmp = [results.mpcs(5).avg_s_t{5,1}.value];
-tmp = [tmp results.mpcs(5).avg_s_t{5,2}.value];
-tmp = [tmp results.mpcs(5).avg_s_t{5,3}.value];
-tmp = [tmp results.mpcs(5).avg_s_t{5,4}.value];
+tmp = [tmp results.mpcs(5).avg_s_t{4,1}.value];
+tmp = [tmp results.mpcs(5).avg_s_t{3,1}.value];
+tmp = [tmp results.mpcs(5).avg_s_t{2,1}.value];
 tmp = [tmp results.mpcs(5).avg_s_t{1,1}.value];
 tmp = [tmp results.mpcs(5).avg_s_t{1,2}.value];
 tmp = [tmp results.mpcs(5).avg_s_t{1,3}.value];
@@ -1467,9 +1467,9 @@ base1A = [tmp results.mpcs(5).avg_s_t{1,5}.value];
 load('/Users/chaseabram/Dropbox/AnnualReviewsFiles/variables10.mat')
 tmp = results;
 tmp = [results.mpcs(5).avg_s_t{5,1}.value];
-tmp = [tmp results.mpcs(5).avg_s_t{5,2}.value];
-tmp = [tmp results.mpcs(5).avg_s_t{5,3}.value];
-tmp = [tmp results.mpcs(5).avg_s_t{5,4}.value];
+tmp = [tmp results.mpcs(5).avg_s_t{4,1}.value];
+tmp = [tmp results.mpcs(5).avg_s_t{3,1}.value];
+tmp = [tmp results.mpcs(5).avg_s_t{2,1}.value];
 tmp = [tmp results.mpcs(5).avg_s_t{1,1}.value];
 tmp = [tmp results.mpcs(5).avg_s_t{1,2}.value];
 tmp = [tmp results.mpcs(5).avg_s_t{1,3}.value];
@@ -1479,36 +1479,48 @@ Ea56 = [tmp results.mpcs(5).avg_s_t{1,5}.value];
 load('/Users/chaseabram/Dropbox/AnnualReviewsFiles/variables22.mat')
 tmp = results;
 tmp = [results.mpcs(5).avg_s_t{5,1}.value];
-tmp = [tmp results.mpcs(5).avg_s_t{5,2}.value];
-tmp = [tmp results.mpcs(5).avg_s_t{5,3}.value];
-tmp = [tmp results.mpcs(5).avg_s_t{5,4}.value];
+tmp = [tmp results.mpcs(5).avg_s_t{4,1}.value];
+tmp = [tmp results.mpcs(5).avg_s_t{3,1}.value];
+tmp = [tmp results.mpcs(5).avg_s_t{2,1}.value];
 tmp = [tmp results.mpcs(5).avg_s_t{1,1}.value];
 tmp = [tmp results.mpcs(5).avg_s_t{1,2}.value];
 tmp = [tmp results.mpcs(5).avg_s_t{1,3}.value];
 tmp = [tmp results.mpcs(5).avg_s_t{1,4}.value];
 beta_het = [tmp results.mpcs(5).avg_s_t{1,5}.value];
 
+% Old indexing for reference
+% tmp = [results.mpcs(5).avg_s_t{5,1}.value];
+% tmp = [tmp results.mpcs(5).avg_s_t{5,2}.value];
+% tmp = [tmp results.mpcs(5).avg_s_t{5,3}.value];
+% tmp = [tmp results.mpcs(5).avg_s_t{5,4}.value];
+% tmp = [tmp results.mpcs(5).avg_s_t{1,1}.value];
+% tmp = [tmp results.mpcs(5).avg_s_t{1,2}.value];
+% tmp = [tmp results.mpcs(5).avg_s_t{1,3}.value];
+% tmp = [tmp results.mpcs(5).avg_s_t{1,4}.value];
+
 load('/Users/chaseabram/Dropbox/AnnualReviewsFiles/variables55.mat')
 tmp = results;
 tmp = [results.mpcs(5).avg_s_t{5,1}.value];
-tmp = [tmp results.mpcs(5).avg_s_t{5,2}.value];
-tmp = [tmp results.mpcs(5).avg_s_t{5,3}.value];
-tmp = [tmp results.mpcs(5).avg_s_t{5,4}.value];
+tmp = [tmp results.mpcs(5).avg_s_t{4,1}.value];
+tmp = [tmp results.mpcs(5).avg_s_t{3,1}.value];
+tmp = [tmp results.mpcs(5).avg_s_t{2,1}.value];
 tmp = [tmp results.mpcs(5).avg_s_t{1,1}.value];
 tmp = [tmp results.mpcs(5).avg_s_t{1,2}.value];
 tmp = [tmp results.mpcs(5).avg_s_t{1,3}.value];
 tmp = [tmp results.mpcs(5).avg_s_t{1,4}.value];
-spend_sav = [tmp results.mpcs(5).avg_s_t{1,5}.value];m
+spend_sav = [tmp results.mpcs(5).avg_s_t{1,5}.value];
 
 cd('/Users/chaseabram/UChiGit/Continuous_Time_HA')
 % load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-30-2021-12:43:22/output_1.mat')
 load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-09-15-2021-18:13:10/output_1.mat')
+load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-02-25-2022-07:33:13/output_1.mat')
 % base2A = [4.2 4.5 5.2 6.5 stats.mpcs(5).quarterly.value] ./ 100;
-n1 = stats.mpcs_news_one_year(5).quarterly.value(1)./1000;
-n2 = stats.mpcs_news_one_year(5).quarterly.value(2)./1000;
-n3 = stats.mpcs_news_one_year(5).quarterly.value(3)./1000;
-n4 = stats.mpcs_news_one_year(5).quarterly.value(4)./1000;
-base2A = [n4 n3 n2 n1 stats.mpcs(5).quarterly.value] ./ 100;
+% n1 = stats.mpcs_news_one_year(5).quarterly.value(1) %./1000;
+% n2 = stats.mpcs_news_one_year(5).quarterly.value(2) %./1000;
+% n3 = stats.mpcs_news_one_year(5).quarterly.value(3) %./1000;
+% n4 = stats.mpcs_news_one_year(5).quarterly.value(4) %./1000;
+% base2A = [n4 n3 n2 n1 stats.mpcs(5).quarterly.value] ./ 100;
+base2A = [stats.mpcs_news_one_quarter(5).quarterly.value(1) stats.mpcs_news_one_quarter(5).quarterly.value(5:7)' stats.mpcs(5).quarterly.value] ./ 100;
 
 
 
@@ -1521,8 +1533,8 @@ plot(ts, beta_het, 'LineWidth', 3);
 hold on
 plot(ts, spend_sav, 'LineWidth', 3);
 hold on
-plot(ts(5:9), base2A(5:9), 'LineWidth', 3)
-% plot(ts, base2A, 'LineWidth', 3)
+% plot(ts(5:9), base2A(5:9), 'LineWidth', 3)
+plot(ts, base2A, 'LineWidth', 3)
 hold on
 xlabel('Time')
 ylim([0 0.2]);

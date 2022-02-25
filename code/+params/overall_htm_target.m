@@ -645,19 +645,19 @@ function [outparams, n] = overall_htm_target(param_opts)
         
 %         % 1A Baseline
 %         for rho = [-0.004] %, -0.003, -0.002, -0.001, 0, 0.001, 0.002]
-%             ii = ii + 1;
-%             ii1A = ii;
-%             params = [params {calibrations{1}}];
-%             params{ii} = params{1};
-% %             params{ii}.OneAsset = true;
-%             params{ii}.na = 2;
-%             params{ii}.na_KFE = 2;
-%             params{ii}.rebalance_rate = 0;
-%             params{ii}.r_b = 0.0025;
-%             params{ii}.r_a = params{ii}.r_b;
-%             params{ii}.ComputeMPCS_illiquid = false;
-% %             params{ii}.rho = rho;
-%             params{ii}.name = sprintf('Baseline 1A, rho=%d', params{ii}.rho);
+            ii = ii + 1;
+            ii1A = ii;
+            params = [params {calibrations{1}}];
+            params{ii} = params{1};
+%             params{ii}.OneAsset = true;
+            params{ii}.na = 2;
+            params{ii}.na_KFE = 2;
+            params{ii}.rebalance_rate = 0;
+            params{ii}.r_b = 0.0025;
+            params{ii}.r_a = params{ii}.r_b;
+            params{ii}.ComputeMPCS_illiquid = false;
+%             params{ii}.rho = rho;
+            params{ii}.name = sprintf('Baseline 1A, rho=%d', params{ii}.rho);
 %         end
             
             % Temptation robust to scaling of rho?

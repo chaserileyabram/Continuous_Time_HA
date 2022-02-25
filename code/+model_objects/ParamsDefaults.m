@@ -193,6 +193,8 @@ classdef ParamsDefaults < handle
         % Temptation
         temptation = 0.0;
         tempt_scale = 10.0;
+        tempt_delta = 0.9;
+        tempt_type = "totw"; % can be set to liqw to only be tempted to consume out of liquid wealth
 
         %% -------------------------------------------
         % CALIBRATION

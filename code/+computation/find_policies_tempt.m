@@ -1,5 +1,5 @@
 function [policies, V_deriv_risky_asset_nodrift] = find_policies_tempt(...
-    p, income, grd, Vn, hours_bc, W)
+    p, income, grd, Vn, hours_bc, W, Wstar)
     % computes policy functions on either the HJB or KFE grid
     %
     % Parameters
@@ -72,10 +72,16 @@ function [policies, V_deriv_risky_asset_nodrift] = find_policies_tempt(...
     Vb.B(2:nb,:,:,:) = max(Vb.B(2:nb,:,:,:), Vbmin);
     Vb.F(1:nb-1,:,:,:) = max(Vb.F(1:nb-1,:,:,:), Vbmin);
     
-    % Derivative W
+    % Derivatives W illiquid
+    Wa = fd_firstorder(W, grd.a.dB, grd.a.dF, 2);
+    Wa.B(:,2:na,:,:) = max(Wa.B(:,2:na,:,:), Vamin);
+    Wa.F(:,1:na-1,:,:) = max(Wa.F(:,1:na-1,:,:), Vamin);
+    
+    % Derivative W liquid
     Wb = fd_firstorder(W, grd.b.dB, grd.b.dF, 1);
     Wb.B(2:nb,:,:,:) = max(Wb.B(2:nb,:,:,:), Vbmin);
     Wb.F(1:nb-1,:,:,:) = max(Wb.F(1:nb-1,:,:,:), Vbmin);
+    
     
     if strcmp(grd.gtype, 'HJB')
         net_income_liq_hourly = income.nety_HJB_liq_hourly;
@@ -92,6 +98,7 @@ function [policies, V_deriv_risky_asset_nodrift] = find_policies_tempt(...
     	hours_fn = {@(Vb) prefs.hrs_u1inv(nety_mat_liq .* Vb)};
     end
     
+        
     upwindB = upwind_consumption(net_income_liq_hourly, (Vb.B + p.temptation*Wb.B) ./ (1 + p.temptation),...
         'B', prefs, hours_fn);
 
@@ -102,6 +109,7 @@ function [policies, V_deriv_risky_asset_nodrift] = find_policies_tempt(...
 
     validcF = upwindF.c > 0;
     validcB = upwindB.c > 0;
+   
 
     % no drift
     c0 = net_income_liq_hourly(hours_bc);
@@ -119,10 +127,14 @@ function [policies, V_deriv_risky_asset_nodrift] = find_policies_tempt(...
     s_c = IcF .* upwindF.s + IcB .* upwindB.s + Ic0 .* s0;
 
     h = IcF .* upwindF.hours + IcB .* upwindB.hours + Ic0 .* hours_bc;
-    u = (1+p.temptation)*prefs.u(c) - prefs.hrs_u(h) + p.temptation .* (s_c .* (Wb.F .* IcF + Wb.B .* IcB) - p.tempt_scale .* p.rho .* W);
+    
+    % u term moved below so that can use s_d
     
     
-    % Now for IG implied actual choices, used in KFE
+    
+    
+    % Now for IG implied actual choices, used in KFE (only works for liquid
+    % temptation right now)
     if p.endogenous_labor
     	hours_fn_KFE = {@(Vb) prefs.hrs_u1inv(nety_mat_liq .* Vb)};
     else
@@ -156,7 +168,7 @@ function [policies, V_deriv_risky_asset_nodrift] = find_policies_tempt(...
     s_c_KFE = IcF_KFE .* upwindF_KFE.s + IcB_KFE .* upwindB_KFE.s + Ic0_KFE .* s0_KFE;
 
     h_KFE = IcF_KFE .* upwindF_KFE.hours + IcB_KFE .* upwindB_KFE.hours + Ic0_KFE .* hours_bc;
-    u_KFE = (1+p.temptation)*prefs.u(c_KFE) - prefs.hrs_u(h_KFE) + p.temptation .* (Wb.F .* s_c_KFE - p.tempt_scale .* p.rho .* W);
+    
     
 
     %% --------------------------------------------------------------------
@@ -175,6 +187,26 @@ function [policies, V_deriv_risky_asset_nodrift] = find_policies_tempt(...
     [d, I_specialcase] = upwind_deposits(Vb, Va, adjcost, opt_d);
     s_d = - d - adjcost(d);
     
+    
+    %%
+    % u terms
+    
+    if p.tempt_type == "liqw"
+        % tempted out of liquid only
+        u = (1+p.temptation)*prefs.u(c) - prefs.hrs_u(h) + p.temptation .* (s_c .* (Wb.F .* IcF + Wb.B .* IcB) - p.tempt_delta .* W);
+        
+        u_KFE = (1+p.temptation)*prefs.u(c_KFE) - prefs.hrs_u(h_KFE) + p.temptation .* (Wb.F .* s_c_KFE - p.tempt_delta .* W);
+    else
+        % tempted out of all wealth
+        u_c = (1+p.temptation)*prefs.u(c) - prefs.hrs_u(h);
+        u_cKFE = (1+p.temptation)*prefs.u(c_KFE) - prefs.hrs_u(h_KFE);
+        u_b =  p.temptation .* s_c .* (Wb.F .* IcF + Wb.B .* IcB);
+        u_a = p.temptation .* s_d .* (Wa.F .* IcF + Wa.B .* IcB);
+        u_reb = p.temptation .* p.rebalance_rate .* (Wstar - W);
+        u = u_c + u_b + u_a - p.temptation .* p.tempt_delta .* W;
+        
+        u_KFE = u_cKFE + u_b + u_a - p.temptation .* p.tempt_delta .* W;
+    end
     
     
     %% --------------------------------------------------------------------

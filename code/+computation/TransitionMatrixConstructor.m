@@ -37,6 +37,9 @@ classdef TransitionMatrixConstructor < handle
 
         % Pre-computed term when returns are risky
         risk_term;
+        
+        % KFE? (for news)
+        newsKFE;
 
         % Offsets from the diagonal for risky returns.
         offsets_for_rr;
@@ -46,7 +49,7 @@ classdef TransitionMatrixConstructor < handle
     end
 
     methods
-        function obj = TransitionMatrixConstructor(p, income, grids, returns_risk)
+        function obj = TransitionMatrixConstructor(p, income, grids, returns_risk, newsKFE)
             % Class constructor.
             %
             % Parameters
@@ -78,6 +81,7 @@ classdef TransitionMatrixConstructor < handle
             obj.income = income;
 
             obj.returns_risk = returns_risk;
+            obj.newsKFE = newsKFE;
 
             if p.sigma_r > 0
                 obj.perform_returns_risk_computations();
@@ -112,7 +116,7 @@ classdef TransitionMatrixConstructor < handle
             A = A + obj.compute_illiquid_transitions(drifts.a_B, drifts.a_F);
             
             
-            if obj.gridtype == "KFE"
+            if obj.gridtype == "KFE" || obj.newsKFE
                 % disp(obj.compute_rebalance(model))
                 % Add rebalancing transitions for KFE
                 A = A + obj.compute_rebalance(model);
