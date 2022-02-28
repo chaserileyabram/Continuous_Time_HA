@@ -1452,7 +1452,8 @@ saveas(gcf, plot_path);
 %% Intertemporal MPCs
 clear
 cd('/Users/chaseabram/UChiGit/Discrete_HA')
-load('/Users/chaseabram/Dropbox/AnnualReviewsFiles/variables2.mat')
+% load('/Users/chaseabram/Dropbox/AnnualReviewsFiles/variables2.mat')
+load('/Users/chaseabram/UChiGit/Discrete_HA/output/variables2.mat')
 tmp = results;
 tmp = [results.mpcs(5).avg_s_t{5,1}.value];
 tmp = [tmp results.mpcs(5).avg_s_t{4,1}.value];
@@ -1476,7 +1477,8 @@ tmp = [tmp results.mpcs(5).avg_s_t{1,3}.value];
 tmp = [tmp results.mpcs(5).avg_s_t{1,4}.value];
 Ea56 = [tmp results.mpcs(5).avg_s_t{1,5}.value];
 
-load('/Users/chaseabram/Dropbox/AnnualReviewsFiles/variables22.mat')
+% load('/Users/chaseabram/Dropbox/AnnualReviewsFiles/variables22.mat')
+load('/Users/chaseabram/UChiGit/Discrete_HA/output/variables22.mat')
 tmp = results;
 tmp = [results.mpcs(5).avg_s_t{5,1}.value];
 tmp = [tmp results.mpcs(5).avg_s_t{4,1}.value];
@@ -1512,8 +1514,9 @@ spend_sav = [tmp results.mpcs(5).avg_s_t{1,5}.value];
 
 cd('/Users/chaseabram/UChiGit/Continuous_Time_HA')
 % load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-30-2021-12:43:22/output_1.mat')
-load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-09-15-2021-18:13:10/output_1.mat')
-load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-02-25-2022-07:33:13/output_1.mat')
+% load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-09-15-2021-18:13:10/output_1.mat')
+% load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-02-25-2022-07:33:13/output_1.mat')
+load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-02-28-2022-09:46:29/output_1.mat')
 % base2A = [4.2 4.5 5.2 6.5 stats.mpcs(5).quarterly.value] ./ 100;
 % n1 = stats.mpcs_news_one_year(5).quarterly.value(1) %./1000;
 % n2 = stats.mpcs_news_one_year(5).quarterly.value(2) %./1000;

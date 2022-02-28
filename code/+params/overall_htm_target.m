@@ -386,19 +386,21 @@ function [outparams, n] = overall_htm_target(param_opts)
                 params{ii}.name = sprintf('Baseline 2A (fixed 9-14)');
             end
             
-            rhos = linspace(-0.1, 0.1, 10);
-            rhos = [params{1}.rho rhos];
+            rhos = [linspace(-0.5, -0.02, 4) params{1}.rho linspace(-0.02, 0.02, 3) linspace(0.05, 1.0, 5)];
             
             % Temptation robustness (try different rho starts)
             tempts = [0.01, linspace(0.05,1.0,20)];
-            for tempt = tempts
-                for rho = rhos
-                    ii = ii + 1;
-                    params = [params {calibrations{1}}];
-                    params{ii} = params{1};
-                    params{ii}.rho = rho;
-                    params{ii}.temptation = tempt;
-                    params{ii}.name = sprintf('Temptation = %d, rho = %d', tempt, rho);
+            for type = ["totw", "liqw"]
+                for tempt = tempts
+                    for rho = rhos
+                        ii = ii + 1;
+                        params = [params {calibrations{1}}];
+                        params{ii} = params{1};
+                        params{ii}.rho = rho;
+                        params{ii}.temptation = tempt;
+                        params{ii}.tempt_type = type;
+                        params{ii}.name = sprintf('Temptation = %d, type=%s, rho = %d', tempt, type, rho);
+                    end
                 end
             end
             
