@@ -390,7 +390,7 @@ function [outparams, n] = overall_htm_target(param_opts)
             rhos = [linspace(-0.5, -0.02, 3) params{1}.rho linspace(-0.02, 0.02, 3) linspace(0.05, 1.0, 4)];
             
             % Temptation robustness (try different rho starts)
-            tempts = [0.01, linspace(0.05,1.0,20)];
+            tempts = [0.01, linspace(0.05,0.5,10)];
             for type = ["totw", "liqw"]
                 for tempt = tempts
                     for rho = rhos
@@ -469,18 +469,18 @@ function [outparams, n] = overall_htm_target(param_opts)
             end
             
             % Quadratic Utility
-            quad_bs = linspace(1e-6, 0.5, 10);
-            for quad_b = quad_bs
-                for rho = rhos
-                    ii = ii + 1;
-                    params = [params {calibrations{1}}];
-                    params{ii} = params{1};
-                    params{ii}.rho = rho;
-                    params{ii}.quad_u = true;
-                    params{ii}.quad_b = quad_b;
-                    params{ii}.name = sprintf('Quad util, b = %d, rho = %d', quad_b, rho);
-                end
-            end
+%             quad_bs = linspace(1e-6, 0.5, 10);
+%             for quad_b = quad_bs
+%                 for rho = rhos
+%                     ii = ii + 1;
+%                     params = [params {calibrations{1}}];
+%                     params{ii} = params{1};
+%                     params{ii}.rho = rho;
+%                     params{ii}.quad_u = true;
+%                     params{ii}.quad_b = quad_b;
+%                     params{ii}.name = sprintf('Quad util, b = %d, rho = %d', quad_b, rho);
+%                 end
+%             end
             
             
             
