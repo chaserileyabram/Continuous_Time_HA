@@ -203,7 +203,7 @@ function [policies, V_deriv_risky_asset_nodrift] = find_policies_tempt(...
         u_b =  p.temptation .* s_c .* (Wb.F .* IcF + Wb.B .* IcB);
         u_a = p.temptation .* s_d .* (Wa.F .* IcF + Wa.B .* IcB);
         u_reb = p.temptation .* p.rebalance_rate .* (Wstar - W);
-        u = u_c + u_b + u_a - p.temptation .* p.tempt_delta .* W;
+        u = u_c + u_b + u_a + u_reb - p.temptation .* p.tempt_delta .* W;
         
         u_KFE = u_cKFE + u_b + u_a - p.temptation .* p.tempt_delta .* W;
     end

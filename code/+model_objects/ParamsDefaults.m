@@ -172,6 +172,10 @@ classdef ParamsDefaults < handle
         % Array of risk aversion coefficients, set
         % automatically
     	riskaver_fulldim;
+        
+        % Quadratic utility: u(c) = c - (b/2)*c^2
+        quad_u = false;
+        quad_b = 1;
 
     	% Transition into death, at a quarterly rate
     	deathrate = 1 / 200;

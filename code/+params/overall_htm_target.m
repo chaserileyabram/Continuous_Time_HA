@@ -360,7 +360,8 @@ function [outparams, n] = overall_htm_target(param_opts)
             params{ii}.kappa1 = 1e10;
             % Calibrated
             params{ii}.rho = 0.0114; %0.01214; %0.01295; 
-            rho_bds = [-0.45, 0.03];
+%             rho_bds = [-0.45, 0.03];
+            rho_bds = [-2.0, 2.0];
     %         params{ii}.r_b = -0.006421023; 
             params{ii}.r_b = -0.005;
             params{ii}.r_a = 0.0156; %0.016340226; %0.01563035; %0.017442897;
@@ -386,7 +387,7 @@ function [outparams, n] = overall_htm_target(param_opts)
                 params{ii}.name = sprintf('Baseline 2A (fixed 9-14)');
             end
             
-            rhos = [linspace(-0.5, -0.02, 4) params{1}.rho linspace(-0.02, 0.02, 3) linspace(0.05, 1.0, 5)];
+            rhos = [linspace(-0.5, -0.02, 3) params{1}.rho linspace(-0.02, 0.02, 3) linspace(0.05, 1.0, 4)];
             
             % Temptation robustness (try different rho starts)
             tempts = [0.01, linspace(0.05,1.0,20)];
@@ -404,6 +405,39 @@ function [outparams, n] = overall_htm_target(param_opts)
                 end
             end
             
+            
+            % Variety of CRRAs
+            crras = linspace(exp(-3), exp(3), 5);
+            for crra = crras
+                for rho = rhos
+                    ii = ii + 1;
+                    params = [params {calibrations{1}}];
+                    params{ii} = params{1};
+                    params{ii}.rho = rho;
+                    params{ii}.riskaver = crra;
+                    params{ii}.name = sprintf('CRRA = %d, rho = %d', crra, rho);
+                end
+            end
+            
+            
+            % Temptation: try calibrating r_a and reb_cost with 
+            for tempt = [0.01 0.05 0.1]
+                for rho = rhos
+                    ii = ii + 1;
+                    params = [params {calibrations{1}}];
+                    params{ii} = params{1};
+                    params{ii}.rho = rho;
+                    params{ii}.temptation = tempt;
+                    params{ii}.calibration_vars = {'rho', 'r_a', 'rebalance_cost'};
+                    params{ii}.calibration_stats = {'totw', 'w_lt_ysixth', 'liqw_lt_ysixth'};
+                    params{ii}.calibration_targets = [scf.mean_totw, scf.htm, scf.phtm];
+                    params{ii}.calibration_scales = [1, 1, 1];
+                    r_a_bounds = [0, 0.126];
+                    reb_bounds = [400/anninc, 600/anninc];
+                    params{ii}.calibration_bounds = {rho_bds, r_a_bounds, reb_bounds};
+                    params{ii}.name = sprintf('3cal Temptation = %d, rho = %d', tempt, rho);
+                end
+            end
             
             % SDU
 %             rras = [0.5, 1.001, 8];
@@ -431,6 +465,20 @@ function [outparams, n] = overall_htm_target(param_opts)
                     params{ii}.rho = rho;
                     params{ii}.riskaver = linspace(exp(-rra_het), exp(rra_het), 5);
                     params{ii}.name = sprintf('het RRA exp(%d), rho=%d', rra_het, rho);
+                end
+            end
+            
+            % Quadratic Utility
+            quad_bs = linspace(1e-6, 0.5, 10);
+            for quad_b = quad_bs
+                for rho = rhos
+                    ii = ii + 1;
+                    params = [params {calibrations{1}}];
+                    params{ii} = params{1};
+                    params{ii}.rho = rho;
+                    params{ii}.quad_u = true;
+                    params{ii}.quad_b = quad_b;
+                    params{ii}.name = sprintf('Quad util, b = %d, rho = %d', quad_b, rho);
                 end
             end
             

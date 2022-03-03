@@ -30,7 +30,13 @@ classdef Preferences < handle
 			obj.u = @(c) CRRA.utility(c, invies);
 			obj.u1 = @(c) CRRA.marginal_utility(c, invies);
 			obj.u1inv = @(u) CRRA.u1inv(u, invies);
-		end
+        end
+        
+        function set_quad(obj,b)
+            obj.u = @(c) c - (b/2).*c.^2;
+			obj.u1 = @(c) 1 - b.*c;
+			obj.u1inv = @(u) (1-u)./b;
+        end
 
 		function set_SDU(obj, invies, rho)
 			import model_objects.CRRA
