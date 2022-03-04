@@ -471,6 +471,36 @@ function [outparams, n] = overall_htm_target(param_opts)
 %                     params{ii}.name = sprintf('het RRA exp(%d), rho=%d', rra_het, rho);
 %                 end
 %             end
+
+            for rho = rhos
+                ii = ii + 1;
+                params = [params {calibrations{1}}];
+                params{ii} = params{1};
+                params{ii}.rho = rho;
+                risk_avergrid = [3/4 1 4/3];
+                params{ii}.riskaver = risk_avergrid;
+                params{ii}.name = sprintf('het RRA %d, rho=%d', 3/4, rho);
+            end
+            
+            for rho = rhos
+                ii = ii + 1;
+                params = [params {calibrations{1}}];
+                params{ii} = params{1};
+                params{ii}.rho = rho;
+                risk_avergrid = [2/3 1 3/2];
+                params{ii}.riskaver = risk_avergrid;
+                params{ii}.name = sprintf('het RRA %d, rho=%d', 2/3, rho);
+            end
+            
+            for rho = rhos
+                ii = ii + 1;
+                params = [params {calibrations{1}}];
+                params{ii} = params{1};
+                params{ii}.rho = rho;
+                risk_avergrid = [1/2 1 2];
+                params{ii}.riskaver = risk_avergrid;
+                params{ii}.name = sprintf('het RRA %d, rho=%d', 1/2, rho);
+            end
             
             % Quadratic Utility
 %             quad_bs = linspace(0.5, 0.5, 10);
@@ -537,6 +567,8 @@ function [outparams, n] = overall_htm_target(param_opts)
                     end
                 end
             end
+            
+            
 
 
 
