@@ -367,11 +367,22 @@ function alltables1A()
     txt *= header()
 
     # MPC Comparison
+    # tmp_tab = small_table("MPC Comparison", "asdf",
+    # ["Baseline", "Calibration to PHtM, HtM = 0.142", 
+    # "p = 0, normal, spacing = 0.01", "RA = exp(1), ..., exp(-1), IES = exp(-1), ..., exp(1)", 
+    # "betaL = 0.4, betaH calibrated", "Baseline 2A"],
+    # ["1A Baseline", "1A Match HtM", "\$\\beta\$ Het", "IES Het",
+    #  "Spender saver", "2A Baseline"],
+    # ["Quarterly MPC (\\%), out of -\\\$5000", "Quarterly MPC (\\%), out of -\\\$500",
+    # "Quarterly MPC (\\%), out of \\\$500", "Quarterly MPC (\\%), out of \\\$5000"],
+    # ["Quarterly MPC (\\%), out of -\\\$5000", "Quarterly MPC (\\%), out of -\\\$500",
+    # "Quarterly MPC (\\%), out of \\\$500", "Quarterly MPC (\\%), out of \\\$5000"])
+
     tmp_tab = small_table("MPC Comparison", "asdf",
-    ["Baseline", "Calibration to PHtM, HtM = 0.142", 
-    "p = 0, normal, spacing = 0.01", "RA = exp(1), ..., exp(-1), IES = exp(-1), ..., exp(1)", 
+    ["Baseline", "Calibration to total wealth, E[a] = 0.5617", 
+    "p = 0, spacing = 0.01", "RA = 1, IES = exp(-3), ..., exp(3)", 
     "betaL = 0.4, betaH calibrated", "Baseline 2A"],
-    ["1A Baseline", "1A Match HtM", "\$\\beta\$ Het", "IES Het",
+    ["1A Baseline", "E[a] = 0.56", "\$\\beta\$ Het", "IES Het",
      "Spender saver", "2A Baseline"],
     ["Quarterly MPC (\\%), out of -\\\$5000", "Quarterly MPC (\\%), out of -\\\$500",
     "Quarterly MPC (\\%), out of \\\$500", "Quarterly MPC (\\%), out of \\\$5000"],

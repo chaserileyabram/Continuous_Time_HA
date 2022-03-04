@@ -274,6 +274,9 @@ classdef ParamsDefaults < handle
         mpc_shocks = [-1e-5 -0.01 -0.1 1e-5 0.01 0.1];
         numeraire_in_dollars;
         decomp_thresholds = [0 0.01 0.05];
+        
+        perc_shock = false;
+        perc_y_shock = 0.01
 
         % ----------- adjustment costs -----------------------------------
         kappa0 = 0;

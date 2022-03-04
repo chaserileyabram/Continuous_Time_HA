@@ -93,6 +93,8 @@ classdef Statistics < handle
         mean_apc;
         
         mpc_apc_corr;
+        b_a_corr;
+        mpc_income_wgt;
         
         A;
         
@@ -152,6 +154,7 @@ classdef Statistics < handle
             obj.compute_apc()
             
             obj.compute_adjust();
+            obj.compute_b_a_corr();
         end
         
         function compute_HtM_trans(obj)
@@ -188,6 +191,25 @@ classdef Statistics < handle
             var_apc = sum(obj.pmf .* obj.apc.^2, 'all') - sum(obj.pmf .* obj.apc, 'all')^2;
             
             obj.mpc_apc_corr = obj.sfill(cov_mpc_apc/(var_mpc^0.5 * var_apc^0.5), 'MPC APC Corr');
+        end
+        
+        function compute_b_a_corr(obj)
+            [bg, ag] = ndgrid(obj.bgrid, obj.agrid);
+            pmf_ba = sum(obj.pmf, [3 4]);
+            
+            cov_b_a = sum(pmf_ba .* bg .* ag, 'all') - sum(pmf_ba .* bg, 'all')*sum(pmf_ba .* ag, 'all');
+            var_b = sum(pmf_ba .* bg.^2, 'all') - sum(pmf_ba .* bg, 'all')^2;
+            var_a = sum(pmf_ba .* ag.^2, 'all') - sum(pmf_ba .* ag, 'all')^2;
+            
+            obj.b_a_corr = obj.sfill(cov_b_a / (var_b^0.5 * var_a^0.5), 'Liquid-Illiquid Corr');
+        end
+        
+        function compute_mpc_income_wgt(obj)
+            mpcs = reshape(obj.mpcs_over_ss{5}, [obj.nb obj.na obj.nz obj.ny]);
+            num = sum(obj.income.y.wide .* obj.pmf .* mpcs, 'all');
+            denom = sum(obj.income.y.wide .* obj.pmf, 'all');
+            
+            obj.mpc_income_wgt = obj.sfill(num / denom, 'MPC (Income Weighted)');
         end
         
         function compute_mpc_w(obj)

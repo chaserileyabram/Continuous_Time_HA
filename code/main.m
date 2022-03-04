@@ -214,6 +214,7 @@ function stats = main(p, varargin)
     if final
         stats.compute_mpc_apc_corr();
         stats.compute_mpc_w();
+        stats.compute_mpc_income_wgt();
     end
     
     %% ----------------------------------------------------------------

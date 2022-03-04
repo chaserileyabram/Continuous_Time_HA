@@ -254,7 +254,7 @@ classdef MPCs < handle
 	        	obj.grids.z.vec, obj.income.y.vec};
 	       	value_grids = {bgrid_mpc_vec, agrid_mpc_vec,...
 	       		obj.grids.z.vec, obj.income.y.vec};
-
+           
         	if (obj.income.ny > 1) && (obj.p.nz > 1)
                 inds = 1:4;
             elseif (obj.income.ny==1) && (obj.p.nz > 1)
@@ -267,6 +267,11 @@ classdef MPCs < handle
 
             interp_grids = interp_grids(inds);
             value_grids = value_grids(inds);
+            
+            if obj.p.perc_shock && (ishock == 5)
+                [bg, ag, yg] = ndgrid(obj.grids.b.vec, obj.grids.a.vec, obj.income.y.vec);
+                bg = bg + obj.p.perc_y_shock .* yg;
+            end
 
 			reshape_vec = [obj.p.nb_KFE obj.p.na_KFE obj.p.nz obj.income.ny];
 			for period = 1:5
@@ -274,7 +279,11 @@ classdef MPCs < handle
 	            con_period = reshape(obj.cum_con_baseline(:,period), reshape_vec);
 	            mpcinterp = griddedInterpolant(interp_grids, squeeze(con_period), 'linear');
 
-	            obj.cum_con_shock{ishock}(:,period) = reshape(mpcinterp(value_grids), [], 1);
+                if obj.p.perc_shock && (ishock == 5)
+                    obj.cum_con_shock{ishock}(:,period) = reshape(mpcinterp(bg, ag, yg), [], 1);
+                else
+                    obj.cum_con_shock{ishock}(:,period) = reshape(mpcinterp(value_grids), [], 1);
+                end
 
 	            if (shock < 0) && some_below && (period==1)
 	                temp = reshape(obj.cum_con_shock{ishock}(:,period), reshape_vec);
@@ -315,10 +324,15 @@ classdef MPCs < handle
 			% obj.mpcs : the final MPC statistics computed from this class,
 			%	a structure array of size nshocks
 			
-			shock = obj.p.mpc_shocks(ishock);
+            if obj.p.perc_shock && (ishock == 5)
+                [bg, ag, zg, yg] = ndgrid(obj.grids.b.vec, obj.grids.a.vec, obj.grids.z.vec, obj.income.y.vec);
+                shock = obj.p.perc_y_shock .* yg;
+            else
+                shock = obj.p.mpc_shocks(ishock);
+            end
 
 			% MPCs out of a shock at beginning of quarter 0
-			mpcs = (obj.cum_con_shock{ishock} - obj.cum_con_baseline) / shock;
+			mpcs = (obj.cum_con_shock{ishock} - obj.cum_con_baseline) ./ shock;
 			if ishock == 5
 				obj.mpcs(5).mpcs = mpcs;
             end
