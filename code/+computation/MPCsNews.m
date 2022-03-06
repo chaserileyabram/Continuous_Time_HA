@@ -153,7 +153,7 @@ classdef MPCsNews < handle
 		    		obj.p, obj.income, obj.grids, false);
 		    end
 
-		    if numel(obj.p.rhos) > 1
+		    if numel(obj.p.rhos) > 1 && false % rho het was not working
 		        rhocol = kron(obj.p.rhos', ones(obj.p.nb_KFE*obj.p.na_KFE, 1));
 		        obj.rho_diag = aux.sparse_diags(rhocol, 0);
 		    else

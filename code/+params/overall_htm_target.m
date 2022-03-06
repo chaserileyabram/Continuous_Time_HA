@@ -389,8 +389,13 @@ function [outparams, n] = overall_htm_target(param_opts)
             
 %             params{ii}.perc_shock = true;
 %             params{ii}.na = 2;
+%             params{ii}.rebalance_cost = 100;
+%             params{ii}.rebalance_rate = 0.0;
+            
+            
             
             rhos = [linspace(-0.5, -0.02, 3) params{1}.rho linspace(-0.02, 0.02, 3) linspace(0.05, 1.0, 4)];
+            rhos = [-0.02 0 params{1}.rho 0.05 1];
             
             % Temptation robustness (try different rho starts)
 %             tempts = [0.01, linspace(0.05,0.5,10)];
@@ -472,35 +477,35 @@ function [outparams, n] = overall_htm_target(param_opts)
 %                 end
 %             end
 
-            for rho = rhos
-                ii = ii + 1;
-                params = [params {calibrations{1}}];
-                params{ii} = params{1};
-                params{ii}.rho = rho;
-                risk_avergrid = [3/4 1 4/3];
-                params{ii}.riskaver = risk_avergrid;
-                params{ii}.name = sprintf('het RRA %d, rho=%d', 3/4, rho);
-            end
-            
-            for rho = rhos
-                ii = ii + 1;
-                params = [params {calibrations{1}}];
-                params{ii} = params{1};
-                params{ii}.rho = rho;
-                risk_avergrid = [2/3 1 3/2];
-                params{ii}.riskaver = risk_avergrid;
-                params{ii}.name = sprintf('het RRA %d, rho=%d', 2/3, rho);
-            end
-            
-            for rho = rhos
-                ii = ii + 1;
-                params = [params {calibrations{1}}];
-                params{ii} = params{1};
-                params{ii}.rho = rho;
-                risk_avergrid = [1/2 1 2];
-                params{ii}.riskaver = risk_avergrid;
-                params{ii}.name = sprintf('het RRA %d, rho=%d', 1/2, rho);
-            end
+%             for rho = rhos
+%                 ii = ii + 1;
+%                 params = [params {calibrations{1}}];
+%                 params{ii} = params{1};
+%                 params{ii}.rho = rho;
+%                 risk_avergrid = [3/4 1 4/3];
+%                 params{ii}.riskaver = risk_avergrid;
+%                 params{ii}.name = sprintf('het RRA %d, rho=%d', 3/4, rho);
+%             end
+%             
+%             for rho = rhos
+%                 ii = ii + 1;
+%                 params = [params {calibrations{1}}];
+%                 params{ii} = params{1};
+%                 params{ii}.rho = rho;
+%                 risk_avergrid = [2/3 1 3/2];
+%                 params{ii}.riskaver = risk_avergrid;
+%                 params{ii}.name = sprintf('het RRA %d, rho=%d', 2/3, rho);
+%             end
+%             
+%             for rho = rhos
+%                 ii = ii + 1;
+%                 params = [params {calibrations{1}}];
+%                 params{ii} = params{1};
+%                 params{ii}.rho = rho;
+%                 risk_avergrid = [1/2 1 2];
+%                 params{ii}.riskaver = risk_avergrid;
+%                 params{ii}.name = sprintf('het RRA %d, rho=%d', 1/2, rho);
+%             end
             
             % Quadratic Utility
 %             quad_bs = linspace(0.5, 0.5, 10);
@@ -538,14 +543,15 @@ function [outparams, n] = overall_htm_target(param_opts)
             % Het discount factors
             rho_hets = [0.001,0.005,0.01];
             for rho_het = rho_hets
-                for rho = rhos
+%                 for rho = rhos
                     ii = ii + 1;
                     params = [params {calibrations{1}}];
                     params{ii} = params{1};
-                    params{ii}.rho = rho;
+%                     params{ii}.rho = params{1}.rho;
+                    rho_diffs = linspace(-rho_het, rho_het, 5);
                     params{ii}.rho_grid = params{1}.rho + linspace(-rho_het, rho_het, 5)';
-                    params{ii}.name = sprintf('het rho, spacing=%d, rho=%d', rho_het, rho);
-                end
+                    params{ii}.name = sprintf('het rho, spacing=%d', rho_het);
+%                 end
             end
             
             % Temptation with different illiquid rates and different reb
@@ -556,14 +562,16 @@ function [outparams, n] = overall_htm_target(param_opts)
             for tempt = tempts
                 for r_a = r_as
                     for reb_cost = reb_costs
-                        ii = ii + 1;
-                        params = [params {calibrations{1}}];
-                        params{ii} = params{1};
-    %                     params{ii}.rho = rho;
-                        params{ii}.temptation = tempt;
-                        params{ii}.r_a = r_a;
-                        params{ii}.rebalance_cost = params{1}.rebalance_cost + reb_cost;
-                        params{ii}.name = sprintf('Temptation=%d, r_a=%d, reb_cost=%d', tempt, r_a, params{ii}.rebalance_cost * anninc);
+%                         for rho = rhos
+                            ii = ii + 1;
+                            params = [params {calibrations{1}}];
+                            params{ii} = params{1};
+%                             params{ii}.rho = paramrho;
+                            params{ii}.temptation = tempt;
+                            params{ii}.r_a = r_a;
+                            params{ii}.rebalance_cost = params{1}.rebalance_cost + reb_cost;
+                            params{ii}.name = sprintf('Temptation=%d, r_a=%d, reb_cost=%d', tempt, r_a, params{ii}.rebalance_cost * anninc);
+%                         end
                     end
                 end
             end
