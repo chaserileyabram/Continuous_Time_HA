@@ -560,7 +560,7 @@ function [outparams, n] = overall_htm_target(param_opts)
             % Temptation with different illiquid rates and different reb
             % costs
             tempts = [0.01, 0.05, 0.1];
-            r_as = [0.0005, 0.0075, 0.01, 0.0125, params{1}.r_a];
+            r_as = [0.005, 0.0075, 0.01, 0.0125, params{1}.r_a];
             reb_costs = [-1000, -500, -250, 0, 250, 500, 1000] ./ anninc;
             for tempt = tempts
                 for r_a = r_as
