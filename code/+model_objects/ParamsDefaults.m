@@ -217,6 +217,9 @@ classdef ParamsDefaults < handle
         calibration_scales = [];
         
         calibration_steptol = 1e-10;
+        
+        % Brackets for fzero
+        x0;
 
         % ------------ taxes ------------------------------
         transfer = 0; % transfer to households 
