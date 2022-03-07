@@ -543,42 +543,104 @@ function [outparams, n] = overall_htm_target(param_opts)
             
 
             % Het discount factors
-            rho_hets = [0.001,0.005,0.01];
-            for rho_het = rho_hets
-                for rho = rhos
-                    ii = ii + 1;
-                    params = [params {calibrations{1}}];
-                    params{ii} = params{1};
-                    params{ii}.rho = rho;
-                    params{ii}.x0 = [rho - 0.01, rho + 0.01];
-%                     rho_diffs = linspace(-rho_het, rho_het, 5);
-                    params{ii}.rho_grid = params{1}.rho + linspace(-rho_het, rho_het, 5)';
-                    params{ii}.name = sprintf('het rho, spacing=%d, rho_cent_start=%d', rho_het, rho);
-                end
-            end
+%             rho_hets = [0.001,0.005,0.01];
+%             for rho_het = rho_hets
+%                 for rho = rhos
+%                     ii = ii + 1;
+%                     params = [params {calibrations{1}}];
+%                     params{ii} = params{1};
+%                     params{ii}.rho = rho;
+%                     params{ii}.x0 = [rho - 0.01, rho + 0.01];
+% %                     rho_diffs = linspace(-rho_het, rho_het, 5);
+%                     params{ii}.rho_grid = params{1}.rho + linspace(-rho_het, rho_het, 5)';
+%                     params{ii}.name = sprintf('het rho, spacing=%d, rho_cent_start=%d', rho_het, rho);
+%                 end
+%             end
             
             % Temptation with different illiquid rates and different reb
             % costs
-            tempts = [0.01, 0.05, 0.1];
-            r_as = [0.005, 0.0075, 0.01, 0.0125, params{1}.r_a];
-            reb_costs = [-1000, -500, -250, 0, 250, 500, 1000] ./ anninc;
-            for tempt = tempts
-                for r_a = r_as
-                    for reb_cost = reb_costs
-                        for rho = rhos
-                            ii = ii + 1;
-                            params = [params {calibrations{1}}];
-                            params{ii} = params{1};
-                            params{ii}.rho = rho;
-                            params{ii}.x0 = [rho - 0.01, rho + 0.01];
-                            params{ii}.temptation = tempt;
-                            params{ii}.r_a = r_a;
-                            params{ii}.rebalance_cost = params{1}.rebalance_cost + reb_cost;
-                            params{ii}.name = sprintf('Temptation=%d, r_a=%d, reb_cost=%d, rho_start=%d', tempt, r_a, params{ii}.rebalance_cost * anninc, rho);
-                        end
+%             tempts = [0.01, 0.05, 0.1];
+%             r_as = [0.005, 0.0075, 0.01, 0.0125, params{1}.r_a];
+%             reb_costs = [-1000, -500, -250, 0, 250, 500, 1000] ./ anninc;
+%             for tempt = tempts
+%                 for r_a = r_as
+%                     for reb_cost = reb_costs
+%                         for rho = rhos
+%                             ii = ii + 1;
+%                             params = [params {calibrations{1}}];
+%                             params{ii} = params{1};
+%                             params{ii}.rho = rho;
+%                             params{ii}.x0 = [rho - 0.01, rho + 0.01];
+%                             params{ii}.temptation = tempt;
+%                             params{ii}.r_a = r_a;
+%                             params{ii}.rebalance_cost = params{1}.rebalance_cost + reb_cost;
+%                             params{ii}.name = sprintf('Temptation=%d, r_a=%d, reb_cost=%d, rho_start=%d', tempt, r_a, params{ii}.rebalance_cost * anninc, rho);
+%                         end
+%                     end
+%                 end
+%             end
+            
+            
+            % 1)
+            tempt = 0.01;
+            r_as = [0.0075 0.008 0.0085 0.009 0.0095];
+            reb_costs = [2300 2400 2500 2600] ./anninc;
+            for r_a = r_as
+                for reb_cost = reb_costs
+                    for rho = rhos
+                        ii = ii + 1;
+                        params = [params {calibrations{1}}];
+                        params{ii} = params{1};
+                        params{ii}.rho = rho;
+                        params{ii}.x0 = [rho - 0.01, rho + 0.01];
+                        params{ii}.temptation = tempt;
+                        params{ii}.r_a = r_a;
+                        params{ii}.rebalance_cost = reb_cost;
+                        params{ii}.name = sprintf('1 Temptation=%d, r_a=%d, reb_cost=%d, rho_start=%d', tempt, r_a, params{ii}.rebalance_cost * anninc, rho);
                     end
                 end
             end
+            
+            % 2)
+            tempt = 0.015;
+            r_as = [params{1}.r_a 0.0075 0.008 0.0085 0.009 0.0095];
+            reb_costs = [params{1}.rebalance_cost 2300 2400 2500 2600] ./anninc;
+            for r_a = r_as
+                for reb_cost = reb_costs
+                    for rho = rhos
+                        ii = ii + 1;
+                        params = [params {calibrations{1}}];
+                        params{ii} = params{1};
+                        params{ii}.rho = rho;
+                        params{ii}.x0 = [rho - 0.01, rho + 0.01];
+                        params{ii}.temptation = tempt;
+                        params{ii}.r_a = r_a;
+                        params{ii}.rebalance_cost = reb_cost;
+                        params{ii}.name = sprintf('2 Temptation=%d, r_a=%d, reb_cost=%d, rho_start=%d', tempt, r_a, params{ii}.rebalance_cost * anninc, rho);
+                    end
+                end
+            end
+            
+            % 3)
+            tempts = [0.0125 0.015 0.0175 0.02 0.0225 0.025];
+            r_as = [params{1}.r_a 0.004 0.005 0.006 0.007 0.008 0.009 0.01 0.011];
+%             reb_costs = [params{1}.rebalance_cost 2300 2400 2500 2600] ./anninc;
+            for r_a = r_as
+                for tempt = tempts
+                    for rho = rhos
+                        ii = ii + 1;
+                        params = [params {calibrations{1}}];
+                        params{ii} = params{1};
+                        params{ii}.rho = rho;
+                        params{ii}.x0 = [rho - 0.01, rho + 0.01];
+                        params{ii}.temptation = tempt;
+                        params{ii}.r_a = r_a;
+%                         params{ii}.rebalance_cost = params{1}.rebalance_cost + reb_cost;
+                        params{ii}.name = sprintf('3 Temptation=%d, r_a=%d, reb_cost=%d, rho_start=%d', tempt, r_a, params{ii}.rebalance_cost * anninc, rho);
+                    end
+                end
+            end
+          
             
             
 
