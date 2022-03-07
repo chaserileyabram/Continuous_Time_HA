@@ -543,19 +543,19 @@ function [outparams, n] = overall_htm_target(param_opts)
             
 
             % Het discount factors
-%             rho_hets = [0.001,0.005,0.01];
-%             for rho_het = rho_hets
-%                 for rho = rhos
-%                     ii = ii + 1;
-%                     params = [params {calibrations{1}}];
-%                     params{ii} = params{1};
-%                     params{ii}.rho = rho;
-%                     params{ii}.x0 = [rho - 0.01, rho + 0.01];
-% %                     rho_diffs = linspace(-rho_het, rho_het, 5);
-%                     params{ii}.rho_grid = params{1}.rho + linspace(-rho_het, rho_het, 5)';
-%                     params{ii}.name = sprintf('het rho, spacing=%d, rho_cent_start=%d', rho_het, rho);
-%                 end
-%             end
+            rho_hets = [0.001,0.005,0.01];
+            for rho_het = rho_hets
+                for rho = rhos
+                    ii = ii + 1;
+                    params = [params {calibrations{1}}];
+                    params{ii} = params{1};
+                    params{ii}.rho = rho;
+                    params{ii}.x0 = [rho - 0.01, rho + 0.01];
+%                     rho_diffs = linspace(-rho_het, rho_het, 5);
+                    params{ii}.rho_grid = params{1}.rho + linspace(-rho_het, rho_het, 5)';
+                    params{ii}.name = sprintf('het rho, spacing=%d, rho_cent_start=%d', rho_het, rho);
+                end
+            end
             
             % Temptation with different illiquid rates and different reb
             % costs
