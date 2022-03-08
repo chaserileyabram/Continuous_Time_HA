@@ -1,0 +1,14 @@
+#!/bin/bash
+#SBATCH --job-name=chase_menu_cost_backup
+#SBATCH --output=/home/abram/Continuous_Time_HA/output/run%a.out
+#SBATCH --error=/home/abram/Continuous_Time_HA/output/run%a.err
+#SBATCH --partition=broadwl
+#SBATCH --array=1-450
+#SBATCH --time=36:00:00
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --mem-per-cpu=8000
+
+module load matlab/2019b
+
+matlab -nodisplay < /home/abram/Continuous_Time_HA/master.m
