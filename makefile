@@ -43,6 +43,12 @@ download_all_out :
 	-mkdir -p output/server-all-$(cdate)
 	-scp $(spath3) output/server-all-$(cdate)
 
+spath4 := "abram@midway2.rcc.uchicago.edu:/home/abram/BackupCHA/Continuous_Time_HA/output/*"
+cdate := $(shell date +"%m-%d-%Y-%T")
+download_backup_all_out :
+	-mkdir -p output/server-all-$(cdate)
+	-scp $(spath4) output/server-all-$(cdate)
+
 readme :
 	-pandoc readme.md -o readme.pdf
 	-xdg-open readme.pdf

@@ -907,6 +907,9 @@ as = as .^ (1/curve);
 as = as .* max_i;
 mpc_i = mpc_illiquid_mean(stats,as) ./ 100;
 
+% Fix last point
+mpc_i(end) = mpc_illiquid_end(stats, as(end)) / 100;
+
 [bg, ag, yg] = ndgrid(stats.bgrid, stats.agrid, income.y.vec);
 pmf_b_a_y = squeeze(stats.pmf);
 
@@ -991,12 +994,12 @@ p(2).FaceColor = blue;
 % p = bar(hist_locs, hist_mass);
 % p.FaceAlpha = 0.5;
 xlim([0 max_i])
-ylim([0 0.55])
+ylim([0 0.33])
 ylabel('Mass')
 hold on
 yyaxis left
 plot(as, mpc_i, 'LineWidth', 3, 'color', 'black')
-ylim([0 0.7])
+ylim([0 0.4])
 ylabel('MPC')
 % title('MPC vs. Liquid Wealth')
 xlabel('Illiquid Wealth')
@@ -1188,6 +1191,98 @@ ax = gca;
 ax.FontSize = 14;
 cd('/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final');
 plot_path = sprintf('Figures/mpc_2A_1A.pdf');
+% saveas(gcf, plot_path, "epsc");
+saveas(gcf, plot_path);
+
+%% 7b) 1A MPC by wealth/income ratio
+
+clear
+% Load baseline 1A
+cd('/Users/chaseabram/UChiGit/Discrete_HA')
+load('/Users/chaseabram/Dropbox/AnnualReviewsFiles/variables2.mat')
+
+% Get MPCs
+mpcs = reshape(results.mpcs(5).mpcs_1_t{1}, size(results.stats.pmf));
+
+% Get pmf
+pmf_b = sum(results.stats.pmf, 2);
+
+% Condition on b
+mpcs_b = sum(mpcs .* results.stats.pmf, 2) ./ pmf_b;
+
+% conformable b grid
+bg = ndgrid(results.stats.agrid);
+
+% pmf of HtM
+pmf_htm = sum(results.stats.pmf .* (bg < 1000/Sparams.numeraire_in_dollars), 2)./ sum(results.stats.pmf .* (bg < 1000/Sparams.numeraire_in_dollars), 'all');
+
+% interpolate MPC fcn
+mpc_int = griddedInterpolant(bg, mpcs_b,'linear','none');
+
+rs = linspace(0,3,100);
+
+mpc_ratio_mean(results.stats,rs)
+
+% Grid for plot
+n = 100;
+curve = 0.1;
+% b from 0 to 1
+bs = linspace(0.6,1,n);
+bs = bs .^ (1/curve);
+bs = bs .* 3;
+
+
+% Make histogram data
+m = 40;
+hist_chunks = linspace(0,3,m);
+hist_locs = linspace(3/(2*m),3 - 3/(2*m),m-1);
+hist_mass = zeros(m-1,1);
+hist_mass_htm = zeros(m-1,1);
+
+for i = 2:m
+    in_chunk = (bg >= hist_chunks(i-1)) .* (bg < hist_chunks(i));
+    hist_mass(i-1) = sum(pmf_b .* in_chunk, 'all');
+    hist_mass_htm(i-1) = sum(pmf_htm .* in_chunk, 'all');
+end
+
+% Last bar contains remaining mass
+hist_mass(m-1) = 1 - sum(hist_mass(1:m-2), 'all');
+hist_mass_htm(m-1) = 1 - sum(hist_mass_htm(1:m-2), 'all');
+hist_mass_htm = hist_mass_htm .* sum(results.stats.pmf .* (bg < 1000/Sparams.numeraire_in_dollars), 'all');
+hist_mass = hist_mass - hist_mass_htm;
+
+% Combine for stacking
+total_mass = [hist_mass_htm hist_mass];
+
+% Black axes
+colororder({'k', 'k'});
+% Right for histogram
+yyaxis right
+% Make stacked histogram
+p = bar(hist_locs, total_mass, 'stacked', 'BarWidth', 1);
+p(1).FaceAlpha = 0.5;
+p(2).FaceAlpha = 0.5;
+orange = [0.8500, 0.3250, 0.0980];
+blue = [0, 0.4470, 0.7410];
+p(1).FaceColor = orange;
+p(2).FaceColor = blue;
+xlim([0 3])
+ylim([0 0.55])
+ylabel('Mass', 'color', 'black')
+% ylim([0 1.0])
+hold on
+% Left for MPC
+yyaxis left
+ylabel('MPC', 'color', 'black')
+plot(bs, mpc_int(bs), 'LineWidth', 5, 'color', 'black');
+ylim([0 0.7])
+% title('Baseline 1A');
+xlabel('Wealth');
+legend('MPC', 'HtM', 'Non NHtM', 'Location', 'north');
+ax = gca;
+ax.FontSize = 14;
+cd('/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final');
+plot_path = sprintf('Figures/mpc_1A_base.pdf');
 % saveas(gcf, plot_path, "epsc");
 saveas(gcf, plot_path);
 
@@ -1645,6 +1740,33 @@ function mpc_w = mpc_wealth_mean(s,ws)
     end
 end
 
+% function for mean at ratio w/y
+function mpc_r = mpc_ratio_mean(s,rs)
+    
+    % interpolant for mpc
+    mpcs = 1;
+    
+    % interpolant for pmf
+    
+    % liquid wealth levels
+    bs = linspace(0,3,100);
+
+    
+    for i = 1:length(rs)
+        bs = linspace(0,ws(i),100);
+        as = ws(i) - bs;
+        pmfs = s.pmf_int(bs, as);
+        pmfs = pmfs ./ sum(pmfs,'all');
+        mpcs = s.mpc_int(bs, as);
+
+%         cdf_int = aux.pctile_interpolant(mpcs, pmfs);
+
+        mpc_r(i) = sum(mpcs .* pmfs, 'all');
+    end
+end
+
+
+
 function mpc_l = mpc_liquid_mean(s,ls)
 
 %     pmf_l = sum(s.pmf, [2 3 4 5]);
@@ -1669,6 +1791,12 @@ function mpc_i = mpc_illiquid_mean(s,is)
     mpc_int = griddedInterpolant(s.agrid, mpc_tmp,'linear','none');
     
     mpc_i = mpc_int(is);
+end
+
+function mpc_i_end = mpc_illiquid_end(s, a_cut)
+    
+    [bg, ag] = ndgrid(s.bgrid, s.agrid);
+    mpc_i_end = sum((ag >= a_cut) .* s.mpc_int(bg,ag) .* s.pmf_b_a, 'all') / sum((ag >= a_cut) .* s.pmf_b_a, 'all');
 end
 
 % MPC out of illiquid wealth, no negative shocking allowed
