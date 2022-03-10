@@ -51,7 +51,7 @@ classdef MPCs < handle
 		% cumulative consumption
 		cumcon; % current state
 		cum_con_baseline; % baseline
-		cum_con_shock = cell(1,6); % shocked
+		cum_con_shock = cell(1,7); % shocked
 
 		% income transitions w/o diagonal
 		ytrans_offdiag;
@@ -97,7 +97,7 @@ classdef MPCs < handle
 
 			obj.ytrans_offdiag = income.ytrans - diag(diag(income.ytrans));
 
-			for ii = 1:6
+			for ii = 1:7
 				obj.mpcs(ii).mpcs = NaN;
 				obj.mpcs(ii).quarterly = NaN(5,1);
                 obj.mpcs(ii).annual = NaN;
@@ -147,7 +147,7 @@ classdef MPCs < handle
 			if obj.options.no_inc_risk
 				ishocks = 5;
 			else
-				ishocks = 1:6;
+				ishocks = 1:7;
 			end
 
 			for ishock = ishocks
@@ -268,7 +268,7 @@ classdef MPCs < handle
             interp_grids = interp_grids(inds);
             value_grids = value_grids(inds);
             
-            if obj.p.perc_shock && (ishock == 5)
+            if obj.p.perc_shock && (ishock == 7)
                 [bg, ag, yg] = ndgrid(obj.grids.b.vec, obj.grids.a.vec, obj.income.y.vec);
                 bg = bg + obj.p.perc_y_shock .* yg;
             end
@@ -279,7 +279,7 @@ classdef MPCs < handle
 	            con_period = reshape(obj.cum_con_baseline(:,period), reshape_vec);
 	            mpcinterp = griddedInterpolant(interp_grids, squeeze(con_period), 'linear');
 
-                if obj.p.perc_shock && (ishock == 5)
+                if obj.p.perc_shock && (ishock == 7)
                     obj.cum_con_shock{ishock}(:,period) = reshape(mpcinterp(bg, ag, yg), [], 1);
                 else
                     obj.cum_con_shock{ishock}(:,period) = reshape(mpcinterp(value_grids), [], 1);
@@ -324,7 +324,7 @@ classdef MPCs < handle
 			% obj.mpcs : the final MPC statistics computed from this class,
 			%	a structure array of size nshocks
 			
-            if obj.p.perc_shock && (ishock == 5)
+            if obj.p.perc_shock && (ishock == 7)
                 [bg, ag, zg, yg] = ndgrid(obj.grids.b.vec, obj.grids.a.vec, obj.grids.z.vec, obj.income.y.vec);
                 shock = obj.p.perc_y_shock .* yg;
             else
@@ -332,7 +332,7 @@ classdef MPCs < handle
             end
 
 			% MPCs out of a shock at beginning of quarter 0
-			mpcs = (obj.cum_con_shock{ishock} - obj.cum_con_baseline) ./ shock;
+			mpcs = (obj.cum_con_shock{ishock} - obj.cum_con_baseline) ./ shock(:);
 			if ishock == 5
 				obj.mpcs(5).mpcs = mpcs;
             end

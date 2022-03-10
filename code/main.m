@@ -142,6 +142,7 @@ function stats = main(p, varargin)
         fprintf_internal('Iterating backward to find policy functions for future shock...\n')
     	trans_dyn_solver.solve(KFE,stats.pmf);
     end
+    
     stats.add_mpcs_news(trans_dyn_solver);
 
     %% ----------------------------------------------------------------

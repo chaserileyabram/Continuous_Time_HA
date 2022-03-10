@@ -25,15 +25,15 @@ using LaTeXStrings
 for_slides = false
 
 # Go directory with .xlsx
-# table_type = 2
-# # cd("/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final/Two_Asset")
-# # xf = XLSX.readdata("output_table.xlsx", "Sheet1", "A2:AF177")
+table_type = 2
 # cd("/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final/Two_Asset")
-# xf = XLSX.readdata("output_table_new_2A_base_all_robs.xlsx", "Sheet1", "A2:P177")
+# xf = XLSX.readdata("output_table.xlsx", "Sheet1", "A2:AF177")
+cd("/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final/Two_Asset")
+xf = XLSX.readdata("output_table_new_2A_base_all_robs.xlsx", "Sheet1", "A2:T177")
 
-table_type = 1
-cd("/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final/One_Asset")
-xf = XLSX.readdata("1A_tables.xlsx", "Sheet1", "A2:BC103")
+# table_type = 1
+# cd("/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final/One_Asset")
+# xf = XLSX.readdata("1A_tables.xlsx", "Sheet1", "A2:BC103")
 
 ###############
 # CHANGE THIS #
@@ -291,6 +291,33 @@ function alltables()
     txt *= include_table("two_asset_chi_rob", "tab:two_asset_chi_rob")
     txt *= raw"
     \newpage"
+
+    # Table Temptation
+    tmp_tab = stat_table("Table N: Temptation", "asdf",
+    ["Baseline 2A (fixed 9-14)", 
+    "Temptation = 1.000000e-02, type=totw, rho = 0", 
+    "Temptation = 5.000000e-02, type=totw, rho = 1.140000e-02",
+    "1 Temptation=1.000000e-02, r_a=8.000000e-03, reb_cost=2400, rho_start=0", 
+    "3b Temptation=1.500000e-02, r_a=5.500000e-03, reb_cost=2700, rho_start=0"], 
+    ["Baseline 2-asset", 
+    "\$\\varphi\$=0.01", "\$\\varphi\$=0.05", 
+    "\$\\varphi\$=0.01", "\$\\varphi\$=0.015"],
+    ["Rebalance arrival rate", "Quarterly  MPC (\\%), out of \\\$500, t=1", "Annual  MPC (\\%), out of \\\$500",
+    "Quarterly  PHtM MPC (\\%), out of \\\$500", "Quarterly  WHtM MPC (\\%), out of \\\$500",
+    "Mean MPC at Mean Wealth (\\%)", "HtM 1year"],
+    ["Rebalance arrival rate", "Quarterly MPC (\\%)", "Annual MPC (\\%)",
+    "Quarterly PHtM MPC(\\%)", "Quarterly WHtM MPC (\\%)",
+    "Mean MPC at Mean Wealth (\\%)", "Prob. HtM status at year t and year t+1"])
+
+    # "\$\\kappa\$=3000", 
+
+    write_text(tmp_tab,"two_asset_tempt_rob")
+
+    txt *= include_table("two_asset_tempt_rob", "tab:two_asset_tempt_rob")
+    txt *= raw"
+    \newpage"
+
+
 
     # txt *= stat_table("Returns Robustness", 
     # ["Baseline 2A", "Low r_b", "High r_b", "Low r_a", "High r_a"],
