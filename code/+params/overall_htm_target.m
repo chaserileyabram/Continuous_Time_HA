@@ -391,7 +391,7 @@ function [outparams, n] = overall_htm_target(param_opts)
             
             params{ii}.perc_shock = true;
 %             params{ii}.na = 2;
-%             params{ii}.rebalance_cost = 100;
+%             params{ii}.rebalance_cost = 1e6;
 %             params{ii}.rebalance_rate = 0.0;
             
             
@@ -643,24 +643,24 @@ function [outparams, n] = overall_htm_target(param_opts)
 %             end
             
             % 3b)
-            tempt = 0.015;
-            r_as = [params{1}.r_a 0.005 0.0055 0.006 0.0065 0.007];
-            reb_costs = [params{1}.rebalance_cost 2300 2400 2500 2600 2700 2800 2900 3000] ./anninc;
-            for r_a = r_as
-                for reb_cost = reb_costs
-                    for rho = rhos
-                        ii = ii + 1;
-                        params = [params {calibrations{1}}];
-                        params{ii} = params{1};
-                        params{ii}.rho = rho;
-                        params{ii}.x0 = [rho - 0.01, rho + 0.01];
-                        params{ii}.temptation = tempt;
-                        params{ii}.r_a = r_a;
-                        params{ii}.rebalance_cost = reb_cost;
-                        params{ii}.name = sprintf('3b Temptation=%d, r_a=%d, reb_cost=%d, rho_start=%d', tempt, r_a, params{ii}.rebalance_cost * anninc, rho);
-                    end
-                end
-            end
+%             tempt = 0.015;
+%             r_as = [params{1}.r_a 0.005 0.0055 0.006 0.0065 0.007];
+%             reb_costs = [params{1}.rebalance_cost 2300 2400 2500 2600 2700 2800 2900 3000] ./anninc;
+%             for r_a = r_as
+%                 for reb_cost = reb_costs
+%                     for rho = rhos
+%                         ii = ii + 1;
+%                         params = [params {calibrations{1}}];
+%                         params{ii} = params{1};
+%                         params{ii}.rho = rho;
+%                         params{ii}.x0 = [rho - 0.01, rho + 0.01];
+%                         params{ii}.temptation = tempt;
+%                         params{ii}.r_a = r_a;
+%                         params{ii}.rebalance_cost = reb_cost;
+%                         params{ii}.name = sprintf('3b Temptation=%d, r_a=%d, reb_cost=%d, rho_start=%d', tempt, r_a, params{ii}.rebalance_cost * anninc, rho);
+%                     end
+%                 end
+%             end
           
             
             
@@ -861,7 +861,7 @@ function [outparams, n] = overall_htm_target(param_opts)
         
         
 %         % 1A Baseline
-%         for rho = [-0.004] %, -0.003, -0.002, -0.001, 0, 0.001, 0.002]
+        for rho = [-0.004] %, -0.003, -0.002, -0.001, 0, 0.001, 0.002]
             ii = ii + 1;
             ii1A = ii;
             params = [params {calibrations{1}}];
@@ -873,9 +873,9 @@ function [outparams, n] = overall_htm_target(param_opts)
             params{ii}.r_b = 0.0025;
             params{ii}.r_a = params{ii}.r_b;
             params{ii}.ComputeMPCS_illiquid = false;
-%             params{ii}.rho = rho;
+            params{ii}.rho = rho;
             params{ii}.name = sprintf('Baseline 1A, rho=%d', params{ii}.rho);
-%         end
+        end
             
             % Temptation robust to scaling of rho?
 %             tempt_scales = linspace(10,100,10);

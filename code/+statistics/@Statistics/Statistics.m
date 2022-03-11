@@ -95,6 +95,7 @@ classdef Statistics < handle
         mpc_apc_corr;
         b_a_corr;
         mpc_income_wgt;
+        mpc_income_wgt_perc;
         
         A;
         
@@ -204,6 +205,7 @@ classdef Statistics < handle
             obj.b_a_corr = obj.sfill(cov_b_a / (var_b^0.5 * var_a^0.5), 'Liquid-Illiquid Corr');
         end
         
+        % Income weighted MPC
         function compute_mpc_income_wgt(obj)
             mpcs = reshape(obj.mpcs_over_ss{5}, [obj.nb obj.na obj.nz obj.ny]);
             num = sum(obj.income.y.wide .* obj.pmf .* mpcs, 'all');
@@ -211,6 +213,17 @@ classdef Statistics < handle
             
             obj.mpc_income_wgt = obj.sfill(num / denom, 'MPC (Income Weighted)');
         end
+        
+        % Income weighted MPC, where each gets 1% shock
+        function compute_mpc_income_wgt_perc(obj)
+            mpcs = reshape(obj.mpcs_over_ss{7}, [obj.nb obj.na obj.nz obj.ny]);
+            num = sum(obj.income.y.wide .* obj.pmf .* mpcs, 'all');
+            denom = sum(obj.income.y.wide .* obj.pmf, 'all');
+            
+            obj.mpc_income_wgt_perc = obj.sfill(num / denom, 'MPC (Income Weighted, 1% shock)');
+        end
+        
+        
         
         function compute_mpc_w(obj)
             % Get MPCs
@@ -259,6 +272,8 @@ classdef Statistics < handle
 
             mpc_w = sum(mpcs .* pmfs, 'all');
         end
+        
+        
         
         
 

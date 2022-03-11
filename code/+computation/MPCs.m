@@ -333,8 +333,12 @@ classdef MPCs < handle
 
 			% MPCs out of a shock at beginning of quarter 0
 			mpcs = (obj.cum_con_shock{ishock} - obj.cum_con_baseline) ./ shock(:);
-			if ishock == 5
-				obj.mpcs(5).mpcs = mpcs;
+% 			if ishock == 5
+% 				obj.mpcs(5).mpcs = mpcs;
+%             end
+            
+            if ishock == 5 || ishock == 7
+				obj.mpcs(ishock).mpcs = mpcs;
             end
             
 
