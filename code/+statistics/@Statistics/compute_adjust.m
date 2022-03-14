@@ -21,16 +21,37 @@ obj.rebalance_frac = obj.sfill(rebalance_frac, 'Fraction Rebalancing (quarterly 
 bloss = obj.bgrid - 0.0074;
 bnew_ind = max(sum(obj.bgrid <= bloss')',1);
 indic_loss = (obj.agrid' + obj.bgrid(bnew_ind)) > (obj.model.rebalance_ba(bnew_ind,:,:,:,1) + obj.model.rebalance_ba(bnew_ind,:,:,:,2));
-reb_500 = sum(indic_loss .* obj.pmf, "all");
+reb = sum(indic_loss .* obj.pmf, "all");
 
-obj.rebalance_500 = reb_500 * obj.p.rebalance_rate;
+obj.rebalance_m500 = reb * obj.p.rebalance_rate;
 
 bloss = obj.bgrid - 0.074;
 bnew_ind = max(sum(obj.bgrid <= bloss')',1);
 indic_loss = (obj.agrid' + obj.bgrid(bnew_ind)) > (obj.model.rebalance_ba(bnew_ind,:,:,:,1) + obj.model.rebalance_ba(bnew_ind,:,:,:,2));
-reb_5000 = sum(indic_loss .* obj.pmf, "all");
+reb = sum(indic_loss .* obj.pmf, "all");
 
-obj.rebalance_5000 = reb_5000 * obj.p.rebalance_rate;
+obj.rebalance_m5000 = reb * obj.p.rebalance_rate;
+
+bloss = obj.bgrid + 0.0074;
+bnew_ind = max(sum(obj.bgrid <= bloss')',1);
+indic_loss = (obj.agrid' + obj.bgrid(bnew_ind)) > (obj.model.rebalance_ba(bnew_ind,:,:,:,1) + obj.model.rebalance_ba(bnew_ind,:,:,:,2));
+reb = sum(indic_loss .* obj.pmf, "all");
+
+obj.rebalance_p500 = reb * obj.p.rebalance_rate;
+
+bloss = obj.bgrid + 0.074;
+bnew_ind = max(sum(obj.bgrid <= bloss')',1);
+indic_loss = (obj.agrid' + obj.bgrid(bnew_ind)) > (obj.model.rebalance_ba(bnew_ind,:,:,:,1) + obj.model.rebalance_ba(bnew_ind,:,:,:,2));
+reb = sum(indic_loss .* obj.pmf, "all");
+
+obj.rebalance_p5000 = reb * obj.p.rebalance_rate;
+
+bloss = obj.bgrid + 0.148;
+bnew_ind = max(sum(obj.bgrid <= bloss')',1);
+indic_loss = (obj.agrid' + obj.bgrid(bnew_ind)) > (obj.model.rebalance_ba(bnew_ind,:,:,:,1) + obj.model.rebalance_ba(bnew_ind,:,:,:,2));
+reb = sum(indic_loss .* obj.pmf, "all");
+
+obj.rebalance_p10000 = reb * obj.p.rebalance_rate;
 
 
 end
