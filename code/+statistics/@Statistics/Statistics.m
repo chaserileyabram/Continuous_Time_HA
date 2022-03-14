@@ -60,6 +60,8 @@ classdef Statistics < handle
 		adjcosts;
         
         rebalance_frac;
+        rebalance_500;
+        rebalance_5000;
 
 		mpcs;
 		illiquid_mpcs;
