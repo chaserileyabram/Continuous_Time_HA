@@ -3,7 +3,7 @@ function [outparams, n] = overall_htm_target(param_opts)
     
     scf = scf2019struct();
 
-	shocks = [-1, -500, -5000, 1, 500, 5000, 999];
+	shocks = [-1, -500, -5000, 1, 500, 5000, 10000, 999];
 
     shared_params = param_opts;
     shared_params.mpc_shocks = shocks / (scf.quarterly_earnings * 4);

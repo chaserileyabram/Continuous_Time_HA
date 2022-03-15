@@ -51,7 +51,7 @@ classdef MPCs < handle
 		% cumulative consumption
 		cumcon; % current state
 		cum_con_baseline; % baseline
-		cum_con_shock = cell(1,7); % shocked
+		cum_con_shock = cell(1,8); % shocked
 
 		% income transitions w/o diagonal
 		ytrans_offdiag;
@@ -97,7 +97,7 @@ classdef MPCs < handle
 
 			obj.ytrans_offdiag = income.ytrans - diag(diag(income.ytrans));
 
-			for ii = 1:7
+			for ii = 1:8
 				obj.mpcs(ii).mpcs = NaN;
 				obj.mpcs(ii).quarterly = NaN(5,1);
                 obj.mpcs(ii).annual = NaN;
@@ -147,7 +147,7 @@ classdef MPCs < handle
 			if obj.options.no_inc_risk
 				ishocks = 5;
 			else
-				ishocks = 1:7;
+				ishocks = 1:8;
 			end
 
 			for ishock = ishocks

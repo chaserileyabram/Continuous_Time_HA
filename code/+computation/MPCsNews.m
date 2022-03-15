@@ -67,10 +67,10 @@ classdef MPCsNews < handle
 		ytrans_offdiag;
 
 		% Cumulative consumption for the q1, q2, q3, q4 shocks.
-		cum_con_q1 = cell(1,7);
-		cum_con_q2 = cell(1,7);
-		cum_con_q3 = cell(1,7);
-		cum_con_q4 = cell(1,7);
+		cum_con_q1 = cell(1,8);
+		cum_con_q2 = cell(1,8);
+		cum_con_q3 = cell(1,8);
+		cum_con_q4 = cell(1,8);
 
 		% Results structure.
 		mpcs = struct();
@@ -128,7 +128,7 @@ classdef MPCsNews < handle
 
 			% Initialize the results
 			obj.mpcs = struct();
-			for ishock = 1:7
+			for ishock = 1:8
 				obj.mpcs(ishock).avg_1_quarterly = NaN;
 				obj.mpcs(ishock).avg_2_quarterly = NaN;
 				obj.mpcs(ishock).avg_3_quarterly = NaN;
