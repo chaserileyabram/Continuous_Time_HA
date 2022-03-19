@@ -59,7 +59,9 @@ classdef Statistics < handle
 
 		adjcosts;
         
+        adj_policy;
         rebalance_frac;
+        rebalance_frac_to_liq;
         rebalance_m500;
         rebalance_m5000;
         rebalance_p500;
