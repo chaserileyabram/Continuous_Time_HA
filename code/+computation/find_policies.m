@@ -111,7 +111,7 @@ function [policies, V_deriv_risky_asset_nodrift] = find_policies(...
     IcF = validcF & (upwindF.s > 0) & ((upwindB.s>=0) | ((HcF>=HcB) | ~validcB)) & ((HcF>=Hc0) | ~validc0);
     IcB = validcB & (upwindB.s < 0) & ((upwindF.s<=0) | ((HcB>=HcF) | ~validcF)) & ((HcB>=Hc0) | ~validc0);
     Ic0 = validc0 & ~(IcF | IcB);
-    assert(isequal(IcF+IcB+Ic0,ones(nb,na,nz,ny,'logical')),'logicals do not sum to unity')
+%     assert(isequal(IcF+IcB+Ic0,ones(nb,na,nz,ny,'logical')),'logicals do not sum to unity')
     c = IcF .* upwindF.c + IcB .* upwindB.c + Ic0 .* c0;
     s_c = IcF .* upwindF.s + IcB .* upwindB.s + Ic0 .* s0;
 
@@ -148,7 +148,7 @@ function [policies, V_deriv_risky_asset_nodrift] = find_policies(...
     IcF_KFE = validcF_KFE & (upwindF_KFE.s > 0) & ((upwindB_KFE.s>=0) | ((HcF_KFE>=HcB_KFE) | ~validcB_KFE)) & ((HcF_KFE>=Hc0_KFE) | ~validc0_KFE);
     IcB_KFE = validcB_KFE & (upwindB_KFE.s < 0) & ((upwindF_KFE.s<=0) | ((HcB_KFE>=HcF_KFE) | ~validcF_KFE)) & ((HcB_KFE>=Hc0_KFE) | ~validc0_KFE);
     Ic0_KFE = validc0_KFE & ~(IcF_KFE | IcB_KFE);
-    assert(isequal(IcF_KFE+IcB_KFE+Ic0_KFE,ones(nb,na,nz,ny,'logical')),'logicals do not sum to unity')
+%     assert(isequal(IcF_KFE+IcB_KFE+Ic0_KFE,ones(nb,na,nz,ny,'logical')),'logicals do not sum to unity')
     c_KFE = IcF_KFE .* upwindF_KFE.c + IcB_KFE .* upwindB_KFE.c + Ic0_KFE .* c0_KFE;
     s_c_KFE = IcF_KFE .* upwindF_KFE.s + IcB_KFE .* upwindB_KFE.s + Ic0_KFE .* s0_KFE;
 

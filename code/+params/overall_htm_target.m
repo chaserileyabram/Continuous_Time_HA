@@ -510,18 +510,21 @@ function [outparams, n] = overall_htm_target(param_opts)
 %             end
             
             % Quadratic Utility
-%             quad_bs = linspace(0.5, 0.5, 10);
-%             for quad_b = quad_bs
-%                 for rho = rhos
-%                     ii = ii + 1;
-%                     params = [params {calibrations{1}}];
-%                     params{ii} = params{1};
-%                     params{ii}.rho = rho;
-%                     params{ii}.quad_u = true;
-%                     params{ii}.quad_b = quad_b;
-%                     params{ii}.name = sprintf('Quad util, b = %d, rho = %d', quad_b, rho);
-%                 end
-%             end
+            quad_bs = linspace(0.5, 50.0, 50);
+            for quad_b = quad_bs
+                for rho = rhos
+                    ii = ii + 1;
+                    params = [params {calibrations{1}}];
+                    params{ii} = params{1};
+                    params{ii}.rho = rho;
+%                     params{ii}.na = 2;
+%                     params{ii}.rebalance_rate = 0;
+                    params{ii}.quad_u = true;
+%                     params{ii}.r_b = 0.02;
+                    params{ii}.quad_b = quad_b;
+                    params{ii}.name = sprintf('Quad util, b = %d, rho = %d', quad_b, rho);
+                end
+            end
             
             
             

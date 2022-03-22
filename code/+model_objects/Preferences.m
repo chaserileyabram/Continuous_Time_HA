@@ -33,7 +33,7 @@ classdef Preferences < handle
         end
         
         function set_quad(obj,b)
-            obj.u = @(c) c - (b/2).*c.^2;
+            obj.u = @(c) c - (b/2).*(c.^2);
 			obj.u1 = @(c) 1 - b.*c;
 			obj.u1inv = @(u) (1-u)./b;
         end
