@@ -350,7 +350,7 @@ function [outparams, n] = overall_htm_target(param_opts)
             % Baseline (new)
             ii = ii + 1;
             params = [params {calibrations{1}}];
-            params{ii}.calibration_vars = {'rho'};
+            
             params{ii}.HJB_delta = 1e3;
             % Income
             params{ii}.income_dir = incomedirs{1};
@@ -376,7 +376,7 @@ function [outparams, n] = overall_htm_target(param_opts)
             
             % Add temptation
 %             params{ii}.temptation = 0.01;
-            
+            params{ii}.calibration_vars = {'rho'};
             params{ii}.calibration_bounds = {rho_bds};
             params{ii}.calibration_stats = {'totw'};
             params{ii}.calibration_targets = [scf.mean_totw];
@@ -511,6 +511,7 @@ function [outparams, n] = overall_htm_target(param_opts)
             
             % Quadratic Utility
             quad_bs = linspace(0.5, 50.0, 20);
+            b_bds = [0.1, 50];
             rhos = [0 0.004 0.008 params{1}.rho 0.02 0.05];
             % 1A (with 2A r_b)
             for quad_b = quad_bs
@@ -518,6 +519,11 @@ function [outparams, n] = overall_htm_target(param_opts)
                     ii = ii + 1;
                     params = [params {calibrations{1}}];
                     params{ii} = params{1};
+                    params{ii}.calibration_vars = {'quad_b'};
+                    params{ii}.calibration_bounds = {b_bds};
+                    params{ii}.calibration_stats = {'totw'};
+                    params{ii}.calibration_targets = [scf.mean_totw];
+                    params{ii}.calibration_scales = [1];
                     params{ii}.rho = rho;
                     params{ii}.na = 2;
                     params{ii}.rebalance_rate = 0;
@@ -534,6 +540,11 @@ function [outparams, n] = overall_htm_target(param_opts)
                     ii = ii + 1;
                     params = [params {calibrations{1}}];
                     params{ii} = params{1};
+                    params{ii}.calibration_vars = {'quad_b'};
+                    params{ii}.calibration_bounds = {b_bds};
+                    params{ii}.calibration_stats = {'totw'};
+                    params{ii}.calibration_targets = [scf.mean_totw];
+                    params{ii}.calibration_scales = [1];
                     params{ii}.rho = rho;
 %                     params{ii}.na = 2;
 %                     params{ii}.rebalance_rate = 0;

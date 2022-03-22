@@ -113,6 +113,7 @@ function [policies, V_deriv_risky_asset_nodrift] = find_policies(...
     Ic0 = validc0 & ~(IcF | IcB);
 %     assert(isequal(IcF+IcB+Ic0,ones(nb,na,nz,ny,'logical')),'logicals do not sum to unity')
     c = IcF .* upwindF.c + IcB .* upwindB.c + Ic0 .* c0;
+    c = max(c, 0);
     s_c = IcF .* upwindF.s + IcB .* upwindB.s + Ic0 .* s0;
 
     h = IcF .* upwindF.hours + IcB .* upwindB.hours + Ic0 .* hours_bc;
@@ -150,6 +151,7 @@ function [policies, V_deriv_risky_asset_nodrift] = find_policies(...
     Ic0_KFE = validc0_KFE & ~(IcF_KFE | IcB_KFE);
 %     assert(isequal(IcF_KFE+IcB_KFE+Ic0_KFE,ones(nb,na,nz,ny,'logical')),'logicals do not sum to unity')
     c_KFE = IcF_KFE .* upwindF_KFE.c + IcB_KFE .* upwindB_KFE.c + Ic0_KFE .* c0_KFE;
+    c_KFE = max(c_KFE, 0);
     s_c_KFE = IcF_KFE .* upwindF_KFE.s + IcB_KFE .* upwindB_KFE.s + Ic0_KFE .* s0_KFE;
 
     h_KFE = IcF_KFE .* upwindF_KFE.hours + IcB_KFE .* upwindB_KFE.hours + Ic0_KFE .* hours_bc;
