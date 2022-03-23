@@ -893,8 +893,9 @@ function [outparams, n] = overall_htm_target(param_opts)
         
         
 %         % 1A Baseline
-        rhos = [-0.0013 rhos];
-        
+%         rhos = [-0.0013 rhos];
+        rhos = linspace(0.0025 * 1, 0.0025 * 3, 300);
+        quad_bs = 1/(10*2.09); % b = 1/(10*max(y))
         for rho = [-0.004] %, -0.003, -0.002, -0.001, 0, 0.001, 0.002]
             ii = ii + 1;
             ii1A = ii;
