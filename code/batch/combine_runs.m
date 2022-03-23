@@ -5,9 +5,9 @@ cd('/Users/chaseabram/UChiGit/Continuous_Time_HA');
 % Change file path when running locally
 local_run = true;
 % local_path = 'output/server-all-08-19-2021-07:32:10';
-local_path = 'output/server-all-03-23-2022-09:55:05';
+local_path = 'output/server-all-03-23-2022-12:34:41';
 % local_path = 'output/temp_comp';
-name_ext = 'quad_1A_latemorn_3_23_22';
+name_ext = 'quad_1A_manual_1240_3_23_22';
 disp(name_ext)
 
 [~, currdir] = fileparts(pwd());
