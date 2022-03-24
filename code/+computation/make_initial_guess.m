@@ -57,6 +57,8 @@ function [V, gg] = make_initial_guess(p, grids, gridsKFE, income)
     if p.SDU
         rho_bc = shiftdim(p.rhos, -2);
         prefs.set_SDU(p.invies, rho_bc + p.deathrate);
+    elseif p.quad_u
+        prefs.set_quad(p.quad_b)
     else
         prefs.set_crra(p.invies);
     end

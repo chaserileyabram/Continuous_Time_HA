@@ -511,7 +511,7 @@ function [outparams, n] = overall_htm_target(param_opts)
             
             % Quadratic Utility
             quad_bs = linspace(0.5, 50.0, 20);
-            b_bds = [0.1, 50];
+            b_bds = [0.00001, 3];
             rhos = [0 0.004 0.008 params{1}.rho 0.02 0.05];
 %             % 1A (with 2A r_b)
 %             for quad_b = quad_bs
@@ -894,8 +894,8 @@ function [outparams, n] = overall_htm_target(param_opts)
         
 %         % 1A Baseline
 %         rhos = [-0.0013 rhos];
-        rhos = linspace((0.0025 - 1/200) - 1/200, (0.0025 - 1/200) + 1/200, 300);
-        quad_bs = 1/(10*2.09); % b = 1/(10*max(y))
+        rhos = linspace((0.0025 - 1/200), (0.0025 - 1/200) + 1/200, 10);
+        quad_bs = [0.001, 0.01, 0.1, 1.0]; %[1/(10*2.09)]; % b = 1/(10*max(y))
         for rho = [-0.004] %, -0.003, -0.002, -0.001, 0, 0.001, 0.002]
             ii = ii + 1;
             ii1A = ii;
@@ -918,17 +918,17 @@ function [outparams, n] = overall_htm_target(param_opts)
                 ii1A = ii;
                 params = [params {calibrations{1}}];
                 params{ii} = params{1};
-                params{ii}.calibration_vars = {'quad_b'};
-                params{ii}.calibration_bounds = {b_bds};
-                params{ii}.calibration_stats = {'totw'};
-                params{ii}.calibration_targets = [scf.mean_totw];
-                params{ii}.calibration_scales = [1];
+%                 params{ii}.calibration_vars = {'quad_b'};
+%                 params{ii}.calibration_bounds = {b_bds};
+%                 params{ii}.calibration_stats = {'totw'};
+%                 params{ii}.calibration_targets = [scf.mean_totw];
+%                 params{ii}.calibration_scales = [1];
 %                 params{ii}.OneAsset = true;
                 params{ii}.na = 2;
                 params{ii}.na_KFE = 2;
                 params{ii}.rebalance_rate = 0;
                 params{ii}.r_b = 0.0025;
-                params{ii}.r_a = params{ii}.r_b;
+                params{ii}.r_a = params{ii}.r_b * 0.9;
                 params{ii}.ComputeMPCS_illiquid = false;
                 params{ii}.rho = rho;
                 params{ii}.quad_u = true;
@@ -936,6 +936,8 @@ function [outparams, n] = overall_htm_target(param_opts)
                 params{ii}.name = sprintf('Baseline 1A w/ with quad_b=%d, rho=%d', quad_b, rho);
             end
         end
+        
+        disp('filler');
             
             % Temptation robust to scaling of rho?
 %             tempt_scales = linspace(10,100,10);
