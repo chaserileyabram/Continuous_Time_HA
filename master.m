@@ -31,14 +31,14 @@ warning('off', 'MATLAB:nearlySingularMatrix')
 % -------------------------------------------------------------------------
 
 param_opts.calibrate = true;
-param_opts.fast = false; % use small grid for debugging
+param_opts.fast = true; % use small grid for debugging
 param_opts.ComputeMPCS = true;
 param_opts.ComputeMPCS_illiquid = true;
 param_opts.SimulateMPCS = false; % also estimate MPCs by simulation
 param_opts.ComputeMPCS_news = false;
 param_opts.SimulateMPCS_news = false;
 param_opts.DealWithSpecialCase = false; % need to recode this
-param_opts.param_index = 3;
+param_opts.param_index = 4;
 param_opts.makePlots = false; % not coded yet -> coded, but not through this option
 
 run_opts.check_nparams = false;
