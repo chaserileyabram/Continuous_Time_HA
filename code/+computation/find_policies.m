@@ -41,6 +41,8 @@ function [policies, V_deriv_risky_asset_nodrift] = find_policies(...
         prefs.set_SDU(p.invies, rho_bc + p.deathrate);
     elseif p.quad_u
         prefs.set_quad(p.quad_b);
+    elseif p.exp_u
+        prefs.set_exp(p.exp_a);
     else
         prefs.set_crra(p.riskaver_fulldim);
     end

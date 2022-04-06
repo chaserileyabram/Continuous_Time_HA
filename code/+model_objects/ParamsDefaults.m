@@ -176,6 +176,10 @@ classdef ParamsDefaults < handle
         % Quadratic utility: u(c) = c - (b/2)*c^2
         quad_u = false;
         quad_b = 1;
+        
+        % Exponential utility
+        exp_u = false;
+        exp_a = 0;
 
     	% Transition into death, at a quarterly rate
     	deathrate = 1 / 200;

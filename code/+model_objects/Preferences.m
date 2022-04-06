@@ -37,6 +37,12 @@ classdef Preferences < handle
 			obj.u1 = @(c) 1 - b.*c;
 			obj.u1inv = @(u) (1-u)./b;
         end
+        
+        function set_exp(obj,a)
+            obj.u = @(c) -(1/a).*exp(-a.*c);
+            obj.u1 = @(c) exp(-a.*c);
+            obj.u1inv = @(u) -log(u)./a;
+        end
 
 		function set_SDU(obj, invies, rho)
 			import model_objects.CRRA
