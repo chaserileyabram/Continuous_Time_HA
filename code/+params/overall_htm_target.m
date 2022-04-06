@@ -513,7 +513,7 @@ function [outparams, n] = overall_htm_target(param_opts)
             quad_bs = [1.0 0.5 0.25 0.1 0.05]; %linspace(0.5, 50.0, 20);
 %             b_bds = [0.00001, 3];
 %             rhos = [0 0.004 0.008 params{1}.rho 0.02 0.05];
-            rhos = linspace(0, 0.05, 20);
+            rhos = linspace(-0.02, 0.01, 20);
             % 1A (with 2A r_b)
             for quad_b = quad_bs
                 for rho = rhos
