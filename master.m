@@ -38,7 +38,7 @@ param_opts.SimulateMPCS = false; % also estimate MPCs by simulation
 param_opts.ComputeMPCS_news = false;
 param_opts.SimulateMPCS_news = false;
 param_opts.DealWithSpecialCase = false; % need to recode this
-param_opts.param_index = 122;
+param_opts.param_index = 25;
 param_opts.makePlots = false; % not coded yet -> coded, but not through this option
 
 run_opts.check_nparams = false;
@@ -123,11 +123,11 @@ if ~isempty(p.calibrator)
 % 	    	lsqnonlin(p.calibrator.solver_handle, x0,...
 %                 p.calibrator.lbounds, p.calibrator.ubounds, options);
         
-        [calibrated_params, resnorm] = ...
-	    	fsolve(p.calibrator.solver_handle, x0, options_fs);
-        
 %         [calibrated_params, resnorm] = ...
-% 	    	fzero(p.calibrator.solver_handle, x0, options_fz);
+% 	    	fsolve(p.calibrator.solver_handle, x0, options_fs);
+        
+        [calibrated_params, resnorm] = ...
+	    	fzero(p.calibrator.solver_handle, x0, options_fz);
 	end
 
     % if (p.calibrator.dnorm >= 1e-3)
