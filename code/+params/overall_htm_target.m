@@ -508,6 +508,19 @@ function [outparams, n] = overall_htm_target(param_opts)
 %                 params{ii}.riskaver = risk_avergrid;
 %                 params{ii}.name = sprintf('het RRA %d, rho=%d', 1/2, rho);
 %             end
+
+            ii = ii + 1;
+            params = [params {calibrations{1}}];
+            params{ii} = params{1};
+%             params{ii}.rho = rho;
+            params{ii}.na = 250;
+            params{ii}.na_KFE = 250;
+%             params{ii}.na = 2;
+%             params{ii}.na_KFE = 2;
+            params{ii}.rebalance_rate = 0;
+            params{ii}.r_b = 0.0025;
+            params{ii}.r_a = params{ii}.r_b;
+            params{ii}.name = sprintf('1A baseline');
             
             % Quadratic Utility
             quad_bs = [1.0 0.5 0.25 0.1 0.05]; %linspace(0.5, 50.0, 20);
@@ -521,8 +534,10 @@ function [outparams, n] = overall_htm_target(param_opts)
                     params = [params {calibrations{1}}];
                     params{ii} = params{1};
                     params{ii}.rho = rho;
-                    params{ii}.na = 2;
-                    params{ii}.na_KFE = 2;
+                    params{ii}.na = 250;
+                    params{ii}.na_KFE = 250;
+%                     params{ii}.na = 2;
+%                     params{ii}.na_KFE = 2;
                     params{ii}.rebalance_rate = 0;
                     params{ii}.quad_u = true;
                     params{ii}.r_b = 0.0025;
@@ -540,8 +555,10 @@ function [outparams, n] = overall_htm_target(param_opts)
                     params = [params {calibrations{1}}];
                     params{ii} = params{1};
                     params{ii}.rho = rho;
-                    params{ii}.na = 2;
-                    params{ii}.na_KFE = 2;
+                    params{ii}.na = 250;
+                    params{ii}.na_KFE = 250;
+%                     params{ii}.na = 2;
+%                     params{ii}.na_KFE = 2;
                     params{ii}.rebalance_rate = 0;
                     params{ii}.exp_u = true;
                     params{ii}.r_b = 0.0025;
