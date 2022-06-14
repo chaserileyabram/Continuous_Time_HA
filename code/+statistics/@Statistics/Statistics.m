@@ -243,15 +243,15 @@ classdef Statistics < handle
                     pmf_cond_i = (speye(length(obj.pmf(:))) - (t_steps(t) - t_steps(t-1)) .* obj.A') \ pmf_cond_i;
                     
                     % Update mobilty entries if relevant time step
-                    if t == 5
+                    if t == 20
                         for j = 1:5
                             obj.mob_mat_b(i,j,1) = sum(pmf_cond_i(:) .* b_cond(j,:)', 'all');
                         end
-                    elseif t == 10
+                    elseif t == 40
                         for j = 1:5
                             obj.mob_mat_b(i,j,2) = sum(pmf_cond_i(:) .* b_cond(j,:)', 'all');
                         end
-                    elseif t == 15
+                    elseif t == 60
                         for j = 1:5
                             obj.mob_mat_b(i,j,3) = sum(pmf_cond_i(:) .* b_cond(j,:)', 'all');
                         end
@@ -297,15 +297,15 @@ classdef Statistics < handle
                     pmf_cond_i = (speye(length(obj.pmf(:))) - (t_steps(t) - t_steps(t-1)) .* obj.A') \ pmf_cond_i;
                     
                     % Update mobilty entries if relevant time step
-                    if t == 5
+                    if t == 20
                         for j = 1:5
                             obj.mob_mat_a(i,j,1) = sum(pmf_cond_i(:) .* a_cond(j,:)', 'all');
                         end
-                    elseif t == 10
+                    elseif t == 40
                         for j = 1:5
                             obj.mob_mat_a(i,j,2) = sum(pmf_cond_i(:) .* a_cond(j,:)', 'all');
                         end
-                    elseif t == 15
+                    elseif t == 60
                         for j = 1:5
                             obj.mob_mat_a(i,j,3) = sum(pmf_cond_i(:) .* a_cond(j,:)', 'all');
                         end
