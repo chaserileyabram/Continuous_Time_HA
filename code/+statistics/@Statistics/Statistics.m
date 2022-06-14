@@ -111,6 +111,7 @@ classdef Statistics < handle
         
         mob_mat_b;
         mob_mat_a;
+        mob_mat_w;
         
         pmf_int;
         mpc_int;
@@ -206,7 +207,7 @@ classdef Statistics < handle
             
             
             % Liquid
-            obj.mob_mat_b = zeros(5,5,3);
+            obj.mob_mat_b = zeros(5,5,5);
             
             % Get quintile cutoffs
             quints = [0.2, 0.4, 0.6, 0.8, 1.0];
@@ -243,24 +244,32 @@ classdef Statistics < handle
                     pmf_cond_i = (speye(length(obj.pmf(:))) - (t_steps(t) - t_steps(t-1)) .* obj.A') \ pmf_cond_i;
                     
                     % Update mobilty entries if relevant time step
-                    if t == 20
+                    if t == 4 % 1 year
                         for j = 1:5
                             obj.mob_mat_b(i,j,1) = sum(pmf_cond_i(:) .* b_cond(j,:)', 'all');
                         end
-                    elseif t == 40
+                    elseif t == 2 
                         for j = 1:5
                             obj.mob_mat_b(i,j,2) = sum(pmf_cond_i(:) .* b_cond(j,:)', 'all');
                         end
-                    elseif t == 60
+                    elseif t == 20
                         for j = 1:5
                             obj.mob_mat_b(i,j,3) = sum(pmf_cond_i(:) .* b_cond(j,:)', 'all');
+                        end
+                    elseif t == 40
+                        for j = 1:5
+                            obj.mob_mat_b(i,j,4) = sum(pmf_cond_i(:) .* b_cond(j,:)', 'all');
+                        end
+                    elseif t == 60
+                        for j = 1:5
+                            obj.mob_mat_b(i,j,5) = sum(pmf_cond_i(:) .* b_cond(j,:)', 'all');
                         end
                     end
                 end
             end
             
             % Illiquid
-            obj.mob_mat_a = zeros(5,5,3);
+            obj.mob_mat_a = zeros(5,5,5);
             
             % Get quintile cutoffs
             quints = [0.2, 0.4, 0.6, 0.8, 1.0];
@@ -297,17 +306,97 @@ classdef Statistics < handle
                     pmf_cond_i = (speye(length(obj.pmf(:))) - (t_steps(t) - t_steps(t-1)) .* obj.A') \ pmf_cond_i;
                     
                     % Update mobilty entries if relevant time step
-                    if t == 20
+                    if t == 4
                         for j = 1:5
                             obj.mob_mat_a(i,j,1) = sum(pmf_cond_i(:) .* a_cond(j,:)', 'all');
                         end
-                    elseif t == 40
+                    elseif t == 8
                         for j = 1:5
                             obj.mob_mat_a(i,j,2) = sum(pmf_cond_i(:) .* a_cond(j,:)', 'all');
                         end
-                    elseif t == 60
+                    elseif t == 20
                         for j = 1:5
                             obj.mob_mat_a(i,j,3) = sum(pmf_cond_i(:) .* a_cond(j,:)', 'all');
+                        end
+                    elseif t == 40
+                        for j = 1:5
+                            obj.mob_mat_a(i,j,4) = sum(pmf_cond_i(:) .* a_cond(j,:)', 'all');
+                        end
+                    elseif t == 60
+                        for j = 1:5
+                            obj.mob_mat_a(i,j,5) = sum(pmf_cond_i(:) .* a_cond(j,:)', 'all');
+                        end
+                    end
+                end
+            end
+            
+            % Total
+            obj.mob_mat_w = zeros(5,5,5);
+            
+            % total wealth full grid
+            w_full = b_full + a_full;
+            
+            % Get quintile cutoffs
+            quints = [0.2, 0.4, 0.6, 0.8, 1.0];
+            q_vals = zeros(5,1);
+            
+            % cdf of totw
+            [w_vec, sortid_w] = sort(w_full(:), 'ascend');
+            pmf_vec = obj.pmf(sortid_w);
+            
+            
+            for i = 1:5
+%                 q_vals(i) = sum(cumsum(obj.pmf_a) <= quints(i));
+                % find cutoff for pmf_vec
+                ind = sum(cumsum(pmf_vec) <= quints(i));
+                % use to find wealth cutoff value
+                if ind > 0
+                    q_vals(i) = w_vec(ind);
+                end
+            end
+            
+            
+            w_cond = zeros(5, length(obj.pmf(:)));
+            for i = 1:5
+                if i == 1 && (q_vals(i) > 0)
+                    % Make conditional pmfs for each quintile
+                    w_cond(i, :) = (w_full(:) <= q_vals(i));
+                elseif (i > 1) && (q_vals(i-1) > 0)
+                    w_cond(i, :) = (w_full(:) > q_vals(i-1)) & (w_full(:) <= q_vals(i));
+                elseif (q_vals(i) > 0)
+                    w_cond(i, :) = (w_full(:) <= q_vals(i));
+                end
+            end
+            
+            for i = 1:5
+                
+                pmf_cond_i = obj.pmf(:) .* w_cond(i,:)';
+                pmf_cond_i = pmf_cond_i / sum(pmf_cond_i, 'all');
+
+                for t = 2:length(t_steps)
+                    % Step forward (implicit method)
+                    pmf_cond_i = (speye(length(obj.pmf(:))) - (t_steps(t) - t_steps(t-1)) .* obj.A') \ pmf_cond_i;
+                    
+                    % Update mobilty entries if relevant time step
+                    if t == 4
+                        for j = 1:5
+                            obj.mob_mat_w(i,j,1) = sum(pmf_cond_i(:) .* w_cond(j,:)', 'all');
+                        end
+                    elseif t == 8
+                        for j = 1:5
+                            obj.mob_mat_w(i,j,2) = sum(pmf_cond_i(:) .* w_cond(j,:)', 'all');
+                        end
+                    elseif t == 20
+                        for j = 1:5
+                            obj.mob_mat_w(i,j,3) = sum(pmf_cond_i(:) .* w_cond(j,:)', 'all');
+                        end
+                    elseif t == 40
+                        for j = 1:5
+                            obj.mob_mat_w(i,j,4) = sum(pmf_cond_i(:) .* w_cond(j,:)', 'all');
+                        end
+                    elseif t == 60
+                        for j = 1:5
+                            obj.mob_mat_w(i,j,5) = sum(pmf_cond_i(:) .* w_cond(j,:)', 'all');
                         end
                     end
                 end
