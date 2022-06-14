@@ -360,8 +360,8 @@ function [outparams, n] = overall_htm_target(param_opts)
             params{ii}.kappa1 = 1e10;
             % Calibrated
             params{ii}.rho = 0.0114; %0.01214; %0.01295; 
-%             rho_bds = [-0.45, 0.03];
-            rho_bds = [-2.0, 2.0];
+            rho_bds = [-0.45, 0.03];
+%             rho_bds = [-2.0, 2.0];
     %         params{ii}.r_b = -0.006421023; 
             params{ii}.r_b = -0.005;
             params{ii}.r_a = 0.0156; %0.016340226; %0.01563035; %0.017442897;
@@ -509,19 +509,22 @@ function [outparams, n] = overall_htm_target(param_opts)
 %                 params{ii}.name = sprintf('het RRA %d, rho=%d', 1/2, rho);
 %             end
 
-            ii = ii + 1;
-            params = [params {calibrations{1}}];
-            params{ii} = params{1};
-%             params{ii}.rho = rho;
-            params{ii}.nb = 250;
-            params{ii}.nb_KFE = 250;
-            params{ii}.na = 2;
-            params{ii}.na_KFE = 2;
-            params{ii}.bmax = 500;
-            params{ii}.rebalance_rate = 0;
-            params{ii}.r_b = 0.0025;
-            params{ii}.r_a = params{ii}.r_b;
-            params{ii}.name = sprintf('1A baseline');
+            rhos = linspace(-0.02, 0.02, 20);
+            for rho = rhos
+                ii = ii + 1;
+                params = [params {calibrations{1}}];
+                params{ii} = params{1};
+                params{ii}.rho = rho;
+                params{ii}.nb = 250;
+                params{ii}.nb_KFE = 250;
+                params{ii}.na = 2;
+                params{ii}.na_KFE = 2;
+                params{ii}.bmax = 500;
+                params{ii}.rebalance_rate = 0;
+                params{ii}.r_b = 0.0025;
+                params{ii}.r_a = params{ii}.r_b;
+                params{ii}.name = sprintf('1A baseline, rho = %d', rho);
+            end
             
             % Quadratic Utility
             quad_bs = [1.0 0.5 0.25 0.1 0.05]; %linspace(0.5, 50.0, 20);

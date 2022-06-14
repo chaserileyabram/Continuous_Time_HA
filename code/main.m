@@ -108,6 +108,7 @@ function stats = main(p, varargin)
     if final
         fprintf_internal('\nComputing HtM remain probs\n')
         stats.compute_HtM_trans();
+        stats.compute_mobility_mats();
     end
 
     %% ----------------------------------------------------------------

@@ -1404,7 +1404,7 @@ clear
 cd('/Users/chaseabram/UChiGit/Continuous_Time_HA')
 load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-23-2021-18:57:08/output_17.mat')
 
-max_w = 10.0;
+max_w = 3.0;
 % IG
 n = 100;
 curve = 0.1;
@@ -1429,12 +1429,33 @@ for i = 2:m
     hist_mass_IG(i-1) = sum(stats.pmf_b_a .* in_chunk, 'all');
 end
 
-hist_mass_IG(m-1) = 1 - sum(hist_mass_IG(1:m-2), 'all');
+res_mass = 1 - sum(hist_mass_IG(1:m-2), 'all');
+
+pos_inds = hist_mass_IG > 0;
+pos_inds(end) = 1;
+
+cdf_IG = cumsum(hist_mass_IG(pos_inds));
+cdf_IG(end) = cdf_IG(end) + cdf_IG(end-1) - cdf_IG(end-2);
+cdf_int_IG = interp1(hist_locs_IG(pos_inds), cdf_IG, hist_locs_IG, 'pchip', 'extrap');
+
+hist_mass_IG(1) = cdf_IG(1);
+for i = 2:m-1
+    hist_mass_IG(i,1) = cdf_int_IG(i) - cdf_int_IG(i-1);
+end
+
+% hist_mass_IG(:,1) = interp1(hist_locs_IG(pos_inds), hist_mass_IG(pos_inds), hist_locs_IG);
+
+
+hist_mass_IG(m-1) = res_mass;
+
+% hist_mass_IG = hist_mass_IG / sum(hist_mass_IG, 'all');
+
+% hist_mass_IG(m-1) = 1 - sum(hist_mass_IG(1:m-2), 'all');
 
 load('/Users/chaseabram/UChiGit/Continuous_Time_HA/output/server-all-08-23-2021-18:57:08/output_2.mat')
 
 % Baseline
-n = 100;
+% n = 100;
 curve = 0.1;
 ws = linspace(0,1,n);
 ws = ws .^ (1/curve);
@@ -1452,7 +1473,22 @@ for i = 2:m
     hist_mass_1A(i-1) = sum(stats.pmf_b_a .* in_chunk, 'all');
 end
 
-hist_mass_1A(m-1) = 1 - sum(hist_mass_1A(1:m-2), 'all');
+
+res_mass = 1 - sum(hist_mass_1A(1:m-2), 'all');
+
+pos_inds = hist_mass_1A > 0;
+pos_inds(end) = 1;
+
+cdf_1A = cumsum(hist_mass_1A(pos_inds));
+cdf_1A(end) = cdf_1A(end) + cdf_1A(end-1) - cdf_1A(end-2);
+cdf_int_1A = interp1(hist_locs_1A(pos_inds), cdf_1A, hist_locs_1A, 'pchip', 'extrap');
+
+hist_mass_1A(1) = cdf_1A(1);
+for i = 2:m-1
+    hist_mass_1A(i,1) = cdf_int_1A(i) - cdf_int_1A(i-1);
+end
+
+hist_mass_1A(m-1) = res_mass;
 
 
 % Load baseline 1A
@@ -1529,17 +1565,17 @@ plot(ws(cut:end), mpcs_IG(cut:end), 'LineWidth', 3, 'color', 'black');
 ylim([0 0.7])
 ylabel('MPC')
 hold on
-plot(ws, mpcs_1A, 'LineWidth', 3, 'LineStyle', '--', 'color', 'black');
+plot(ws(cut:end), mpcs_1A(cut:end), 'LineWidth', 3, 'LineStyle', '--', 'color', 'black');
 % title('Baseline 2A and 1A');
 xlabel('Wealth');
 % plot(nsidedpoly(1000, 'Center', [0 0.08], 'Radius', 0.005), 'FaceColor', 'black', 'LineColor', 'black')
 rectangle('Position', [0 0.075 0.02 0.005],'FaceColor', 'black')
-legend('MPC \beta_{IG} = 0.7', 'MPC Baseline', '\beta_{IG} = 0.7', 'Baseline', 'Location', 'north')
+legend('MPC \zeta = 0.7', 'MPC Baseline', '\zeta = 0.7', 'Baseline', 'Location', 'north')
 % text(0.05,0.09,['$\leftarrow $' 'Discontinuity'],'FontSize',11,'Interpreter','latex','Color','k');
 ax = gca;
 ax.FontSize = 14;
 cd('/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final');
-plot_path = sprintf('Figures/mpc_1A_IG_10.pdf');
+plot_path = sprintf('Figures/mpc_1A_IG_3.pdf');
 % saveas(gcf, plot_path, "epsc");
 saveas(gcf, plot_path);
 

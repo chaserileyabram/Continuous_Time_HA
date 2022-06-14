@@ -109,6 +109,9 @@ classdef Statistics < handle
         b_lt_ysixth_1_year;
         b_lt_ysixth_5_year;
         
+        mob_mat_b;
+        mob_mat_a;
+        
         pmf_int;
         mpc_int;
         
@@ -166,6 +169,8 @@ classdef Statistics < handle
         end
         
         function compute_HtM_trans(obj)
+            % Note: obj.A' is the KFE operator (\dot{g} = A'g)
+            
             % Need to "iterate" forward from steady-state to see how many HtM stay
             % HtM, using A and pmf_ss?
             b_lt_ysixth = (repmat(obj.bgrid, [1 obj.na obj.nz obj.ny]) ./ obj.income.y.wide) <= 1/6;
@@ -189,6 +194,125 @@ classdef Statistics < handle
             htm_dist = (obj.pmf(:) .* b_lt_ysixth(:)) ./ sum(obj.pmf(:) .* b_lt_ysixth(:), 'all');
             outflow = (speye(length(htm_dist)) - obj.A' .* 20) \ htm_dist;
             obj.b_lt_ysixth_5_year = obj.sfill(sum(outflow .* b_lt_ysixth(:), 'all'), 'HtM 5year');
+            
+        end
+        
+        function compute_mobility_mats(obj)
+            % Want to compute wealth state mobility for each quintile
+            disp('\nComputing trans_quintile\n')
+            
+            % Time steps
+            t_steps = linspace(0,60,61);
+            
+            
+            % Liquid
+            obj.mob_mat_b = zeros(5,5,3);
+            
+            % Get quintile cutoffs
+            quints = [0.2, 0.4, 0.6, 0.8, 1.0];
+            q_cuts = zeros(5,1);
+            for i = 1:5
+                q_cuts(i) = sum(cumsum(obj.pmf_b) <= quints(i));
+            end
+            
+            % liquid fit to full grid
+            b_full = repmat(obj.bgrid, [1 obj.na obj.nz obj.ny]);
+            
+            b_cond = zeros(5, length(obj.pmf(:)));
+            for i = 1:5
+                if i == 1 && (q_cuts(i) > 0)
+                    % Make conditional pmfs for each quintile
+                    b_temp = (b_full <= obj.bgrid(q_cuts(i)));
+                    b_cond(i, :) = b_temp(:);
+                elseif (i > 1) && (q_cuts(i-1) > 0)
+                    b_temp = (b_full > obj.bgrid(q_cuts(i-1))) & (b_full <= obj.bgrid(q_cuts(i)));
+                    b_cond(i, :) = b_temp(:);
+                elseif (q_cuts(i) > 0)
+                    b_temp = (b_full <= obj.bgrid(q_cuts(i)));
+                    b_cond(i, :) = b_temp(:);
+                end
+            end
+            
+            for i = 1:5
+                
+                pmf_cond_i = obj.pmf(:) .* b_cond(i,:)';
+                pmf_cond_i = pmf_cond_i / sum(pmf_cond_i, 'all');
+
+                for t = 2:length(t_steps)
+                    % Step forward (implicit method)
+                    pmf_cond_i = (speye(length(obj.pmf(:))) - (t_steps(t) - t_steps(t-1)) .* obj.A') \ pmf_cond_i;
+                    
+                    % Update mobilty entries if relevant time step
+                    if t == 5
+                        for j = 1:5
+                            obj.mob_mat_b(i,j,1) = sum(pmf_cond_i(:) .* b_cond(j,:)', 'all');
+                        end
+                    elseif t == 10
+                        for j = 1:5
+                            obj.mob_mat_b(i,j,2) = sum(pmf_cond_i(:) .* b_cond(j,:)', 'all');
+                        end
+                    elseif t == 15
+                        for j = 1:5
+                            obj.mob_mat_b(i,j,3) = sum(pmf_cond_i(:) .* b_cond(j,:)', 'all');
+                        end
+                    end
+                end
+            end
+            
+            % Illiquid
+            obj.mob_mat_a = zeros(5,5,3);
+            
+            % Get quintile cutoffs
+            quints = [0.2, 0.4, 0.6, 0.8, 1.0];
+            q_cuts = zeros(5,1);
+            for i = 1:5
+                q_cuts(i) = sum(cumsum(obj.pmf_a) <= quints(i));
+            end
+            
+            % illiquid fit to full grid
+            a_full = repmat(obj.agrid', [obj.nb 1 obj.nz obj.ny]);
+            
+            a_cond = zeros(5, length(obj.pmf(:)));
+            for i = 1:5
+                if i == 1 && (q_cuts(i) > 0)
+                    % Make conditional pmfs for each quintile
+                    a_temp = (a_full <= obj.agrid(q_cuts(i)));
+                    a_cond(i, :) = a_temp(:);
+                elseif (i > 1) && (q_cuts(i-1) > 0)
+                    a_temp = (a_full > obj.agrid(q_cuts(i-1))) & (a_full <= obj.agrid(q_cuts(i)));
+                    a_cond(i, :) = a_temp(:);
+                elseif (q_cuts(i) > 0)
+                    a_temp = (a_full <= obj.agrid(q_cuts(i)));
+                    a_cond(i, :) = a_temp(:);
+                end
+            end
+            
+            for i = 1:5
+                
+                pmf_cond_i = obj.pmf(:) .* a_cond(i,:)';
+                pmf_cond_i = pmf_cond_i / sum(pmf_cond_i, 'all');
+
+                for t = 2:length(t_steps)
+                    % Step forward (implicit method)
+                    pmf_cond_i = (speye(length(obj.pmf(:))) - (t_steps(t) - t_steps(t-1)) .* obj.A') \ pmf_cond_i;
+                    
+                    % Update mobilty entries if relevant time step
+                    if t == 5
+                        for j = 1:5
+                            obj.mob_mat_a(i,j,1) = sum(pmf_cond_i(:) .* a_cond(j,:)', 'all');
+                        end
+                    elseif t == 10
+                        for j = 1:5
+                            obj.mob_mat_a(i,j,2) = sum(pmf_cond_i(:) .* a_cond(j,:)', 'all');
+                        end
+                    elseif t == 15
+                        for j = 1:5
+                            obj.mob_mat_a(i,j,3) = sum(pmf_cond_i(:) .* a_cond(j,:)', 'all');
+                        end
+                    end
+                end
+            end
+            
             
         end
         
