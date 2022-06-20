@@ -213,7 +213,7 @@ function stats = main(p, varargin)
 %     stats.compute_mpc_w();
     % Check that mpc_wealth_quantile is in stats
     
-    if final
+    if final && p.ComputeMPCS
         stats.compute_mpc_apc_corr();
         stats.compute_mpc_w();
         stats.compute_mpc_income_wgt();
