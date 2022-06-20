@@ -526,53 +526,53 @@ function [outparams, n] = overall_htm_target(param_opts)
                 params{ii}.name = sprintf('1A baseline, rho = %d', rho);
             end
             
-            % Quadratic Utility
-            quad_bs = [1.0 0.5 0.25 0.1 0.05]; %linspace(0.5, 50.0, 20);
-%             b_bds = [0.00001, 3];
-%             rhos = [0 0.004 0.008 params{1}.rho 0.02 0.05];
-            rhos = linspace(-0.02, 0.02, 20);
-            % 1A (with 2A r_b)
-            for quad_b = quad_bs
-                for rho = rhos
-                    ii = ii + 1;
-                    params = [params {calibrations{1}}];
-                    params{ii} = params{1};
-                    params{ii}.rho = rho;
-                    params{ii}.nb = 250;
-                    params{ii}.nb_KFE = 250;
-                    params{ii}.bmax = 500;
-                    params{ii}.na = 2;
-                    params{ii}.na_KFE = 2;
-                    params{ii}.rebalance_rate = 0;
-                    params{ii}.quad_u = true;
-                    params{ii}.r_b = 0.0025;
-                    params{ii}.r_a = params{ii}.r_b;
-                    params{ii}.quad_b = quad_b;
-                    params{ii}.name = sprintf('1A Quad util, b = %d, rho = %d', quad_b, rho);
-                end
-            end
-            
-            exp_as = [2.0 1.0 0.5 0.2 0.1];
-            % Exponential Utility
-            for exp_a = exp_as
-                for rho = rhos
-                    ii = ii + 1;
-                    params = [params {calibrations{1}}];
-                    params{ii} = params{1};
-                    params{ii}.rho = rho;
-                    params{ii}.nb = 250;
-                    params{ii}.nb_KFE = 250;
-                    params{ii}.bmax = 500;
-                    params{ii}.na = 2;
-                    params{ii}.na_KFE = 2;
-                    params{ii}.rebalance_rate = 0;
-                    params{ii}.exp_u = true;
-                    params{ii}.r_b = 0.0025;
-                    params{ii}.r_a = params{ii}.r_b;
-                    params{ii}.exp_a = exp_a;
-                    params{ii}.name = sprintf('1A Exp util, a = %d, rho = %d', exp_a, rho);
-                end
-            end
+%             % Quadratic Utility
+%             quad_bs = [1.0 0.5 0.25 0.1 0.05]; %linspace(0.5, 50.0, 20);
+% %             b_bds = [0.00001, 3];
+% %             rhos = [0 0.004 0.008 params{1}.rho 0.02 0.05];
+%             rhos = linspace(-0.02, 0.02, 20);
+%             % 1A (with 2A r_b)
+%             for quad_b = quad_bs
+%                 for rho = rhos
+%                     ii = ii + 1;
+%                     params = [params {calibrations{1}}];
+%                     params{ii} = params{1};
+%                     params{ii}.rho = rho;
+%                     params{ii}.nb = 250;
+%                     params{ii}.nb_KFE = 250;
+%                     params{ii}.bmax = 500;
+%                     params{ii}.na = 2;
+%                     params{ii}.na_KFE = 2;
+%                     params{ii}.rebalance_rate = 0;
+%                     params{ii}.quad_u = true;
+%                     params{ii}.r_b = 0.0025;
+%                     params{ii}.r_a = params{ii}.r_b;
+%                     params{ii}.quad_b = quad_b;
+%                     params{ii}.name = sprintf('1A Quad util, b = %d, rho = %d', quad_b, rho);
+%                 end
+%             end
+%             
+%             exp_as = [2.0 1.0 0.5 0.2 0.1];
+%             % Exponential Utility
+%             for exp_a = exp_as
+%                 for rho = rhos
+%                     ii = ii + 1;
+%                     params = [params {calibrations{1}}];
+%                     params{ii} = params{1};
+%                     params{ii}.rho = rho;
+%                     params{ii}.nb = 250;
+%                     params{ii}.nb_KFE = 250;
+%                     params{ii}.bmax = 500;
+%                     params{ii}.na = 2;
+%                     params{ii}.na_KFE = 2;
+%                     params{ii}.rebalance_rate = 0;
+%                     params{ii}.exp_u = true;
+%                     params{ii}.r_b = 0.0025;
+%                     params{ii}.r_a = params{ii}.r_b;
+%                     params{ii}.exp_a = exp_a;
+%                     params{ii}.name = sprintf('1A Exp util, a = %d, rho = %d', exp_a, rho);
+%                 end
+%             end
             
             
             
