@@ -159,7 +159,7 @@ classdef Model < handle
             
             % disp('ready for TransitionMatrixConstructor.construct with KFE')
             
-		    Au = A_constructor_kfe.construct(KFE, KFE.Vn); 
+		    Au = A_constructor_kfe.construct(KFE, KFE.Vn);
             
             % disp('done TransitionMatrixConstructor.construct with KFE')
 

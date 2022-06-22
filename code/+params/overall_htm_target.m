@@ -617,6 +617,21 @@ function [outparams, n] = overall_htm_target(param_opts)
             
 
             % Het discount factors
+%             rho_hets = [0.001,0.005,0.01];
+%             for rho_het = rho_hets
+%                 for rho = rhos
+%                     ii = ii + 1;
+%                     params = [params {calibrations{1}}];
+%                     params{ii} = params{1};
+%                     params{ii}.rho = rho;
+%                     params{ii}.x0 = [rho - 0.01, rho + 0.01];
+% %                     rho_diffs = linspace(-rho_het, rho_het, 5);
+%                     params{ii}.rho_grid = params{1}.rho + linspace(-rho_het, rho_het, 5)';
+%                     params{ii}.name = sprintf('het rho, spacing=%d, rho_cent_start=%d', rho_het, rho);
+%                 end
+%             end
+            
+            % Het discount factors 1A
             rho_hets = [0.001,0.005,0.01];
             for rho_het = rho_hets
                 for rho = rhos
@@ -627,7 +642,15 @@ function [outparams, n] = overall_htm_target(param_opts)
                     params{ii}.x0 = [rho - 0.01, rho + 0.01];
 %                     rho_diffs = linspace(-rho_het, rho_het, 5);
                     params{ii}.rho_grid = params{1}.rho + linspace(-rho_het, rho_het, 5)';
-                    params{ii}.name = sprintf('het rho, spacing=%d, rho_cent_start=%d', rho_het, rho);
+                    params{ii}.nb = 250;
+                    params{ii}.nb_KFE = 250;
+                    params{ii}.na = 2;
+                    params{ii}.na_KFE = 2;
+                    params{ii}.bmax = 500;
+                    params{ii}.rebalance_rate = 0;
+                    params{ii}.r_b = 0.0025;
+                    params{ii}.r_a = params{ii}.r_b;
+                    params{ii}.name = sprintf('1A het rho, spacing=%d, rho_cent_start=%d', rho_het, rho);
                 end
             end
             

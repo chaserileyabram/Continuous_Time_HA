@@ -171,6 +171,9 @@ classdef Statistics < handle
         
         function compute_HtM_trans(obj)
             % Note: obj.A' is the KFE operator (\dot{g} = A'g)
+            % No, it also needs the inctrans matrix
+            inctrans = kron(obj.income.ytrans, speye(obj.p.nb_KFE*obj.p.na_KFE*obj.p.nz));
+            A_full = obj.A + inctrans;
             
             % Need to "iterate" forward from steady-state to see how many HtM stay
             % HtM, using A and pmf_ss?
@@ -183,7 +186,7 @@ classdef Statistics < handle
 %             obj.b_lt_ysixth_1_year = obj.sfill(sum(rem_pmf_1year .* b_lt_ysixth(:)), 'HtM 1year');
 %             obj.b_lt_ysixth_1_year = obj.sfill(0, 'HtM 1year');
             htm_dist = (obj.pmf(:) .* b_lt_ysixth(:)) ./ sum(obj.pmf(:) .* b_lt_ysixth(:), 'all');
-            outflow = (speye(length(htm_dist)) - obj.A' .* 4) \ htm_dist;
+            outflow = (speye(length(htm_dist)) - A_full' .* 4) \ htm_dist;
             obj.b_lt_ysixth_1_year = obj.sfill(sum(outflow .* b_lt_ysixth(:), 'all'), 'HtM 1year');
 
             disp('\nComputing trans_5year\n')
@@ -193,7 +196,7 @@ classdef Statistics < handle
 %             obj.b_lt_ysixth_5_year = obj.sfill(sum(rem_pmf_5year .* b_lt_ysixth(:)), 'HtM 5year');
 %             obj.b_lt_ysixth_5_year = obj.sfill(0, 'HtM 5year');
             htm_dist = (obj.pmf(:) .* b_lt_ysixth(:)) ./ sum(obj.pmf(:) .* b_lt_ysixth(:), 'all');
-            outflow = (speye(length(htm_dist)) - obj.A' .* 20) \ htm_dist;
+            outflow = (speye(length(htm_dist)) - A_full' .* 20) \ htm_dist;
             obj.b_lt_ysixth_5_year = obj.sfill(sum(outflow .* b_lt_ysixth(:), 'all'), 'HtM 5year');
             
         end
@@ -201,6 +204,10 @@ classdef Statistics < handle
         function compute_mobility_mats(obj)
             % Want to compute wealth state mobility for each quintile
             disp('\nComputing trans_quintile\n')
+            
+            % Full transition matrix (choices + income changes)
+            inctrans = kron(obj.income.ytrans, speye(obj.p.nb_KFE*obj.p.na_KFE*obj.p.nz));
+            A_full = obj.A + inctrans;
             
             % Time steps
             t_steps = linspace(0,60,61);
@@ -241,7 +248,7 @@ classdef Statistics < handle
 
                 for t = 2:length(t_steps)
                     % Step forward (implicit method)
-                    pmf_cond_i = (speye(length(obj.pmf(:))) - (t_steps(t) - t_steps(t-1)) .* obj.A') \ pmf_cond_i;
+                    pmf_cond_i = (speye(length(obj.pmf(:))) - (t_steps(t) - t_steps(t-1)) .* A_full') \ pmf_cond_i;
                     
                     % Update mobilty entries if relevant time step
                     if t == 4 % 1 year
@@ -303,7 +310,7 @@ classdef Statistics < handle
 
                 for t = 2:length(t_steps)
                     % Step forward (implicit method)
-                    pmf_cond_i = (speye(length(obj.pmf(:))) - (t_steps(t) - t_steps(t-1)) .* obj.A') \ pmf_cond_i;
+                    pmf_cond_i = (speye(length(obj.pmf(:))) - (t_steps(t) - t_steps(t-1)) .* A_full') \ pmf_cond_i;
                     
                     % Update mobilty entries if relevant time step
                     if t == 4
@@ -375,7 +382,7 @@ classdef Statistics < handle
 
                 for t = 2:length(t_steps)
                     % Step forward (implicit method)
-                    pmf_cond_i = (speye(length(obj.pmf(:))) - (t_steps(t) - t_steps(t-1)) .* obj.A') \ pmf_cond_i;
+                    pmf_cond_i = (speye(length(obj.pmf(:))) - (t_steps(t) - t_steps(t-1)) .* A_full') \ pmf_cond_i;
                     
                     % Update mobilty entries if relevant time step
                     if t == 4
