@@ -509,16 +509,17 @@ function [outparams, n] = overall_htm_target(param_opts)
 %                 params{ii}.name = sprintf('het RRA %d, rho=%d', 1/2, rho);
 %             end
 
-            rhos = linspace(-0.02, 0.02, 20);
+%             rhos = linspace(-0.02, 0.02, 20);
+            rhos = [-0.004];
             for rho = rhos
                 ii = ii + 1;
                 params = [params {calibrations{1}}];
                 params{ii} = params{1};
                 params{ii}.rho = rho;
-                params{ii}.nb = 250;
-                params{ii}.nb_KFE = 250;
-                params{ii}.na = 2;
-                params{ii}.na_KFE = 2;
+%                 params{ii}.nb = 250;
+%                 params{ii}.nb_KFE = 250;
+%                 params{ii}.na = 2;
+%                 params{ii}.na_KFE = 2;
                 params{ii}.bmax = 500;
                 params{ii}.rebalance_rate = 0;
                 params{ii}.r_b = 0.0025;

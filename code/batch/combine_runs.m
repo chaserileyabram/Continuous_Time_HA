@@ -5,9 +5,9 @@ cd('/Users/chaseabram/UChiGit/Continuous_Time_HA');
 % Change file path when running locally
 local_run = true;
 % local_path = 'output/server-all-08-19-2021-07:32:10';
-local_path = 'output/server-all-06-19-2022-18:05:33';
+local_path = 'output/decomp_quick';
 % local_path = 'output/temp_comp';
-name_ext = 'mob_mat_runs_06_19_2022_18_07';
+name_ext = 'decomp_search_jul_19_2022';
 disp(name_ext)
 
 [~, currdir] = fileparts(pwd());
@@ -49,15 +49,15 @@ try
 
             % perform Empc1 - Empc0 decomposition
             % Need to check to see why 1A break this
-            if params(ind).rebalance_rate > 0
+%             if params(ind).rebalance_rate > 0
                 decomp_base(ind) = statistics.decomp_baseline(s(1), s(ind));
                 % perform decomp wrt one-asset model
     %             decomp_oneasset(ind) = statistics.decomp_twoasset_oneasset(oneasset,s(ind));
-            else
+%             else
                 % Make 1A the baseline for 1A decomps
 %                 decomp_base(ind) = statistics.decomp_baseline(s(ind), s(1));
-                decomp_base(ind) = decomp_base(ind-1);
-            end
+% %                 decomp_base(ind) = decomp_base(ind-1);
+%             end
             
             stats{ind} = aux.add_comparison_decomps(params(ind),...
                     stats{ind}, decomp_base(ind));

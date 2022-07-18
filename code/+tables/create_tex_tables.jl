@@ -25,15 +25,15 @@ using LaTeXStrings
 for_slides = false
 
 # Go directory with .xlsx
-table_type = 2
+# table_type = 2
 # cd("/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final/Two_Asset")
 # xf = XLSX.readdata("output_table.xlsx", "Sheet1", "A2:AF177")
-cd("/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final/Two_Asset")
-xf = XLSX.readdata("output_table_new_2A_base_all_robs.xlsx", "Sheet1", "A2:T177")
+# cd("/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final/Two_Asset")
+# xf = XLSX.readdata("output_table_new_2A_base_all_robs.xlsx", "Sheet1", "A2:T177")
 
-# table_type = 1
-# cd("/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final/One_Asset")
-# xf = XLSX.readdata("1A_tables.xlsx", "Sheet1", "A2:BC103")
+table_type = 1
+cd("/Users/chaseabram/Dropbox/AnnualReviewsMPC/Results/Final/One_Asset")
+xf = XLSX.readdata("1A_tables.xlsx", "Sheet1", "A2:BC104")
 
 ###############
 # CHANGE THIS #
